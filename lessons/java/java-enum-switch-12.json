@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-enum-switch-12",
+  "version": 1,
+  "title": "Java Enum Switch",
+  "description": "Practice enums and switch expressions with arrow cases.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 85,
+  "tags": [
+    "java",
+    "enums",
+    "switch"
+  ],
+  "prerequisites": [
+    "java-abstract-class-11"
+  ],
+  "learningGoals": [
+    "Type an enum declaration.",
+    "Use switch expression arrow cases."
+  ],
+  "languageVersion": "Java 14",
+  "completionChecks": [
+    {
+      "prompt": "What does label hold when priority is Priority.HIGH?",
+      "choices": [
+        "later",
+        "now",
+        "soon",
+        "Compilation fails because the switch has no default"
+      ],
+      "answerIndex": 1,
+      "explanation": "The HIGH constant matches case HIGH, whose arrow value is \"now\"; a switch that covers every enum constant is exhaustive, so no default is required."
+    },
+    {
+      "prompt": "What happens if a new constant URGENT is added to Priority but not to the switch?",
+      "choices": [
+        "Compilation fails because the switch expression is no longer exhaustive",
+        "URGENT silently maps to null",
+        "URGENT maps to the first case, later",
+        "Nothing changes; switch expressions ignore new constants"
+      ],
+      "answerIndex": 0,
+      "explanation": "A switch expression must be exhaustive; adding an enum constant that no case handles, with no default, makes it fail to compile until the new constant is covered."
+    },
+    {
+      "prompt": "What happens if priority is null when the switch expression executes?",
+      "choices": [
+        "NullPointerException",
+        "IllegalArgumentException",
+        "Compilation fails because enum variables cannot be null",
+        "Nothing; label becomes null"
+      ],
+      "answerIndex": 0,
+      "explanation": "An enum reference can be null, but switching on that null reference throws NullPointerException at runtime."
+    }
+  ],
+  "targetCode": "// Learn: Match enum constants in a switch expression.\nenum Priority {\n  LOW, MEDIUM, HIGH\n}\n\nString label = switch (priority) {\n  // Each enum constant maps to one result string.\n  case LOW -> \"later\";\n  case MEDIUM -> \"soon\";\n  case HIGH -> \"now\";\n};"
+}

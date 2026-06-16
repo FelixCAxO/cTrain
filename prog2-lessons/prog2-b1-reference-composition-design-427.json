@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-composition-design-427",
+    "version":  1,
+    "title":  "Reference Page 1 - Komposition och design",
+    "description":  "Use this Java reference to review Komposition och design through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "classes",
+                 "interfaces",
+                 "encapsulation"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-interfaces-contracts-426"
+                      ],
+    "learningGoals":  [
+                          "Use composition when an object has another object.",
+                          "Keep one clear responsibility per class.",
+                          "Swap behavior through an interface."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Komposition och design.\n// You will learn: Use composition, single responsibility, and strategy interfaces.\nclass Prog2Reference427 {\n  // EXEMPEL 1: Komposition betyder att ett objekt byggs av andra objekt.\n  static class Engine {\n    void start() { System.out.println(\"start\"); }\n  }\n  static class Car {\n    private final Engine engine;\n    Car(Engine engine) { this.engine = engine; }\n    void drive() { engine.start(); }\n  }\n  // EXEMPEL 2: Single Responsibility delar upp ansvar i sma klasser.\n  static class PriceCalculator {\n    int total(int price, int count) { return price * count; }\n  }\n  static class ReceiptPrinter {\n    String line(String name, int total) { return name + \":\" + total; }\n  }\n  // EXEMPEL 3: Strategy byter beteende via ett interface.\n  interface DiscountPolicy {\n    int discount(int price);\n  }\n  static class NoDiscount implements DiscountPolicy {\n    public int discount(int price) { return 0; }\n  }\n  static int finalPrice(int price, DiscountPolicy policy) {\n    return price - policy.discount(price);\n  }\n}"
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-generics-wildcard-copy-68",
+  "version": 1,
+  "title": "Java Generics Wildcard Copy",
+  "description": "Practice reading from an extends wildcard and writing into a concrete collection.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "generics",
+    "collections"
+  ],
+  "prerequisites": [
+    "java-generics-method-14",
+    "java-collections-list-07"
+  ],
+  "learningGoals": [
+    "Use an upper-bounded wildcard when a method only reads values from a source list.",
+    "Keep writes directed at a concrete destination type so the compiler can prove safety."
+  ],
+  "languageVersion": "Java 9",
+  "completionChecks": [
+    {
+      "prompt": "Why does target.addAll(source) compile in copyScores?",
+      "choices": [
+        "addAll accepts elements from a Collection whose element type extends Number",
+        "List<Integer> is a direct subtype of List<Number>",
+        "The wildcard removes generic type checks at compile time",
+        "The method converts every Integer into Double before adding it"
+      ],
+      "answerIndex": 0,
+      "explanation": "List<Number>.addAll can accept a source collection whose elements are Number or a subtype of Number, so List<Integer> can be copied into it."
+    },
+    {
+      "prompt": "What happens if copyScores tries source.add(1) inside the method?",
+      "choices": [
+        "It appends 1 to every caller's source list",
+        "It compiles only when source is backed by ArrayList",
+        "It fails to compile because ? extends Number is not a safe write target",
+        "It throws ClassCastException after the method returns"
+      ],
+      "answerIndex": 2,
+      "explanation": "A List<? extends Number> may be a List<Integer>, List<Double>, or another subtype list, so the compiler cannot allow adding an arbitrary Number."
+    },
+    {
+      "prompt": "What happens after copyScores(rawScores, reportScores); reportScores.add(10.5); runs?",
+      "choices": [
+        "reportScores contains [7, 8, 9, 10.5]",
+        "rawScores also contains 10.5 because addAll links the lists",
+        "The call throws ClassCastException when the Integer values are copied",
+        "The code fails to compile because List<Integer> cannot be passed to the method"
+      ],
+      "answerIndex": 0,
+      "explanation": "The trap is mixing invariance with bounded reads; the source can be read as Numbers, while the concrete List<Number> target can accept Double."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Generics wildcard copy\n// Learn: read from ? extends and write into a concrete destination.\nimport java.util.ArrayList;\nimport java.util.List;\n\nstatic void copyScores(List<? extends Number> source, List<Number> target) {\n  // addAll can read Number values from any Number subtype list.\n  target.addAll(source);\n}\n\nList<Integer> rawScores = List.of(7, 8, 9);\nList<Number> reportScores = new ArrayList<>();\ncopyScores(rawScores, reportScores);\nreportScores.add(10.5);"
+}

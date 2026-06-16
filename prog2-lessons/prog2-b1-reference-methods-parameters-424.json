@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-methods-parameters-424",
+    "version":  1,
+    "title":  "Reference Page 1 - Metoder och parametrar",
+    "description":  "Use this Java reference to review Metoder och parametrar through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "methods",
+                 "functions"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-references-values-null-423"
+                      ],
+    "learningGoals":  [
+                          "Write methods with parameters and return values.",
+                          "Recognize how reference parameters can mutate objects.",
+                          "Use varargs when a method accepts many values."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Metoder och parametrar.\n// You will learn: Pass values, mutate referenced objects, and use varargs deliberately.\nclass Prog2Reference424 {\n  // EXEMPEL 1: En metod kan ta parametrar och returnera ett varde.\n  static int max(int a, int b) {\n    return a \u003e= b ? a : b;\n  }\n  // EXEMPEL 2: En referensparameter kan anvandas for att andra samma objekt.\n  static void addName(java.util.List\u003cString\u003e names, String name) {\n    if (name != null \u0026\u0026 !name.trim().isEmpty()) { names.add(name.trim()); }\n  }\n  // EXEMPEL 3: Varargs later anroparen skicka valfritt antal argument.\n  static int sum(int... values) {\n    int total = 0;\n    for (int value : values) { total += value; }\n    return total;\n  }\n}"
+}

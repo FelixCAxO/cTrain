@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-stream-collect-16",
+  "version": 1,
+  "title": "Java Stream Collect",
+  "description": "Practice stream collection with Collectors.toList and toList.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 220,
+  "tags": [
+    "java",
+    "streams",
+    "collectors"
+  ],
+  "prerequisites": [
+    "java-optional-orelse-15"
+  ],
+  "learningGoals": [
+    "Type collect(Collectors.toList()).",
+    "Practice the modern toList finisher."
+  ],
+  "languageVersion": "Java 16",
+  "completionChecks": [
+    {
+      "prompt": "What does emails contain after this stream pipeline runs?",
+      "choices": [
+        "[ada@example.com, ben@example.com]",
+        "[ada@example.com]",
+        "[Ada, Ben]",
+        "Compilation fails because toList() is not a terminal operation"
+      ],
+      "answerIndex": 0,
+      "explanation": "The second pipeline maps every user to email() and then materializes those mapped values with Stream.toList()."
+    },
+    {
+      "prompt": "What does activeNames contain after this code runs?",
+      "choices": [
+        "[Ada, Ben]",
+        "[ada@example.com]",
+        "[Ada]",
+        "[] because collect(Collectors.toList()) is not a terminal operation"
+      ],
+      "answerIndex": 2,
+      "explanation": "Only Ada is active, so the first pipeline filters to Ada and maps to the name, producing [Ada]; collect(Collectors.toList()) is a terminal operation."
+    },
+    {
+      "prompt": "What happens after emails is created with stream().map(User::email).toList() and code calls emails.add(\"new@example.com\")?",
+      "choices": [
+        "The address is appended because toList always returns an ArrayList",
+        "UnsupportedOperationException is thrown",
+        "Compilation fails because add is not declared on List",
+        "The call is ignored and emails stays unchanged"
+      ],
+      "answerIndex": 1,
+      "explanation": "Stream.toList returns an unmodifiable result, a common trap when comparing it with Collectors.toList()."
+    }
+  ],
+  "targetCode": "// Learn: Collect stream results into lists.\nimport java.util.List;\nimport java.util.stream.Collectors;\n\nclass User {\n  final String name, email;\n  final boolean active;\n  User(String name, String email, boolean active) {\n    this.name = name; this.email = email; this.active = active;\n  }\n  String name() { return name; }\n  String email() { return email; }\n  boolean active() { return active; }\n}\n\nList<User> users = List.of(\n  new User(\"Ada\", \"ada@example.com\", true),\n  new User(\"Ben\", \"ben@example.com\", false)\n);\n\nList<String> activeNames = users.stream()\n  // filter removes inactive users before mapping names.\n  .filter(User::active)\n  .map(User::name)\n  .collect(Collectors.toList());\n\nList<String> emails = users.stream()\n  .map(User::email)\n  .toList();"
+}

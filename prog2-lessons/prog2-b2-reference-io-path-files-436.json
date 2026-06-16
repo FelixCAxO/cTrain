@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b2-reference-io-path-files-436",
+    "version":  1,
+    "title":  "Reference Page 1 - I/O, Path, Files",
+    "description":  "Use this Java reference to review I/O, Path, Files through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "io",
+                 "files",
+                 "resources"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-arrays-loops-435"
+                      ],
+    "learningGoals":  [
+                          "Read text through Path and Files.",
+                          "Write text through Files and BufferedWriter.",
+                          "Use Reader and Writer classes for buffered I/O."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - I/O, Path, Files.\n// You will learn: Read, write, and close files with Path, Files, and resources.\nclass Prog2Reference436 {\n  // EXEMPEL 1: Path beskriver var en fil finns och Files laser innehall.\n  static java.util.List\u003cString\u003e readLines(String fileName) throws java.io.IOException {\n    java.nio.file.Path path = java.nio.file.Paths.get(fileName);\n    return java.nio.file.Files.readAllLines(path, java.nio.charset.StandardCharsets.UTF_8);\n  }\n  // EXEMPEL 2: Files kan skriva en hel lista rader till en fil.\n  static void writeLines(String fileName, java.util.List\u003cString\u003e lines) throws java.io.IOException {\n    java.nio.file.Path path = java.nio.file.Paths.get(fileName);\n    java.nio.file.Files.write(path, lines, java.nio.charset.StandardCharsets.UTF_8);\n  }\n  // EXEMPEL 3: BufferedWriter och PrintWriter ger radvis skrivning.\n  static void printOneLine(String fileName, String line) throws java.io.IOException {\n    java.nio.file.Path path = java.nio.file.Paths.get(fileName);\n    try (java.io.PrintWriter out = new java.io.PrintWriter(java.nio.file.Files.newBufferedWriter(path))) {\n      out.println(line);\n    }\n  }\n}"
+}

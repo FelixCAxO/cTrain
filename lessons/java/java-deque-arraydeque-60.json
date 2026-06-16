@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-deque-arraydeque-60",
+  "version": 1,
+  "title": "Java Deque",
+  "description": "Use ArrayDeque as both a stack and a double-ended queue.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "collections",
+    "deque"
+  ],
+  "prerequisites": [
+    "java-collections-list-07"
+  ],
+  "learningGoals": [
+    "Push and pop from one end of an ArrayDeque to use it as a stack.",
+    "Add and inspect both ends with offerLast, peekFirst, and peekLast."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does stack.pop() return after pushing 1 then 2?",
+      "choices": [
+        "2",
+        "1",
+        "9"
+      ],
+      "answerIndex": 0,
+      "explanation": "push and pop use the front of the deque as a stack, so the most recently pushed value comes out first."
+    },
+    {
+      "prompt": "What is a common ArrayDeque exam trap?",
+      "choices": [
+        "It is synchronized by default",
+        "It does not permit null elements",
+        "It only works as a FIFO queue"
+      ],
+      "answerIndex": 1,
+      "explanation": "ArrayDeque supports stack and queue operations but rejects null elements, unlike some legacy APIs."
+    },
+    {
+      "prompt": "What prints after push(1), push(2), pop(), and offerLast(9)?",
+      "choices": [
+        "2 1 9",
+        "1 2 9",
+        "2 9 1",
+        "9 1 2"
+      ],
+      "answerIndex": 0,
+      "explanation": "push and pop use the front of the deque, then offerLast appends 9 at the opposite end."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Deque and ArrayDeque\n// Learn: use ArrayDeque as a stack and a double-ended queue.\nDeque<Integer> stack = new ArrayDeque<>();\n// push adds to the front like a stack.\nstack.push(1);\nstack.push(2);\nint top = stack.pop();\nstack.offerLast(9);\nSystem.out.println(top + \" \" + stack.peekFirst() + \" \" + stack.peekLast());"
+}

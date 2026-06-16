@@ -1,0 +1,26 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-queue-deque-priorityqueue-705",
+    "version":  1,
+    "title":  "Queue Deque PriorityQueue - Reference Page 2",
+    "description":  "Use this Java reference to review Queue Deque PriorityQueue through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  540,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Use offer, peek, and poll for queue-based work.",
+                          "Choose ArrayDeque or PriorityQueue based on how elements should leave the collection."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Queue Deque PriorityQueue - Reference Page 2.\n// You will learn: Choose Queue, Deque, and PriorityQueue operations for ordered work.\nimport java.util.ArrayDeque;\nimport java.util.HashSet;\nimport java.util.PriorityQueue;\nimport java.util.Queue;\nimport java.util.Deque;\nimport java.util.Set;\n\nclass QueueDequePriorityQueueReference {\n  public static void main(String[] args) {\n    example1QueueFifo();\n    example2DequeEndsAndStack();\n    example3PriorityQueueOrder();\n    example4BfsFrontier();\n  }\n\n  static void example1QueueFifo() {\n    Queue\u003cString\u003e line = new ArrayDeque\u003c\u003e();\n    line.offer(\"Ana\");\n    line.offer(\"Bo\");\n    String next = line.peek();\n    String served = line.poll();\n    String afterServing = line.poll();\n    System.out.println(next + \" \" + served + \" \" + afterServing);\n  }\n\n  static void example2DequeEndsAndStack() {\n    Deque\u003cString\u003e deque = new ArrayDeque\u003c\u003e();\n    deque.addFirst(\"front\");\n    deque.addLast(\"back\");\n    String first = deque.peekFirst();\n    String last = deque.peekLast();\n    deque.push(\"top\");\n    String popped = deque.pop();\n    System.out.println(first + \" \" + last + \" \" + popped);\n  }\n\n  static void example3PriorityQueueOrder() {\n    PriorityQueue\u003cInteger\u003e tasks = new PriorityQueue\u003c\u003e();\n    tasks.offer(3);\n    tasks.offer(1);\n    tasks.offer(2);\n    System.out.println(tasks.peek());\n    while (!tasks.isEmpty()) {\n      int priority = tasks.poll();\n      System.out.println(priority);\n    }\n  }\n\n  static void example4BfsFrontier() {\n    Queue\u003cString\u003e frontier = new ArrayDeque\u003c\u003e();\n    Set\u003cString\u003e visited = new HashSet\u003c\u003e();\n    frontier.offer(\"Start\");\n    while (!frontier.isEmpty()) {\n      String node = frontier.poll();\n      if (visited.add(node)) {\n        System.out.println(\"Visited \" + node);\n        if (node.equals(\"Start\")) {\n          frontier.offer(\"A\");\n          frontier.offer(\"B\");\n        }\n      }\n    }\n  }\n}"
+}

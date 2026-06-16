@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-inheritance-extends-10",
+  "version": 1,
+  "title": "Java Inheritance Extends",
+  "description": "Practice extends, super, and overriding a method.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 105,
+  "tags": [
+    "java",
+    "inheritance"
+  ],
+  "prerequisites": [
+    "java-constructor-encapsulation-09"
+  ],
+  "learningGoals": [
+    "Type an extends clause.",
+    "Call a superclass constructor with super."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does new Car().toString() return?",
+      "choices": [
+        "car, the value passed to super",
+        "Vehicle, from the superclass",
+        "Car",
+        "Compilation fails because Vehicle has no toString"
+      ],
+      "answerIndex": 2,
+      "explanation": "Car overrides toString to return \"Car\", and an overriding method is chosen by the object's runtime type, so new Car().toString() is \"Car\"."
+    },
+    {
+      "prompt": "Why does Car call super(\"car\") in its constructor?",
+      "choices": [
+        "Vehicle has no no-argument constructor, so Car must call super with a String",
+        "super is required only when overriding toString",
+        "It copies all private fields of Vehicle into Car",
+        "Compilation fails because a subclass cannot call super"
+      ],
+      "answerIndex": 0,
+      "explanation": "Vehicle declares only Vehicle(String), so there is no implicit no-arg super to call; Car must invoke super(\"car\") explicitly to initialize its superclass."
+    },
+    {
+      "prompt": "What happens if String label = this.toString(); is placed before super(\"car\"); inside Car()?",
+      "choices": [
+        "Compilation fails because the constructor prologue cannot use this before delegation",
+        "The instance method runs, then Vehicle(String) runs normally",
+        "It compiles only because Vehicle.name is private",
+        "A NullPointerException is thrown before super runs"
+      ],
+      "answerIndex": 0,
+      "explanation": "Java 25 flexible constructor bodies allow parameter-only validation before super(...), but pre-delegation code cannot read this or call instance methods on the object being constructed."
+    }
+  ],
+  "targetCode": "// Learn: Extend a base class and call its constructor.\nclass Vehicle {\n  Vehicle(String name) {\n    this.name = name;\n  }\n\n  private final String name;\n}\n\nclass Car extends Vehicle {\n  Car() {\n    // super calls the Vehicle constructor first.\n    super(\"car\");\n  }\n\n  @Override\n  public String toString() {\n    return \"Car\";\n  }\n}"
+}

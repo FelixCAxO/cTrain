@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-record-patterns-57",
+  "version": 1,
+  "title": "Java Record Patterns",
+  "description": "Deconstruct a record into its components inside an instanceof check.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "records",
+    "pattern-matching"
+  ],
+  "prerequisites": [
+    "java-records-45",
+    "java-pattern-switch-56"
+  ],
+  "learningGoals": [
+    "Bind a record's components directly with a record pattern.",
+    "Combine instanceof with deconstruction to avoid manual accessor calls."
+  ],
+  "languageVersion": "Java 21",
+  "completionChecks": [
+    {
+      "prompt": "What does isOrigin(new Point(0, 0)) return?",
+      "choices": [
+        "true",
+        "false",
+        "Compilation fails because record patterns cannot appear in instanceof",
+        "An exception is thrown at runtime"
+      ],
+      "answerIndex": 0,
+      "explanation": "The instanceof record pattern matches the Point, binds x and y to 0, and the method returns the coordinate comparison."
+    },
+    {
+      "prompt": "What does isOrigin(null) return?",
+      "choices": [
+        "false",
+        "true",
+        "Compilation fails because null cannot be tested with instanceof",
+        "An exception is thrown before the if statement"
+      ],
+      "answerIndex": 0,
+      "explanation": "The instanceof test is false for null, so the pattern body does not run and the final false return is used."
+    },
+    {
+      "prompt": "What happens for isOrigin(new Point(0, 1))?",
+      "choices": [
+        "It returns false",
+        "It returns true",
+        "It throws ClassCastException",
+        "Compilation fails because record patterns cannot bind int components"
+      ],
+      "answerIndex": 0,
+      "explanation": "The record pattern matches and binds both coordinates, but the y == 0 comparison is false."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Record patterns\n// Learn: destructure a record inside an instanceof pattern.\nrecord Point(int x, int y) {\n}\n\nboolean isOrigin(Object value) {\n    if (value instanceof Point(int x, int y)) { // binds x and y\n        return x == 0 && y == 0;\n    }\n    return false;\n}"
+}

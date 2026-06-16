@@ -1,0 +1,26 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-javafx-layout-pane-713",
+    "version":  1,
+    "title":  "JavaFX Layout Panes - Reference Page 2",
+    "description":  "Use this Java reference to review JavaFX Layout Panes through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  540,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b3",
+                 "source-file",
+                 "javafx"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Choose VBox, HBox, BorderPane, and GridPane for common UI layouts.",
+                          "Use spacing, padding, alignment, and add/addAll to place nodes."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: JavaFX Layout Panes - Reference Page 2.\n// You will learn: Arrange controls with VBox, HBox, BorderPane, and GridPane.\nimport javafx.application.Application;\nimport javafx.geometry.Insets;\nimport javafx.geometry.Pos;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Button;\nimport javafx.scene.control.Label;\nimport javafx.scene.layout.BorderPane;\nimport javafx.scene.layout.GridPane;\nimport javafx.scene.layout.HBox;\nimport javafx.scene.layout.VBox;\nimport javafx.stage.Stage;\n\npublic class JavaFxLayoutPaneReference extends Application {\n  public static void main(String[] args) {\n    launch(args);\n  }\n\n  @Override\n  public void start(Stage stage) {\n    VBox root = new VBox(12);\n    root.setPadding(new Insets(12));\n    root.getChildren().addAll(exampleVBoxHBox(), exampleBorderPane(), exampleGridPane());\n    stage.setScene(new Scene(root, 460, 360));\n    stage.setTitle(\"Layout panes\");\n    stage.show();\n  }\n\n  private VBox exampleVBoxHBox() {\n    VBox box = new VBox(6);\n    HBox row = new HBox(8);\n    row.setAlignment(Pos.CENTER_LEFT);\n    row.getChildren().addAll(new Button(\"Save\"), new Button(\"Cancel\"));\n    box.getChildren().addAll(new Label(\"EXAMPLE 1: VBox and HBox\"), row);\n    return box;\n  }\n\n  private BorderPane exampleBorderPane() {\n    BorderPane pane = new BorderPane();\n    pane.setTop(new Label(\"EXAMPLE 2: BorderPane top\"));\n    pane.setCenter(new Label(\"Center is for main content\"));\n    pane.setBottom(new Button(\"Bottom button\"));\n    return pane;\n  }\n\n  private GridPane exampleGridPane() {\n    GridPane grid = new GridPane();\n    grid.setHgap(8);\n    grid.setVgap(6);\n    grid.add(new Label(\"EXAMPLE 3: GridPane\"), 0, 0);\n    grid.add(new Label(\"Name:\"), 0, 1);\n    grid.add(new Button(\"Send\"), 1, 1);\n    return grid;\n  }\n}"
+}

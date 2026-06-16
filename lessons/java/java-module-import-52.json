@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-module-import-52",
+  "version": 1,
+  "title": "Java Module Import",
+  "description": "Import a whole module in one line with a module import declaration.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 200,
+  "tags": [
+    "java",
+    "imports",
+    "modules"
+  ],
+  "prerequisites": [
+    "java-package-import-30"
+  ],
+  "learningGoals": [
+    "Import every package exported by a module with a module import declaration (JEP 511).",
+    "Recall that compact source files already import java.base, making this example explicit but redundant."
+  ],
+  "languageVersion": "Java 25",
+  "completionChecks": [
+    {
+      "prompt": "What does import module java.base make visible?",
+      "choices": [
+        "Every package in every module on the module path",
+        "Only classes from java.lang",
+        "Public types from packages exported by java.base"
+      ],
+      "answerIndex": 2,
+      "explanation": "A module import declaration imports the public top-level types from packages exported by that module."
+    },
+    {
+      "prompt": "Why is import module java.base redundant in a compact source file?",
+      "choices": [
+        "java.base is already imported for compact source files",
+        "java.base cannot be imported by any source file",
+        "List and Map are primitive types"
+      ],
+      "answerIndex": 0,
+      "explanation": "Compact source files implicitly get java.base, so the declaration is useful here as an explicit teaching cue."
+    },
+    {
+      "prompt": "Does HashMap compile here without an explicit import java.util.HashMap declaration?",
+      "choices": [
+        "Yes, because import module java.base imports public types from exported java.base packages",
+        "No, module imports expose only java.lang types",
+        "No, HashMap is not a public top-level type",
+        "Yes, but only because HashMap is a primitive wrapper"
+      ],
+      "answerIndex": 0,
+      "explanation": "The trap is treating a module import like a single-package import; java.base exports java.util, so HashMap is in scope."
+    }
+  ],
+  "targetCode": "// Java 25 - Module import declarations (JEP 511, final)\n// Learn: import a whole module's exported packages with one declaration.\n// import module exposes exported packages from java.base.\nimport module java.base;\n\nvoid main() {\n    List<String> langs = List.of(\"Java\", \"Kotlin\", \"Scala\");\n    Map<String, Integer> lengths = new HashMap<>();\n    for (String lang : langs) {\n        lengths.put(lang, lang.length());\n    }\n    IO.println(lengths);\n}"
+}

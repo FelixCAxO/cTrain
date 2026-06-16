@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-varargs-33",
+  "version": 1,
+  "title": "Java Varargs",
+  "description": "Practice a method that accepts a variable number of arguments.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 96,
+  "tags": [
+    "java",
+    "methods",
+    "arrays",
+    "varargs"
+  ],
+  "prerequisites": [
+    "java-method-overload-28"
+  ],
+  "learningGoals": [
+    "Recall that a varargs parameter is treated like an array inside the method.",
+    "Recognize that a varargs parameter must be the final parameter."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does sum(\"round\", 4, 5, 6) return?",
+      "choices": [
+        "15",
+        "3",
+        "\"round3\"",
+        "Compilation fails because varargs cannot follow a String parameter"
+      ],
+      "answerIndex": 0,
+      "explanation": "values receives {4, 5, 6}; the loop sums them to 15 and returns it. It also prints \"round3\" because values.length is 3, but the returned value is 15."
+    },
+    {
+      "prompt": "Inside sum(String label, int... values), what is values?",
+      "choices": [
+        "A stream of int values",
+        "A single boxed Integer",
+        "A List<Integer>",
+        "An int array"
+      ],
+      "answerIndex": 3,
+      "explanation": "A varargs parameter is compiled as an array, so values is an int[]; values.length and indexing work, and varargs must be the last parameter."
+    },
+    {
+      "prompt": "What does sum(\"round\", 4, 5, 6) print before returning?",
+      "choices": [
+        "round15",
+        "round3",
+        "round 3",
+        "Nothing, because the print happens after return"
+      ],
+      "answerIndex": 1,
+      "explanation": "values is an int array containing three arguments, so values.length is 3 and the label is concatenated directly before it."
+    }
+  ],
+  "targetCode": "// Learn: Accept any number of int arguments.\nint sum(String label, int... values) {\n  int total = 0;\n  // values acts like an array inside the method.\n  for (int value : values) {\n    total += value;\n  }\n  System.out.println(label + values.length);\n  return total;\n}\n\nint score = sum(\"round\", 4, 5, 6);"
+}

@@ -1,0 +1,312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ctrain.local/schemas/lesson.schema.json",
+  "title": "cTrain Lesson",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "title",
+    "description",
+    "language",
+    "difficulty",
+    "estimatedSeconds",
+    "tags",
+    "prerequisites",
+    "targetCode"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-\\d{2,}$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "java"
+      ]
+    },
+    "difficulty": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "estimatedSeconds": {
+      "type": "integer",
+      "minimum": 10,
+      "maximum": 1800
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "enum": [
+          "abstract",
+          "arrays",
+          "b1",
+          "b2",
+          "b3",
+          "classes",
+          "collections",
+          "collectors",
+          "concurrency",
+          "conditionals",
+          "constructors",
+          "dates",
+          "deque",
+          "encapsulation",
+          "enum-members",
+          "enums",
+          "errors",
+          "events",
+          "exceptions",
+          "executors",
+          "file-chooser",
+          "files",
+          "filtering",
+          "focus",
+          "formatting",
+          "functional-interfaces",
+          "functions",
+          "generics",
+          "http-client",
+          "if-else",
+          "imports",
+          "inheritance",
+          "interface-methods",
+          "interfaces",
+          "io",
+          "iterators",
+          "java",
+          "javafx",
+          "lambda",
+          "lambdas",
+          "lazy-constants",
+          "list-view",
+          "literals",
+          "localization",
+          "loops",
+          "map",
+          "maps",
+          "math",
+          "methods",
+          "modules",
+          "multicatch",
+          "networking",
+          "numeric-casting",
+          "object-contracts",
+          "observable-list",
+          "optional",
+          "pattern-matching",
+          "preview",
+          "primitives",
+          "prog2",
+          "properties",
+          "records",
+          "references",
+          "resources",
+          "scoped-values",
+          "sealed",
+          "search",
+          "security",
+          "sequenced-collections",
+          "serialization",
+          "sets",
+          "sort",
+          "sorting",
+          "source-file",
+          "stable-values",
+          "static",
+          "streams",
+          "strings",
+          "structured-concurrency",
+          "switch",
+          "table-view",
+          "testing",
+          "text-blocks",
+          "threads",
+          "time",
+          "unnamed-variables",
+          "validation",
+          "var",
+          "varargs",
+          "variables",
+          "virtual-threads",
+          "workspace"
+        ]
+      }
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "learningGoals": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "defects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "line",
+          "hint"
+        ],
+        "properties": {
+          "line": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "hint": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "completionChecks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "prompt",
+          "choices",
+          "answerIndex",
+          "explanation"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "choices": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "answerIndex": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "languageVersion": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "Java 8",
+        "Java 9",
+        "Java 11",
+        "Java 14",
+        "Java 15",
+        "Java 16",
+        "Java 17",
+        "Java 21",
+        "Java 22",
+        "Java 23",
+        "Java 24",
+        "Java 25",
+        "Java 26"
+      ]
+    },
+    "targetCode": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "language"
+        ],
+        "properties": {
+          "language": {
+            "const": "java"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "languageVersion": {
+            "enum": [
+              "Java 8",
+              "Java 9",
+              "Java 11",
+              "Java 14",
+              "Java 15",
+              "Java 16",
+              "Java 17",
+              "Java 21",
+              "Java 22",
+              "Java 23",
+              "Java 24",
+              "Java 25",
+              "Java 26"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "difficulty"
+        ],
+        "properties": {
+          "difficulty": {
+            "minimum": 3
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "learningGoals",
+          "languageVersion"
+        ],
+        "properties": {
+          "learningGoals": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

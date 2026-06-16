@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-nested-classes-84",
+  "version": 1,
+  "title": "Java Nested Classes",
+  "description": "Practice static nested classes, inner classes, local classes, and anonymous classes.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 240,
+  "tags": [
+    "java",
+    "classes",
+    "static"
+  ],
+  "prerequisites": [
+    "java-static-members-26"
+  ],
+  "learningGoals": [
+    "Distinguish a static nested class from an inner class tied to an enclosing instance.",
+    "Recognize local and anonymous nested class objects in exam code."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "Which nested class object can be created without an existing Order instance?",
+      "choices": [
+        "Order.ItemView, because it reads itemCount",
+        "AuditTask, because it is declared inside printAudit",
+        "Order.Summary, because it is a static nested class",
+        "The anonymous Runnable, because anonymous classes are always static"
+      ],
+      "answerIndex": 2,
+      "explanation": "A static nested class is associated with the enclosing class, not an enclosing object. Inner, local, and anonymous classes in this lesson are created in an instance context."
+    },
+    {
+      "prompt": "What does printAudit() print for new Order(\"A17\", 3)?",
+      "choices": [
+        "A17 has 3 items, audit A17, async A17",
+        "Order.Summary, Order.ItemView, Order.AuditTask",
+        "A17 has 0 items, audit null, async null",
+        "Compilation fails because local classes cannot read fields"
+      ],
+      "answerIndex": 0,
+      "explanation": "The inner ItemView, local AuditTask, and anonymous Runnable all run inside an Order instance and can read the instance field id; ItemView also reads itemCount."
+    },
+    {
+      "prompt": "What happens if outside code writes new Order.ItemView()?",
+      "choices": [
+        "It creates an ItemView with null id",
+        "It creates an ItemView only after Summary is initialized",
+        "Compilation fails because ItemView is a non-static inner class and needs an Order instance",
+        "It compiles because every nested class is implicitly static"
+      ],
+      "answerIndex": 2,
+      "explanation": "ItemView is an inner class, not a static nested class. Code outside Order needs an enclosing instance, such as order.new ItemView(), before it can create one."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Nested classes\n// Learn: compare static nested, inner, local, and anonymous class objects.\nclass Order {\n    static class Summary { } // Static nested: no Order instance required.\n    private final String id;\n    private final int itemCount;\n    Order(String id, int itemCount) { this.id = id; this.itemCount = itemCount; }\n    class ItemView { String label() { return id + \" has \" + itemCount + \" items\"; } }\n    void printAudit() {\n        class AuditTask { String line() { return \"audit \" + id; } }\n        Runnable async = new Runnable() { public void run() { System.out.println(\"async \" + id); } };\n        System.out.println(new ItemView().label());\n        System.out.println(new AuditTask().line());\n        async.run();\n    }\n}"
+}

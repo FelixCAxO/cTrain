@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-gc-eligibility-88",
+  "version": 1,
+  "title": "Java Garbage Collection Eligibility",
+  "description": "Trace when objects become eligible for garbage collection after references change.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "references"
+  ],
+  "prerequisites": [
+    "java-reference-null-29"
+  ],
+  "learningGoals": [
+    "Identify when an object becomes eligible for garbage collection.",
+    "Recall that System.gc() is only a request and does not guarantee collection."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "When does the first Object become eligible for garbage collection?",
+      "choices": [
+        "Immediately after first = null;",
+        "After second = new Object();",
+        "After cache[0] = null;",
+        "Only after System.gc() definitely runs"
+      ],
+      "answerIndex": 2,
+      "explanation": "first = null removes one reference, but second and cache[0] still reach the original object. After second points elsewhere and cache[0] is null, no live reference remains."
+    },
+    {
+      "prompt": "What happens when System.gc() is called here?",
+      "choices": [
+        "The original object is guaranteed to be collected before the next line",
+        "The VM receives a request to run GC, but collection is not guaranteed",
+        "All objects allocated on the heap become unreachable",
+        "The code fails to compile because gc is private"
+      ],
+      "answerIndex": 1,
+      "explanation": "The exam trap is confusing eligibility with collection. System.gc() may suggest a collection cycle, but Java does not promise the object is reclaimed immediately."
+    },
+    {
+      "prompt": "What happens if cache[0] = null is removed?",
+      "choices": [
+        "The original object is still reachable through cache[0]",
+        "The original object becomes eligible after first = null",
+        "The array itself is collected immediately",
+        "The code fails because arrays cannot store Object references"
+      ],
+      "answerIndex": 0,
+      "explanation": "second is reassigned, but the array element still points at the original object. A reachable array element is a live reference, so the object is not eligible yet."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Garbage collection eligibility\n// Learn: remove the last live reference before an object is eligible.\nObject first = new Object();\nObject second = first;\nObject[] cache = { second };\nfirst = null;\nsecond = new Object();\ncache[0] = null;\nSystem.gc(); // request only, not a guarantee\nSystem.out.println(\"old object is eligible\");"
+}

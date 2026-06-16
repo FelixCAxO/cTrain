@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-javafx-program-structure-712",
+    "version":  1,
+    "title":  "JavaFX Program Structure - Reference Page 2",
+    "description":  "Use this Java reference to review JavaFX Program Structure through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  540,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b3",
+                 "source-file",
+                 "javafx",
+                 "events",
+                 "properties",
+                 "classes"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Split a JavaFX app into small methods for startup, scene creation, and controls.",
+                          "Use common Stage and Node methods while keeping UI updates on the JavaFX thread."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: JavaFX Program Structure - Reference Page 2.\n// You will learn: Organize JavaFX startup, node building, and UI-thread updates.\nimport javafx.application.Application;\nimport javafx.application.Platform;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Button;\nimport javafx.scene.control.Label;\nimport javafx.scene.layout.BorderPane;\nimport javafx.scene.layout.VBox;\nimport javafx.stage.Stage;\n\npublic class JavaFxProgramStructureReference extends Application {\n  private Label statusLabel;\n\n  public static void main(String[] args) {\n    launch(args);\n  }\n\n  @Override\n  public void start(Stage stage) {\n    // EXAMPLE 1: split startup into clear methods.\n    BorderPane root = buildRoot();\n    configureStage(stage, root);\n  }\n\n  private BorderPane buildRoot() {\n    // EXAMPLE 2: build nodes and configure common properties.\n    statusLabel = new Label(\"Ready\");\n    statusLabel.setId(\"status\");\n    Button workButton = new Button(\"Start work\");\n    workButton.setOnAction(event -\u003e runLaterExample());\n    return new BorderPane(new VBox(8, statusLabel, workButton));\n  }\n\n  private void configureStage(Stage stage, BorderPane root) {\n    stage.setTitle(\"Program structure\");\n    stage.setScene(new Scene(root, 360, 220));\n    stage.show();\n  }\n\n  private void runLaterExample() {\n    // EXAMPLE 3: update a node through the JavaFX Application Thread.\n    statusLabel.setDisable(true);\n    Platform.runLater(() -\u003e {\n      statusLabel.setText(\"Done\");\n      statusLabel.setDisable(false);\n    });\n  }\n}"
+}

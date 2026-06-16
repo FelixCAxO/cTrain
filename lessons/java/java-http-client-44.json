@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "java-http-client-44",
+  "version": 1,
+  "title": "Java HttpClient Send",
+  "description": "Practice the modern Java HTTP client send flow.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "http-client",
+    "networking"
+  ],
+  "prerequisites": [
+    "java-time-localdate-42"
+  ],
+  "learningGoals": [
+    "Type HttpClient and HttpRequest builders.",
+    "Practice send with BodyHandlers."
+  ],
+  "languageVersion": "Java 11",
+  "completionChecks": [
+    {
+      "prompt": "Which call sends the request synchronously and returns a response?",
+      "choices": [
+        "HttpClient.newHttpClient()",
+        "HttpRequest.newBuilder(URI.create(url))",
+        "client.send(request, HttpResponse.BodyHandlers.ofString())"
+      ],
+      "answerIndex": 2,
+      "explanation": "send performs the blocking request/response operation; the other calls construct client and request objects."
+    }
+  ],
+  "targetCode": "// Learn: Build and send an HTTP request.\nimport java.net.URI;\nimport java.net.http.HttpClient;\nimport java.net.http.HttpRequest;\nimport java.net.http.HttpResponse;\n\nHttpClient client = HttpClient.newHttpClient();\n// The builder prepares a GET request for the URL.\nHttpRequest request = HttpRequest.newBuilder(URI.create(url)).GET().build();\n// send blocks for the response; real code handles its IOException and InterruptedException.\nHttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());"
+}

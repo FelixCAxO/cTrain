@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-interfaces-contracts-426",
+    "version":  1,
+    "title":  "Reference Page 1 - Interface och kontrakt",
+    "description":  "Use this Java reference to review Interface och kontrakt through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  248,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "interfaces",
+                 "abstract",
+                 "classes"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-inheritance-polymorphism-425"
+                      ],
+    "learningGoals":  [
+                          "Declare behavior with interfaces.",
+                          "Implement interface methods as public methods.",
+                          "Program against interface types."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Interface och kontrakt.\n// You will learn: Define contracts, implement interfaces, and program to abstractions.\nclass Prog2Reference426 {\n  // EXEMPEL 1: Ett interface sager vilka metoder en klass lovar att ha.\n  interface Measurable {\n    double measure();\n  }\n  static class Box implements Measurable {\n    private final double width;\n    private final double height;\n    Box(double width, double height) { this.width = width; this.height = height; }\n    public double measure() { return width * height; }\n  }\n  // EXEMPEL 2: En klass kan implementera flera interface.\n  interface Named {\n    String name();\n  }\n  interface Priced {\n    int priceInOre();\n  }\n  static class Ticket implements Named, Priced {\n    public String name() { return \"Ticket\"; }\n    public int priceInOre() { return 8000; }\n  }\n  // EXEMPEL 3: Programmera mot interface nar implementationen kan bytas.\n  static int total(java.util.List\u003cPriced\u003e items) {\n    int sum = 0;\n    for (Priced item : items) { sum += item.priceInOre(); }\n    return sum;\n  }\n}"
+}

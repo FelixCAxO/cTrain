@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-unnamed-variables-34",
+  "version": 1,
+  "title": "Java Unnamed Variables",
+  "description": "Practice underscore variables that intentionally discard a value.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 90,
+  "tags": [
+    "java",
+    "variables",
+    "unnamed-variables",
+    "exceptions"
+  ],
+  "prerequisites": [
+    "java-varargs-33"
+  ],
+  "learningGoals": [
+    "Recall that `_` declares an unnamed variable when the value is intentionally unused.",
+    "Recognize that unnamed variables cannot be read later because they do not bind a name."
+  ],
+  "languageVersion": "Java 22",
+  "completionChecks": [
+    {
+      "prompt": "What does seen hold after this code runs?",
+      "choices": [
+        "-1",
+        "2",
+        "0",
+        "Compilation fails because `_` cannot be reused as a name"
+      ],
+      "answerIndex": 0,
+      "explanation": "The loop increments seen to 2, then Integer.parseInt(\"bad\") throws NumberFormatException and the catch sets seen to -1; multiple unnamed `_` variables are allowed because none can be read."
+    },
+    {
+      "prompt": "What happens if code later tries to read `_` from this lesson?",
+      "choices": [
+        "It reads the most recent discarded value",
+        "It reads null",
+        "It fails to compile because `_` is unnamed and binds no readable name",
+        "It reads the loop count"
+      ],
+      "answerIndex": 2,
+      "explanation": "The underscore declares an unnamed variable that discards its value and creates no readable binding, so referring to `_` does not compile."
+    },
+    {
+      "prompt": "Does this compile if the catch block contains System.out.println(_);?",
+      "choices": [
+        "Yes, it prints bad",
+        "Yes, it prints NumberFormatException",
+        "No, _ is an unnamed variable and cannot be read",
+        "No, catch clauses cannot use unnamed variables"
+      ],
+      "answerIndex": 2,
+      "explanation": "The underscore marks the exception parameter as intentionally discarded, so code cannot read it inside the catch block."
+    }
+  ],
+  "targetCode": "// Java 22 - unnamed variables\n// Learn: Use _ when a value is intentionally discarded.\nString[] raw = {\"42\", \"bad\"};\nint seen = 0;\n// _ discards each loop value and cannot be read.\nfor (String _ : raw) {\n  seen++;\n}\n\ntry {\n  Integer.parseInt(\"bad\");\n} catch (NumberFormatException _) {\n  seen = -1;\n}"
+}

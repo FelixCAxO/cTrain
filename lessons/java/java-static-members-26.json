@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-static-members-26",
+  "version": 1,
+  "title": "Java Static Members",
+  "description": "Practice static constants and static helper methods.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 35,
+  "tags": [
+    "java",
+    "static",
+    "methods"
+  ],
+  "prerequisites": [
+    "java-arrays-init-25"
+  ],
+  "learningGoals": [
+    "Type a static final constant.",
+    "Practice calling a static method."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does MathBox.scale(5) return?",
+      "choices": [
+        "50",
+        "10",
+        "5",
+        "Compilation fails because scale is not static"
+      ],
+      "answerIndex": 0,
+      "explanation": "scale multiplies its argument by the static constant SCALE (10), so MathBox.scale(5) returns 50; both SCALE and scale belong to the class, not an instance."
+    },
+    {
+      "prompt": "How is SCALE shared in MathBox?",
+      "choices": [
+        "As a separate field on each MathBox instance",
+        "As a local variable inside scale only",
+        "As one class-level static final field shared by all callers",
+        "As a new copy created on every scale call"
+      ],
+      "answerIndex": 2,
+      "explanation": "static attaches SCALE to the class so a single shared copy exists, and final prevents reassignment after initialization."
+    },
+    {
+      "prompt": "What happens if scale tries to run SCALE = 20; before returning?",
+      "choices": [
+        "The method returns value * 20 for that call only",
+        "The method changes SCALE for every MathBox instance",
+        "Compilation fails because SCALE is final",
+        "An UnsupportedOperationException is thrown at runtime"
+      ],
+      "answerIndex": 2,
+      "explanation": "SCALE is a static final field initialized once, and assigning to it inside the static method is a compile-time error."
+    }
+  ],
+  "targetCode": "// Learn: Share constants and methods through the class.\nclass MathBox {\n  static final int SCALE = 10;\n\n  static int scale(int value) {\n    // static methods can read static fields directly.\n    return value * SCALE;\n  }\n}"
+}

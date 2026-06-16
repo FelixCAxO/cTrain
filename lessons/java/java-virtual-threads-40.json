@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-virtual-threads-40",
+  "version": 1,
+  "title": "Java Virtual Threads",
+  "description": "Practice creating and joining a Java virtual thread.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 95,
+  "tags": [
+    "java",
+    "threads",
+    "virtual-threads"
+  ],
+  "prerequisites": [
+    "java-thread-runnable-20"
+  ],
+  "learningGoals": [
+    "Type Thread.ofVirtual().start.",
+    "Practice joining a virtual thread."
+  ],
+  "languageVersion": "Java 21",
+  "completionChecks": [
+    {
+      "prompt": "What does Thread.ofVirtual().start(...) return?",
+      "choices": [
+        "A started virtual Thread running the lambda",
+        "A Thread.Builder you must start later",
+        "An ExecutorService",
+        "Compilation fails because virtual threads need a pool"
+      ],
+      "answerIndex": 0,
+      "explanation": "Thread.ofVirtual().start(runnable) creates and starts a lightweight virtual thread and returns the Thread; ofVirtual() on its own returns the builder."
+    },
+    {
+      "prompt": "What kind of thread does Thread.ofVirtual().start create?",
+      "choices": [
+        "A platform daemon group",
+        "A thread pool without starting work",
+        "An OS thread bound one-to-one for its whole life",
+        "A virtual thread"
+      ],
+      "answerIndex": 3,
+      "explanation": "Thread.ofVirtual() builds lightweight virtual threads that the JVM schedules onto a small pool of carrier threads, not one OS thread each."
+    },
+    {
+      "prompt": "What does this code print before worker.join() returns?",
+      "choices": [
+        "loading lesson",
+        "Nothing, because join cancels the worker",
+        "Thread[loading lesson]",
+        "Compilation fails because join is unavailable on virtual threads"
+      ],
+      "answerIndex": 0,
+      "explanation": "The virtual thread runs the lambda body, and join waits for that work to finish before the current thread continues."
+    }
+  ],
+  "targetCode": "// Learn: Start lightweight work with a virtual thread.\nThread worker = Thread.ofVirtual().start(() -> {\n  System.out.println(\"loading lesson\");\n});\n\n// join waits for the worker; real main methods must handle its InterruptedException.\nworker.join();"
+}

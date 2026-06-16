@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-streams-api-708",
+    "version":  1,
+    "title":  "Streams API Map - Reference Page 2",
+    "description":  "Use this Java reference to review Streams API Map through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  480,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "streams",
+                 "lambdas"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Recognize common stream steps: create, filter, map, and finish.",
+                          "Choose terminal operations for summing, searching, and list results."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Streams API Map - Reference Page 2.\n// You will learn: Use stream filter, map, numeric summaries, find, and match operations.\nimport java.util.Arrays;\nimport java.util.List;\nimport java.util.Optional;\nimport java.util.stream.Collectors;\n\nclass StreamsApiReference {\n  public static void main(String[] args) {\n    example1FilterAndMap();\n    example2Numbers();\n    example3FindAndMatch();\n  }\n\n  static void example1FilterAndMap() {\n    List\u003cString\u003e words = Arrays.asList(\"java\", \"code\", \"stream\", \"api\");\n    List\u003cString\u003e longUpper = words.stream().filter(word -\u003e word.length() \u003e= 4).map(String::toUpperCase).collect(Collectors.toList());\n    System.out.println(longUpper);\n  }\n\n  static void example2Numbers() {\n    List\u003cInteger\u003e points = Arrays.asList(3, 8, 10, 4);\n    int total = points.stream().mapToInt(Integer::intValue).sum();\n    double average = points.stream().mapToInt(Integer::intValue).average().orElse(0.0);\n    System.out.println(total);\n    System.out.println(average);\n  }\n\n  static void example3FindAndMatch() {\n    List\u003cStreamPerson\u003e people = Arrays.asList(new StreamPerson(\"Nora\", 16), new StreamPerson(\"Leo\", 20), new StreamPerson(\"Iris\", 18));\n    boolean hasAdult = people.stream().anyMatch(person -\u003e person.age() \u003e= 18);\n    Optional\u003cStreamPerson\u003e firstAdult = people.stream().filter(person -\u003e person.age() \u003e= 18).findFirst();\n    System.out.println(hasAdult);\n    firstAdult.ifPresent(System.out::println);\n  }\n}\n\nclass StreamPerson {\n  private final String name;\n  private final int age;\n\n  StreamPerson(String name, int age) {\n    this.name = name;\n    this.age = age;\n  }\n\n  int age() { return age; }\n  public String toString() { return name + \" (\" + age + \")\"; }\n}"
+}

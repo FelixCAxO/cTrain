@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-string-pool-equality-82",
+  "version": 1,
+  "title": "Java String Pool Equality",
+  "description": "Practice separating string reference identity from value equality.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 200,
+  "tags": [
+    "java",
+    "strings",
+    "references"
+  ],
+  "prerequisites": [
+    "java-string-methods-23",
+    "java-reference-null-29"
+  ],
+  "learningGoals": [
+    "Predict when == is true because both references share the interned string pool entry.",
+    "Use equals for value comparison and reserve == for identity checks."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "true false true true",
+        "true true true true",
+        "false false true true",
+        "true false false true"
+      ],
+      "answerIndex": 0,
+      "explanation": "\"ex\" + \"am\" is a compile-time constant folded into the pooled \"exam\", the StringBuilder result is a distinct runtime object, equals compares characters, and intern returns the pooled reference."
+    },
+    {
+      "prompt": "What happens to left == right if right is computed as \"ex\" + suffix, where suffix is a method parameter holding \"am\"?",
+      "choices": [
+        "It stays true because the runtime result still equals \"exam\"",
+        "It becomes false because runtime concatenation builds a new String object",
+        "It fails to compile because + requires constant String operands",
+        "It throws NullPointerException unless suffix is declared final"
+      ],
+      "answerIndex": 1,
+      "explanation": "Only constant expressions are interned at compile time; concatenation with a variable runs at runtime and allocates a new String, so the references differ even though the values match."
+    },
+    {
+      "prompt": "What does System.out.println(built == built.intern()) print in this snippet?",
+      "choices": [
+        "true",
+        "false",
+        "It throws IllegalStateException because intern cannot be called on constructed strings",
+        "It depends on whether the StringBuilder object has been garbage collected"
+      ],
+      "answerIndex": 1,
+      "explanation": "The trap is thinking intern changes built itself; intern returns the pooled literal reference while built still refers to the runtime object."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - String pool vs object identity\n// Learn: == compares references; equals compares value; literals share the pool.\nString left = \"exam\";\nString right = \"ex\" + \"am\";\n// Constant expressions fold at compile time into the same pooled \"exam\".\nString built = new StringBuilder(\"ex\").append(\"am\").toString();\nSystem.out.println(left == right);\nSystem.out.println(left == built);\n// built is a fresh runtime object: identity differs while the value matches.\nSystem.out.println(left.equals(built));\nSystem.out.println(left == built.intern());"
+}

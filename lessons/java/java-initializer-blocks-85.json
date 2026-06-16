@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "java-initializer-blocks-85",
+  "version": 1,
+  "title": "Java Initializer Blocks",
+  "description": "Practice static and instance initializer execution before constructors finish.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 220,
+  "tags": [
+    "java",
+    "classes",
+    "constructors",
+    "static"
+  ],
+  "prerequisites": [
+    "java-constructor-encapsulation-09",
+    "java-static-members-26"
+  ],
+  "learningGoals": [
+    "Trace static initializer execution once when the class is initialized.",
+    "Trace instance initializer execution before the constructor body for each object."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does new Account(\"Mira\").label() return for the first Account object created?",
+      "choices": [
+        "Mira#0",
+        "Mira#1",
+        "Mira#100",
+        "null#100"
+      ],
+      "answerIndex": 2,
+      "explanation": "The static initializer sets nextId to 100 once. The instance initializer assigns id before the constructor stores the owner, so label later returns Mira#100."
+    },
+    {
+      "prompt": "What happens to the instance initializer block?",
+      "choices": [
+        "It runs once when the class is loaded",
+        "It runs before the constructor body for each new Account",
+        "It runs only when label() is called",
+        "It cannot assign to final fields"
+      ],
+      "answerIndex": 1,
+      "explanation": "Instance initializer blocks are copied into each constructor after super() and field initializers, so they run for every new object before the constructor body completes."
+    },
+    {
+      "prompt": "What does a second new Account(\"Noor\").label() return after the first Account was Mira#100?",
+      "choices": [
+        "Noor#100",
+        "Noor#101",
+        "Mira#101",
+        "null#101"
+      ],
+      "answerIndex": 1,
+      "explanation": "The static initializer does not run again. The first instance consumed id 100, so the next instance initializer assigns id 101 before the Noor constructor body stores the owner."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Initializer blocks\n// Learn: trace static and instance initializers before constructors finish.\nclass Account {\n    private static int nextId;\n    static {\n        nextId = 100; // Static initializer runs once when Account is initialized.\n    }\n    private final int id;\n    private final String owner;\n    {\n        id = nextId++;\n    }\n    Account(String owner) {\n        this.owner = owner;\n    }\n    String label() { return owner + \"#\" + id; }\n}"
+}

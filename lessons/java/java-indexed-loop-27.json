@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-indexed-loop-27",
+  "version": 1,
+  "title": "Java Indexed Loop",
+  "description": "Practice indexed for loops with break and continue.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 85,
+  "tags": [
+    "java",
+    "loops",
+    "arrays",
+    "conditionals"
+  ],
+  "prerequisites": [
+    "java-static-members-26"
+  ],
+  "learningGoals": [
+    "Type a classic indexed for loop.",
+    "Use continue and break for loop control."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "18",
+        "8",
+        "28",
+        "17"
+      ],
+      "answerIndex": 0,
+      "explanation": "8 adds (total 8), -1 hits continue and is skipped, 10 adds (total 18), then 0 hits break before adding, so it prints 18."
+    },
+    {
+      "prompt": "Which statement skips only the current loop iteration?",
+      "choices": [
+        "break",
+        "continue",
+        "return",
+        "yield"
+      ],
+      "answerIndex": 1,
+      "explanation": "continue skips the rest of the current iteration and proceeds to the next; break exits the loop entirely."
+    },
+    {
+      "prompt": "What happens when the loop reaches the 0 at scores[3]?",
+      "choices": [
+        "total is reset to 0",
+        "continue skips to a fifth element",
+        "0 is added and then the loop exits",
+        "break exits the loop before adding the 0"
+      ],
+      "answerIndex": 3,
+      "explanation": "The equality test for 0 executes before total += scores[i], so break leaves the loop without adding the sentinel value."
+    }
+  ],
+  "targetCode": "// Learn: Use an index when position matters.\nint[] scores = { 8, -1, 10, 0 };\nint total = 0;\nfor (int i = 0; i < scores.length; i++) {\n  // continue skips this negative score.\n  if (scores[i] < 0) continue;\n  if (scores[i] == 0) break;\n  total += scores[i];\n}\nSystem.out.println(total);"
+}

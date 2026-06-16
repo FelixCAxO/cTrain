@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-references-values-null-423",
+    "version":  1,
+    "title":  "Reference Page 1 - Referenser, varden, null",
+    "description":  "Use this Java reference to review Referenser, varden, null through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "references",
+                 "primitives",
+                 "classes"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-visibility-final-static-422"
+                      ],
+    "learningGoals":  [
+                          "Distinguish primitive value copies from object references.",
+                          "Understand that two variables can reference the same object.",
+                          "Guard against null before dereferencing."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Referenser, varden, null.\n// You will learn: Track primitive copies, object references, and null guards.\nclass Prog2Reference423 {\n  // EXEMPEL 1: Primitiva typer kopieras som direkta varden.\n  static int primitiveCopy() {\n    int first = 5;\n    int second = first;\n    second = 9;\n    return first;\n  }\n  // EXEMPEL 2: Klasstyper kopierar referensen, inte objektet.\n  static class Note {\n    String text;\n    Note(String text) { this.text = text; }\n  }\n  static String referenceCopy() {\n    Note a = new Note(\"start\");\n    Note b = a;\n    b.text = \"changed\";\n    return a.text;\n  }\n  // EXEMPEL 3: null betyder att variabeln inte pekar pa nagot objekt.\n  static int safeLength(String text) {\n    if (text == null) { return 0; }\n    return text.length();\n  }\n}"
+}

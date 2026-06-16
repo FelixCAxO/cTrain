@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "java-structured-concurrency-71",
+  "version": 1,
+  "title": "Java Structured Concurrency",
+  "description": "Run subtasks as a single unit of work with StructuredTaskScope.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 200,
+  "tags": [
+    "java",
+    "concurrency",
+    "structured-concurrency",
+    "preview"
+  ],
+  "prerequisites": [
+    "java-scoped-values-54"
+  ],
+  "learningGoals": [
+    "Fork concurrent subtasks and join them together with StructuredTaskScope.",
+    "Read each Subtask result with get() after a successful join.",
+    "Note: structured concurrency is a preview feature in Java 26, enabled with --enable-preview."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "What does scope.join() coordinate in this structured-concurrency lesson?",
+      "choices": [
+        "It converts every task into a virtual thread factory.",
+        "It serializes the results to disk.",
+        "It waits for the forked subtasks in the scope."
+      ],
+      "answerIndex": 2,
+      "explanation": "Structured concurrency treats forked work as a scoped unit; join waits for the subtasks before results are read."
+    }
+  ],
+  "targetCode": "// Java 26 - Structured concurrency (PREVIEW, --enable-preview)\n// Learn: fork subtasks and join them as one unit, then read each result.\nimport java.util.concurrent.StructuredTaskScope;\nimport java.util.concurrent.StructuredTaskScope.Subtask;\n\nstatic String findUser() { return \"ada\"; }\nstatic int fetchOrder() { return 7; }\n\ntry (var scope = StructuredTaskScope.open()) {\n    Subtask<String> user = scope.fork(() -> findUser()); // runs concurrently\n    Subtask<Integer> order = scope.fork(() -> fetchOrder());\n    scope.join();\n    System.out.println(user.get() + \" \" + order.get());\n}"
+}

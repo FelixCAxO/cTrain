@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "java-class-basic-01",
+  "version": 1,
+  "title": "Java Class Basics",
+  "description": "Type a minimal Java class with a main method.",
+  "language": "java",
+  "difficulty": 1,
+  "estimatedSeconds": 32,
+  "tags": [
+    "java",
+    "classes"
+  ],
+  "prerequisites": [],
+  "learningGoals": [
+    "Type a Java class declaration.",
+    "Practice the main method skeleton."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does running Demo print?",
+      "choices": [
+        "Demo",
+        "Ready",
+        "Nothing, because main is not the entry point",
+        "Compilation fails because main returns void"
+      ],
+      "answerIndex": 1,
+      "explanation": "main is the entry point and prints \"Ready\"; a void return is exactly what a Java main method must declare."
+    },
+    {
+      "prompt": "Which method signature is the standard Java application entry point shown here?",
+      "choices": [
+        "public void main(String args)",
+        "static int main(String[] args)",
+        "private static void main(String[] args)",
+        "public static void main(String[] args)"
+      ],
+      "answerIndex": 3,
+      "explanation": "The JVM launches a public static void main that takes a String[] parameter; the others have the wrong modifiers, return type, or parameter."
+    },
+    {
+      "prompt": "What happens if Demo changes main to public void main(String[] args) and you run java Demo?",
+      "choices": [
+        "It prints Ready because public is enough for the launcher",
+        "It compiles, but the launcher does not treat the instance method as the entry point",
+        "Compilation fails because void methods cannot be named main",
+        "The JVM creates a Demo instance and calls main automatically"
+      ],
+      "answerIndex": 1,
+      "explanation": "The method can compile as an instance method, but the Java launcher needs the static main signature shown in the lesson."
+    }
+  ],
+  "targetCode": "// Learn: Type a class with a main entry point.\npublic class Demo {\n  // main is the method the JVM runs first.\n  public static void main(String[] args) {\n    System.out.println(\"Ready\");\n  }\n}"
+}

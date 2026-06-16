@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-javafx-dialog-files-css-717",
+    "version":  1,
+    "title":  "JavaFX Dialog Files CSS - Reference Page 2",
+    "description":  "Use this Java reference to review JavaFX Dialog Files CSS through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  600,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b3",
+                 "source-file",
+                 "javafx",
+                 "file-chooser",
+                 "resources",
+                 "events"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Show simple dialogs and let the user choose files.",
+                          "Load CSS from resources and connect style ids and classes to controls."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: JavaFX Dialog Files CSS - Reference Page 2.\n// You will learn: Use dialogs, FileChooser, CSS, and resource paths in JavaFX.\nimport java.io.File;\nimport java.io.IOException;\nimport java.nio.charset.StandardCharsets;\nimport java.nio.file.Files;\nimport javafx.application.Application;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Alert;\nimport javafx.scene.control.Button;\nimport javafx.scene.control.TextArea;\nimport javafx.scene.layout.VBox;\nimport javafx.stage.FileChooser;\nimport javafx.stage.Stage;\n\npublic class JavaFxDialogFilesCssReference extends Application {\n  private TextArea textArea;\n\n  public static void main(String[] args) {\n    launch(args);\n  }\n\n  @Override\n  public void start(Stage stage) {\n    textArea = new TextArea();\n    Button alertButton = new Button(\"Show alert\");\n    alertButton.setOnAction(e -\u003e showAlertExample());\n    Button openButton = new Button(\"Open file\");\n    openButton.setOnAction(e -\u003e openFileExample(stage));\n    Button saveButton = new Button(\"Save\");\n    saveButton.setId(\"save-button\");\n    saveButton.getStyleClass().add(\"primary\");\n    VBox root = new VBox(8, alertButton, openButton, saveButton, textArea);\n    Scene scene = new Scene(root, 420, 300);\n    addCssExample(scene);\n    stage.setScene(scene);\n    stage.show();\n  }\n\n  private void showAlertExample() {\n    Alert alert = new Alert(Alert.AlertType.INFORMATION);\n    alert.setTitle(\"Saved\");\n    alert.setHeaderText(null);\n    alert.setContentText(\"The text was saved.\");\n    alert.showAndWait();\n  }\n\n  private void openFileExample(Stage stage) {\n    FileChooser chooser = new FileChooser();\n    chooser.setTitle(\"Open text file\");\n    chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(\"Text files\", \"*.txt\"));\n    File file = chooser.showOpenDialog(stage);\n    if (file != null) {\n      try {\n        String text = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);\n        textArea.setText(text);\n      } catch (IOException ex) {\n        textArea.setText(\"Could not read file: \" + ex.getMessage());\n      }\n    }\n  }\n\n  private void addCssExample(Scene scene) {\n    String css = getClass().getResource(\"/style.css\").toExternalForm();\n    scene.getStylesheets().add(css);\n  }\n}"
+}

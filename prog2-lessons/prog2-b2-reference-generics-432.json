@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b2-reference-generics-432",
+    "version":  1,
+    "title":  "Reference Page 1 - Generics",
+    "description":  "Use this Java reference to review Generics through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "generics",
+                 "collections"
+             ],
+    "prerequisites":  [
+                          "prog2-b2-reference-sorting-searching-431"
+                      ],
+    "learningGoals":  [
+                          "Use generic types for compile-time type safety.",
+                          "Write generic methods that preserve the element type.",
+                          "Apply extends and super wildcards with PECS."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Generics.\n// You will learn: Use type parameters and bounds to keep collection code type-safe.\nclass Prog2Reference432 {\n  // EXEMPEL 1: En generisk klass kan lagra en typ som valjs vid anvandning.\n  static class Box\u003cT\u003e {\n    private final T value;\n    Box(T value) { this.value = value; }\n    T get() { return value; }\n  }\n  // EXEMPEL 2: En generisk metod kan fungera for manga List-typer.\n  static \u003cT\u003e T first(java.util.List\u003cT\u003e values) {\n    return values.get(0);\n  }\n  // EXEMPEL 3: Wildcards beskriver om listan producerar eller tar emot varden.\n  static double sum(java.util.List\u003c? extends Number\u003e numbers) {\n    double total = 0;\n    for (Number number : numbers) { total += number.doubleValue(); }\n    return total;\n  }\n  static void addDefault(java.util.List\u003c? super Integer\u003e numbers) { numbers.add(1); }\n}"
+}

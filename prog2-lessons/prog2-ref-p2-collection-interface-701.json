@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-collection-interface-701",
+    "version":  1,
+    "title":  "Collection Interface API - Reference Page 2",
+    "description":  "Use this Java reference to review Collection Interface API through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  420,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "iterators",
+                 "arrays"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Use Collection\u003cE\u003e for shared group operations such as size, contains, add, remove, and clear.",
+                          "Iterate safely with enhanced for loops, Iterator.remove, and toArray."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Collection Interface API - Reference Page 2.\n// You will learn: Use Collection add/remove/contains, iteration, and array conversion.\nimport java.util.ArrayList;\nimport java.util.Collection;\nimport java.util.Iterator;\n\nclass CollectionInterfaceReference {\n  public static void main(String[] args) {\n    example1Queries();\n    example2Updates();\n    example3Iteration();\n  }\n\n  static void example1Queries() {\n    Collection\u003cString\u003e names = new ArrayList\u003c\u003e();\n    names.add(\"Ada\");\n    names.add(\"Bo\");\n    int count = names.size();\n    boolean empty = names.isEmpty();\n    boolean hasAda = names.contains(\"Ada\");\n    System.out.println(count + \" \" + empty + \" \" + hasAda);\n  }\n\n  static void example2Updates() {\n    Collection\u003cString\u003e tasks = new ArrayList\u003c\u003e();\n    boolean added = tasks.add(\"compile\");\n    boolean removed = tasks.remove(\"compile\");\n    tasks.add(\"test\");\n    tasks.clear();\n    System.out.println(added + \" \" + removed + \" \" + tasks.size());\n  }\n\n  static void example3Iteration() {\n    Collection\u003cString\u003e tasks = new ArrayList\u003c\u003e();\n    tasks.add(\"todo-read\");\n    tasks.add(\"done-test\");\n    tasks.add(\"todo-submit\");\n    for (String task : tasks) {\n      System.out.println(task);\n    }\n    Iterator\u003cString\u003e iterator = tasks.iterator();\n    while (iterator.hasNext()) {\n      String task = iterator.next();\n      if (task.startsWith(\"done\")) {\n        iterator.remove();\n      }\n    }\n    String[] copied = tasks.toArray(new String[0]);\n    System.out.println(copied.length);\n  }\n}"
+}

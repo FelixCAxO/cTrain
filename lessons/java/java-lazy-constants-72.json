@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "java-lazy-constants-72",
+  "version": 1,
+  "title": "Java Lazy Constants",
+  "description": "Initialize a value lazily and at most once with LazyConstant.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "concurrency",
+    "lazy-constants",
+    "preview"
+  ],
+  "prerequisites": [
+    "java-static-members-26"
+  ],
+  "learningGoals": [
+    "Defer expensive initialization with a LazyConstant that is computed at most once.",
+    "Read initialized contents with get().",
+    "Note: lazy constants are a preview feature in Java 26, enabled with --enable-preview."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "What does LazyConstant.get() guarantee?",
+      "choices": [
+        "The supplier runs every time get() is called",
+        "The field can be reassigned after initialization",
+        "The value is initialized before it is returned"
+      ],
+      "answerIndex": 2,
+      "explanation": "LazyConstant.get() initializes the content if needed, then returns the initialized value."
+    }
+  ],
+  "targetCode": "// Java 26 - Lazy constants (PREVIEW, --enable-preview)\n// Learn: initialize a value lazily, at most once.\nprivate final LazyConstant<System.Logger> logger =\n    LazyConstant.of(() -> System.getLogger(\"app\"));\n\nSystem.Logger getLogger() {\n    return logger.get(); // computed once, then reused\n}"
+}

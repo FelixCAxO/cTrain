@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-equals-hashcode-compareto-428",
+    "version":  1,
+    "title":  "Reference Page 1 - equals, hashCode, compareTo",
+    "description":  "Use this Java reference to review equals, hashCode, compareTo through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  264,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "methods",
+                 "collections",
+                 "sorting"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-composition-design-427"
+                      ],
+    "learningGoals":  [
+                          "Implement equals and hashCode from the same identity fields.",
+                          "Understand how HashSet uses equality.",
+                          "Use compareTo for natural ordering."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - equals, hashCode, compareTo.\n// You will learn: Compare identity, hashing, set uniqueness, and natural ordering.\nclass Prog2Reference428 {\n  // EXEMPEL 1: equals jamfor logisk identitet i stallet for referens.\n  static class Student {\n    private final int studentId;\n    Student(int studentId) { this.studentId = studentId; }\n    @Override public boolean equals(Object other) {\n      if (this == other) { return true; }\n      if (!(other instanceof Student)) { return false; }\n      Student that = (Student) other;\n      return studentId == that.studentId;\n    }\n    @Override public int hashCode() { return Integer.hashCode(studentId); }\n  }\n  // EXEMPEL 2: HashSet anvander hashCode och equals for att hitta dubletter.\n  static int uniqueStudents() {\n    java.util.Set\u003cStudent\u003e students = new java.util.HashSet\u003cStudent\u003e();\n    students.add(new Student(7));\n    students.add(new Student(7));\n    return students.size();\n  }\n  // EXEMPEL 3: compareTo ger en naturlig sorteringsordning.\n  static class Time implements Comparable\u003cTime\u003e {\n    private final int hour;\n    private final int minute;\n    Time(int hour, int minute) { this.hour = hour; this.minute = minute; }\n    public int compareTo(Time other) {\n      int hourOrder = Integer.compare(hour, other.hour);\n      return hourOrder != 0 ? hourOrder : Integer.compare(minute, other.minute);\n    }\n  }\n}"
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "java-mutable-hash-keys-83",
+  "version": 1,
+  "title": "Java Mutable Hash Keys",
+  "description": "Practice why mutating a stored key strands it inside a hashed collection.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 260,
+  "tags": [
+    "java",
+    "object-contracts",
+    "collections",
+    "sets"
+  ],
+  "prerequisites": [
+    "java-equals-hashcode-37",
+    "java-set-hashset-36"
+  ],
+  "learningGoals": [
+    "Explain why hashed collections look up entries by the key's current hashCode bucket.",
+    "Keep fields used by equals and hashCode immutable while an object is stored as a key."
+  ],
+  "languageVersion": "Java 16",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "true true",
+        "false true",
+        "true false",
+        "false false"
+      ],
+      "answerIndex": 3,
+      "explanation": "The entry was bucketed under hash(\"urgent\") when it was added; after the mutation both lookups probe the bucket for hash(\"later\"), which never held the entry, so both print false."
+    },
+    {
+      "prompt": "What happens if urgent.name is set back to \"urgent\" before the two contains calls?",
+      "choices": [
+        "Both calls print false because the set cached a stale hash at add time",
+        "The code prints false then true because the original bucket matches again",
+        "The code prints true then false because the first probe now finds the entry",
+        "Both calls print true because equals now matches in any bucket"
+      ],
+      "answerIndex": 1,
+      "explanation": "HashSet keeps the entry in the bucket computed at add time; restoring the field restores that hashCode, so contains(urgent) finds it again while the probe for \"later\" still finds nothing."
+    },
+    {
+      "prompt": "What happens if tags.remove(urgent) is called immediately after urgent.name = \"later\"?",
+      "choices": [
+        "It returns false and the set size remains 1",
+        "It returns true and the set size becomes 0",
+        "It throws ConcurrentModificationException because the key was mutated",
+        "It fails to compile because hashCode depends on a mutable field"
+      ],
+      "answerIndex": 0,
+      "explanation": "The trap is expecting identity to rescue the removal; HashSet first probes the bucket for the current hash and misses the stored entry."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Mutable keys break hashing\n// Learn: hashed lookups probe the bucket for the key's current hashCode.\nimport java.util.HashSet;\nimport java.util.Objects;\nimport java.util.Set;\n\nclass Tag {\n  String name;\n  Tag(String name) { this.name = name; }\n  @Override public boolean equals(Object other) {\n    return other instanceof Tag tag && Objects.equals(name, tag.name);\n  }\n  @Override public int hashCode() { return Objects.hash(name); }\n}\n\nSet<Tag> tags = new HashSet<>();\nTag urgent = new Tag(\"urgent\");\ntags.add(urgent);\nurgent.name = \"later\";\n// The stored entry still sits in the bucket chosen for hash(\"urgent\").\nSystem.out.println(tags.contains(new Tag(\"later\")));\nSystem.out.println(tags.contains(urgent));"
+}

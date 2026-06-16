@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "java-casting-overflow-38",
+  "version": 1,
+  "title": "Java Casting Overflow Math",
+  "description": "Practice numeric casts, overflow, and exact arithmetic helpers.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "primitives",
+    "variables",
+    "numeric-casting",
+    "math"
+  ],
+  "prerequisites": [
+    "java-primitives-types-21"
+  ],
+  "learningGoals": [
+    "Recall that narrowing casts keep low-order bits and can wrap values.",
+    "Recognize that normal int arithmetic overflows silently while Math.addExact throws."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does Integer.MAX_VALUE + 1 evaluate to here?",
+      "choices": [
+        "A long value, because the result is automatically widened",
+        "Integer.MIN_VALUE, because int addition silently wraps on overflow",
+        "An ArithmeticException, because Java checks every int overflow",
+        "A compile error, because the sum exceeds the int range"
+      ],
+      "answerIndex": 1,
+      "explanation": "Plain int arithmetic wraps around on overflow, so MAX_VALUE + 1 becomes MIN_VALUE; Math.addExact is what throws ArithmeticException instead of wrapping."
+    },
+    {
+      "prompt": "What does System.out.println(wrapped) print after byte wrapped = (byte) 200;?",
+      "choices": [
+        "200",
+        "-128",
+        "-56",
+        "Compilation fails because 200 does not fit in a byte"
+      ],
+      "answerIndex": 2,
+      "explanation": "The explicit cast keeps the low 8 bits, so 200 wraps into the signed byte range as 200 - 256 = -56; the cast also suppresses the narrowing error the assignment would otherwise need."
+    },
+    {
+      "prompt": "What does the third System.out.println(widened + exact); print?",
+      "choices": [
+        "215",
+        "15",
+        "-41",
+        "ArithmeticException"
+      ],
+      "answerIndex": 2,
+      "explanation": "(byte) 200 wraps to -56 before widening to long, and -56 plus the exact result 15 prints -41."
+    }
+  ],
+  "targetCode": "// Learn: Notice casts, overflow, and exact math.\nbyte wrapped = (byte) 200;\n// MAX_VALUE + 1 wraps around for int arithmetic.\nint overflow = Integer.MAX_VALUE + 1;\nlong widened = wrapped;\nint exact = Math.addExact(10, 5);\nSystem.out.println(wrapped);\nSystem.out.println(overflow);\nSystem.out.println(widened + exact);"
+}

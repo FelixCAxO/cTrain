@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b2-reference-lambdas-functional-interfaces-437",
+    "version":  1,
+    "title":  "Reference Page 1 - Lambdas och funktionella interface",
+    "description":  "Use this Java reference to review Lambdas och funktionella interface through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "lambdas",
+                 "lambda",
+                 "functional-interfaces"
+             ],
+    "prerequisites":  [
+                          "prog2-b2-reference-io-path-files-436"
+                      ],
+    "learningGoals":  [
+                          "Use lambdas as implementations of functional interfaces.",
+                          "Apply common functional interface types.",
+                          "Use method references when an existing method matches the contract."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Lambdas och funktionella interface.\n// You will learn: Pass behavior with lambdas, predicates, comparators, and functions.\nclass Prog2Reference437 {\n  // EXEMPEL 1: Predicate\u003cT\u003e beskriver ett test som returnerar boolean.\n  static boolean isLongName(String name) {\n    java.util.function.Predicate\u003cString\u003e longName = text -\u003e text.length() \u003e 5;\n    return longName.test(name);\n  }\n  // EXEMPEL 2: Function\u003cT,R\u003e gor om ett varde till ett annat.\n  static int lengthOf(String text) {\n    java.util.function.Function\u003cString, Integer\u003e length = value -\u003e value.length();\n    return length.apply(text);\n  }\n  // EXEMPEL 3: Ett eget funktionellt interface kan anvandas med lambda.\n  interface Calculator {\n    int apply(int a, int b);\n  }\n  static int addWithLambda(int left, int right) {\n    Calculator add = (a, b) -\u003e a + b;\n    return add.apply(left, right);\n  }\n}"
+}

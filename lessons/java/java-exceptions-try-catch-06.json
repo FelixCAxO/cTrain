@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-exceptions-try-catch-06",
+  "version": 1,
+  "title": "Java Exceptions Try Catch",
+  "description": "Practice try, catch, IOException, and finally.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 95,
+  "tags": [
+    "java",
+    "exceptions"
+  ],
+  "prerequisites": [
+    "java-interface-04"
+  ],
+  "learningGoals": [
+    "Type a checked exception catch block.",
+    "Use finally for cleanup."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "Does the finally block run when readConfig throws IOException?",
+      "choices": [
+        "No, catch prevents finally from running",
+        "Yes, finally runs after the catch block handles the exception",
+        "Only if the catch block rethrows the exception",
+        "Only if readConfig returns without throwing"
+      ],
+      "answerIndex": 1,
+      "explanation": "finally always runs after the try/catch completes, including when a thrown exception was handled by catch, so the cleanup in finally is guaranteed."
+    },
+    {
+      "prompt": "What happens if readConfig() throws a RuntimeException instead of IOException?",
+      "choices": [
+        "The catch block still handles it because RuntimeException is a subtype of IOException",
+        "finally runs and then the RuntimeException propagates to the caller",
+        "finally is skipped because no catch clause matched",
+        "Compilation fails because RuntimeException is not declared by the try statement"
+      ],
+      "answerIndex": 1,
+      "explanation": "catch (IOException e) only matches IOException and its subtypes; an unchecked RuntimeException bypasses it, but finally still runs before the exception continues up the call stack."
+    },
+    {
+      "prompt": "What happens if readConfig throws an IOException and closeQuietly completes normally?",
+      "choices": [
+        "The IOException message is printed, then the finally cleanup runs",
+        "The finally block runs first, then the catch block prints the message",
+        "The IOException skips both catch and finally",
+        "Compilation fails because IOException cannot be caught"
+      ],
+      "answerIndex": 0,
+      "explanation": "A matching catch handles the IOException before control reaches finally, and finally still runs after the catch body."
+    }
+  ],
+  "targetCode": "// Learn: Handle a checked exception and always clean up.\nimport java.io.IOException;\n\ntry {\n  readConfig();\n} catch (IOException e) {\n  System.err.println(e.getMessage());\n} finally {\n  // finally runs after try or catch.\n  closeQuietly();\n}"
+}

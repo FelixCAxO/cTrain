@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-stream-gatherers-67",
+  "version": 1,
+  "title": "Java Stream Gatherers",
+  "description": "Reshape a stream with the gather operation and a built-in Gatherer.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "streams",
+    "collectors"
+  ],
+  "prerequisites": [
+    "java-stream-groupby-17"
+  ],
+  "learningGoals": [
+    "Apply an extensible intermediate operation with Stream.gather (final since Java 24).",
+    "Recognize that Gatherers.windowFixed is a built-in gatherer, not a terminal collector."
+  ],
+  "languageVersion": "Java 24",
+  "completionChecks": [
+    {
+      "prompt": "What kind of stream operation is gather()?",
+      "choices": [
+        "A terminal collector",
+        "An intermediate operation",
+        "A source factory"
+      ],
+      "answerIndex": 1,
+      "explanation": "Stream.gather transforms the pipeline before a terminal operation such as toList is invoked."
+    },
+    {
+      "prompt": "What does Gatherers.windowFixed(2) emit for five input numbers?",
+      "choices": [
+        "Only the first two elements",
+        "A Map keyed by window number",
+        "Lists of up to two adjacent elements"
+      ],
+      "answerIndex": 2,
+      "explanation": "windowFixed groups the stream into fixed-size windows, with the final window containing the remaining element."
+    },
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "[[1, 2], [3, 4], [5]]",
+        "[[1, 2], [2, 3], [3, 4], [4, 5]]",
+        "[[1, 2], [3, 4]]",
+        "[1, 2, 3, 4, 5]"
+      ],
+      "answerIndex": 0,
+      "explanation": "The trap is confusing fixed windows with sliding windows; windowFixed emits non-overlapping groups and keeps the short final group."
+    }
+  ],
+  "targetCode": "// Java 24 - Stream gatherers (JEP 485, final)\n// Learn: reshape a stream with gather() and a built-in Gatherer.\nList<List<Integer>> windows = Stream.of(1, 2, 3, 4, 5)\n    .gather(Gatherers.windowFixed(2)) // groups into fixed-size windows\n    .toList();\nSystem.out.println(windows);"
+}

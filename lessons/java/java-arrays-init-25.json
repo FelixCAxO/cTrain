@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-arrays-init-25",
+  "version": 1,
+  "title": "Java Array Init",
+  "description": "Practice array literals, indexing, and length.",
+  "language": "java",
+  "difficulty": 1,
+  "estimatedSeconds": 47,
+  "tags": [
+    "java",
+    "arrays",
+    "literals"
+  ],
+  "prerequisites": [
+    "java-operators-assignment-24"
+  ],
+  "learningGoals": [
+    "Type an array initializer.",
+    "Practice array indexing and length."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does totalItems hold after this snippet runs?",
+      "choices": [
+        "6",
+        "5",
+        "3",
+        "Compilation fails because the arrays have different lengths"
+      ],
+      "answerIndex": 1,
+      "explanation": "scores has 3 elements and names has 2, so scores.length + names.length is 5; each array tracks its own length."
+    },
+    {
+      "prompt": "What happens if the code reads scores[3]?",
+      "choices": [
+        "It returns 0 because arrays are zero-filled past the end",
+        "It returns 77, the last element",
+        "It throws ArrayIndexOutOfBoundsException at runtime",
+        "Compilation fails because the index is out of range"
+      ],
+      "answerIndex": 2,
+      "explanation": "scores has valid indexes 0 through 2, so reading scores[3] throws ArrayIndexOutOfBoundsException at runtime; javac does not reject an out-of-range index here."
+    },
+    {
+      "prompt": "What does first hold after int first = scores[0]; runs?",
+      "choices": [
+        "91",
+        "84",
+        "0",
+        "Compilation fails because array literals always need new int[]"
+      ],
+      "answerIndex": 1,
+      "explanation": "Array indexes start at zero, so scores[0] reads the first element from the initializer, which is 84."
+    }
+  ],
+  "targetCode": "// Learn: Create arrays and read their size.\nint[] scores = { 84, 91, 77 };\nString[] names = new String[] { \"Ada\", \"Linus\" };\n// Array indexes start at zero.\nint first = scores[0];\nint totalItems = scores.length + names.length;"
+}

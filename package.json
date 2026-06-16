@@ -1,0 +1,140 @@
+{
+  "name": "ctrain",
+  "displayName": "cTrain (Code Training)",
+  "description": "Practice typing real code and existing files inside VS Code with decoration-based ghost text.",
+  "version": "0.1.0",
+  "publisher": "FelixCAxO",
+  "icon": "docs/cTrain_logo.png",
+  "license": "MIT",
+  "author": "FelixCAxO",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FelixCAxO/cTrain.git"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Education",
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:cTrain.lessons",
+    "onCommand:cTrain.mockExam"
+  ],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "clean": "node scripts/clean.cjs",
+    "compile": "tsc -p . --noEmit",
+    "build": "node esbuild.mjs",
+    "lint": "eslint src tests",
+    "test": "npm run compile && npm run lint && npm run test:unit && npm run build && npm run test:bundle",
+    "test:unit": "mocha --require ts-node/register \"tests/**/*.test.ts\"",
+    "test:bundle": "node ./scripts/smoke-bundle.cjs",
+    "roadmap:coverage": "node scripts/roadmap-coverage.cjs",
+    "coverage": "c8 --extension .ts --include src/**/*.ts --reporter=text --reporter=lcov mocha --require ts-node/register \"tests/**/*.test.ts\"",
+    "test:e2e": "npm run build && tsc -p . && node ./out/tests/e2e/run.js",
+    "test:all": "npm test && npm run test:e2e",
+    "package": "npm run clean && npm run compile && npm run build && vsce package --no-dependencies --allow-missing-repository"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "cTrain.startLesson",
+        "title": "cTrain: Start Lesson",
+        "category": "cTrain"
+      },
+      {
+        "command": "cTrain.practiceCurrentFile",
+        "title": "cTrain: Practice Current File",
+        "category": "cTrain"
+      },
+      {
+        "command": "cTrain.mockExam",
+        "title": "cTrain: Mock Exam",
+        "category": "cTrain"
+      },
+      {
+        "command": "cTrain.pauseSession",
+        "title": "cTrain: Pause Session",
+        "category": "cTrain"
+      },
+      {
+        "command": "cTrain.restartSession",
+        "title": "cTrain: Restart Session",
+        "category": "cTrain"
+      },
+      {
+        "command": "cTrain.sessionActions",
+        "title": "cTrain: Session Actions",
+        "category": "cTrain"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "cTrain.lessons",
+          "name": "cTrain"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "cTrain.lessons",
+        "contents": "Start a focused typing session or practice the active file/selection.\n[Start Lesson](command:cTrain.startLesson)\n[Practice Current File](command:cTrain.practiceCurrentFile)\n[Read the lesson guide](https://github.com/FelixCAxO/cTrain/blob/main/docs/lessons.md)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "cTrain.practiceCurrentFile",
+          "when": "editorTextFocus && resourceScheme != code-trainer",
+          "group": "navigation@90"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "cTrain",
+      "properties": {
+        "cTrain.ghostTextOpacity": {
+          "type": "number",
+          "default": 0.4,
+          "minimum": 0.1,
+          "maximum": 1,
+          "description": "Opacity used for cTrain ghost text decorations."
+        },
+        "cTrain.mistakeStyle": {
+          "type": "string",
+          "enum": [
+            "squiggle",
+            "underline",
+            "outline"
+          ],
+          "default": "squiggle",
+          "description": "Decoration style for cTrain mistakes."
+        },
+        "cTrain.allowPaste": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow pasting text into active training lessons."
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.15.3",
+    "@types/vscode": "^1.90.0",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.2.2",
+    "c8": "^10.0.0",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "mocha": "^11.1.0",
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^8.0.0",
+    "typescript": "^5.8.2"
+  }
+}

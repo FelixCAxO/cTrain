@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "java-module-declaration-53",
+  "version": 1,
+  "title": "Java Module Declaration",
+  "description": "Declare a named module with requires and exports directives.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "modules"
+  ],
+  "prerequisites": [
+    "java-module-import-52"
+  ],
+  "learningGoals": [
+    "Declare a named module and its dependencies in module-info.java.",
+    "Contrast requires transitive with a qualified exports ... to clause."
+  ],
+  "languageVersion": "Java 9",
+  "completionChecks": [
+    {
+      "prompt": "What does requires transitive java.sql do?",
+      "choices": [
+        "Makes java.sql readable to modules that read this module",
+        "Exports every package in this module",
+        "Limits java.sql to com.example.plugin only"
+      ],
+      "answerIndex": 0,
+      "explanation": "requires transitive re-exports readability so downstream modules that require this module also read java.sql."
+    },
+    {
+      "prompt": "What is special about exports com.example.app.spi to com.example.plugin?",
+      "choices": [
+        "It exports the package to all modules",
+        "It is a qualified export to one named module",
+        "It imports that package from com.example.plugin"
+      ],
+      "answerIndex": 1,
+      "explanation": "The to clause makes the export qualified, so only the listed module receives that exported package."
+    },
+    {
+      "prompt": "What happens if another module requires com.example.app and uses java.sql.Connection?",
+      "choices": [
+        "It compiles because java.sql readability is re-exported by requires transitive",
+        "It fails unless that module also declares requires java.sql",
+        "It compiles only when the other module is named com.example.plugin",
+        "It fails because exports controls readability of required modules"
+      ],
+      "answerIndex": 0,
+      "explanation": "requires transitive affects downstream readability; the qualified export line is a separate package-access rule."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Module declarations\n// Learn: declare a module's dependencies and exported packages.\nmodule com.example.app {\n    requires java.net.http;\n    requires transitive java.sql; // re-exported to this module's readers\n    exports com.example.app.api;\n    exports com.example.app.spi to com.example.plugin; // qualified export\n}"
+}

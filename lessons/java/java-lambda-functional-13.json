@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-lambda-functional-13",
+  "version": 1,
+  "title": "Java Lambda Functional",
+  "description": "Practice a Comparator lambda and list sorting.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 75,
+  "tags": [
+    "java",
+    "lambdas",
+    "collections"
+  ],
+  "prerequisites": [
+    "java-enum-switch-12"
+  ],
+  "learningGoals": [
+    "Type lambda arrow syntax.",
+    "Sort a list with Comparator."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does names.sort(Comparator.comparing(String::length)) do to the order?",
+      "choices": [
+        "Sorts alphabetically, ignoring case",
+        "Puts the longest strings first",
+        "Reverses the insertion order",
+        "Sorts shortest strings first, ascending by length"
+      ],
+      "answerIndex": 3,
+      "explanation": "Comparator.comparing(String::length) orders by the int length in natural ascending order, so shorter strings sort before longer ones."
+    },
+    {
+      "prompt": "What ordering does compareToIgnoreCase provide in the first lambda?",
+      "choices": [
+        "Shortest strings first",
+        "Alphabetical ordering that ignores letter case",
+        "Reverse insertion order",
+        "A different random order each run"
+      ],
+      "answerIndex": 1,
+      "explanation": "compareToIgnoreCase compares text lexicographically without regard to uppercase versus lowercase, giving case-insensitive alphabetical order."
+    },
+    {
+      "prompt": "What does names contain after sorting [\"Bob\", \"Al\", \"Cara\"] with Comparator.comparing(String::length)?",
+      "choices": [
+        "[Bob, Al, Cara]",
+        "[Cara, Bob, Al]",
+        "[Al, Bob, Cara]",
+        "[Al, Cara, Bob]"
+      ],
+      "answerIndex": 2,
+      "explanation": "The method reference extracts each String length, so the comparator orders the names from shortest to longest."
+    }
+  ],
+  "targetCode": "// Learn: Pass behavior as a lambda or method reference.\nimport java.util.Comparator;\n\n// The lambda compares two names without a separate class.\nnames.sort((left, right) -> left.compareToIgnoreCase(right));\nnames.sort(Comparator.comparing(String::length));"
+}

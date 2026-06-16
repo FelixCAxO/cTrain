@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-flexible-constructors-51",
+  "version": 1,
+  "title": "Java Flexible Constructors",
+  "description": "Validate arguments before calling super() with a flexible constructor body.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 210,
+  "tags": [
+    "java",
+    "constructors",
+    "classes"
+  ],
+  "prerequisites": [
+    "java-constructor-encapsulation-09"
+  ],
+  "learningGoals": [
+    "Run validation logic before an explicit super() call (JEP 513, final in Java 25).",
+    "Recall that pre-super() code cannot read the current instance under construction."
+  ],
+  "languageVersion": "Java 25",
+  "completionChecks": [
+    {
+      "prompt": "What happens if this constructor reads this.side before super(side * side)?",
+      "choices": [
+        "It fails to compile",
+        "Validation that uses only constructor parameters",
+        "Calling an instance method on this"
+      ],
+      "answerIndex": 0,
+      "explanation": "The constructor prologue may validate parameters before super(), but reading the current instance before delegation fails to compile."
+    },
+    {
+      "prompt": "What still has to happen exactly once in a flexible constructor body?",
+      "choices": [
+        "A return statement",
+        "A call to finalize()",
+        "A constructor invocation such as super(...) or this(...)"
+      ],
+      "answerIndex": 2,
+      "explanation": "Flexible constructor bodies change where validation can appear, not the rule that construction delegates exactly once."
+    },
+    {
+      "prompt": "What happens when new Square(0) is evaluated?",
+      "choices": [
+        "IllegalArgumentException is thrown before the Shape constructor is called",
+        "A Square is created with side set to 0",
+        "Compilation fails because super(...) is not the first statement",
+        "The Shape constructor receives 0 and then side is assigned"
+      ],
+      "answerIndex": 0,
+      "explanation": "The constructor prologue may reject the parameter before delegation, so the trap is assuming old super-first ordering."
+    }
+  ],
+  "targetCode": "// Java 25 - Flexible constructor bodies (JEP 513, final)\n// Learn: validate arguments before calling super().\nclass Shape {\n    Shape(double area) {\n    }\n}\n\nclass Square extends Shape {\n    final double side;\n\n    Square(double side) {\n        if (side <= 0) {\n            throw new IllegalArgumentException(\"side must be positive\");\n        }\n        super(side * side); // runs after the validation above\n        this.side = side;\n    }\n}"
+}

@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b2-reference-map-api-430",
+    "version":  1,
+    "title":  "Reference Page 1 - Map-API",
+    "description":  "Use this Java reference to review Map-API through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "maps",
+                 "map"
+             ],
+    "prerequisites":  [
+                          "prog2-b2-reference-collections-concepts-429"
+                      ],
+    "learningGoals":  [
+                          "Store values by unique keys.",
+                          "Count values with getOrDefault or merge.",
+                          "Iterate keys, values, and entries."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Map-API.\n// You will learn: Use key lookup, map views, computeIfAbsent, and merge updates.\nclass Prog2Reference430 {\n  // EXEMPEL 1: put, get och containsKey arbetar med nycklar.\n  static String capitals() {\n    java.util.Map\u003cString, String\u003e capitals = new java.util.HashMap\u003cString, String\u003e();\n    capitals.put(\"SE\", \"Stockholm\");\n    capitals.put(\"NO\", \"Oslo\");\n    return capitals.containsKey(\"SE\") ? capitals.get(\"SE\") : \"missing\";\n  }\n  // EXEMPEL 2: getOrDefault passar nar saknade nycklar ska starta pa noll.\n  static java.util.Map\u003cString, Integer\u003e countWords(String[] words) {\n    java.util.Map\u003cString, Integer\u003e counts = new java.util.HashMap\u003cString, Integer\u003e();\n    for (String word : words) { counts.put(word, counts.getOrDefault(word, 0) + 1); }\n    return counts;\n  }\n  // EXEMPEL 3: entrySet ger bade nyckel och varde i samma loop.\n  static int totalPoints(java.util.Map\u003cString, Integer\u003e points) {\n    int total = 0;\n    for (java.util.Map.Entry\u003cString, Integer\u003e entry : points.entrySet()) { total += entry.getValue(); }\n    return total;\n  }\n}"
+}

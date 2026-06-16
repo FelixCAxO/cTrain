@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-string-text-434",
+    "version":  1,
+    "title":  "Reference Page 1 - String och text",
+    "description":  "Use this Java reference to review String och text through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "strings",
+                 "formatting"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-exceptions-433"
+                      ],
+    "learningGoals":  [
+                          "Compare text with equals instead of reference identity.",
+                          "Use common String methods for extracting and changing text.",
+                          "Build repeated text efficiently with StringBuilder."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - String och text.\n// You will learn: Compare, transform, and build text without mutating String.\nclass Prog2Reference434 {\n  // EXEMPEL 1: equals jamfor textens innehall.\n  static boolean sameName(String left, String right) {\n    return left != null \u0026\u0026 left.equalsIgnoreCase(right);\n  }\n  // EXEMPEL 2: String-metoder returnerar nya texter eftersom String ar immutable.\n  static String cleanCode(String raw) {\n    String trimmed = raw.trim();\n    String upper = trimmed.toUpperCase();\n    return upper.substring(0, Math.min(3, upper.length()));\n  }\n  // EXEMPEL 3: StringBuilder passar nar text byggs steg for steg.\n  static String joinLines(java.util.List\u003cString\u003e lines) {\n    StringBuilder builder = new StringBuilder();\n    for (String line : lines) { builder.append(line).append(System.lineSeparator()); }\n    return builder.toString();\n  }\n}"
+}

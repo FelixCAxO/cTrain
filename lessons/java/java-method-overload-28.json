@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-method-overload-28",
+  "version": 1,
+  "title": "Java Method Overload",
+  "description": "Practice method overloads with distinct parameter lists.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 70,
+  "tags": [
+    "java",
+    "methods"
+  ],
+  "prerequisites": [
+    "java-indexed-loop-27"
+  ],
+  "learningGoals": [
+    "Type overloads that differ by parameter type.",
+    "Call the overload selected by the argument type."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does label hold after String label = format(42);?",
+      "choices": [
+        "\"42\" via format(String), after autoboxing",
+        "42 as an int rather than a String",
+        "Compilation fails because the call is ambiguous",
+        "\"42\" via format(int), which returns Integer.toString(42)"
+      ],
+      "answerIndex": 3,
+      "explanation": "An int argument selects format(int), which returns Integer.toString(42), so label is the String \"42\"; overload resolution prefers the exact int match over boxing to Integer."
+    },
+    {
+      "prompt": "Can two overloads differ only by return type?",
+      "choices": [
+        "No, overloads must differ in their parameter lists, not just return type",
+        "Yes, the compiler picks by the assigned variable's type",
+        "Yes, but only when both methods are static",
+        "Yes, the return type alone is enough to overload"
+      ],
+      "answerIndex": 0,
+      "explanation": "Overload resolution is based on the method name and parameter list; two methods that differ only by return type do not compile."
+    },
+    {
+      "prompt": "What does format(\"  hi  \") return?",
+      "choices": [
+        "\"hi\"",
+        "\"  hi  \"",
+        "\"42\"",
+        "Compilation fails because the call is ambiguous"
+      ],
+      "answerIndex": 0,
+      "explanation": "A String argument selects the String overload, and that overload returns value.trim(), removing the surrounding spaces."
+    }
+  ],
+  "targetCode": "// Learn: Overload methods with different parameter types.\nstatic String format(String value) {\n  return value.trim();\n}\n\nstatic String format(int value) {\n  // Same method name, different argument type.\n  return Integer.toString(value);\n}\n\nString label = format(42);"
+}

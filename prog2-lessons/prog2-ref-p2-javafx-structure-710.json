@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-javafx-structure-710",
+    "version":  1,
+    "title":  "JavaFX Structure - Reference Page 2",
+    "description":  "Use this Java reference to review JavaFX Structure through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  420,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b3",
+                 "source-file",
+                 "javafx",
+                 "events",
+                 "classes"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Create a JavaFX app with Application, Stage, Scene, and Node.",
+                          "Connect a Button to a Label with setOnAction."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: JavaFX Structure - Reference Page 2.\n// You will learn: Create JavaFX nodes, events, scenes, and stages.\nimport javafx.application.Application;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Button;\nimport javafx.scene.control.Label;\nimport javafx.scene.layout.VBox;\nimport javafx.stage.Stage;\n\npublic class JavaFxStructureReference extends Application {\n  public static void main(String[] args) {\n    launch(args);\n  }\n\n  @Override\n  public void start(Stage stage) {\n    // EXAMPLE 1: create nodes for the scene graph.\n    Label label = new Label(\"Hello JavaFX\");\n    Button button = new Button(\"OK\");\n    VBox root = new VBox(8, label, button);\n    // EXAMPLE 2: connect an event to a control.\n    button.setOnAction(event -\u003e label.setText(\"Clicked\"));\n    // EXAMPLE 3: create a scene and show it in a stage.\n    Scene scene = new Scene(root, 300, 200);\n    stage.setTitle(\"Structure\");\n    stage.setScene(scene);\n    stage.show();\n  }\n}"
+}

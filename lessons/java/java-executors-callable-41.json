@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "java-executors-callable-41",
+  "version": 1,
+  "title": "Java Executors Callable",
+  "description": "Practice ExecutorService, Callable, Future, and concurrent maps.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 240,
+  "tags": [
+    "java",
+    "concurrency",
+    "threads",
+    "executors",
+    "maps"
+  ],
+  "prerequisites": [
+    "java-thread-runnable-20"
+  ],
+  "learningGoals": [
+    "Recall that Callable returns a value through Future.",
+    "Recognize that ConcurrentHashMap supports concurrent updates without external locking."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does result.get() return after the task runs once?",
+      "choices": [
+        "0",
+        "1",
+        "null until the pool shuts down",
+        "Compilation fails because Callable cannot return Integer"
+      ],
+      "answerIndex": 1,
+      "explanation": "merge inserts 1 for the new key \"ok\" and returns the new value, so the Callable yields 1 and Future.get() returns 1."
+    },
+    {
+      "prompt": "Which submitted task type can return a value from ExecutorService?",
+      "choices": [
+        "Callable, whose result is read through Future",
+        "Runnable",
+        "Thread",
+        "Comparable"
+      ],
+      "answerIndex": 0,
+      "explanation": "Callable<V> returns a value retrieved through Future<V>; Runnable returns nothing, so submitting a Runnable gives a Future whose result is null."
+    },
+    {
+      "prompt": "What does counts.get(\"ok\") return after result.get() completes?",
+      "choices": [
+        "null",
+        "1",
+        "Future[1]",
+        "2"
+      ],
+      "answerIndex": 1,
+      "explanation": "The Callable runs once before Future.get returns, and merge stores 1 for the ok key when there was no previous value."
+    }
+  ],
+  "targetCode": "// Learn: Submit Callable work to an ExecutorService.\nimport java.util.concurrent.Callable;\nimport java.util.concurrent.ConcurrentHashMap;\nimport java.util.concurrent.ExecutorService;\nimport java.util.concurrent.Executors;\nimport java.util.concurrent.Future;\n\nConcurrentHashMap<String, Integer> counts = new ConcurrentHashMap<>();\nExecutorService pool = Executors.newFixedThreadPool(2);\nCallable<Integer> task = () -> counts.merge(\"ok\", 1, Integer::sum);\n// submit returns a Future for the Callable result.\nFuture<Integer> result = pool.submit(task);\ntry {\n  // get() blocks for the result; real code also handles its checked exceptions.\n  System.out.println(result.get());\n} finally {\n  pool.shutdown();\n}"
+}

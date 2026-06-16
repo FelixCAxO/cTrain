@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-thread-runnable-20",
+  "version": 1,
+  "title": "Java Thread Runnable",
+  "description": "Practice Thread, Runnable, and lambda syntax.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 80,
+  "tags": [
+    "java",
+    "threads",
+    "lambdas"
+  ],
+  "prerequisites": [
+    "java-var-textblock-19"
+  ],
+  "learningGoals": [
+    "Type a Runnable lambda.",
+    "Start and join a thread."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does worker.start() do with the task?",
+      "choices": [
+        "Runs the task's run() on a new thread, printing \"working\"",
+        "Runs the task on the current thread immediately",
+        "Schedules the task but never runs it",
+        "Compilation fails because Runnable has no run method"
+      ],
+      "answerIndex": 0,
+      "explanation": "start() spawns a new thread that executes the Runnable's run(), so \"working\" prints on the worker thread; calling run() directly would instead use the current thread."
+    },
+    {
+      "prompt": "What does worker.join() do after worker.start()?",
+      "choices": [
+        "It starts the thread a second time",
+        "It blocks the caller until the worker thread finishes",
+        "It interrupts the worker immediately",
+        "It returns the worker's result value"
+      ],
+      "answerIndex": 1,
+      "explanation": "join() makes the calling thread wait until the worker terminates; it does not restart, interrupt, or return a value."
+    },
+    {
+      "prompt": "What happens on the second call if code runs worker.start(); worker.start();?",
+      "choices": [
+        "The task prints working twice on the same Thread",
+        "The second call restarts the Thread after join",
+        "IllegalThreadStateException is thrown",
+        "Compilation fails because start declares InterruptedException"
+      ],
+      "answerIndex": 2,
+      "explanation": "A Thread instance can be started only once; calling start again is a runtime lifecycle error."
+    }
+  ],
+  "targetCode": "// Learn: Run work on a separate Thread.\nRunnable task = () -> System.out.println(\"working\");\nThread worker = new Thread(task);\n// start begins execution on the worker thread.\nworker.start();\n// join waits for the worker; real main methods must handle its InterruptedException.\nworker.join();"
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "java-instance-main-50",
+  "version": 1,
+  "title": "Java Instance Main",
+  "description": "Practice the compact source file and instance main method finalized in Java 25.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "methods"
+  ],
+  "prerequisites": [
+    "java-method-return-02"
+  ],
+  "learningGoals": [
+    "Start a program with a compact source file and an instance main method (JEP 512).",
+    "Read from and write to the console with the new java.lang.IO helper class."
+  ],
+  "languageVersion": "Java 25",
+  "completionChecks": [
+    {
+      "prompt": "What does this compact source file use as its entry point?",
+      "choices": [
+        "A public static void main(String[] args) method",
+        "An instance void main() method",
+        "A module main declaration"
+      ],
+      "answerIndex": 1,
+      "explanation": "Java 25 compact source files can use a plain instance void main() without declaring a class."
+    },
+    {
+      "prompt": "Why can this lesson call IO.println without an import?",
+      "choices": [
+        "IO is a method declared by every object",
+        "IO is imported by java.util.List",
+        "IO lives in java.lang, which every Java source file imports implicitly"
+      ],
+      "answerIndex": 2,
+      "explanation": "Since Java 25 the IO helper class is part of java.lang, so every source file - compact or not - can call IO.println and IO.readln without an import."
+    },
+    {
+      "prompt": "If the user types Ada at the prompt, what prints from the IO.println call?",
+      "choices": [
+        "Welcome to Java 25, Ada!",
+        "Your name: Ada",
+        "Welcome to Java 25, name!",
+        "Compilation fails because main is not static"
+      ],
+      "answerIndex": 0,
+      "explanation": "The readln call supplies the input text, and a compact source file may run with an instance void main method."
+    }
+  ],
+  "targetCode": "// Java 25 - Compact source files & instance main (JEP 512, final)\n// Learn: run a program with a plain void main() and print via the IO class.\nvoid main() {\n    // IO.readln prompts and returns the typed line.\n    String name = IO.readln(\"Your name: \");\n    IO.println(\"Welcome to Java 25, \" + name + \"!\");\n}"
+}

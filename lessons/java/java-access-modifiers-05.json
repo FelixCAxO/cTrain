@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-access-modifiers-05",
+  "version": 1,
+  "title": "Java Access Modifiers",
+  "description": "Practice class, field, and method visibility.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 82,
+  "tags": [
+    "java",
+    "classes",
+    "encapsulation"
+  ],
+  "prerequisites": [
+    "java-interface-04"
+  ],
+  "learningGoals": [
+    "Recall that public, protected, package-private, and private narrow access in that order.",
+    "Recognize that final classes cannot be subclassed."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What happens if another class declares class Sub extends Account?",
+      "choices": [
+        "Sub inherits balance and owner normally",
+        "Sub compiles but cannot call deposit",
+        "Sub must override deposit",
+        "Compilation fails because Account is final and cannot be subclassed"
+      ],
+      "answerIndex": 3,
+      "explanation": "A final class cannot be extended, so declaring class Sub extends Account fails to compile."
+    },
+    {
+      "prompt": "Which member is visible to subclasses in another package?",
+      "choices": [
+        "protected",
+        "package-private (no modifier)",
+        "private",
+        "None; cross-package access is always denied"
+      ],
+      "answerIndex": 0,
+      "explanation": "protected members are visible to subclasses even across package boundaries; package-private and private members are not."
+    },
+    {
+      "prompt": "From another class in the same package, what happens when code calls new Account().deposit(10)?",
+      "choices": [
+        "Compilation fails because deposit is private",
+        "Compilation fails because Account is final",
+        "It compiles; deposit has package-private access and updates the private balance inside Account",
+        "It throws IllegalAccessError at runtime"
+      ],
+      "answerIndex": 2,
+      "explanation": "The deposit method has package-private access, so same-package callers can invoke it even though balance remains private."
+    }
+  ],
+  "targetCode": "// Learn: Control visibility with access modifiers.\npublic final class Account {\n  // private keeps state inside this class.\n  private int balance;\n  protected String owner;\n  void deposit(int amount) {\n    balance += amount;\n  }\n}"
+}

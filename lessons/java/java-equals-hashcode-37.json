@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "java-equals-hashcode-37",
+  "version": 1,
+  "title": "Java Equals HashCode Comparable",
+  "description": "Practice object equality, hash codes, and natural ordering.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 240,
+  "tags": [
+    "java",
+    "classes",
+    "methods",
+    "object-contracts",
+    "sorting"
+  ],
+  "prerequisites": [
+    "java-set-hashset-36"
+  ],
+  "learningGoals": [
+    "Recall that equal objects must return equal hash codes.",
+    "Recognize that compareTo returns a sign, not a boolean."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does new User(7).compareTo(new User(7)) return?",
+      "choices": [
+        "true",
+        "1",
+        "0",
+        "Compilation fails because compareTo must return boolean"
+      ],
+      "answerIndex": 2,
+      "explanation": "compareTo returns an int sign - negative, zero, or positive. Integer.compare(7, 7) is 0, meaning equal ordering; compareTo never returns a boolean."
+    },
+    {
+      "prompt": "What must be true when two User objects are equal?",
+      "choices": [
+        "Their hashCode results must also be equal",
+        "They must be the same object reference",
+        "Their compareTo result must be positive",
+        "Their ids may differ as long as equals returns true"
+      ],
+      "answerIndex": 0,
+      "explanation": "The equals/hashCode contract requires that objects equal by equals() return the same hashCode, so equal Users must share a hash code."
+    },
+    {
+      "prompt": "What does new User(3).equals(\"3\") return?",
+      "choices": [
+        "true",
+        "false",
+        "ClassCastException is thrown",
+        "Compilation fails because equals cannot accept a String"
+      ],
+      "answerIndex": 1,
+      "explanation": "equals accepts Object, and the instanceof guard returns false before any cast when the argument is not a User."
+    }
+  ],
+  "targetCode": "// Learn: Keep equality, hashes, and ordering consistent.\nclass User implements Comparable<User> {\n  private final int id;\n  User(int id) { this.id = id; }\n\n  public boolean equals(Object obj) {\n    // instanceof checks the runtime type before casting.\n    if (!(obj instanceof User)) return false;\n    User other = (User) obj;\n    return id == other.id;\n  }\n\n  public int hashCode() {\n    return Integer.hashCode(id);\n  }\n\n  public int compareTo(User other) {\n    return Integer.compare(id, other.id);\n  }\n}"
+}

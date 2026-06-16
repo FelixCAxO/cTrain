@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b2-reference-collections-concepts-429",
+    "version":  1,
+    "title":  "Reference Page 1 - Collections: begrepp",
+    "description":  "Use this Java reference to review Collections: begrepp through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "sets",
+                 "iterators"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-equals-hashcode-compareto-428"
+                      ],
+    "learningGoals":  [
+                          "Choose List when order and indexes matter.",
+                          "Choose Set when values must be unique.",
+                          "Choose Queue or Deque for queue-like workflows."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Collections: begrepp.\n// You will learn: Choose Collection, Set, Iterator, and Queue operations by purpose.\nclass Prog2Reference429 {\n  // EXEMPEL 1: List bevarar ordning, index och dubletter.\n  static String listExample() {\n    java.util.List\u003cString\u003e names = new java.util.ArrayList\u003cString\u003e();\n    names.add(\"Ada\");\n    names.add(\"Ada\");\n    return names.get(0) + names.size();\n  }\n  // EXEMPEL 2: Set lagrar unika varden utan index.\n  static int setExample() {\n    java.util.Set\u003cString\u003e usernames = new java.util.HashSet\u003cString\u003e();\n    usernames.add(\"sam\");\n    usernames.add(\"sam\");\n    return usernames.size();\n  }\n  // EXEMPEL 3: Queue och Deque modellerar ko eller stack.\n  static String queueExample() {\n    java.util.Queue\u003cString\u003e queue = new java.util.ArrayDeque\u003cString\u003e();\n    queue.add(\"first\");\n    queue.add(\"second\");\n    return queue.remove();\n  }\n}"
+}

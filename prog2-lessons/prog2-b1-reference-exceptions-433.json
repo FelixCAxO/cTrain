@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-exceptions-433",
+    "version":  1,
+    "title":  "Reference Page 1 - Undantag",
+    "description":  "Use this Java reference to review Undantag through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "exceptions",
+                 "errors",
+                 "validation"
+             ],
+    "prerequisites":  [
+                          "prog2-b2-reference-generics-432"
+                      ],
+    "learningGoals":  [
+                          "Throw exceptions when inputs break method contracts.",
+                          "Catch expected failures at boundaries.",
+                          "Use try-with-resources for AutoCloseable resources."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Undantag.\n// You will learn: Throw, catch, and wrap errors at validation and I/O boundaries.\nclass Prog2Reference433 {\n  // EXEMPEL 1: throw skapar ett undantag nar ett kontrakt bryts.\n  static void setAge(int age) {\n    if (age \u003c 0) { throw new IllegalArgumentException(\"age\"); }\n  }\n  // EXEMPEL 2: try/catch fangar ett vantat fel vid en grans.\n  static int parseOrZero(String text) {\n    try { return Integer.parseInt(text); }\n    catch (NumberFormatException error) { return 0; }\n  }\n  // EXEMPEL 3: try-with-resources stanger resurser automatiskt.\n  static String readFirstLine(String text) throws java.io.IOException {\n    try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.StringReader(text))) {\n      return reader.readLine();\n    }\n  }\n}"
+}

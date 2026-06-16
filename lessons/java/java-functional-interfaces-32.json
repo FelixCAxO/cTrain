@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-functional-interfaces-32",
+  "version": 1,
+  "title": "Java Functional Interfaces",
+  "description": "Practice Function, Predicate, and Consumer declarations.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 105,
+  "tags": [
+    "java",
+    "functional-interfaces",
+    "lambdas"
+  ],
+  "prerequisites": [
+    "java-package-import-30"
+  ],
+  "learningGoals": [
+    "Type java.util.function imports.",
+    "Practice lambda assignments to functional interfaces."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does isLong.test(\"hi\") return?",
+      "choices": [
+        "false, because \"hi\" has length 2, which is not greater than 8",
+        "true, because any non-empty string is long",
+        "2, the length of the string",
+        "Compilation fails because Predicate has no test method"
+      ],
+      "answerIndex": 0,
+      "explanation": "isLong applies length (2) and checks > 8, which is false; Predicate<String>.test returns a boolean."
+    },
+    {
+      "prompt": "Which functional interface in the snippet transforms a String into an Integer?",
+      "choices": [
+        "Predicate<String>",
+        "Consumer<String>",
+        "Function<String, Integer>",
+        "Supplier<Integer>"
+      ],
+      "answerIndex": 2,
+      "explanation": "Function<T, R> accepts a T and returns an R, so String::length fits Function<String, Integer>; Predicate returns boolean and Consumer returns nothing."
+    },
+    {
+      "prompt": "What happens when printer.accept(\"  ok  \") is called?",
+      "choices": [
+        "It prints ok",
+        "It returns 2",
+        "It throws NumberFormatException",
+        "Compilation fails because Consumer must return a value"
+      ],
+      "answerIndex": 0,
+      "explanation": "Consumer.accept performs the lambda side effect and returns void; this lambda trims the text before printing it."
+    }
+  ],
+  "targetCode": "// Learn: Choose functional interfaces by input and output.\nimport java.util.function.Consumer;\nimport java.util.function.Function;\nimport java.util.function.Predicate;\n\nFunction<String, Integer> length = String::length;\n// Predicate returns true or false for one value.\nPredicate<String> isLong = text -> length.apply(text) > 8;\nConsumer<String> printer = text -> System.out.println(text.trim());"
+}

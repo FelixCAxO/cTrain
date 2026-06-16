@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "java-records-45",
+  "version": 1,
+  "title": "Java Records",
+  "description": "Declare a compact immutable data carrier with generated accessors and object contracts.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 220,
+  "tags": [
+    "java",
+    "records",
+    "classes",
+    "constructors",
+    "object-contracts"
+  ],
+  "prerequisites": [
+    "java-equals-hashcode-37"
+  ],
+  "learningGoals": [
+    "Declare a record and use its generated component accessors.",
+    "Normalize constructor arguments with a compact constructor.",
+    "Recall that records generate equals, hashCode, and toString from their components.",
+    "Implement an interface from a record declaration."
+  ],
+  "languageVersion": "Java 16",
+  "completionChecks": [
+    {
+      "prompt": "What does badge.email() return?",
+      "choices": [
+        "admin@example.com",
+        " ADMIN@Example.COM ",
+        "ADMIN@example.com",
+        "An exception is thrown at runtime"
+      ],
+      "answerIndex": 0,
+      "explanation": "The compact constructor assigns the stripped, lower-case value to the email component before the generated accessor returns it."
+    },
+    {
+      "prompt": "Which Badge declaration fails to compile?",
+      "choices": [
+        "record Badge(String email, int level) { }",
+        "record Badge(String email, int level) implements Comparable<Badge> { public int compareTo(Badge other) { return 0; } }",
+        "record Badge(String email, int level) { void email() { } }",
+        "record Badge(String email, int level) { public Badge { email = email.strip(); } }"
+      ],
+      "answerIndex": 2,
+      "explanation": "A record component already declares a public accessor with the component name, so a void email() method conflicts with the generated String email() accessor."
+    },
+    {
+      "prompt": "What happens when new Badge(\" user@example.com \", 0) runs?",
+      "choices": [
+        "IllegalArgumentException is thrown",
+        "A Badge is created with level 1",
+        "Compilation fails because compact constructors cannot validate",
+        "The normalized email is printed"
+      ],
+      "answerIndex": 0,
+      "explanation": "The compact constructor normalizes the email but then rejects any level below 1 by throwing IllegalArgumentException."
+    }
+  ],
+  "targetCode": "// Learn: Use a record with validation and ordering.\nimport java.util.Locale;\n\nrecord Badge(String email, int level) implements Comparable<Badge> {\n  public Badge {\n    // Compact constructors can normalize record components.\n    email = email.strip().toLowerCase(Locale.ROOT);\n    if (level < 1) throw new IllegalArgumentException(\"level\");\n  }\n\n  boolean senior() {\n    return level >= 5;\n  }\n\n  public int compareTo(Badge other) {\n    return email.compareTo(other.email());\n  }\n}\n\nBadge badge = new Badge(\" ADMIN@Example.COM \", 5);\nSystem.out.println(badge.email());"
+}

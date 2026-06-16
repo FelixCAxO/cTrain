@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-stringbuilder-mutation-87",
+  "version": 1,
+  "title": "Java StringBuilder Mutation",
+  "description": "Practice StringBuilder append, insert, reverse, and delete operations.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "strings"
+  ],
+  "prerequisites": [
+    "java-string-methods-23"
+  ],
+  "learningGoals": [
+    "Trace how append, insert, reverse, and delete mutate the same StringBuilder object.",
+    "Contrast StringBuilder mutation with immutable String method results."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does the final println print?",
+      "choices": [
+        "ID-24",
+        "24-DI",
+        "ID-42",
+        "24DI"
+      ],
+      "answerIndex": 1,
+      "explanation": "append makes ID-42, insert adds brackets, delete removes them, and reverse mutates the same builder into 24-DI before printing."
+    },
+    {
+      "prompt": "What happens when builder.reverse() runs?",
+      "choices": [
+        "It returns a new String and leaves builder as ID-42",
+        "It mutates builder and also returns that same builder",
+        "It fails because reverse exists only on String",
+        "It deletes characters from index 0 to 2"
+      ],
+      "answerIndex": 1,
+      "explanation": "StringBuilder methods such as reverse mutate the receiver and return the same builder, which is the opposite trap from immutable String methods."
+    },
+    {
+      "prompt": "What does builder contain immediately before reverse() runs?",
+      "choices": [
+        "ID-42",
+        "[ID-42]",
+        "42-DI",
+        "ID"
+      ],
+      "answerIndex": 0,
+      "explanation": "The insert and append add brackets, then the two delete calls remove the first and last bracket. The builder is back to ID-42 just before reverse mutates it."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - StringBuilder\n// Learn: mutate one builder with append, insert, delete, and reverse.\nStringBuilder builder = new StringBuilder(\"ID\");\nbuilder.append('-').append(42); // append mutates this same builder.\nbuilder.insert(0, '[');\nbuilder.append(']');\nbuilder.delete(0, 1);\nbuilder.delete(builder.length() - 1, builder.length());\nbuilder.reverse();\nSystem.out.println(builder);"
+}

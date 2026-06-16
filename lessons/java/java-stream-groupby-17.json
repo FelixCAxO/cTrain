@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-stream-groupby-17",
+  "version": 1,
+  "title": "Java Stream Group By",
+  "description": "Practice grouping stream results into a Map.",
+  "language": "java",
+  "difficulty": 5,
+  "estimatedSeconds": 95,
+  "tags": [
+    "java",
+    "streams",
+    "collectors",
+    "maps"
+  ],
+  "prerequisites": [
+    "java-stream-collect-16"
+  ],
+  "learningGoals": [
+    "Type groupingBy collector syntax.",
+    "Collect stream values into a Map."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What are the keys in ordersByCustomer after this collector runs?",
+      "choices": [
+        "The original Order objects",
+        "A running count of all orders",
+        "The List<Order> groups",
+        "The customer ids returned by Order::customerId"
+      ],
+      "answerIndex": 3,
+      "explanation": "Collectors.groupingBy uses the classifier function's result as each map key, so every key is a customer id returned by Order::customerId."
+    },
+    {
+      "prompt": "What does each value in the resulting Map<String, List<Order>> contain?",
+      "choices": [
+        "The list of orders that share that customer id",
+        "Only the most recent order for that customer",
+        "The number of orders as an Integer",
+        "Compilation fails because groupingBy requires a downstream collector"
+      ],
+      "answerIndex": 0,
+      "explanation": "Single-argument groupingBy collects each group's elements into a List, so every value is the List<Order> for that customer id; a downstream collector is optional."
+    },
+    {
+      "prompt": "What does ordersByCustomer.get(\"A\").size() return if orders has two customerId \"A\" orders and one customerId \"B\" order?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "null"
+      ],
+      "answerIndex": 1,
+      "explanation": "groupingBy puts all elements with the same classifier key into the same list, so customer A has two orders."
+    }
+  ],
+  "targetCode": "// Learn: Group stream elements by a key.\nimport java.util.List;\nimport java.util.Map;\nimport java.util.stream.Collectors;\n\nMap<String, List<Order>> ordersByCustomer = orders.stream()\n  // groupingBy creates one list per customer id.\n  .collect(Collectors.groupingBy(Order::customerId));"
+}

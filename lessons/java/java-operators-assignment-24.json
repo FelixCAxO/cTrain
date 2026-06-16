@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-operators-assignment-24",
+  "version": 1,
+  "title": "Java Operators Assignment",
+  "description": "Practice assignment, increment, remainder, and compound operators.",
+  "language": "java",
+  "difficulty": 1,
+  "estimatedSeconds": 50,
+  "tags": [
+    "java",
+    "primitives",
+    "variables"
+  ],
+  "prerequisites": [
+    "java-string-methods-23"
+  ],
+  "learningGoals": [
+    "Type compound assignment and increment operators.",
+    "Recognize remainder checks used in branch conditions."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "8:true",
+        "7:true",
+        "7:false",
+        "8:false"
+      ],
+      "answerIndex": 1,
+      "explanation": "count starts at 4, += 3 makes it 7, next reads 7 before count++ stores 8, and 8 % 2 == 0 is true, so it prints 7:true."
+    },
+    {
+      "prompt": "What does next hold after int next = count++; when count is 7?",
+      "choices": [
+        "8, because the increment is applied before the assignment",
+        "8, because next reads count again after the statement",
+        "7, because post-increment yields the value before incrementing",
+        "Compilation fails because count++ cannot appear in an assignment"
+      ],
+      "answerIndex": 2,
+      "explanation": "Post-increment evaluates to the current value (7) and assigns that to next, then stores the incremented value (8) back into count."
+    },
+    {
+      "prompt": "What does count hold just before System.out.println(next + \":\" + even); runs?",
+      "choices": [
+        "8",
+        "7",
+        "4",
+        "Compilation fails because count++ cannot appear in an assignment"
+      ],
+      "answerIndex": 0,
+      "explanation": "count += 3 changes count to 7, then the post-increment stores 7 in next and leaves count as 8 before even is calculated."
+    }
+  ],
+  "targetCode": "// Learn: Update values with assignment operators.\nint count = 4;\ncount += 3;\n// count++ returns the old value, then increments.\nint next = count++;\nboolean even = count % 2 == 0;\nSystem.out.println(next + \":\" + even);"
+}

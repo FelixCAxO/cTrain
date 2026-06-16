@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-map-counter-08",
+  "version": 1,
+  "title": "Java Map Counter",
+  "description": "Practice HashMap, generic types, getOrDefault, and put.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 100,
+  "tags": [
+    "java",
+    "maps",
+    "generics"
+  ],
+  "prerequisites": [
+    "java-collections-list-07"
+  ],
+  "learningGoals": [
+    "Type generic Map declarations.",
+    "Count values with getOrDefault."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does counts hold for a word that appears three times in words?",
+      "choices": [
+        "1, because put overwrites the previous count",
+        "0, because getOrDefault always returns the default",
+        "3, because each occurrence adds one to the running count",
+        "null, because the key is replaced each time"
+      ],
+      "answerIndex": 2,
+      "explanation": "Each occurrence reads the current count via getOrDefault (0 the first time) and puts back one more, so a word seen three times maps to 3."
+    },
+    {
+      "prompt": "Why does getOrDefault(word, 0) appear in the counter update?",
+      "choices": [
+        "It removes missing words from the map",
+        "It supplies 0 for a word not yet in the map, so the first +1 starts at 1",
+        "It sorts the map by count",
+        "It throws if the word is missing"
+      ],
+      "answerIndex": 1,
+      "explanation": "The first time a word is seen it has no stored count, so getOrDefault provides the starting value 0 before the +1."
+    },
+    {
+      "prompt": "What does counts.get(\"red\") return after the loop when words contains [\"red\", \"blue\", \"red\"]?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "null"
+      ],
+      "answerIndex": 1,
+      "explanation": "The first red stores 1 and the second red reads that count and stores 2, instead of overwriting with a constant."
+    }
+  ],
+  "targetCode": "// Learn: Count repeated words with a Map.\nimport java.util.HashMap;\nimport java.util.Map;\n\nMap<String, Integer> counts = new HashMap<>();\nfor (String word : words) {\n  // getOrDefault starts missing words at zero.\n  counts.put(word, counts.getOrDefault(word, 0) + 1);\n}"
+}

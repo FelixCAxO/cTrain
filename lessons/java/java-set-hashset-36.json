@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-set-hashset-36",
+  "version": 1,
+  "title": "Java HashSet",
+  "description": "Practice Set and HashSet operations.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 51,
+  "tags": [
+    "java",
+    "collections",
+    "sets"
+  ],
+  "prerequisites": [
+    "java-functional-interfaces-32"
+  ],
+  "learningGoals": [
+    "Type HashSet construction.",
+    "Practice add and contains on Set."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does a second seen.add(\"java\") return?",
+      "choices": [
+        "true, because add always succeeds",
+        "It throws IllegalStateException for duplicates",
+        "It removes the existing java entry",
+        "false, because the element is already present"
+      ],
+      "answerIndex": 3,
+      "explanation": "Set.add returns false when the element is already present and leaves the set unchanged, because a HashSet stores each value at most once."
+    },
+    {
+      "prompt": "What does seen.contains(\"java\") return after adding java?",
+      "choices": [
+        "true",
+        "false",
+        "It throws because sets have no contains method",
+        "null"
+      ],
+      "answerIndex": 0,
+      "explanation": "HashSet stores unique elements and contains reports whether a value is present, so it returns true after java was added."
+    },
+    {
+      "prompt": "What does this code print if seen.add(\"java\") is called once more before the println?",
+      "choices": [
+        "true",
+        "false",
+        "java",
+        "Compilation fails because HashSet rejects duplicate add calls"
+      ],
+      "answerIndex": 0,
+      "explanation": "Adding a duplicate does not add a second copy, but the set still contains java, so contains(\"java\") remains true."
+    }
+  ],
+  "targetCode": "// Learn: Track unique values with a Set.\nimport java.util.HashSet;\nimport java.util.Set;\n\nSet<String> seen = new HashSet<>();\n// Set keeps one copy of each value.\nseen.add(\"java\");\nseen.add(\"cpp\");\nSystem.out.println(seen.contains(\"java\"));"
+}

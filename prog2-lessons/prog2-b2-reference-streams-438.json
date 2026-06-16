@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b2-reference-streams-438",
+    "version":  1,
+    "title":  "Reference Page 1 - Streams",
+    "description":  "Use this Java reference to review Streams through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "streams",
+                 "filtering",
+                 "collectors"
+             ],
+    "prerequisites":  [
+                          "prog2-b2-reference-lambdas-functional-interfaces-437"
+                      ],
+    "learningGoals":  [
+                          "Build stream pipelines from collections.",
+                          "Use filter, map, and sorted as intermediate operations.",
+                          "Finish pipelines with terminal operations."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Streams.\n// You will learn: Build stream pipelines with filter, map, collect, reduce, and grouping.\nclass Prog2Reference438 {\n  // EXEMPEL 1: filter valjer vilka element som far ga vidare.\n  static java.util.List\u003cString\u003e adultNames(java.util.List\u003cPerson\u003e people) {\n    return people.stream().filter(person -\u003e person.age \u003e= 18).map(person -\u003e person.name).sorted().collect(java.util.stream.Collectors.toList());\n  }\n  static class Person {\n    final String name;\n    final int age;\n    Person(String name, int age) { this.name = name; this.age = age; }\n  }\n  // EXEMPEL 2: count och anyMatch ar terminala operationer.\n  static boolean hasShortName(java.util.List\u003cString\u003e names) {\n    long count = names.stream().filter(name -\u003e name.length() \u003c= 3).count();\n    return count \u003e 0 \u0026\u0026 names.stream().anyMatch(name -\u003e name.startsWith(\"A\"));\n  }\n  // EXEMPEL 3: mapToInt och sum passar numeriska berakningar.\n  static int totalLength(java.util.List\u003cString\u003e names) {\n    return names.stream().mapToInt(name -\u003e name.length()).sum();\n  }\n}"
+}

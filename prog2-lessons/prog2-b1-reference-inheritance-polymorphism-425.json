@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-inheritance-polymorphism-425",
+    "version":  1,
+    "title":  "Reference Page 1 - Arv och polymorfi",
+    "description":  "Use this Java reference to review Arv och polymorfi through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  248,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "inheritance",
+                 "abstract",
+                 "classes"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-methods-parameters-424"
+                      ],
+    "learningGoals":  [
+                          "Use extends for specialization.",
+                          "Override methods to specialize behavior.",
+                          "Store subclass objects behind superclass references."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Arv och polymorfi.\n// You will learn: Use inheritance, override, abstract methods, and dynamic dispatch.\nclass Prog2Reference425 {\n  // EXEMPEL 1: En subklass arver gemensamt tillstand fran en superklass.\n  static class Product {\n    private final String name;\n    Product(String name) { this.name = name; }\n    String label() { return name; }\n  }\n  static class Book extends Product {\n    Book(String name) { super(name); }\n  }\n  // EXEMPEL 2: Override gor att objekttypen valjer metod vid korning.\n  static class DiscountedBook extends Book {\n    DiscountedBook(String name) { super(name); }\n    @Override String label() { return \"Sale: \" + super.label(); }\n  }\n  static String dynamicDispatch() {\n    Product product = new DiscountedBook(\"Java\");\n    return product.label();\n  }\n  // EXEMPEL 3: En abstrakt klass kan krava metoder som subklasser maste skriva.\n  abstract static class Shape {\n    abstract double area();\n  }\n  static class Circle extends Shape {\n    private final double radius;\n    Circle(double radius) { this.radius = radius; }\n    @Override double area() { return Math.PI * radius * radius; }\n  }\n}"
+}

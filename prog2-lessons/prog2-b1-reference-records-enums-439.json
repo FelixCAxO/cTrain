@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-records-enums-439",
+    "version":  1,
+    "title":  "Reference Page 1 - record och enum",
+    "description":  "Use this Java reference to review record och enum through compact practice examples.",
+    "language":  "java",
+    "difficulty":  4,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "records",
+                 "enums",
+                 "classes"
+             ],
+    "prerequisites":  [
+                          "prog2-b2-reference-streams-438"
+                      ],
+    "learningGoals":  [
+                          "Use enum for a fixed set of values.",
+                          "Attach data and methods to enum constants.",
+                          "Use records for compact immutable data carriers."
+                      ],
+    "languageVersion":  "Java 16",
+    "targetCode":  "// LESSON: Reference Page 1 - record och enum.\n// You will learn: Represent fixed choices and immutable data with enum and record.\nclass Prog2Reference439 {\n  // EXEMPEL 1: enum representerar ett fast antal mojliga varden.\n  enum Suit { HEARTS, SPADES, DIAMONDS, CLUBS }\n  static boolean isRed(Suit suit) {\n    return suit == Suit.HEARTS || suit == Suit.DIAMONDS;\n  }\n  // EXEMPEL 2: enum kan ha falt, konstruktor och metoder.\n  enum Priority {\n    LOW(1), MEDIUM(2), HIGH(3);\n    private final int weight;\n    Priority(int weight) { this.weight = weight; }\n    int weight() { return weight; }\n  }\n  // EXEMPEL 3: record ar en kompakt immutable databarare.\n  record Grade(String name, int points) {\n    Grade {\n      if (points \u003c 0) { throw new IllegalArgumentException(\"points\"); }\n    }\n  }\n  static String display(Grade grade) { return grade.name() + \":\" + grade.points(); }\n}"
+}

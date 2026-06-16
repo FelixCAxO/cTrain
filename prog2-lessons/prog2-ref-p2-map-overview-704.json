@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-map-overview-704",
+    "version":  1,
+    "title":  "Map Overview - Reference Page 2",
+    "description":  "Use this Java reference to review Map Overview through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  540,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "maps",
+                 "sorting"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Use Map methods for lookup, defaults, removal, and membership checks.",
+                          "Iterate map views and update values with computeIfAbsent, merge, and TreeMap range operations."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Map Overview - Reference Page 2.\n// You will learn: Use key lookup, map views, computeIfAbsent, merge, and TreeMap ranges.\nimport java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.TreeMap;\n\nclass MapOverviewReference {\n  public static void main(String[] args) {\n    example1BasicOperations();\n    example2ViewsAndEntries();\n    example3ComputedUpdates();\n    example4SortedTreeMap();\n  }\n\n  static void example1BasicOperations() {\n    Map\u003cString, Integer\u003e ages = new HashMap\u003c\u003e();\n    ages.put(\"Ada\", 17);\n    ages.put(\"Bo\", 18);\n    int adaAge = ages.get(\"Ada\");\n    int missingAge = ages.getOrDefault(\"Cy\", 0);\n    boolean hasBo = ages.containsKey(\"Bo\");\n    ages.remove(\"Bo\");\n    System.out.println(adaAge + \" \" + missingAge + \" \" + hasBo);\n  }\n\n  static void example2ViewsAndEntries() {\n    Map\u003cString, String\u003e capitals = new HashMap\u003c\u003e();\n    capitals.put(\"Sweden\", \"Stockholm\");\n    capitals.put(\"Norway\", \"Oslo\");\n    for (String country : capitals.keySet()) {\n      System.out.println(country);\n    }\n    System.out.println(capitals.values());\n    for (Map.Entry\u003cString, String\u003e entry : capitals.entrySet()) {\n      System.out.println(entry.getKey() + \" -\u003e \" + entry.getValue());\n    }\n  }\n\n  static void example3ComputedUpdates() {\n    Map\u003cString, List\u003cString\u003e\u003e groups = new HashMap\u003c\u003e();\n    groups.computeIfAbsent(\"Prog2\", key -\u003e new ArrayList\u003cString\u003e()).add(\"Mina\");\n    groups.computeIfAbsent(\"Prog2\", key -\u003e new ArrayList\u003cString\u003e()).add(\"Leo\");\n    Map\u003cString, Integer\u003e counts = new HashMap\u003c\u003e();\n    counts.merge(\"java\", 1, (oldCount, added) -\u003e oldCount + added);\n    counts.merge(\"java\", 1, (oldCount, added) -\u003e oldCount + added);\n    System.out.println(groups + \" \" + counts);\n  }\n\n  static void example4SortedTreeMap() {\n    TreeMap\u003cInteger, String\u003e rooms = new TreeMap\u003c\u003e();\n    rooms.put(101, \"Lab\");\n    rooms.put(203, \"Classroom\");\n    rooms.put(150, \"Office\");\n    System.out.println(rooms.firstKey());\n    System.out.println(rooms.lastKey());\n    System.out.println(rooms.headMap(200));\n    System.out.println(rooms.tailMap(150));\n    System.out.println(rooms.subMap(100, 204));\n  }\n}"
+}

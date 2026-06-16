@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-javafx-controls-714",
+    "version":  1,
+    "title":  "JavaFX Controls - Reference Page 2",
+    "description":  "Use this Java reference to review JavaFX Controls through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  540,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b3",
+                 "source-file",
+                 "javafx",
+                 "list-view",
+                 "observable-list"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Read and change values in common controls such as Label, TextField, TextArea, CheckBox, ComboBox, and ListView.",
+                          "Connect controls to simple actions and observable data."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: JavaFX Controls - Reference Page 2.\n// You will learn: Configure controls, choices, sliders, and observable selection state.\nimport javafx.application.Application;\nimport javafx.collections.FXCollections;\nimport javafx.collections.ObservableList;\nimport javafx.geometry.Insets;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Button;\nimport javafx.scene.control.CheckBox;\nimport javafx.scene.control.ComboBox;\nimport javafx.scene.control.Label;\nimport javafx.scene.control.ListView;\nimport javafx.scene.control.TextArea;\nimport javafx.scene.control.TextField;\nimport javafx.scene.layout.VBox;\nimport javafx.stage.Stage;\n\npublic class JavaFxControlsReference extends Application {\n  public static void main(String[] args) {\n    launch(args);\n  }\n\n  @Override\n  public void start(Stage stage) {\n    VBox root = new VBox(10);\n    root.setPadding(new Insets(12));\n    root.getChildren().addAll(textControls(), choiceControls(), listViewControl());\n    stage.setScene(new Scene(root, 460, 420));\n    stage.setTitle(\"Controls\");\n    stage.show();\n  }\n\n  private VBox textControls() {\n    Label output = new Label(\"EXAMPLE 1: TextField and TextArea\");\n    TextField name = new TextField();\n    TextArea notes = new TextArea();\n    Button copy = new Button(\"Show text\");\n    copy.setOnAction(e -\u003e output.setText(name.getText() + \": \" + notes.getText()));\n    return new VBox(5, output, name, notes, copy);\n  }\n\n  private VBox choiceControls() {\n    Label status = new Label(\"EXAMPLE 2: CheckBox and ComboBox\");\n    CheckBox member = new CheckBox(\"Member\");\n    ComboBox\u003cString\u003e level = new ComboBox\u003c\u003e();\n    level.getItems().addAll(\"Basic\", \"Middle\", \"Advanced\");\n    Button read = new Button(\"Read choice\");\n    read.setOnAction(e -\u003e status.setText(member.isSelected() + \" / \" + level.getValue()));\n    return new VBox(5, status, member, level, read);\n  }\n\n  private VBox listViewControl() {\n    ObservableList\u003cString\u003e names = FXCollections.observableArrayList(\"Ada\", \"Bo\", \"Cia\");\n    ListView\u003cString\u003e list = new ListView\u003c\u003e(names);\n    Label selected = new Label(\"EXAMPLE 3: ListView selection\");\n    Button show = new Button(\"Show selected\");\n    show.setOnAction(e -\u003e selected.setText(\"Selected: \" + list.getSelectionModel().getSelectedItem()));\n    return new VBox(5, selected, list, show);\n  }\n}"
+}

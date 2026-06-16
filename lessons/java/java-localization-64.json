@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-localization-64",
+  "version": 1,
+  "title": "Java Localization",
+  "description": "Format currency and percentage values for a specific locale.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "localization",
+    "formatting"
+  ],
+  "prerequisites": [
+    "java-time-localdate-42"
+  ],
+  "learningGoals": [
+    "Select a Locale and build locale-aware NumberFormat instances.",
+    "Format currency and percentage values according to the locale's conventions."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does Locale.forLanguageTag(\"sv-SE\") select?",
+      "choices": [
+        "Swedish language conventions for Sweden",
+        "The system default locale only",
+        "A currency code named sv-SE"
+      ],
+      "answerIndex": 0,
+      "explanation": "The BCP 47 language tag selects a specific language and region for locale-sensitive formatting."
+    },
+    {
+      "prompt": "Which factory formats money values?",
+      "choices": [
+        "NumberFormat.getPercentInstance(locale)",
+        "NumberFormat.getCurrencyInstance(locale)",
+        "Locale.forLanguageTag(locale)"
+      ],
+      "answerIndex": 1,
+      "explanation": "getCurrencyInstance creates a formatter that applies the locale's currency formatting conventions."
+    },
+    {
+      "prompt": "What does NumberFormat.getPercentInstance(Locale.US).format(0.5) return?",
+      "choices": [
+        "50%",
+        "0.5%",
+        "0.50",
+        "It fails to compile"
+      ],
+      "answerIndex": 0,
+      "explanation": "A percent formatter multiplies 0.5 by 100 and applies the locale's percent symbol."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Localization\n// Learn: format currency and percentages for a Locale.\n// Locale selects language and regional formatting rules.\nLocale locale = Locale.forLanguageTag(\"sv-SE\");\nNumberFormat currency = NumberFormat.getCurrencyInstance(locale);\nNumberFormat percent = NumberFormat.getPercentInstance(locale);\nSystem.out.println(currency.format(1299.5));\nSystem.out.println(percent.format(0.075));"
+}

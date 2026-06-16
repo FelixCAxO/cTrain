@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-reference-null-29",
+  "version": 1,
+  "title": "Java Reference Null",
+  "description": "Practice null checks before dereferencing reference values.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 65,
+  "tags": [
+    "java",
+    "references",
+    "errors"
+  ],
+  "prerequisites": [
+    "java-method-overload-28"
+  ],
+  "learningGoals": [
+    "Type an explicit null comparison.",
+    "Recognize the dereference that would throw NullPointerException."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does this code do when findName(id) returns null?",
+      "choices": [
+        "It prints 0 for the length of a null name",
+        "It silently skips the print and continues",
+        "It throws NullPointerException with the message \"missing name\"",
+        "It throws NullPointerException at name.length() instead"
+      ],
+      "answerIndex": 2,
+      "explanation": "When name is null the if branch runs and explicitly throws NullPointerException(\"missing name\"), so execution never reaches name.length()."
+    },
+    {
+      "prompt": "Which operation can throw NullPointerException here?",
+      "choices": [
+        "Comparing name == null",
+        "Dereferencing with name.length() when name is null",
+        "Assigning the reference variable name",
+        "The throw statement, because new always throws"
+      ],
+      "answerIndex": 1,
+      "explanation": "Comparing a reference to null is always safe; dereferencing a null reference by calling a method on it is what throws NullPointerException."
+    },
+    {
+      "prompt": "What happens when findName(id) returns \"Ada\"?",
+      "choices": [
+        "A NullPointerException with message \"missing name\" is thrown",
+        "The code prints 3",
+        "The code prints Ada",
+        "Compilation fails because name might still be null"
+      ],
+      "answerIndex": 1,
+      "explanation": "The null check is skipped for a non-null String, and name.length() returns 3 for Ada."
+    }
+  ],
+  "targetCode": "// Learn: Check a reference before using it.\nString name = findName(id);\nif (name == null) {\n  throw new NullPointerException(\"missing name\");\n}\n// After the null check, name.length() is safe here.\nSystem.out.println(name.length());"
+}

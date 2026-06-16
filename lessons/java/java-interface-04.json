@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-interface-04",
+  "version": 1,
+  "title": "Java Interface",
+  "description": "Practice an interface and implementation.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 95,
+  "tags": [
+    "java",
+    "interfaces"
+  ],
+  "prerequisites": [
+    "java-loop-array-03"
+  ],
+  "learningGoals": [
+    "Type an interface declaration.",
+    "Implement an interface method."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does new FriendlyGreeter().greet(\"Ada\") return?",
+      "choices": [
+        "Ada",
+        "Hello, ",
+        "Compilation fails because greet is not declared public in Greeter",
+        "Hello, Ada"
+      ],
+      "answerIndex": 3,
+      "explanation": "greet concatenates \"Hello, \" with the argument, returning \"Hello, Ada\"; interface methods are implicitly public, so the implementation declares greet public."
+    },
+    {
+      "prompt": "Which method must FriendlyGreeter implement from Greeter?",
+      "choices": [
+        "toString()",
+        "greet(String name)",
+        "main(String[] args)",
+        "equals(Object o)"
+      ],
+      "answerIndex": 1,
+      "explanation": "Greeter declares the abstract method greet(String), so a concrete implementing class must provide that method."
+    },
+    {
+      "prompt": "What happens if FriendlyGreeter implements greet as String greet(String name) with no public modifier?",
+      "choices": [
+        "It compiles because interface methods are package-private by default",
+        "Compilation fails because the implementation reduces the public access required by the interface",
+        "It compiles but greet throws AbstractMethodError at runtime",
+        "The method becomes private to FriendlyGreeter only"
+      ],
+      "answerIndex": 1,
+      "explanation": "Interface methods are public contracts, so an implementing method cannot use weaker package-private access."
+    }
+  ],
+  "targetCode": "// Learn: Define a contract and implement it.\ninterface Greeter {\n  String greet(String name);\n}\n\nclass FriendlyGreeter implements Greeter {\n  // implements requires the class to provide greet.\n  public String greet(String name) {\n    return \"Hello, \" + name;\n  }\n}"
+}

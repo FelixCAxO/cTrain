@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-set-uniqueness-703",
+    "version":  1,
+    "title":  "Set and Uniqueness - Reference Page 2",
+    "description":  "Use this Java reference to review Set and Uniqueness through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  420,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "sets",
+                 "sorting"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Use Set\u003cE\u003e when duplicate elements should be rejected.",
+                          "Compare HashSet, LinkedHashSet, and TreeSet behavior for order and uniqueness."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Set and Uniqueness - Reference Page 2.\n// You will learn: Model uniqueness with HashSet, LinkedHashSet, TreeSet, and comparators.\nimport java.util.Comparator;\nimport java.util.HashSet;\nimport java.util.LinkedHashSet;\nimport java.util.Set;\nimport java.util.TreeSet;\n\nclass SetUniquenessReference {\n  public static void main(String[] args) {\n    example1RejectDuplicates();\n    example2OrderChoices();\n    example3ComparatorUniqueness();\n  }\n\n  static void example1RejectDuplicates() {\n    Set\u003cString\u003e seen = new HashSet\u003c\u003e();\n    boolean firstAda = seen.add(\"Ada\");\n    boolean secondAda = seen.add(\"Ada\");\n    boolean hasAda = seen.contains(\"Ada\");\n    System.out.println(firstAda + \" \" + secondAda + \" \" + hasAda);\n  }\n\n  static void example2OrderChoices() {\n    Set\u003cString\u003e linked = new LinkedHashSet\u003c\u003e();\n    linked.add(\"third\");\n    linked.add(\"first\");\n    linked.add(\"second\");\n    Set\u003cString\u003e sorted = new TreeSet\u003c\u003e();\n    sorted.add(\"third\");\n    sorted.add(\"first\");\n    sorted.add(\"second\");\n    System.out.println(linked + \" \" + sorted);\n  }\n\n  static void example3ComparatorUniqueness() {\n    Set\u003cString\u003e byLength = new TreeSet\u003c\u003e(Comparator.comparingInt(String::length));\n    boolean addedCat = byLength.add(\"cat\");\n    boolean addedDog = byLength.add(\"dog\");\n    boolean addedLion = byLength.add(\"lion\");\n    System.out.println(addedCat + \" \" + addedDog + \" \" + addedLion + \" \" + byLength);\n  }\n}"
+}

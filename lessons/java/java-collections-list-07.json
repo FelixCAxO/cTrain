@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-collections-list-07",
+  "version": 1,
+  "title": "Java Collections List",
+  "description": "Practice imports, List.of, ArrayList, add, get, and size.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 64,
+  "tags": [
+    "java",
+    "collections",
+    "imports"
+  ],
+  "prerequisites": [
+    "java-exceptions-try-catch-06"
+  ],
+  "learningGoals": [
+    "Type java.util imports.",
+    "Practice common List operations."
+  ],
+  "languageVersion": "Java 9",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "Ada then 3",
+        "Linus then 3",
+        "Ada then 2",
+        "Linus then 2"
+      ],
+      "answerIndex": 0,
+      "explanation": "List.of seeds the ArrayList with Ada and Grace, add appends Linus at the end, so get(0) is still Ada and size() is 3."
+    },
+    {
+      "prompt": "What happens if names is assigned List.of(\"Ada\", \"Grace\") directly and then names.add(\"Linus\") runs?",
+      "choices": [
+        "Linus is appended, giving size 3",
+        "The add call is ignored silently",
+        "Compilation fails because List.of is not a List",
+        "It throws UnsupportedOperationException because List.of is immutable"
+      ],
+      "answerIndex": 3,
+      "explanation": "List.of returns an unmodifiable list, so add throws UnsupportedOperationException; the lesson copies it into a new ArrayList precisely so it can be modified."
+    },
+    {
+      "prompt": "After the target code runs, what does System.out.println(names.get(2)) print?",
+      "choices": [
+        "Linus",
+        "Grace",
+        "Ada",
+        "IndexOutOfBoundsException is thrown"
+      ],
+      "answerIndex": 0,
+      "explanation": "List indexes are zero-based, so after adding Linus at the end, index 2 refers to the third element."
+    }
+  ],
+  "targetCode": "// Learn: Store ordered values in a List.\nimport java.util.ArrayList;\nimport java.util.List;\n\n// ArrayList is a resizable List implementation.\nList<String> names = new ArrayList<>(List.of(\"Ada\", \"Grace\"));\nnames.add(\"Linus\");\nSystem.out.println(names.get(0));\nSystem.out.println(names.size());"
+}

@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-visibility-final-static-422",
+    "version":  1,
+    "title":  "Reference Page 1 - Synlighet, final, static",
+    "description":  "Use this Java reference to review Synlighet, final, static through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "encapsulation",
+                 "static",
+                 "classes"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-class-object-constructor-421"
+                      ],
+    "learningGoals":  [
+                          "Control access with public and private members.",
+                          "Use final for values that should not be reassigned.",
+                          "Use static for class-level state and constants."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Synlighet, final, static.\n// You will learn: Protect state with private, final fields, and shared static members.\nclass Prog2Reference422 {\n  // EXEMPEL 1: private skyddar falt och public ger kontrollerad atkomst.\n  static class Account {\n    private int balance;\n    public void deposit(int amount) {\n      if (amount \u003e 0) { balance += amount; }\n    }\n    public int balance() { return balance; }\n  }\n  // EXEMPEL 2: final markerar att referensen eller vardet inte ska omtilldelas.\n  static class Course {\n    private final String code;\n    Course(String code) { this.code = code; }\n    String code() { return code; }\n  }\n  // EXEMPEL 3: static hor till klassen och delas av alla objekt.\n  static class Ticket {\n    static final int VAT_PERCENT = 12;\n    private static int created;\n    Ticket() { created++; }\n    static int createdCount() { return created; }\n  }\n}"
+}

@@ -1,0 +1,29 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-class-object-constructor-421",
+    "version":  1,
+    "title":  "Reference Page 1 - Klass, objekt, konstruktor",
+    "description":  "Use this Java reference to review Klass, objekt, konstruktor through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  256,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "classes",
+                 "constructors",
+                 "encapsulation"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Use classes as blueprints for objects.",
+                          "Initialize valid object state with constructors.",
+                          "Call instance methods on created objects."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Klass, objekt, konstruktor.\n// You will learn: Build objects with fields, constructors, validation, and methods.\nclass Prog2Reference421 {\n  // EXEMPEL 1: En klass beskriver vilka falt och metoder ett objekt far.\n  static class Person {\n    private final String name;\n    private int age;\n    Person(String name, int age) {\n      this.name = name;\n      this.age = age;\n    }\n    void birthday() { age++; }\n    String label() { return name + \" (\" + age + \")\"; }\n  }\n  // EXEMPEL 2: new skapar ett objekt som metoder kan anropas pa.\n  static String createAndUseObject() {\n    Person ada = new Person(\"Ada\", 20);\n    ada.birthday();\n    return ada.label();\n  }\n  // EXEMPEL 3: En konstruktor kan validera innan objektet blir anvandbart.\n  static class Rectangle {\n    private final int width;\n    private final int height;\n    Rectangle(int width, int height) {\n      if (width \u003c= 0 || height \u003c= 0) { throw new IllegalArgumentException(\"size\"); }\n      this.width = width;\n      this.height = height;\n    }\n    int area() { return width * height; }\n  }\n}"
+}

@@ -1,0 +1,56 @@
+track	roadmapNode	expectedTags	minExamReadyLessons	minCompletionChecksPerLesson
+java	Class Basics	classes	1	2
+java	Access Modifiers	encapsulation	1	2
+java	Methods	methods	1	2
+java	Loops	loops	1	2
+java	Interfaces	interfaces	1	2
+java	Interface Methods	interface-methods	1	2
+java	Records	records	1	2
+java	Exceptions	exceptions	1	2
+java	Multi Catch Custom Exceptions	multicatch	1	2
+java	Collections	collections	1	2
+java	Maps	maps	1	2
+java	Constructors	constructors	1	2
+java	Inheritance	inheritance	1	2
+java	Abstract Classes	abstract	1	2
+java	Enums	enums	1	2
+java	Enum Members	enum-members	1	2
+java	Lambdas	lambdas	1	2
+java	Generics	generics	1	2
+java	Optional	optional	1	2
+java	Streams	streams	1	2
+java	Resource Management	resources	1	2
+java	Local Variables	var	1	2
+java	Varargs	varargs	1	2
+java	Unnamed Variables	unnamed-variables	1	2
+java	Threads	threads	1	2
+java	Primitive Types	primitives	1	2
+java	Numeric Casting Overflow Math	numeric-casting,math	1	2
+java	Strings	strings	1	2
+java	Conditionals	conditionals,if-else	1	2
+java	References	references	1	2
+java	Arrays	arrays	1	2
+java	Static Members	static,methods	1	2
+java	Set Collections	sets	1	2
+java	Equals HashCode Comparable	object-contracts	1	2
+java	Functional Interfaces	functional-interfaces	1	2
+java	Virtual Threads	virtual-threads	1	2
+java	Date Time	time	1	2
+java	Time Formatting	time,formatting	1	2
+java	Http Client	http-client	0	0
+java	Modules	modules	1	2
+java	Scoped Values	scoped-values	1	2
+java	Sealed Types	sealed	1	2
+java	Pattern Matching	pattern-matching	1	2
+java	Switch Expressions	switch	1	2
+java	Sequenced Collections	sequenced-collections	1	2
+java	Deque	deque	1	2
+java	File IO	files	1	2
+java	IO Streams	io	1	2
+java	Serialization	serialization	1	2
+java	Localization	localization	1	2
+java	Concurrency Utilities	concurrency	1	2
+java	Executor Services	executors	1	2
+java	Structured Concurrency	structured-concurrency	0	0
+java	Lazy Constants	lazy-constants	0	0
+java	Security	security	0	0

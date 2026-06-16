@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-sealed-types-55",
+  "version": 1,
+  "title": "Java Sealed Types",
+  "description": "Model a closed set of subtypes with a sealed interface and permits clause.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "sealed",
+    "inheritance"
+  ],
+  "prerequisites": [
+    "java-inheritance-extends-10",
+    "java-records-45"
+  ],
+  "learningGoals": [
+    "Restrict which types may implement an interface with a sealed type and permits clause.",
+    "Combine sealed types with records to describe an exhaustive set of alternatives."
+  ],
+  "languageVersion": "Java 17",
+  "completionChecks": [
+    {
+      "prompt": "Which Shape subtype declaration fails to compile?",
+      "choices": [
+        "record Circle(double radius) implements Shape { }",
+        "record Triangle(double side) implements Shape { }",
+        "record Square(double side) implements Shape { }",
+        "Compilation fails for every record that implements an interface"
+      ],
+      "answerIndex": 1,
+      "explanation": "Shape permits only Circle and Square as direct subtypes, so an unlisted Triangle cannot directly implement it."
+    },
+    {
+      "prompt": "Why do sealed hierarchies help switch exhaustiveness?",
+      "choices": [
+        "They make every subtype final automatically",
+        "They remove the need for pattern matching",
+        "The compiler knows the permitted direct subtype set",
+        "They turn every switch statement into a switch expression"
+      ],
+      "answerIndex": 2,
+      "explanation": "Because the compiler knows the permitted subtype set, it can reason about whether all alternatives are handled."
+    },
+    {
+      "prompt": "Does a switch expression over Shape with cases for Circle and Square compile without a default?",
+      "choices": [
+        "Yes, because Shape permits only Circle and Square as direct implementations",
+        "No, every switch expression over an interface must have default",
+        "No, records cannot appear in switch pattern labels",
+        "Yes, but only because sealed interfaces are converted to enums"
+      ],
+      "answerIndex": 0,
+      "explanation": "The sealed permits list is the key fact; the trap is ignoring that the compiler can see the complete subtype set."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Sealed types\n// Learn: limit which types may implement an interface with sealed ... permits.\n// permits lists the only allowed implementations.\nsealed interface Shape permits Circle, Square {\n}\n\nrecord Circle(double radius) implements Shape {\n}\n\nrecord Square(double side) implements Shape {\n}"
+}

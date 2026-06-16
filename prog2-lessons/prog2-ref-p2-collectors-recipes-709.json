@@ -1,0 +1,30 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-collectors-recipes-709",
+    "version":  1,
+    "title":  "Collectors Recipes - Reference Page 2",
+    "description":  "Use this Java reference to review Collectors Recipes through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  540,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "streams",
+                 "collectors",
+                 "maps",
+                 "lambdas"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Use collectors for lists, text, maps, and grouped results.",
+                          "Understand how groupingBy and toMap build new data structures."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Collectors Recipes - Reference Page 2.\n// You will learn: Collect streams into lists, maps, groups, partitions, and summaries.\nimport java.util.Arrays;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.stream.Collectors;\n\nclass CollectorsRecipesReference {\n  public static void main(String[] args) {\n    example1CollectListAndText();\n    example2CollectToMap();\n    example3GroupAndCount();\n  }\n\n  static void example1CollectListAndText() {\n    List\u003cString\u003e names = Arrays.asList(\"Alva\", \"Bo\", \"Cleo\", \"Dina\");\n    List\u003cString\u003e shortNames = names.stream().filter(name -\u003e name.length() \u003c= 4).collect(Collectors.toList());\n    String joined = names.stream().collect(Collectors.joining(\", \"));\n    System.out.println(shortNames);\n    System.out.println(joined);\n  }\n\n  static void example2CollectToMap() {\n    List\u003cCollectorPerson\u003e people = Arrays.asList(new CollectorPerson(\"p1\", \"Alva\", \"Lund\"), new CollectorPerson(\"p2\", \"Bo\", \"Mora\"), new CollectorPerson(\"p3\", \"Cleo\", \"Lund\"));\n    Map\u003cString, CollectorPerson\u003e byId = people.stream().collect(Collectors.toMap(CollectorPerson::id, person -\u003e person));\n    CollectorPerson found = byId.get(\"p2\");\n    System.out.println(found);\n  }\n\n  static void example3GroupAndCount() {\n    List\u003cCollectorPerson\u003e people = Arrays.asList(new CollectorPerson(\"p1\", \"Alva\", \"Lund\"), new CollectorPerson(\"p2\", \"Bo\", \"Mora\"), new CollectorPerson(\"p3\", \"Cleo\", \"Lund\"));\n    Map\u003cString, List\u003cCollectorPerson\u003e\u003e byCity = people.stream().collect(Collectors.groupingBy(CollectorPerson::city));\n    Map\u003cString, Long\u003e countByCity = people.stream().collect(Collectors.groupingBy(CollectorPerson::city, Collectors.counting()));\n    System.out.println(byCity);\n    System.out.println(countByCity);\n  }\n}\n\nclass CollectorPerson {\n  private final String id;\n  private final String name;\n  private final String city;\n\n  CollectorPerson(String id, String name, String city) {\n    this.id = id;\n    this.name = name;\n    this.city = city;\n  }\n\n  String id() { return id; }\n  String city() { return city; }\n  public String toString() { return name + \" from \" + city; }\n}"
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-sequenced-collections-59",
+  "version": 1,
+  "title": "Java Sequenced Collections",
+  "description": "Read both ends and reverse a collection with the sequenced collections API.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "collections",
+    "sequenced-collections"
+  ],
+  "prerequisites": [
+    "java-collections-list-07"
+  ],
+  "learningGoals": [
+    "Access the first and last elements with getFirst and getLast (Java 21).",
+    "Recall that reversed() gives a reverse-order view without index arithmetic."
+  ],
+  "languageVersion": "Java 21",
+  "completionChecks": [
+    {
+      "prompt": "What does q.getFirst() return after q.addFirst(\"start\")?",
+      "choices": [
+        "start",
+        "a",
+        "c"
+      ],
+      "answerIndex": 0,
+      "explanation": "addFirst inserts at the front of the sequenced collection, so getFirst reads the inserted value."
+    },
+    {
+      "prompt": "What is the purpose of q.reversed()?",
+      "choices": [
+        "To sort the elements alphabetically",
+        "To view the same sequence in reverse order",
+        "To remove the last element"
+      ],
+      "answerIndex": 1,
+      "explanation": "reversed() exposes the collection in reverse encounter order; it is not a sorting or removal operation."
+    },
+    {
+      "prompt": "What does the println statement print after addFirst(\"start\")?",
+      "choices": [
+        "start/c [c, b, a, start]",
+        "a/c [c, b, a, start]",
+        "start/start [start, a, b, c]",
+        "c/start [start, a, b, c]"
+      ],
+      "answerIndex": 0,
+      "explanation": "addFirst changes the first element, while reversed() views the encounter order backward without sorting the values."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Sequenced collections\n// Learn: read both ends and reverse with the sequenced collections API.\nSequencedCollection<String> q = new ArrayList<>(List.of(\"a\", \"b\", \"c\"));\nq.addFirst(\"start\");\n// getFirst and getLast read opposite ends.\nString first = q.getFirst();\nString last = q.getLast();\nSystem.out.println(first + \"/\" + last + \" \" + q.reversed());"
+}

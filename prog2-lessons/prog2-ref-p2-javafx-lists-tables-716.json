@@ -1,0 +1,31 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-javafx-lists-tables-716",
+    "version":  1,
+    "title":  "JavaFX Lists and Tables - Reference Page 2",
+    "description":  "Use this Java reference to review JavaFX Lists and Tables through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  600,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b3",
+                 "source-file",
+                 "javafx",
+                 "observable-list",
+                 "list-view",
+                 "table-view",
+                 "events",
+                 "properties"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Use ObservableList as a data source for ListView and TableView.",
+                          "Read selections and display object data with selection models and table columns."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: JavaFX Lists and Tables - Reference Page 2.\n// You will learn: Connect ObservableList data to ListView, selection, and TableView columns.\nimport javafx.application.Application;\nimport javafx.beans.property.SimpleIntegerProperty;\nimport javafx.beans.property.SimpleStringProperty;\nimport javafx.collections.FXCollections;\nimport javafx.collections.ObservableList;\nimport javafx.geometry.Insets;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Label;\nimport javafx.scene.control.ListView;\nimport javafx.scene.control.TableColumn;\nimport javafx.scene.control.TableView;\nimport javafx.scene.layout.VBox;\nimport javafx.stage.Stage;\n\npublic class JavaFxListsTablesReference extends Application {\n  public static void main(String[] args) {\n    launch(args);\n  }\n\n  @Override\n  public void start(Stage stage) {\n    // EXAMPLE 1: ObservableList drives a ListView.\n    ObservableList\u003cString\u003e names = FXCollections.observableArrayList();\n    ListView\u003cString\u003e list = new ListView\u003c\u003e(names);\n    names.add(\"Ada\");\n    names.add(\"Grace\");\n    // EXAMPLE 2: selectionModel reports the selected item.\n    Label status = new Label(\"Choose a name\");\n    list.getSelectionModel().selectedItemProperty().addListener((obs, oldName, newName) -\u003e {\n      status.setText(\"Selected: \" + newName);\n    });\n    // EXAMPLE 3: TableView shows object fields in columns.\n    ObservableList\u003cTablePerson\u003e people = FXCollections.observableArrayList(new TablePerson(\"Ada\", 17), new TablePerson(\"Grace\", 18));\n    TableView\u003cTablePerson\u003e table = new TableView\u003c\u003e(people);\n    TableColumn\u003cTablePerson, String\u003e nameColumn = new TableColumn\u003c\u003e(\"Name\");\n    nameColumn.setCellValueFactory(cell -\u003e new SimpleStringProperty(cell.getValue().name()));\n    TableColumn\u003cTablePerson, Number\u003e ageColumn = new TableColumn\u003c\u003e(\"Age\");\n    ageColumn.setCellValueFactory(cell -\u003e new SimpleIntegerProperty(cell.getValue().age()));\n    table.getColumns().add(nameColumn);\n    table.getColumns().add(ageColumn);\n    VBox root = new VBox(8, status, list, table);\n    root.setPadding(new Insets(12));\n    stage.setScene(new Scene(root, 440, 360));\n    stage.show();\n  }\n}\n\nclass TablePerson {\n  private final String name;\n  private final int age;\n\n  TablePerson(String name, int age) {\n    this.name = name;\n    this.age = age;\n  }\n\n  String name() { return name; }\n  int age() { return age; }\n}"
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-string-methods-23",
+  "version": 1,
+  "title": "Java String Methods",
+  "description": "Practice common String operations.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 69,
+  "tags": [
+    "java",
+    "strings",
+    "methods"
+  ],
+  "prerequisites": [
+    "java-primitives-types-21",
+    "java-if-else-22"
+  ],
+  "learningGoals": [
+    "Type chained String method calls that normalize text before comparing it.",
+    "Recall that String methods return new strings instead of mutating the original."
+  ],
+  "languageVersion": "Java 11",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "admin",
+        "admin@",
+        "ADMIN",
+        "Nothing, because the if condition is false"
+      ],
+      "answerIndex": 0,
+      "explanation": "raw.trim().toLowerCase() yields \"admin@example.com\", which is not blank and contains \"admin\", so the branch prints substring(0, 5) - the first five characters, \"admin\"."
+    },
+    {
+      "prompt": "What does the variable raw refer to after raw.trim().toLowerCase() runs?",
+      "choices": [
+        "\"admin@example.com\", because trim and toLowerCase modify raw in place",
+        "An empty string, because trim removed every character",
+        "Compilation fails because String methods cannot be chained",
+        "The original \"  admin@example.com  \", because String methods return new strings instead of mutating raw"
+      ],
+      "answerIndex": 3,
+      "explanation": "Strings are immutable, so trim and toLowerCase each return a new String and leave raw unchanged; only the email variable holds the normalized result."
+    },
+    {
+      "prompt": "What does internal hold after email.endsWith(\"@example.com\") runs?",
+      "choices": [
+        "false, because raw still has leading and trailing spaces",
+        "\"@example.com\"",
+        "true",
+        "Compilation fails because endsWith returns an int"
+      ],
+      "answerIndex": 2,
+      "explanation": "email is the trimmed, lower-case String, so it ends with @example.com even though raw still keeps its original spaces."
+    }
+  ],
+  "targetCode": "// Learn: Normalize and inspect a String.\nString raw = \"  admin@example.com  \";\nString email = raw.trim().toLowerCase();\nboolean internal = email.endsWith(\"@example.com\");\nif (!email.isBlank() && email.contains(\"admin\")) {\n  // substring reads characters from index 0 up to 5.\n  System.out.println(email.substring(0, 5));\n}"
+}

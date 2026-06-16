@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-concurrency-locks-65",
+  "version": 1,
+  "title": "Java Concurrency Locks",
+  "description": "Guard shared mutable state with a ReentrantLock.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 200,
+  "tags": [
+    "java",
+    "concurrency",
+    "threads"
+  ],
+  "prerequisites": [
+    "java-thread-runnable-20"
+  ],
+  "learningGoals": [
+    "Protect a critical section with ReentrantLock's lock and unlock.",
+    "Release the lock in a finally block so it is freed even on exceptions."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What happens to the lock if balance += amount throws?",
+      "choices": [
+        "finally still releases the lock",
+        "balance becomes volatile",
+        "the lock is acquired a second time"
+      ],
+      "answerIndex": 0,
+      "explanation": "finally runs on normal and exceptional exits, so it is the safe place to release a lock."
+    },
+    {
+      "prompt": "What state is protected by the lock in this snippet?",
+      "choices": [
+        "amount",
+        "balance",
+        "The ReentrantLock class itself"
+      ],
+      "answerIndex": 1,
+      "explanation": "The critical section mutates the shared balance field, so the lock guards that mutable state."
+    },
+    {
+      "prompt": "What happens if a return; statement is added inside the try block after balance += amount?",
+      "choices": [
+        "finally still calls unlock before deposit returns",
+        "The lock remains held until the object is garbage collected",
+        "The method fails to compile because return cannot appear in a try block",
+        "unlock runs only if no other thread is waiting for the lock"
+      ],
+      "answerIndex": 0,
+      "explanation": "The trap is assuming return skips cleanup; finally runs on return as well as normal fall-through."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Locks for thread safety\n// Learn: guard shared state with a ReentrantLock and finally.\nprivate final ReentrantLock lock = new ReentrantLock();\nprivate int balance = 0;\n\nvoid deposit(int amount) {\n    lock.lock();\n    try {\n        balance += amount;\n    } finally {\n        lock.unlock(); // released even if the body throws\n    }\n}"
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-optional-lazy-fallback-69",
+  "version": 1,
+  "title": "Java Optional Lazy Fallback",
+  "description": "Practice choosing orElseGet when fallback work should be lazy.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "optional",
+    "lambdas"
+  ],
+  "prerequisites": [
+    "java-optional-orelse-15",
+    "java-lambda-functional-13"
+  ],
+  "learningGoals": [
+    "Use orElseGet to defer fallback work until an Optional is empty.",
+    "Recognize that orElse evaluates its argument before Optional decides which value to return."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print when nickname contains \"Ada\"?",
+      "choices": [
+        "guest-Ada",
+        "Ada",
+        "null",
+        "It fails to compile because Supplier cannot be passed to orElseGet"
+      ],
+      "answerIndex": 1,
+      "explanation": "The Optional contains Ada and the filter keeps it, so orElseGet returns the present value without calling the fallback supplier."
+    },
+    {
+      "prompt": "What changes if the final call uses orElse(buildGuestName()) instead?",
+      "choices": [
+        "buildGuestName runs even when nickname already contains Ada",
+        "The code returns Optional<String> instead of String",
+        "The fallback becomes lazy in the same way as orElseGet",
+        "The filter is skipped before the fallback is evaluated"
+      ],
+      "answerIndex": 0,
+      "explanation": "Method arguments are evaluated before the method call, so orElse(buildGuestName()) performs the fallback work even when the Optional value is present."
+    },
+    {
+      "prompt": "What does the code print if nickname is Optional.of(\"Al\") instead of Optional.of(\"Ada\")?",
+      "choices": [
+        "Al",
+        "guest",
+        "Optional.empty",
+        "It throws NoSuchElementException when the filter rejects the name"
+      ],
+      "answerIndex": 1,
+      "explanation": "The trap is forgetting that filter can empty a present Optional; orElseGet then calls the supplier and returns guest."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Optional lazy fallback\n// Learn: use orElseGet when fallback work should run only for empty Optional.\nimport java.util.Optional;\nimport java.util.function.Supplier;\n\nstatic String buildGuestName() {\n  // This fallback should run only when the Optional is empty.\n  return \"guest\";\n}\n\nOptional<String> nickname = Optional.of(\"Ada\");\nSupplier<String> fallback = () -> buildGuestName();\nString displayName = nickname\n  .filter(name -> name.length() > 2)\n  .orElseGet(fallback);\nSystem.out.println(displayName);"
+}

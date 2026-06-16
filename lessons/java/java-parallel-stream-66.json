@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-parallel-stream-66",
+  "version": 1,
+  "title": "Java Parallel Stream",
+  "description": "Reduce a numeric range concurrently with a parallel stream.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "streams",
+    "concurrency"
+  ],
+  "prerequisites": [
+    "java-stream-collect-16"
+  ],
+  "learningGoals": [
+    "Process a stream pipeline across multiple threads with parallel().",
+    "Recall that parallel pipelines need stateless operations and associative reductions."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "Why is sum() a safe reduction for this parallel stream?",
+      "choices": [
+        "parallel() always preserves encounter order",
+        "Addition is associative and the operation is stateless",
+        "mapToLong prevents every possible race condition"
+      ],
+      "answerIndex": 1,
+      "explanation": "Associative, stateless reductions can be split and combined safely across parallel stream workers."
+    },
+    {
+      "prompt": "What does parallel() guarantee?",
+      "choices": [
+        "The result is always faster",
+        "Every element runs on a new Thread object",
+        "The pipeline may execute in parallel"
+      ],
+      "answerIndex": 2,
+      "explanation": "parallel() requests parallel execution, but it does not guarantee speedup or a new thread per element."
+    },
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "250500",
+        "500500",
+        "250000",
+        "The result is nondeterministic because the worker threads race"
+      ],
+      "answerIndex": 0,
+      "explanation": "The trap is treating parallel as unordered math; the even numbers 2 through 1000 sum to 250500 and sum combines them safely."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Parallel streams\n// Learn: reduce a range across threads with a parallel stream.\nlong total = IntStream.rangeClosed(1, 1_000)\n    .parallel()\n    .filter(n -> n % 2 == 0)\n    .mapToLong(n -> (long) n)\n    .sum(); // associative reduction stays correct in parallel\nSystem.out.println(total);"
+}

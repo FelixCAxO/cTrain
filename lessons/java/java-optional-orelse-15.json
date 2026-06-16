@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-optional-orelse-15",
+  "version": 1,
+  "title": "Java Optional Or Else",
+  "description": "Practice Optional, filter, map, and orElse.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 80,
+  "tags": [
+    "java",
+    "optional"
+  ],
+  "prerequisites": [
+    "java-generics-method-14"
+  ],
+  "learningGoals": [
+    "Type Optional pipeline syntax.",
+    "Use orElse for a fallback."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does displayName hold when user is null?",
+      "choices": [
+        "null",
+        "An empty string",
+        "guest",
+        "A NullPointerException is thrown"
+      ],
+      "answerIndex": 2,
+      "explanation": "Optional.ofNullable(null) produces an empty Optional, so filter and map are skipped and orElse supplies the fallback \"guest\"."
+    },
+    {
+      "prompt": "When does the orElse(\"guest\") fallback supply the value?",
+      "choices": [
+        "Only when user is active",
+        "When user is null, fails the active filter, or maps to a null name, leaving the Optional empty",
+        "Only when User::name throws at runtime",
+        "Always, because orElse runs after every chain"
+      ],
+      "answerIndex": 1,
+      "explanation": "orElse supplies its argument only when the Optional is empty, which happens if user is null, the active filter removes it, or the mapped name is null."
+    },
+    {
+      "prompt": "What does displayName become if user is non-null but User::active returns false?",
+      "choices": [
+        "guest",
+        "The user's name",
+        "null",
+        "A NullPointerException is thrown"
+      ],
+      "answerIndex": 0,
+      "explanation": "The filter removes inactive users from the Optional pipeline, so map is skipped and orElse returns the fallback."
+    }
+  ],
+  "targetCode": "// Learn: Use Optional to replace a null check chain.\nimport java.util.Optional;\n\nString displayName = Optional.ofNullable(user)\n  // filter keeps only active users.\n  .filter(User::active)\n  .map(User::name)\n  .orElse(\"guest\");"
+}

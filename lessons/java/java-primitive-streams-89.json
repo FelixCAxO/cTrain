@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-primitive-streams-89",
+  "version": 1,
+  "title": "Java Primitive Streams",
+  "description": "Practice IntStream, mapToInt, summaryStatistics, and boxed conversion.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 220,
+  "tags": [
+    "java",
+    "streams"
+  ],
+  "prerequisites": [
+    "java-stream-collect-16"
+  ],
+  "learningGoals": [
+    "Convert object streams to primitive streams with mapToInt.",
+    "Use IntStream summaryStatistics and boxed when object results are needed again."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does stats.getMax() return?",
+      "choices": [
+        "3",
+        "8",
+        "15",
+        "Compilation fails because mapToInt returns Stream<Integer>"
+      ],
+      "answerIndex": 2,
+      "explanation": "mapToInt(Integer::parseInt) creates an IntStream of 4, 8, and 15. summaryStatistics then reports the maximum primitive int as 15."
+    },
+    {
+      "prompt": "Why is boxed() used on the IntStream range?",
+      "choices": [
+        "To turn IntStream elements into Integer objects before collecting into a List",
+        "To make summaryStatistics available",
+        "To force the stream to run in parallel",
+        "To parse strings as primitive ints"
+      ],
+      "answerIndex": 0,
+      "explanation": "boxed() adapts an IntStream back to Stream<Integer>, which is useful when a collection of wrapper objects is the desired result."
+    },
+    {
+      "prompt": "What does the final println output?",
+      "choices": [
+        "15",
+        "18",
+        "3",
+        "Compilation fails because getMax returns OptionalInt"
+      ],
+      "answerIndex": 1,
+      "explanation": "The maximum parsed value is 15, and boxed contains 1, 2, and 3, so boxed.size() is 3. The printed sum is 18."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Primitive streams\n// Learn: move between Stream<String>, IntStream, statistics, and boxed values.\nIntSummaryStatistics stats = Arrays.asList(\"4\", \"8\", \"15\").stream()\n    .mapToInt(Integer::parseInt) // mapToInt creates an IntStream, not Stream<Integer>.\n    .summaryStatistics();\nList<Integer> boxed = IntStream.rangeClosed(1, 3)\n    .boxed()\n    .collect(Collectors.toList());\nSystem.out.println(stats.getMax() + boxed.size());"
+}

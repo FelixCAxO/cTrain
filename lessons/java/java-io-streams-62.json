@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "java-io-streams-62",
+  "version": 1,
+  "title": "Java IO Streams",
+  "description": "Read text line by line through a BufferedReader with try-with-resources.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "io"
+  ],
+  "prerequisites": [
+    "java-nio-files-61"
+  ],
+  "learningGoals": [
+    "Wrap a character stream in a BufferedReader and read it one line at a time.",
+    "Release the underlying stream automatically with try-with-resources."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does reader.readLine() return to end the loop?",
+      "choices": [
+        "An empty string",
+        "The string \"EOF\"",
+        "null"
+      ],
+      "answerIndex": 2,
+      "explanation": "BufferedReader.readLine returns null at end of stream; an empty line would be an empty string."
+    },
+    {
+      "prompt": "Why is BufferedReader in a try-with-resources statement?",
+      "choices": [
+        "It closes the reader automatically",
+        "It makes readLine skip blank lines",
+        "It converts bytes to objects"
+      ],
+      "answerIndex": 0,
+      "explanation": "try-with-resources closes the reader when the block exits, including when an exception is thrown."
+    },
+    {
+      "prompt": "What prints while the BufferedReader loop runs?",
+      "choices": [
+        "ALPHA\nBETA\nGAMMA",
+        "alpha\nbeta\ngamma",
+        "ALPHA BETA GAMMA",
+        "ALPHA\nBETA\nGAMMA\nnull"
+      ],
+      "answerIndex": 0,
+      "explanation": "Each non-null line is uppercased and printed separately; the null end marker is used only to stop the loop."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - IO streams\n// Learn: read text line by line through a BufferedReader.\nString data = \"alpha\\nbeta\\ngamma\";\ntry (BufferedReader reader = new BufferedReader(new StringReader(data))) {\n    String line;\n    // readLine returns null after the last line.\n    while ((line = reader.readLine()) != null) {\n        System.out.println(line.toUpperCase());\n    }\n}"
+}

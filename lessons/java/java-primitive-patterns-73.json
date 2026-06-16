@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "java-primitive-patterns-73",
+  "version": 1,
+  "title": "Java Primitive Patterns",
+  "description": "Match primitive types directly in a switch with primitive type patterns.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "pattern-matching",
+    "switch",
+    "preview"
+  ],
+  "prerequisites": [
+    "java-pattern-switch-56"
+  ],
+  "learningGoals": [
+    "Match primitive types with case int, case long, and case double labels.",
+    "Replace instanceof-and-cast chains with primitive type patterns.",
+    "Note: primitive type patterns are a preview feature in Java 26, enabled with --enable-preview."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "Which switch arm handles an int value in this preview feature?",
+      "choices": [
+        "case int i",
+        "case double d",
+        "default"
+      ],
+      "answerIndex": 0,
+      "explanation": "Primitive type patterns let the switch match an int directly with the case int i arm."
+    }
+  ],
+  "targetCode": "// Java 26 - Primitive type patterns (PREVIEW, --enable-preview)\n// Learn: match primitive types directly in a switch.\nString classify(Object value) {\n    return switch (value) {\n        // Primitive patterns bind the matched value.\n        case int i -> \"int \" + i;\n        case long l -> \"long \" + l;\n        case double d -> \"double \" + d;\n        default -> \"other\";\n    };\n}"
+}

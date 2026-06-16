@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b1-reference-arrays-loops-435",
+    "version":  1,
+    "title":  "Reference Page 1 - Array och loopar",
+    "description":  "Use this Java reference to review Array och loopar through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b1",
+                 "source-file",
+                 "arrays",
+                 "loops"
+             ],
+    "prerequisites":  [
+                          "prog2-b1-reference-string-text-434"
+                      ],
+    "learningGoals":  [
+                          "Create arrays with fixed length.",
+                          "Use indexed loops when the position matters.",
+                          "Use enhanced for and Arrays helpers for common array work."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Array och loopar.\n// You will learn: Use array indexes, bounds checks, enhanced for, and Arrays helpers.\nclass Prog2Reference435 {\n  // EXEMPEL 1: En array har fast langd och index fran 0.\n  static int sumWithIndex() {\n    int[] scores = { 3, 5, 8 };\n    int total = 0;\n    for (int i = 0; i \u003c scores.length; i++) { total += scores[i]; }\n    return total;\n  }\n  // EXEMPEL 2: Enhanced for passar nar index inte behovs.\n  static int maxValue(int[] values) {\n    int max = values[0];\n    for (int value : values) { if (value \u003e max) { max = value; } }\n    return max;\n  }\n  // EXEMPEL 3: Arrays-klassen har hjalpare for kopiering och sortering.\n  static int[] sortedCopy(int[] values) {\n    int[] copy = java.util.Arrays.copyOf(values, values.length);\n    java.util.Arrays.sort(copy);\n    return copy;\n  }\n}"
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-loop-array-03",
+  "version": 1,
+  "title": "Java Array Loop",
+  "description": "Type a for-each loop over an array.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 55,
+  "tags": [
+    "java",
+    "loops"
+  ],
+  "prerequisites": [
+    "java-method-return-02"
+  ],
+  "learningGoals": [
+    "Practice enhanced-for loop syntax.",
+    "Accumulate values from an array."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print when scores is {2, 4, 6}?",
+      "choices": [
+        "12",
+        "6",
+        "3",
+        "0"
+      ],
+      "answerIndex": 0,
+      "explanation": "The enhanced for loop adds each value (2, 4, 6) to total, so it prints their sum, 12."
+    },
+    {
+      "prompt": "What does the enhanced for loop add to total?",
+      "choices": [
+        "Only the final array element",
+        "The index positions of scores",
+        "Each value stored in scores",
+        "The array length, once"
+      ],
+      "answerIndex": 2,
+      "explanation": "An enhanced for loop binds value to each element in turn, so total accumulates the element values themselves, not the indexes."
+    },
+    {
+      "prompt": "What does this code print when scores is an empty int array?",
+      "choices": [
+        "0",
+        "The last score value",
+        "Compilation fails because enhanced for cannot handle empty arrays",
+        "ArrayIndexOutOfBoundsException is thrown"
+      ],
+      "answerIndex": 0,
+      "explanation": "The loop body runs zero times for an empty array, leaving total at its initialized value of 0."
+    }
+  ],
+  "targetCode": "// Learn: Sum array values with an enhanced for loop.\nint total = 0;\n// value receives each score in order.\nfor (int value : scores) {\n  total += value;\n}\nSystem.out.println(total);"
+}

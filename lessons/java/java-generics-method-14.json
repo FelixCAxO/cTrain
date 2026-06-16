@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-generics-method-14",
+  "version": 1,
+  "title": "Java Generics Method",
+  "description": "Practice declaring and calling a generic method.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 80,
+  "tags": [
+    "java",
+    "generics"
+  ],
+  "prerequisites": [
+    "java-lambda-functional-13"
+  ],
+  "learningGoals": [
+    "Type an explicit type parameter.",
+    "Return values from a generic List."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does first(names) return when names is a List<String>?",
+      "choices": [
+        "An Object",
+        "A List<String>",
+        "Compilation fails because the type parameter T is unbound",
+        "A String"
+      ],
+      "answerIndex": 3,
+      "explanation": "The type parameter T is inferred from the argument type List<T>, so passing a List<String> binds T to String and first returns a String."
+    },
+    {
+      "prompt": "What happens if first is called on an empty List<String>?",
+      "choices": [
+        "It throws IndexOutOfBoundsException at runtime",
+        "It returns null",
+        "It returns an empty String",
+        "Compilation fails because get(0) is unsafe on a generic list"
+      ],
+      "answerIndex": 0,
+      "explanation": "Generics affect only compile-time types, not runtime bounds checks, so items.get(0) on an empty list throws IndexOutOfBoundsException like any other List."
+    },
+    {
+      "prompt": "What does Integer firstNumber = first(List.of(7, 8)); store?",
+      "choices": [
+        "7",
+        "8",
+        "An Object that must be cast manually",
+        "Compilation fails because T cannot be inferred"
+      ],
+      "answerIndex": 0,
+      "explanation": "The generic method infers T as Integer from the List<Integer>, so the first element is returned with that type."
+    }
+  ],
+  "targetCode": "// Learn: Keep input and return types linked with a type parameter.\nimport java.util.List;\n\nstatic <T> T first(List<T> items) {\n  // T means the returned item has the same element type.\n  return items.get(0);\n}\n\nString firstName = first(names);"
+}

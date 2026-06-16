@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-time-formatting-43",
+  "version": 1,
+  "title": "Java Time Formatting",
+  "description": "Practice zones, instants, periods, and date-time formatting.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 240,
+  "tags": [
+    "java",
+    "time",
+    "dates",
+    "formatting"
+  ],
+  "prerequisites": [
+    "java-time-localdate-42"
+  ],
+  "learningGoals": [
+    "Recall that Instant is a timeline point and ZoneId gives it local calendar meaning.",
+    "Recognize that Period is date-based, unlike time-based durations."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print for an instant of 2026-06-08T10:15:30Z?",
+      "choices": [
+        "2026-06-08 10:15",
+        "2026-07-08 10:15",
+        "2026-06-08 12:15",
+        "2026-07-08 12:15"
+      ],
+      "answerIndex": 3,
+      "explanation": "Europe/Stockholm is UTC+2 in June (summer time), so the instant shows as 12:15 local; adding a one-month Period gives 2026-07-08, formatted as \"2026-07-08 12:15\"."
+    },
+    {
+      "prompt": "What does Period.ofMonths(1) represent?",
+      "choices": [
+        "Exactly 30 days",
+        "A clock-based duration measured in seconds",
+        "A date-based amount of one calendar month",
+        "Exactly 31 days"
+      ],
+      "answerIndex": 2,
+      "explanation": "Period is date-based, so one month spans a variable number of days depending on the calendar, unlike a time-based Duration measured in seconds."
+    },
+    {
+      "prompt": "What does local.getHour() return immediately after now.atZone(zone)?",
+      "choices": [
+        "10",
+        "11",
+        "15",
+        "12"
+      ],
+      "answerIndex": 3,
+      "explanation": "Europe/Stockholm is two hours ahead of UTC for this June instant, so 10:15Z becomes 12:15 locally."
+    }
+  ],
+  "targetCode": "// Learn: Convert an instant to local formatted time.\nimport java.time.Instant;\nimport java.time.Period;\nimport java.time.ZoneId;\nimport java.time.ZonedDateTime;\nimport java.time.format.DateTimeFormatter;\n\nZoneId zone = ZoneId.of(\"Europe/Stockholm\");\nInstant now = Instant.parse(\"2026-06-08T10:15:30Z\");\nZonedDateTime local = now.atZone(zone);\n// DateTimeFormatter controls the output pattern.\nDateTimeFormatter formatter = DateTimeFormatter.ofPattern(\"uuuu-MM-dd HH:mm\");\nPeriod reviewWindow = Period.ofMonths(1);\nSystem.out.println(formatter.format(local.plus(reviewWindow)));"
+}

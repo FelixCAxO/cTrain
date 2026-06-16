@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-switch-expression-58",
+  "version": 1,
+  "title": "Java Switch Expression",
+  "description": "Return a value from a switch expression with arrow labels and yield.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "switch"
+  ],
+  "prerequisites": [
+    "java-enum-switch-12"
+  ],
+  "learningGoals": [
+    "Produce a value from a switch expression using arrow labels.",
+    "Recall that switch expressions must be exhaustive and block arms return with yield."
+  ],
+  "languageVersion": "Java 14",
+  "completionChecks": [
+    {
+      "prompt": "What would happen if default -> 0 were removed?",
+      "choices": [
+        "The switch expression would not be exhaustive",
+        "The method would return -1 for unknown seasons",
+        "The switch would become a statement automatically",
+        "An exception would be thrown only when season is null"
+      ],
+      "answerIndex": 0,
+      "explanation": "A switch expression over String needs a catch-all path such as default because the compiler cannot know all strings."
+    },
+    {
+      "prompt": "What does seasonDays(\"autumn\") return?",
+      "choices": [
+        "91",
+        "90",
+        "0",
+        "Compilation fails because yield cannot appear in a switch expression"
+      ],
+      "answerIndex": 0,
+      "explanation": "The autumn arm enters the block, sets base to 90, and yield supplies base + 1 as the switch expression value."
+    },
+    {
+      "prompt": "What happens if seasonDays(null) is called?",
+      "choices": [
+        "NullPointerException is thrown before default can return 0",
+        "0 is returned by the default arm",
+        "93 is returned because null matches the first arm",
+        "Compilation fails because the selector might be null"
+      ],
+      "answerIndex": 0,
+      "explanation": "A default label is not a null label; the trap is assuming default handles null selectors in a switch expression."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Switch expressions\n// Learn: return a value from a switch with arrows and yield.\nint seasonDays(String season) {\n    return switch (season) {\n        case \"winter\", \"summer\" -> 93;\n        case \"spring\" -> 92;\n        case \"autumn\" -> {\n            int base = 90;\n            yield base + 1; // block arm returns with yield\n        }\n        default -> 0;\n    };\n}"
+}

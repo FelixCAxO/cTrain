@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-serialization-63",
+  "version": 1,
+  "title": "Java Serialization",
+  "description": "Serialize an object graph to bytes with ObjectOutputStream.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 210,
+  "tags": [
+    "java",
+    "io",
+    "serialization"
+  ],
+  "prerequisites": [
+    "java-io-streams-62"
+  ],
+  "learningGoals": [
+    "Mark a type Serializable so its instances can be written to a stream.",
+    "Write an object to bytes with ObjectOutputStream.writeObject."
+  ],
+  "languageVersion": "Java 16",
+  "completionChecks": [
+    {
+      "prompt": "What does implements Serializable provide here?",
+      "choices": [
+        "A generated writeObject method",
+        "A guarantee that every field is encrypted",
+        "A marker that Account may be serialized"
+      ],
+      "answerIndex": 2,
+      "explanation": "Serializable is a marker interface; it marks the type as eligible for Java object serialization."
+    },
+    {
+      "prompt": "Which call actually writes the account object?",
+      "choices": [
+        "out.writeObject(account)",
+        "bytes.toByteArray()",
+        "new ByteArrayOutputStream()"
+      ],
+      "answerIndex": 0,
+      "explanation": "ObjectOutputStream.writeObject serializes the object graph into the underlying byte stream."
+    },
+    {
+      "prompt": "What happens when save(new Account(\"a\", 10)) runs without an IOException?",
+      "choices": [
+        "It returns a nonempty byte array containing serialized object data",
+        "It returns an empty byte array because records have no fields to serialize",
+        "It returns the UTF-8 text a:10",
+        "It throws NotSerializableException because records cannot implement Serializable"
+      ],
+      "answerIndex": 0,
+      "explanation": "A record may implement Serializable, and ObjectOutputStream writes binary serialization data into the byte array."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Object serialization\n// Learn: write an object to bytes with ObjectOutputStream.\nrecord Account(String id, long cents) implements Serializable {\n}\n\nbyte[] save(Account account) throws IOException {\n    var bytes = new ByteArrayOutputStream();\n    try (var out = new ObjectOutputStream(bytes)) {\n        // ObjectOutputStream writes Serializable objects.\n        out.writeObject(account);\n    }\n    return bytes.toByteArray();\n}"
+}

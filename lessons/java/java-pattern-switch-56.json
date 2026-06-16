@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-pattern-switch-56",
+  "version": 1,
+  "title": "Java Pattern Switch",
+  "description": "Match types and guards directly in a switch expression.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 200,
+  "tags": [
+    "java",
+    "switch",
+    "pattern-matching"
+  ],
+  "prerequisites": [
+    "java-sealed-types-55"
+  ],
+  "learningGoals": [
+    "Select a branch by type using pattern labels in a switch expression.",
+    "Recall that guarded patterns, null handling, and dominant cases affect which labels are legal."
+  ],
+  "languageVersion": "Java 21",
+  "completionChecks": [
+    {
+      "prompt": "What does the when clause do in case Integer i when i < 0?",
+      "choices": [
+        "Adds a guard that must also be true",
+        "Declares a second switch selector",
+        "Makes the case run after default"
+      ],
+      "answerIndex": 0,
+      "explanation": "The when clause is a guard; the pattern must match and the guard must evaluate true for that case to apply."
+    },
+    {
+      "prompt": "Why is case null written explicitly here?",
+      "choices": [
+        "default must always appear before null",
+        "A null selector is not handled by the other type patterns",
+        "String patterns also match null"
+      ],
+      "answerIndex": 1,
+      "explanation": "Type patterns do not match null, so an explicit case null handles that selector value before default."
+    },
+    {
+      "prompt": "What does describe(-3) return?",
+      "choices": [
+        "negative int",
+        "int -3",
+        "other",
+        "nothing"
+      ],
+      "answerIndex": 0,
+      "explanation": "The Integer pattern matches first and its when guard is true, so the unguarded Integer case is skipped."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Pattern matching for switch\n// Learn: branch by type in a switch and refine with a when guard.\nString describe(Object value) {\n    return switch (value) {\n        case Integer i when i < 0 -> \"negative int\"; // guarded pattern\n        case Integer i -> \"int \" + i;\n        case String s -> \"text of length \" + s.length();\n        case null -> \"nothing\";\n        default -> \"other\";\n    };\n}"
+}

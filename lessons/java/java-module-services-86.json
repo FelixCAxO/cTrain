@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-module-services-86",
+  "version": 1,
+  "title": "Java Module Services",
+  "description": "Declare module service consumers and providers with uses and provides directives.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "modules"
+  ],
+  "prerequisites": [
+    "java-module-declaration-53"
+  ],
+  "learningGoals": [
+    "Use uses to declare that a module consumes a service through ServiceLoader.",
+    "Use provides ... with to declare one or more provider implementation classes."
+  ],
+  "languageVersion": "Java 9",
+  "completionChecks": [
+    {
+      "prompt": "Which directive says this module consumes Reporter services?",
+      "choices": [
+        "exports com.example.impl;",
+        "requires com.example.spi.Reporter;",
+        "uses com.example.spi.Reporter;",
+        "provides com.example.impl.JsonReporter;"
+      ],
+      "answerIndex": 2,
+      "explanation": "The uses directive names the service interface that this module may load as a consumer. It does not export packages or declare a dependency by itself."
+    },
+    {
+      "prompt": "What does provides com.example.spi.Reporter with com.example.impl.JsonReporter mean?",
+      "choices": [
+        "JsonReporter implements the Reporter service for service consumers",
+        "Reporter is exported only to JsonReporter",
+        "The module reads JsonReporter transitively",
+        "The service is an automatic module"
+      ],
+      "answerIndex": 0,
+      "explanation": "provides ... with registers provider implementation classes for the named service interface. The provider class does not need its package exported for service loading."
+    },
+    {
+      "prompt": "What happens if JsonReporter does not implement com.example.spi.Reporter?",
+      "choices": [
+        "The module still compiles but ServiceLoader skips JsonReporter",
+        "The module declaration fails because the provider must implement the service type",
+        "The uses directive automatically adapts JsonReporter",
+        "The exports directive makes JsonReporter a provider"
+      ],
+      "answerIndex": 1,
+      "explanation": "A provides directive is checked against the service contract. The provider class named after with must be a valid implementation of the service interface."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Module services\n// Learn: declare service consumers and providers in module-info.java.\nmodule com.example.reports {\n    requires com.example.contracts;\n    uses com.example.spi.Reporter; // Consumer side: ServiceLoader may request Reporter.\n    provides com.example.spi.Reporter\n        with com.example.impl.JsonReporter;\n    exports com.example.api;\n}"
+}

@@ -1,0 +1,30 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-javafx-layout-data-711",
+    "version":  1,
+    "title":  "JavaFX Layout and Data - Reference Page 2",
+    "description":  "Use this Java reference to review JavaFX Layout and Data through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  540,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b3",
+                 "source-file",
+                 "javafx",
+                 "events",
+                 "observable-list",
+                 "list-view",
+                 "properties"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Display an ObservableList in a ListView.",
+                          "Add data from a TextField with a button event and simple layout."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: JavaFX Layout and Data - Reference Page 2.\n// You will learn: Bind ObservableList data to controls and update selection state.\nimport javafx.application.Application;\nimport javafx.collections.FXCollections;\nimport javafx.collections.ObservableList;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Button;\nimport javafx.scene.control.Label;\nimport javafx.scene.control.ListView;\nimport javafx.scene.control.TextField;\nimport javafx.scene.layout.BorderPane;\nimport javafx.scene.layout.HBox;\nimport javafx.stage.Stage;\n\npublic class JavaFxLayoutDataReference extends Application {\n  public static void main(String[] args) {\n    launch(args);\n  }\n\n  @Override\n  public void start(Stage stage) {\n    // EXAMPLE 1: connect ObservableList to ListView.\n    ObservableList\u003cString\u003e data = FXCollections.observableArrayList();\n    data.add(\"First row\");\n    ListView\u003cString\u003e listView = new ListView\u003c\u003e(data);\n    // EXAMPLE 2: add data from a text field.\n    TextField input = new TextField();\n    Button addButton = new Button(\"Add\");\n    addButton.setOnAction(event -\u003e {\n      String text = input.getText().trim();\n      if (!text.isEmpty()) {\n        data.add(text);\n        input.clear();\n      }\n    });\n    // EXAMPLE 3: combine selection, HBox, and BorderPane.\n    Label selectedLabel = new Label(\"Choose a row\");\n    listView.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -\u003e {\n      selectedLabel.setText(newValue == null ? \"Choose a row\" : \"Selected: \" + newValue);\n    });\n    BorderPane root = new BorderPane(listView);\n    root.setTop(selectedLabel);\n    root.setBottom(new HBox(5, input, addButton));\n    stage.setScene(new Scene(root, 360, 240));\n    stage.show();\n  }\n}"
+}

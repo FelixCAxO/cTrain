@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-concurrent-hashmap-90",
+  "version": 1,
+  "title": "Java ConcurrentHashMap",
+  "description": "Practice concurrent collection updates with ConcurrentHashMap.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "collections",
+    "concurrency"
+  ],
+  "prerequisites": [
+    "java-map-counter-08",
+    "java-concurrency-locks-65"
+  ],
+  "learningGoals": [
+    "Use ConcurrentHashMap operations designed for concurrent collection updates.",
+    "Trace merge and computeIfAbsent without replacing them with external check-then-act code."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does counts.get(\"ok\") return after these merge calls?",
+      "choices": [
+        "1",
+        "2",
+        "null",
+        "Compilation fails because merge is not on ConcurrentHashMap"
+      ],
+      "answerIndex": 1,
+      "explanation": "The first merge inserts 1 for ok, and the second combines the existing 1 with another 1 using Integer::sum, so the value becomes 2."
+    },
+    {
+      "prompt": "What happens when computeIfAbsent(\"miss\", key -> 0) runs?",
+      "choices": [
+        "It leaves the map unchanged because miss is absent",
+        "It throws ConcurrentModificationException",
+        "It inserts miss with value 0 and returns 0",
+        "It replaces ok with value 0"
+      ],
+      "answerIndex": 2,
+      "explanation": "computeIfAbsent computes and inserts a value only when the key is missing. ConcurrentHashMap supports this as an atomic per-key update."
+    },
+    {
+      "prompt": "What does counts.size() return after all three map updates?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "It throws ConcurrentModificationException"
+      ],
+      "answerIndex": 1,
+      "explanation": "Both merge calls update the same ok key, and computeIfAbsent adds the miss key. The map therefore contains two keys: ok and miss."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Concurrent collections\n// Learn: update a ConcurrentHashMap with atomic per-key operations.\nConcurrentHashMap<String, Integer> counts = new ConcurrentHashMap<>();\ncounts.merge(\"ok\", 1, Integer::sum); // merge avoids a separate get-then-put race.\ncounts.merge(\"ok\", 1, Integer::sum);\ncounts.computeIfAbsent(\"miss\", key -> 0);\ncounts.forEach((key, value) -> System.out.println(key + \"=\" + value));"
+}

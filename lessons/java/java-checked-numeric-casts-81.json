@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "java-checked-numeric-casts-81",
+  "version": 1,
+  "title": "Java Checked Numeric Casts",
+  "description": "Practice widening before int math wraps and failing fast with Math exact conversions.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 210,
+  "tags": [
+    "java",
+    "numeric-casting",
+    "math",
+    "primitives"
+  ],
+  "prerequisites": [
+    "java-casting-overflow-38",
+    "java-primitives-types-21"
+  ],
+  "learningGoals": [
+    "Widen to long before multiplying so int products cannot wrap silently.",
+    "Use Math.multiplyExact and Math.toIntExact to surface overflow as ArithmeticException."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "0",
+        "4096",
+        "16384",
+        "It throws ArithmeticException at multiplyExact"
+      ],
+      "answerIndex": 2,
+      "explanation": "(long) megabytes widens before the multiplication, so the product 4294967296 fits in long; scaling by 4 and dividing back yields 16384, which fits an int."
+    },
+    {
+      "prompt": "What happens if the cast is removed so scaleBytes returns megabytes * 1_048_576?",
+      "choices": [
+        "It no longer compiles because an int expression cannot be returned as long",
+        "scaleBytes(4_096) returns 0 because the int product wraps before widening to long",
+        "Nothing changes because the long return type widens the operands first",
+        "scaleBytes(4_096) throws ArithmeticException at the multiplication"
+      ],
+      "answerIndex": 1,
+      "explanation": "Both operands are int, so the multiplication is 32-bit: 4096 * 1048576 is exactly 2 to the 32nd power, which wraps to 0 before the implicit widening to long happens."
+    },
+    {
+      "prompt": "What is thrown if the final line calls toCheckedInt(total) instead of toCheckedInt(total / 1_048_576)?",
+      "choices": [
+        "No exception; it prints 17179869184",
+        "ArithmeticException",
+        "ClassCastException",
+        "No exception; it prints 0 after truncating the low bits"
+      ],
+      "answerIndex": 1,
+      "explanation": "The trap is treating toIntExact like a cast; it checks the long range and throws ArithmeticException when the value cannot fit in int."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Checked numeric conversions\n// Learn: widen before int math wraps; Math.*Exact turns overflow into errors.\nstatic long scaleBytes(int megabytes) {\n  // Widen first: the int product 4_096 * 1_048_576 would wrap to 0.\n  return (long) megabytes * 1_048_576;\n}\n\nstatic int toCheckedInt(long value) {\n  // toIntExact throws ArithmeticException instead of truncating bits.\n  return Math.toIntExact(value);\n}\n\nlong total = Math.multiplyExact(scaleBytes(4_096), 4L);\nSystem.out.println(toCheckedInt(total / 1_048_576));"
+}

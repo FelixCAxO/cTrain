@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-try-with-resources-18",
+  "version": 1,
+  "title": "Java Try With Resources",
+  "description": "Practice try-with-resources for file reading.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 105,
+  "tags": [
+    "java",
+    "exceptions",
+    "resources"
+  ],
+  "prerequisites": [
+    "java-stream-groupby-17"
+  ],
+  "learningGoals": [
+    "Type a try-with-resources header.",
+    "Read lines with a BufferedReader."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What happens to reader when the try-with-resources block exits, even if readLine throws?",
+      "choices": [
+        "It stays open until it is garbage collected",
+        "It is closed only if no exception was thrown",
+        "It must be closed manually in the catch block",
+        "It is closed automatically, before the catch block runs"
+      ],
+      "answerIndex": 3,
+      "explanation": "A resource declared in the try header is closed automatically when control leaves the block, including on an exception, and that close runs before the matching catch."
+    },
+    {
+      "prompt": "What does the catch block do when readLine throws IOException?",
+      "choices": [
+        "It swallows the IOException and continues",
+        "It wraps the IOException in an IllegalStateException and throws that",
+        "It retries reading the line",
+        "It returns null from the method"
+      ],
+      "answerIndex": 1,
+      "explanation": "The catch converts the checked IOException into an unchecked IllegalStateException(e), preserving the original as the cause, and throws it."
+    },
+    {
+      "prompt": "If reader.readLine() throws IOException and reader.close() also throws IOException, what is thrown by this code?",
+      "choices": [
+        "Only the close IOException is thrown, because closing happens last",
+        "Nothing; try-with-resources swallows both exceptions",
+        "An IllegalStateException whose cause is the readLine IOException, with the close IOException suppressed",
+        "A plain NullPointerException from the catch block"
+      ],
+      "answerIndex": 2,
+      "explanation": "The try failure remains the primary IOException, the close failure is suppressed on it, and the catch wraps the primary exception."
+    }
+  ],
+  "targetCode": "// Learn: Close resources automatically after use.\nimport java.io.BufferedReader;\nimport java.io.IOException;\nimport java.nio.file.Files;\n\ntry (BufferedReader reader = Files.newBufferedReader(path)) {\n  // The reader closes when the try block ends.\n  String line = reader.readLine();\n  System.out.println(line);\n} catch (IOException e) {\n  throw new IllegalStateException(e);\n}"
+}

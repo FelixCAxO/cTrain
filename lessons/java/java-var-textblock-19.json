@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-var-textblock-19",
+  "version": 1,
+  "title": "Java Var Text Block",
+  "description": "Practice var and text blocks.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 35,
+  "tags": [
+    "java",
+    "var",
+    "text-blocks"
+  ],
+  "prerequisites": [
+    "java-try-with-resources-18"
+  ],
+  "learningGoals": [
+    "Type local variable type inference.",
+    "Practice Java text block syntax."
+  ],
+  "languageVersion": "Java 15",
+  "completionChecks": [
+    {
+      "prompt": "What does message contain when name is \"Ada\"?",
+      "choices": [
+        "Hello, Ada then Keep practicing Java. on the next line",
+        "Hello, %s then Keep practicing Java., with %s left unreplaced",
+        "    Hello, Ada with the leading spaces preserved",
+        "Compilation fails because a text block cannot call formatted"
+      ],
+      "answerIndex": 0,
+      "explanation": "The closing delimiter aligns with the text, so the incidental leading spaces are stripped; formatted replaces %s with \"Ada\", giving \"Hello, Ada\" then \"Keep practicing Java.\" on the next line."
+    },
+    {
+      "prompt": "What type does var infer for message?",
+      "choices": [
+        "StringBuilder",
+        "String",
+        "char[]",
+        "Object"
+      ],
+      "answerIndex": 1,
+      "explanation": "A text block is a String literal, and formatted returns another String, so var infers String."
+    },
+    {
+      "prompt": "What happens if the code is changed to var message; and the text block assignment is placed on the next line?",
+      "choices": [
+        "It compiles and var infers String from the later assignment",
+        "Compilation fails because a local var declaration requires an initializer",
+        "message is inferred as Object until the assignment runs",
+        "A NullPointerException is thrown before formatted runs"
+      ],
+      "answerIndex": 1,
+      "explanation": "Local variable type inference happens at the declaration, so var cannot wait for a later assignment to discover the type."
+    }
+  ],
+  "targetCode": "// Learn: Infer a text block variable with var.\nvar message = \"\"\"\n    Hello, %s\n    Keep practicing Java.\n    \"\"\".formatted(name);\n// formatted fills the %s placeholder.\nSystem.out.println(message);"
+}

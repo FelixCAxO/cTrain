@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-if-else-22",
+  "version": 1,
+  "title": "Java If Else",
+  "description": "Practice an if, else-if, else branching ladder.",
+  "language": "java",
+  "difficulty": 1,
+  "estimatedSeconds": 36,
+  "tags": [
+    "java",
+    "conditionals",
+    "if-else"
+  ],
+  "prerequisites": [
+    "java-primitives-types-21"
+  ],
+  "learningGoals": [
+    "Type a complete if/else ladder.",
+    "Practice comparison operators."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does grade hold when score is 80?",
+      "choices": [
+        "A",
+        "B",
+        "Keep practicing",
+        "Compilation fails because grade is assigned in every branch"
+      ],
+      "answerIndex": 1,
+      "explanation": "80 fails the >= 90 test but passes the >= 75 test, so the else-if assigns \"B\"."
+    },
+    {
+      "prompt": "What does grade hold when score is 60?",
+      "choices": [
+        "A",
+        "B",
+        "Keep practicing",
+        "null, because no branch matches"
+      ],
+      "answerIndex": 2,
+      "explanation": "60 fails both the >= 90 and >= 75 tests, so the final else assigns \"Keep practicing\"."
+    },
+    {
+      "prompt": "What happens when score is exactly 75?",
+      "choices": [
+        "grade becomes \"A\"",
+        "grade becomes \"Keep practicing\"",
+        "Compilation fails because the conditions overlap",
+        "grade becomes \"B\""
+      ],
+      "answerIndex": 3,
+      "explanation": "The first condition is false at 75, but the else-if uses >= 75, so that branch assigns B before the final else is considered."
+    }
+  ],
+  "targetCode": "// Learn: Choose one branch with if and else.\nif (score >= 90) {\n  grade = \"A\";\n} else if (score >= 75) {\n  // else if tests only when the first condition failed.\n  grade = \"B\";\n} else {\n  grade = \"Keep practicing\";\n}"
+}

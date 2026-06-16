@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-package-import-30",
+  "version": 1,
+  "title": "Java Package Import",
+  "description": "Practice package declarations and imports.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 70,
+  "tags": [
+    "java",
+    "imports",
+    "classes"
+  ],
+  "prerequisites": [
+    "java-reference-null-29"
+  ],
+  "learningGoals": [
+    "Place the package declaration before imports.",
+    "Import a collection type used in a class."
+  ],
+  "languageVersion": "Java 9",
+  "completionChecks": [
+    {
+      "prompt": "What does names.size() return?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "Compilation fails because List is not imported"
+      ],
+      "answerIndex": 2,
+      "explanation": "List.of(\"Ana\", \"Bo\") creates a two-element list, so names.size() is 2; the import java.util.List makes List available."
+    },
+    {
+      "prompt": "Where must the package declaration appear?",
+      "choices": [
+        "After the import declarations",
+        "Before the import declarations, as the first declaration",
+        "Inside the Roster class",
+        "Anywhere; order does not matter"
+      ],
+      "answerIndex": 1,
+      "explanation": "A package declaration, when present, must be the first declaration in the source file, before any imports."
+    },
+    {
+      "prompt": "Does this compile if import java.util.List; is placed before package training.app;?",
+      "choices": [
+        "Yes, imports may appear before package declarations",
+        "Yes, because java.util is part of the standard library",
+        "No, the package declaration must come before imports and class declarations",
+        "No, because List.of requires java.awt.List"
+      ],
+      "answerIndex": 2,
+      "explanation": "A package declaration, when present, must be the first non-comment declaration in the source file, so imports cannot precede it."
+    }
+  ],
+  "targetCode": "// Learn: Put a class in a package and import List.\npackage training.app;\n\nimport java.util.List;\n\nclass Roster {\n  // List is available because of the import above.\n  private final List<String> names = List.of(\"Ana\", \"Bo\");\n}"
+}

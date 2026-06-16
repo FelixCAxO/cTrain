@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-javafx-events-properties-715",
+    "version":  1,
+    "title":  "JavaFX Events and Properties - Reference Page 2",
+    "description":  "Use this Java reference to review JavaFX Events and Properties through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  540,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b3",
+                 "source-file",
+                 "javafx",
+                 "events",
+                 "properties"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Handle button actions and text changes with event handlers and listeners.",
+                          "Bind JavaFX properties so UI text updates automatically."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: JavaFX Events and Properties - Reference Page 2.\n// You will learn: Handle actions, listeners, binding, and property updates.\nimport javafx.application.Application;\nimport javafx.beans.property.IntegerProperty;\nimport javafx.beans.property.SimpleIntegerProperty;\nimport javafx.geometry.Insets;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Button;\nimport javafx.scene.control.Label;\nimport javafx.scene.control.Slider;\nimport javafx.scene.control.TextField;\nimport javafx.scene.layout.VBox;\nimport javafx.stage.Stage;\n\npublic class JavaFxEventsPropertiesReference extends Application {\n  public static void main(String[] args) {\n    launch(args);\n  }\n\n  @Override\n  public void start(Stage stage) {\n    VBox root = new VBox(10);\n    root.setPadding(new Insets(12));\n    root.getChildren().addAll(actionEventExample(), listenerExample(), bindingExample());\n    stage.setScene(new Scene(root, 460, 320));\n    stage.setTitle(\"Events and properties\");\n    stage.show();\n  }\n\n  private VBox actionEventExample() {\n    IntegerProperty clicks = new SimpleIntegerProperty(0);\n    Label counter = new Label();\n    counter.textProperty().bind(clicks.asString(\"EXAMPLE 1: Clicks: %d\"));\n    Button button = new Button(\"Click\");\n    button.setOnAction(e -\u003e clicks.set(clicks.get() + 1));\n    return new VBox(5, counter, button);\n  }\n\n  private VBox listenerExample() {\n    TextField input = new TextField();\n    Label mirror = new Label(\"EXAMPLE 2: Type something\");\n    input.textProperty().addListener((obs, oldText, newText) -\u003e mirror.setText(\"Text: \" + newText));\n    return new VBox(5, mirror, input);\n  }\n\n  private VBox bindingExample() {\n    Slider slider = new Slider(0, 100, 50);\n    Label value = new Label();\n    value.textProperty().bind(slider.valueProperty().asString(\"EXAMPLE 3: Value: %.0f\"));\n    return new VBox(5, value, slider);\n  }\n}"
+}

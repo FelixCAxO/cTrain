@@ -1,0 +1,30 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-b2-reference-sorting-searching-431",
+    "version":  1,
+    "title":  "Reference Page 1 - Sortering och sokning",
+    "description":  "Use this Java reference to review Sortering och sokning through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  240,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "sorting",
+                 "sort",
+                 "search",
+                 "collections"
+             ],
+    "prerequisites":  [
+                          "prog2-b2-reference-map-api-430"
+                      ],
+    "learningGoals":  [
+                          "Sort values by natural order.",
+                          "Sort objects with a Comparator.",
+                          "Search sorted lists with binarySearch."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Reference Page 1 - Sortering och sokning.\n// You will learn: Choose natural order, Comparator, binarySearch, and stable sorting.\nclass Prog2Reference431 {\n  // EXEMPEL 1: Collections.sort anvander naturlig ordning for enkla typer.\n  static java.util.List\u003cString\u003e sortedNames() {\n    java.util.List\u003cString\u003e names = new java.util.ArrayList\u003cString\u003e(java.util.Arrays.asList(\"Bo\", \"Ada\", \"Cia\"));\n    java.util.Collections.sort(names);\n    return names;\n  }\n  // EXEMPEL 2: Comparator kan sortera objekt pa ett valt falt.\n  static class Book {\n    final String title;\n    final int year;\n    Book(String title, int year) { this.title = title; this.year = year; }\n  }\n  static void sortBooksByYear(java.util.List\u003cBook\u003e books) {\n    books.sort(java.util.Comparator.comparingInt(book -\u003e book.year));\n  }\n  // EXEMPEL 3: binarySearch kraver att listan redan ar sorterad pa samma satt.\n  static int findNumber() {\n    java.util.List\u003cInteger\u003e numbers = java.util.Arrays.asList(2, 4, 6, 8);\n    return java.util.Collections.binarySearch(numbers, 6);\n  }\n}"
+}

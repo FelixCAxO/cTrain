@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "java-pem-encoding-74",
+  "version": 1,
+  "title": "Java PEM Encoding",
+  "description": "Encode and decode cryptographic keys as PEM text.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "security",
+    "io",
+    "preview"
+  ],
+  "prerequisites": [
+    "java-io-streams-62"
+  ],
+  "learningGoals": [
+    "Encode a public key to PEM text with PEMEncoder.of().encodeToString.",
+    "Decode PEM text back into a typed key with PEMDecoder.",
+    "Note: the PEM encoding API is a preview feature in Java 26, enabled with --enable-preview."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "What representation does PEMEncoder produce in this lesson?",
+      "choices": [
+        "A ZIP archive of the key pair",
+        "A Locale-specific date string",
+        "A PEM text representation of the public key"
+      ],
+      "answerIndex": 2,
+      "explanation": "PEM encoding serializes cryptographic objects into textual PEM form for storage or exchange."
+    }
+  ],
+  "targetCode": "// Java 26 - PEM encoding of crypto objects (JEP 524 PREVIEW)\n// Learn: encode and decode keys as PEM text.\nPublicKey publicKey = KeyPairGenerator.getInstance(\"EC\").generateKeyPair().getPublic();\nPEMEncoder encoder = PEMEncoder.of();\n// PEM text is portable key encoding.\nString pem = encoder.encodeToString(publicKey);\nPEMDecoder decoder = PEMDecoder.of();\nPublicKey restored = decoder.decode(pem, PublicKey.class);\nSystem.out.println(restored.getAlgorithm());"
+}

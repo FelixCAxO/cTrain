@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-interface-methods-31",
+  "version": 1,
+  "title": "Java Interface Methods",
+  "description": "Practice default, static, and private interface methods.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "interfaces",
+    "interface-methods",
+    "methods"
+  ],
+  "prerequisites": [
+    "java-package-import-30"
+  ],
+  "learningGoals": [
+    "Recall which interface methods are inherited and which are called through the interface type.",
+    "Recognize that private interface helpers are only callable inside the interface."
+  ],
+  "languageVersion": "Java 9",
+  "completionChecks": [
+    {
+      "prompt": "What does Taxable.fixed(0.2).tax(100) return?",
+      "choices": [
+        "0.2, the configured rate",
+        "20.0",
+        "100.0, because clamp ignores the rate",
+        "Compilation fails because tax cannot call the private clamp"
+      ],
+      "answerIndex": 1,
+      "explanation": "fixed(0.2) returns a Taxable whose rate() is 0.2, and the default tax(100) computes clamp(100) * rate() = 100 * 0.2 = 20.0; a default method may call a private interface helper."
+    },
+    {
+      "prompt": "How is a static interface method called?",
+      "choices": [
+        "Through every implementing instance automatically",
+        "Through super from an unrelated class",
+        "Through an instance reference such as new X().fixed(...)",
+        "Through the interface name, such as Taxable.fixed(...)"
+      ],
+      "answerIndex": 3,
+      "explanation": "static interface methods are not inherited by implementing classes or instances; you call them through the interface name, such as Taxable.fixed(0.2)."
+    },
+    {
+      "prompt": "What does Taxable.fixed(0.2).tax(-50) return?",
+      "choices": [
+        "-10.0",
+        "-50.0",
+        "0.2",
+        "0.0"
+      ],
+      "answerIndex": 3,
+      "explanation": "The default method calls clamp first, and Math.max(0.0, -50) produces 0.0 before multiplying by the fixed rate."
+    }
+  ],
+  "targetCode": "// Learn: Use default, static, and private interface methods.\ninterface Taxable {\n  double rate();\n\n  default double tax(double amount) {\n    // default methods provide shared behavior to implementers.\n    return clamp(amount) * rate();\n  }\n\n  static Taxable fixed(double value) {\n    return () -> value;\n  }\n\n  private static double clamp(double value) {\n    return Math.max(0.0, value);\n  }\n}"
+}

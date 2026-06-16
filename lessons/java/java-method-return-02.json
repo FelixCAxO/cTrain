@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-method-return-02",
+  "version": 1,
+  "title": "Java Method Return",
+  "description": "Practice a static method that returns a value.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 30,
+  "tags": [
+    "java",
+    "methods"
+  ],
+  "prerequisites": [
+    "java-class-basic-01"
+  ],
+  "learningGoals": [
+    "Type a static method signature.",
+    "Return a computed integer value."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does add(2, 3) return?",
+      "choices": [
+        "23",
+        "0",
+        "5",
+        "Compilation fails because add is not public"
+      ],
+      "answerIndex": 2,
+      "explanation": "add returns the int sum a + b, so add(2, 3) is 5; a static method need not be public to be called within the same class."
+    },
+    {
+      "prompt": "What does the static keyword on add allow?",
+      "choices": [
+        "Calling add through the class, such as Calculator.add(2, 3), without an instance",
+        "Overriding add in any subclass",
+        "Returning a different type on each call",
+        "Skipping the return statement"
+      ],
+      "answerIndex": 0,
+      "explanation": "static binds add to the class rather than an instance, so callers invoke Calculator.add(2, 3) without creating a Calculator object."
+    },
+    {
+      "prompt": "Inside Calculator, what does System.out.println(add(4, -1)) print?",
+      "choices": [
+        "4-1",
+        "41",
+        "3",
+        "Compilation fails because add is static"
+      ],
+      "answerIndex": 2,
+      "explanation": "The method returns the int sum a + b, so 4 plus -1 is 3; static does not prevent calling it from class code."
+    }
+  ],
+  "targetCode": "// Learn: Return a computed value from a method.\npublic class Calculator {\n  static int add(int a, int b) {\n    // return sends the result back to the caller.\n    return a + b;\n  }\n}"
+}

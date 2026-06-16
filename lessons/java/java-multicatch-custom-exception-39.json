@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-multicatch-custom-exception-39",
+  "version": 1,
+  "title": "Java Multi Catch Custom Exception",
+  "description": "Practice custom checked exceptions and multi-catch handlers.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "exceptions",
+    "multicatch"
+  ],
+  "prerequisites": [
+    "java-try-with-resources-18"
+  ],
+  "learningGoals": [
+    "Recall that a checked custom exception extends Exception and must be handled or declared.",
+    "Recognize that a multi-catch parameter is implicitly final."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does the catch block print when input is \"abc\"?",
+      "choices": [
+        "MissingScoreException",
+        "Exception",
+        "Nothing, because abc is a valid score",
+        "NumberFormatException"
+      ],
+      "answerIndex": 3,
+      "explanation": "\"abc\" is not blank, so parseScore reaches Integer.parseInt(\"abc\"), which throws NumberFormatException; the multi-catch handles it and prints its simple name."
+    },
+    {
+      "prompt": "What is true about e in catch (NumberFormatException | MissingScoreException e)?",
+      "choices": [
+        "It can be reassigned to either exception type",
+        "It is implicitly final, so it cannot be reassigned in the catch block",
+        "It always has the type RuntimeException",
+        "It must be declared with var"
+      ],
+      "answerIndex": 1,
+      "explanation": "A multi-catch parameter is implicitly final, so it cannot be reassigned; its static type is the common supertype of the listed exceptions."
+    },
+    {
+      "prompt": "What does the catch block print when input is an empty String?",
+      "choices": [
+        "NumberFormatException",
+        "Exception",
+        "Nothing, because empty input is parsed as 0",
+        "MissingScoreException"
+      ],
+      "answerIndex": 3,
+      "explanation": "parseScore checks text.trim().isEmpty() before parseInt, so an empty String throws the custom MissingScoreException."
+    }
+  ],
+  "targetCode": "// Learn: Throw a custom exception and catch alternatives together.\nclass MissingScoreException extends Exception {}\n\nint parseScore(String text) throws MissingScoreException {\n  if (text.trim().isEmpty()) throw new MissingScoreException();\n  return Integer.parseInt(text);\n}\n\ntry {\n  parseScore(input);\n} catch (NumberFormatException | MissingScoreException e) {\n  // Multi-catch handles either exception in one block.\n  System.out.println(e.getClass().getSimpleName());\n}"
+}

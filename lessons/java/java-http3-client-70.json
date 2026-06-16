@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "java-http3-client-70",
+  "version": 1,
+  "title": "Java HTTP/3 Client",
+  "description": "Send a request over HTTP/3 with the Java 26 HttpClient.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 220,
+  "tags": [
+    "java",
+    "http-client",
+    "networking"
+  ],
+  "prerequisites": [
+    "java-http-client-44"
+  ],
+  "learningGoals": [
+    "Opt in to HTTP/3 by setting HttpClient.Version.HTTP_3 (JEP 517, final in Java 26).",
+    "Send a request and read back which protocol version the server actually used."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "Which HTTP protocol version does the client builder request?",
+      "choices": [
+        "HttpClient.Version.HTTP_3",
+        "HttpClient.Version.HTTP_2",
+        "HttpClient.Version.HTTP_1_1"
+      ],
+      "answerIndex": 0,
+      "explanation": "The builder sets version(HttpClient.Version.HTTP_3), asking the client to use HTTP/3 when available."
+    }
+  ],
+  "targetCode": "// Java 26 - HTTP/3 HttpClient (JEP 517, final)\n// Learn: opt a request into HTTP/3 with HttpClient.Version.HTTP_3.\nimport java.net.URI;\nimport java.net.http.HttpClient;\nimport java.net.http.HttpRequest;\nimport java.net.http.HttpResponse;\n\nHttpClient client = HttpClient.newBuilder()\n    // version requests HTTP/3 for this client.\n    .version(HttpClient.Version.HTTP_3)\n    .build();\nHttpRequest request = HttpRequest.newBuilder(URI.create(\"https://openjdk.org/\"))\n    .GET()\n    .build();\nHttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());\nSystem.out.println(response.version());"
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-stream-lazy-pipeline-80",
+  "version": 1,
+  "title": "Java Stream Lazy Pipelines",
+  "description": "Practice why stream pipelines stay lazy and can be consumed only once.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 200,
+  "tags": [
+    "java",
+    "streams",
+    "lambdas"
+  ],
+  "prerequisites": [
+    "java-stream-collect-16",
+    "java-lambda-functional-13"
+  ],
+  "learningGoals": [
+    "Recognize that intermediate operations are lazy and run only when a terminal operation executes.",
+    "Explain why a consumed stream throws IllegalStateException on a second terminal operation."
+  ],
+  "languageVersion": "Java 16",
+  "completionChecks": [
+    {
+      "prompt": "What does this code print?",
+      "choices": [
+        "[ADA, LINUS, GRACE, ALAN]",
+        "[LINUS, GRACE, ALAN]",
+        "[Linus, Grace, Alan]",
+        "It throws IllegalStateException at toList()"
+      ],
+      "answerIndex": 1,
+      "explanation": "filter drops Ada because its length is 3, map upper-cases the survivors, and toList preserves the encounter order of the source list."
+    },
+    {
+      "prompt": "What happens if pipeline.count() runs after the toList() call?",
+      "choices": [
+        "It returns 3 because the pipeline re-reads the source list",
+        "It returns 0 because the stream is now empty",
+        "It throws IllegalStateException because the stream has already been operated upon",
+        "It fails to compile because count() does not exist on Stream<String>"
+      ],
+      "answerIndex": 2,
+      "explanation": "A stream can be traversed only once; after toList() consumes the pipeline, any further intermediate or terminal call throws IllegalStateException."
+    },
+    {
+      "prompt": "What does the code print if the toList and list print are replaced with System.out.println(pipeline.count())?",
+      "choices": [
+        "3",
+        "4",
+        "[LINUS, GRACE, ALAN]",
+        "It throws IllegalStateException because count is a terminal operation"
+      ],
+      "answerIndex": 0,
+      "explanation": "The trap is expecting the map result to print; count is the first terminal operation and counts the three names that pass the lazy filter."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Stream pipelines run once\n// Learn: intermediate ops stay lazy until one terminal op consumes the stream.\nimport java.util.List;\nimport java.util.stream.Stream;\n\nList<String> names = List.of(\"Ada\", \"Linus\", \"Grace\", \"Alan\");\nStream<String> pipeline = names.stream()\n  .filter(name -> name.length() > 3)\n  .map(String::toUpperCase);\n// Nothing has executed yet: filter and map only describe the pipeline.\nList<String> longNames = pipeline.toList();\nSystem.out.println(longNames);\n// A second terminal op such as pipeline.count() throws IllegalStateException."
+}

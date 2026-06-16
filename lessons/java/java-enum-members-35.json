@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "java-enum-members-35",
+  "version": 1,
+  "title": "Java Enum Members",
+  "description": "Practice enum fields, constructors, and methods.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 95,
+  "tags": [
+    "java",
+    "enums",
+    "enum-members",
+    "constructors"
+  ],
+  "prerequisites": [
+    "java-enum-switch-12"
+  ],
+  "learningGoals": [
+    "Recall that enum constructors are not public and run once per constant.",
+    "Recognize that enum constants can carry fields and behavior."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does Level.HIGH.urgent() return?",
+      "choices": [
+        "false",
+        "true",
+        "10",
+        "Compilation fails because enums cannot declare methods"
+      ],
+      "answerIndex": 1,
+      "explanation": "HIGH is constructed with priority 10, and urgent() returns priority >= 10, so Level.HIGH.urgent() is true; enums may declare fields and methods."
+    },
+    {
+      "prompt": "Why is Level(int priority) not public?",
+      "choices": [
+        "Enum constructors cannot be public; they run once per constant",
+        "Enums cannot have constructors at all",
+        "Only abstract enums can have fields",
+        "Because the priority field is final"
+      ],
+      "answerIndex": 0,
+      "explanation": "Enum constructors are implicitly private and never public; they run once for each declared constant, and callers use the constants rather than new."
+    },
+    {
+      "prompt": "What does Level.MEDIUM.urgent() return?",
+      "choices": [
+        "true",
+        "5",
+        "MEDIUM",
+        "false"
+      ],
+      "answerIndex": 3,
+      "explanation": "MEDIUM stores priority 5, and urgent only returns true when the stored priority is at least 10."
+    }
+  ],
+  "targetCode": "// Learn: Give enum constants their own data.\nenum Level {\n  LOW(1), MEDIUM(5), HIGH(10);\n\n  private final int priority;\n\n  Level(int priority) {\n    // The constructor stores the value beside each constant.\n    this.priority = priority;\n  }\n\n  boolean urgent() {\n    return priority >= 10;\n  }\n}"
+}

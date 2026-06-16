@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-console-input-91",
+  "version": 1,
+  "title": "Java Console Input",
+  "description": "Practice Scanner and System.console input paths for console data.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "io"
+  ],
+  "prerequisites": [
+    "java-io-streams-62"
+  ],
+  "learningGoals": [
+    "Read console text with Scanner when consuming System.in.",
+    "Use System.console() defensively because it can be null in IDE and redirected runs."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What happens when System.console() returns null?",
+      "choices": [
+        "console.readLine() safely returns an empty string",
+        "The ternary expression uses the Scanner fallback value",
+        "Scanner is closed automatically by System.console()",
+        "The program cannot compile because Console is abstract"
+      ],
+      "answerIndex": 1,
+      "explanation": "Many IDE and redirected runs have no Console object. The null check avoids calling readLine on null and falls back to text already read by Scanner."
+    },
+    {
+      "prompt": "Which call reads a full line from the Console object?",
+      "choices": [
+        "scanner.nextInt()",
+        "System.in.readLine()",
+        "console.readLine(\"Name: \")",
+        "Scanner.console()"
+      ],
+      "answerIndex": 2,
+      "explanation": "Console exposes readLine for line-oriented console input, optionally with a prompt. Scanner reads from System.in, while System.in itself has no readLine method."
+    },
+    {
+      "prompt": "What happens when console is not null and the user enters Ava at the Console prompt?",
+      "choices": [
+        "name is set to the Scanner fallback value",
+        "name is set to Ava after console.readLine(\"Name: \") returns",
+        "name is always an empty string because console input is disabled",
+        "The ternary expression evaluates both branches and throws"
+      ],
+      "answerIndex": 1,
+      "explanation": "The ternary operator evaluates only the selected branch. With a real Console, readLine supplies the name, so the Scanner fallback is not used for name."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Console input\n// Learn: read text with Scanner and System.console() safely.\nScanner scanner = new Scanner(System.in);\nString fallback = scanner.nextLine();\nConsole console = System.console(); // Often null inside IDEs and redirected runs.\nString name = console == null\n    ? fallback\n    : console.readLine(\"Name: \");\nSystem.out.println(name.trim());"
+}

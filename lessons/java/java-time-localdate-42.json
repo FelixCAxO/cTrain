@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-time-localdate-42",
+  "version": 1,
+  "title": "Java LocalDate Duration",
+  "description": "Practice LocalDate and Duration from java.time.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 90,
+  "tags": [
+    "java",
+    "time",
+    "dates"
+  ],
+  "prerequisites": [
+    "java-static-members-26"
+  ],
+  "learningGoals": [
+    "Type java.time imports.",
+    "Practice LocalDate and Duration calls."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does due hold when start is 2026-05-18?",
+      "choices": [
+        "2026-05-14",
+        "2026-05-25",
+        "2026-05-32, before normalization",
+        "2026-06-01"
+      ],
+      "answerIndex": 3,
+      "explanation": "plusDays(14) adds 14 days to May 18; May has 31 days, so the date rolls into June as 2026-06-01."
+    },
+    {
+      "prompt": "What does start hold after start.plusDays(14) runs?",
+      "choices": [
+        "2026-05-18, because LocalDate is immutable and plusDays returns a new date",
+        "2026-06-01, because plusDays mutates start in place",
+        "null, until the result is assigned back",
+        "Compilation fails because LocalDate has no plusDays method"
+      ],
+      "answerIndex": 0,
+      "explanation": "java.time types are immutable; plusDays returns a new LocalDate (assigned to due) and leaves start unchanged at 2026-05-18."
+    },
+    {
+      "prompt": "What happens if code calls start.plusDays(14); without assigning the result?",
+      "choices": [
+        "start changes to 2026-06-01",
+        "UnsupportedOperationException is thrown",
+        "start remains 2026-05-18",
+        "reviewTime changes to 14 days"
+      ],
+      "answerIndex": 2,
+      "explanation": "LocalDate is immutable, so plusDays returns a new date and leaves the original start reference unchanged unless reassigned."
+    }
+  ],
+  "targetCode": "// Learn: Represent dates and review durations.\nimport java.time.Duration;\nimport java.time.LocalDate;\n\nLocalDate start = LocalDate.of(2026, 5, 18);\n// plusDays returns a new LocalDate.\nLocalDate due = start.plusDays(14);\nDuration reviewTime = Duration.ofMinutes(25);"
+}

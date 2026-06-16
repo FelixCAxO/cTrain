@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-comparator-order-707",
+    "version":  1,
+    "title":  "Comparator and Ordering - Reference Page 2",
+    "description":  "Use this Java reference to review Comparator and Ordering through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  540,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "sorting",
+                 "lambdas"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Build simple and chained Comparator rules.",
+                          "Use the same ordering idea in lists and sorted collections."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Comparator and Ordering - Reference Page 2.\n// You will learn: Build comparators for multi-key ordering and null handling.\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Comparator;\nimport java.util.List;\nimport java.util.TreeSet;\n\nclass ComparatorOrderReference {\n  public static void main(String[] args) {\n    example1SortStrings();\n    example2SortPersons();\n    example3SortedSet();\n  }\n\n  static void example1SortStrings() {\n    List\u003cString\u003e names = new ArrayList\u003c\u003e(Arrays.asList(\"Bo\", \"Amanda\", \"Cecilia\"));\n    names.sort(Comparator.naturalOrder());\n    System.out.println(names);\n    names.sort(Comparator.reverseOrder());\n    System.out.println(names);\n  }\n\n  static void example2SortPersons() {\n    List\u003cPersonForOrdering\u003e people = new ArrayList\u003c\u003e();\n    people.add(new PersonForOrdering(\"Sara\", \"Nordin\", 19));\n    people.add(new PersonForOrdering(\"Ali\", \"Nordin\", 17));\n    people.add(new PersonForOrdering(\"Maja\", \"Berg\", 20));\n    Comparator\u003cPersonForOrdering\u003e byNameAndAge = Comparator.comparing(PersonForOrdering::lastName).thenComparing(PersonForOrdering::firstName).thenComparingInt(PersonForOrdering::age);\n    people.sort(byNameAndAge);\n    System.out.println(people);\n  }\n\n  static void example3SortedSet() {\n    Comparator\u003cPersonForOrdering\u003e byFullName = Comparator.comparing(PersonForOrdering::lastName).thenComparing(PersonForOrdering::firstName);\n    TreeSet\u003cPersonForOrdering\u003e sortedPeople = new TreeSet\u003c\u003e(byFullName);\n    sortedPeople.add(new PersonForOrdering(\"Eva\", \"Lund\", 18));\n    sortedPeople.add(new PersonForOrdering(\"Adam\", \"Lund\", 18));\n    sortedPeople.add(new PersonForOrdering(\"Eva\", \"Lund\", 22));\n    System.out.println(sortedPeople);\n  }\n}\n\nclass PersonForOrdering {\n  private final String firstName;\n  private final String lastName;\n  private final int age;\n\n  PersonForOrdering(String firstName, String lastName, int age) {\n    this.firstName = firstName;\n    this.lastName = lastName;\n    this.age = age;\n  }\n\n  String firstName() { return firstName; }\n  String lastName() { return lastName; }\n  int age() { return age; }\n  public String toString() { return firstName + \" \" + lastName + \" (\" + age + \")\"; }\n}"
+}

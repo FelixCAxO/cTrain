@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-list-api-702",
+    "version":  1,
+    "title":  "List API - Reference Page 2",
+    "description":  "Use this Java reference to review List API through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  420,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "arrays",
+                 "sorting"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Use indexed List operations such as add, get, set, remove, and indexOf.",
+                          "Sort, copy, and understand that subList is a view of the original list."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: List API - Reference Page 2.\n// You will learn: Use indexed list access, search, removal, sorting, and subList views.\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.Comparator;\nimport java.util.List;\n\nclass ListApiReference {\n  public static void main(String[] args) {\n    example1IndexedAccess();\n    example2SearchAndRemove();\n    example3SortCopyAndView();\n  }\n\n  static void example1IndexedAccess() {\n    List\u003cString\u003e letters = new ArrayList\u003c\u003e();\n    letters.add(\"a\");\n    letters.add(\"c\");\n    letters.add(1, \"b\");\n    String first = letters.get(0);\n    letters.set(0, \"A\");\n    System.out.println(first + \" \" + letters);\n  }\n\n  static void example2SearchAndRemove() {\n    List\u003cString\u003e names = new ArrayList\u003c\u003e(Arrays.asList(\"Ada\", \"Bo\", \"Ada\"));\n    int adaIndex = names.indexOf(\"Ada\");\n    boolean removedByValue = names.remove(\"Bo\");\n    String removedByIndex = names.remove(0);\n    System.out.println(adaIndex + \" \" + removedByValue + \" \" + removedByIndex);\n  }\n\n  static void example3SortCopyAndView() {\n    List\u003cString\u003e names = new ArrayList\u003c\u003e(Arrays.asList(\"Bo\", \"Ada\", \"Kim\"));\n    names.sort(Comparator.naturalOrder());\n    List\u003cString\u003e firstTwo = names.subList(0, 2);\n    firstTwo.set(1, \"Ann\");\n    List\u003cString\u003e fixedSize = Arrays.asList(\"x\", \"y\");\n    List\u003cString\u003e readOnlyCopy = Collections.unmodifiableList(new ArrayList\u003c\u003e(names));\n    System.out.println(names + \" \" + fixedSize + \" \" + readOnlyCopy);\n  }\n}"
+}

@@ -1,0 +1,2425 @@
+{
+  "schemaVersion": "1.0.0",
+  "exam": "Oracle Java SE 25 (1Z0-831)",
+  "edition": "Java 25",
+  "goal": "Pre-implementation exercise map for future delivery of Java 25 certification preparation assets.",
+  "intendedOutcome": [
+    "Flashcard recall coverage for exam-style code reading and behavior reasoning.",
+    "Programming exercises that train implementation, API design, and debugging skills.",
+    "A roadmap-mapped backlog ready for iterative implementation without missing core objectives."
+  ],
+  "areas": [
+    {
+      "roadmapNode": "Access Modifiers",
+      "expectedTags": [
+        "encapsulation"
+      ],
+      "prerequisites": [
+        "Class Basics"
+      ],
+      "flashcards": {
+        "minimumCount": 10,
+        "questionPatterns": [
+          "Which member declaration compiles with the shown package structure?",
+          "Which visibility choice causes unintended API exposure?",
+          "Which access modifier keeps this method inaccessible to subclasses?"
+        ],
+        "focus": "compile-time visibility, API surface discipline, and encapsulation traps."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Design two related classes with safe field visibility and constructor invariants.",
+          "Refactor package-visible helper methods to proper visibility without breaking behavior."
+        ],
+        "focus": "access-level audits and API contract shaping."
+      },
+      "study": {
+        "order": 2,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "flashcard-heavy",
+        "estimatedMinutes": {
+          "flashcards": 18,
+          "programming": 15,
+          "total": 33
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 10 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Methods",
+      "expectedTags": [
+        "methods"
+      ],
+      "prerequisites": [
+        "Class Basics",
+        "Access Modifiers"
+      ],
+      "flashcards": {
+        "minimumCount": 10,
+        "questionPatterns": [
+          "Which method signature is selected for this overload set?",
+          "Which method declaration fails static type-checking?",
+          "What compile error appears when overload ambiguity is introduced?"
+        ],
+        "focus": "method signatures, dispatch, and overload ambiguity."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Build a class with overloaded methods and write tests that expose ambiguity.",
+          "Replace duplicated method bodies with better extracted helpers and keep behavior stable."
+        ],
+        "focus": "method design, polymorphism-safe contracts."
+      },
+      "study": {
+        "order": 3,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "flashcard-heavy",
+        "estimatedMinutes": {
+          "flashcards": 18,
+          "programming": 15,
+          "total": 33
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 10 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Interface Methods",
+      "expectedTags": [
+        "interface-methods"
+      ],
+      "prerequisites": [
+        "Methods",
+        "Interfaces"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which interface method is implicitly public?",
+          "How does default method conflict resolution behave here?",
+          "Which implementation signature causes a compile-time override mismatch?"
+        ],
+        "focus": "implicit modifiers, default/private interface methods, and collision rules."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Build an interface with default, static, and private helper methods and compose implementations.",
+          "Resolve conflicting default methods across a simple interface hierarchy."
+        ],
+        "focus": "interface API strategy and conflict control."
+      },
+      "study": {
+        "order": 5,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Records",
+      "expectedTags": [
+        "records"
+      ],
+      "prerequisites": [
+        "Class Basics"
+      ],
+      "flashcards": {
+        "minimumCount": 9,
+        "questionPatterns": [
+          "Which record declaration is legal with the shown component list?",
+          "What does this compact constructor enforce at runtime?",
+          "Which record method is auto-generated by default?"
+        ],
+        "focus": "record shape, generated members, and canonical constructor behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Convert a classic value object class into a record and preserve invariants.",
+          "Add validation logic in a compact constructor without breaking the component contract."
+        ],
+        "focus": "immutable data modeling and compiler-assisted boilerplate."
+      },
+      "study": {
+        "order": 6,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 16,
+          "programming": 15,
+          "total": 31
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 9 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Exceptions",
+      "expectedTags": [
+        "exceptions"
+      ],
+      "prerequisites": [
+        "Access Modifiers"
+      ],
+      "flashcards": {
+        "minimumCount": 10,
+        "questionPatterns": [
+          "Which statement throws the checked exception path here?",
+          "What line fails to compile because of unhandled exceptions?",
+          "Which catch order handles subtype exceptions correctly?"
+        ],
+        "focus": "checked/unchecked behavior and control flow on failure."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Write a utility method with proper try/catch/finally behavior and no exception swallowing.",
+          "Refactor broad catch blocks into typed hierarchy-aware handling."
+        ],
+        "focus": "failure modeling and robust defensive coding."
+      },
+      "study": {
+        "order": 7,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "flashcard-heavy",
+        "estimatedMinutes": {
+          "flashcards": 18,
+          "programming": 15,
+          "total": 33
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 10 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Multi Catch Custom Exceptions",
+      "expectedTags": [
+        "multicatch"
+      ],
+      "prerequisites": [
+        "Exceptions"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which multi-catch declaration compiles with the shown types?",
+          "What happens when the same variable is effectively final after multi-catch?",
+          "Which variant preserves precise exception reporting?"
+        ],
+        "focus": "multi-catch syntax rules and flow analysis."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Create a service method that uses multi-catch with custom exception hierarchy.",
+          "Refactor duplicated handler code into a shared report routine."
+        ],
+        "focus": "typed exception composition and logging clarity."
+      },
+      "study": {
+        "order": 8,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Collections",
+      "expectedTags": [
+        "collections"
+      ],
+      "prerequisites": [
+        "Class Basics"
+      ],
+      "flashcards": {
+        "minimumCount": 10,
+        "questionPatterns": [
+          "Which collection factory method returns an immutable collection here?",
+          "What is the runtime behavior of the shown list mutation sequence?",
+          "Which concrete type should be used for predictable iteration order?"
+        ],
+        "focus": "collection interfaces, mutability, and behavioral contracts."
+      },
+      "programmingExercises": {
+        "minimumCount": 4,
+        "exercisePatterns": [
+          "Implement a collection pipeline that enforces uniqueness and predictable ordering.",
+          "Fix a mutation bug caused by aliasing in a shared collection reference."
+        ],
+        "focus": "mutation control and collection correctness."
+      },
+      "study": {
+        "order": 9,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "code-heavy",
+        "estimatedMinutes": {
+          "flashcards": 18,
+          "programming": 20,
+          "total": 38
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 10 active-recall checks",
+          "Submit 4 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Maps",
+      "expectedTags": [
+        "maps"
+      ],
+      "prerequisites": [
+        "Collections"
+      ],
+      "flashcards": {
+        "minimumCount": 9,
+        "questionPatterns": [
+          "Which map access pattern returns null vs throws exception?",
+          "Which key comparator impacts retrieval stability?",
+          "Which lambda overload changes map merge semantics?"
+        ],
+        "focus": "lookup semantics, merging behavior, and key consistency."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Implement a frequency counter and update rule set using merge methods.",
+          "Detect and fix collisions caused by mutable keys."
+        ],
+        "focus": "hash/equality reasoning and map operation safety."
+      },
+      "study": {
+        "order": 10,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 16,
+          "programming": 15,
+          "total": 31
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 9 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Constructors",
+      "expectedTags": [
+        "constructors"
+      ],
+      "prerequisites": [
+        "Class Basics"
+      ],
+      "flashcards": {
+        "minimumCount": 9,
+        "questionPatterns": [
+          "Which constructor call is ambiguous in this chain?",
+          "What object state is guaranteed after delegating constructors?",
+          "What does this explicit constructor invocation require at compile time?"
+        ],
+        "focus": "constructor overloading and delegation rules."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Build a domain class with safe constructor chaining and invariants.",
+          "Refactor initialization logic to avoid duplicated setup code."
+        ],
+        "focus": "state initialization correctness."
+      },
+      "study": {
+        "order": 11,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 16,
+          "programming": 15,
+          "total": 31
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 9 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Inheritance",
+      "expectedTags": [
+        "inheritance"
+      ],
+      "prerequisites": [
+        "Class Basics",
+        "Constructors"
+      ],
+      "flashcards": {
+        "minimumCount": 10,
+        "questionPatterns": [
+          "Which field value is referenced after polymorphic assignment?",
+          "Which call causes an illegal superclass constructor invocation?",
+          "What override rule breaks with this generic signature?"
+        ],
+        "focus": "subclass construction, overriding, and member resolution."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Create a small inheritance hierarchy and demonstrate safe override behavior.",
+          "Refactor an inheritance-based API to avoid field shadowing issues."
+        ],
+        "focus": "behavioral consistency and object model design."
+      },
+      "study": {
+        "order": 12,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "flashcard-heavy",
+        "estimatedMinutes": {
+          "flashcards": 18,
+          "programming": 15,
+          "total": 33
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 10 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Enums",
+      "expectedTags": [
+        "enums"
+      ],
+      "prerequisites": [
+        "Class Basics"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which enum constant is selected under switch logic?",
+          "What method is implicitly declared on enum constants?",
+          "Which declaration mutates enum construction rules?"
+        ],
+        "focus": "enum creation, ordering, and safe switching."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Model a status domain as enum and add behavior methods.",
+          "Implement switch expressions over enums with exhaustive coverage."
+        ],
+        "focus": "type-safe finite state design."
+      },
+      "study": {
+        "order": 13,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Enum Members",
+      "expectedTags": [
+        "enum-members"
+      ],
+      "prerequisites": [
+        "Enums"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which enum member initialization compiles with final fields?",
+          "How are custom members overridden per constant?",
+          "Which use of mutable static state leaks enum guarantees?"
+        ],
+        "focus": "enum constants as objects and member-level behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Design enum constants with per-instance methods and immutable members.",
+          "Refactor a switch-heavy state table into enum-driven behavior."
+        ],
+        "focus": "object-like enum design."
+      },
+      "study": {
+        "order": 14,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Generics",
+      "expectedTags": [
+        "generics"
+      ],
+      "prerequisites": [
+        "Methods",
+        "Collections"
+      ],
+      "flashcards": {
+        "minimumCount": 10,
+        "questionPatterns": [
+          "Which wildcard bound preserves assignment compatibility?",
+          "What does type erasure produce for this generic method?",
+          "Which call is rejected due to capture conversion?"
+        ],
+        "focus": "variance, bounds, and compile-time type safety."
+      },
+      "programmingExercises": {
+        "minimumCount": 4,
+        "exercisePatterns": [
+          "Write a bounded generic helper and tests for covariance edge cases.",
+          "Refactor raw types into bounded generics with safer API signatures."
+        ],
+        "focus": "generic API ergonomics and safety."
+      },
+      "implementedLessonIds": [
+        "java-generics-wildcard-copy-68"
+      ],
+      "study": {
+        "order": 16,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "code-heavy",
+        "estimatedMinutes": {
+          "flashcards": 18,
+          "programming": 20,
+          "total": 38
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 10 active-recall checks",
+          "Submit 4 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Optional",
+      "expectedTags": [
+        "optional"
+      ],
+      "prerequisites": [
+        "Generics",
+        "Conditionals"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which line throws when empty Optional is unwrapped?",
+          "What chain preserves laziness while transforming Optional values?",
+          "Which API returns a fallback without eager evaluation?"
+        ],
+        "focus": "safe optional usage and short-circuit behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Refactor null-prone code to explicit Optional flow with clear fallback paths.",
+          "Write Optional composition that avoids nested flattening bugs."
+        ],
+        "focus": "defensive handling and null elimination."
+      },
+      "implementedLessonIds": [
+        "java-optional-lazy-fallback-69"
+      ],
+      "study": {
+        "order": 17,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Streams",
+      "expectedTags": [
+        "streams"
+      ],
+      "prerequisites": [
+        "Collections",
+        "Generics"
+      ],
+      "flashcards": {
+        "minimumCount": 10,
+        "questionPatterns": [
+          "Which stream operation is terminal vs intermediate in this pipeline?",
+          "What does this pipeline throw due to parallel state leakage?",
+          "Which collector preserves encounter order?"
+        ],
+        "focus": "pipeline semantics and operation ordering."
+      },
+      "programmingExercises": {
+        "minimumCount": 4,
+        "exercisePatterns": [
+          "Build a stream pipeline that filters, groups, and aggregates while preserving order.",
+          "Refactor imperative loops into stream-based operations with equivalent results."
+        ],
+        "focus": "functional data processing and collectors."
+      },
+      "implementedLessonIds": [
+        "java-stream-lazy-pipeline-80"
+      ],
+      "study": {
+        "order": 18,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "code-heavy",
+        "estimatedMinutes": {
+          "flashcards": 18,
+          "programming": 20,
+          "total": 38
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 10 active-recall checks",
+          "Submit 4 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Varargs",
+      "expectedTags": [
+        "varargs"
+      ],
+      "prerequisites": [
+        "Methods"
+      ],
+      "flashcards": {
+        "minimumCount": 7,
+        "questionPatterns": [
+          "Which varargs call is ambiguous due to overload resolution?",
+          "What is runtime representation of the varargs tail?",
+          "Which API contract prevents modification hazards?"
+        ],
+        "focus": "varargs dispatch and array backing behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Write overloads using varargs with safe defensive copy semantics.",
+          "Refactor dangerous varargs signatures into safer alternatives."
+        ],
+        "focus": "API ergonomics and safe callers."
+      },
+      "study": {
+        "order": 19,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 13,
+          "programming": 10,
+          "total": 23
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 7 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Unnamed Variables",
+      "expectedTags": [
+        "unnamed-variables"
+      ],
+      "prerequisites": [
+        "Methods",
+        "Records"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which declaration is legal with underscore as a variable placeholder?",
+          "How does underscore interact with lambda parameters in this version?",
+          "Which pattern is disallowed when variable names are inferred as underscore?"
+        ],
+        "focus": "modern syntax allowances and reserved usage."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Refactor legacy code using unused variable placeholders in patterns and lambda params.",
+          "Update style-sensitive snippets to preserve readability while reducing noise."
+        ],
+        "focus": "clean modern syntax."
+      },
+      "study": {
+        "order": 20,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 11,
+          "programming": 10,
+          "total": 21
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Threads",
+      "expectedTags": [
+        "threads"
+      ],
+      "prerequisites": [
+        "Class Basics"
+      ],
+      "flashcards": {
+        "minimumCount": 9,
+        "questionPatterns": [
+          "Which thread state transition is valid after this call?",
+          "Which statement can still throw InterruptedException?",
+          "How does daemon status affect JVM shutdown behavior here?"
+        ],
+        "focus": "thread lifecycle and interruption discipline."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Implement a small producer/consumer pattern with interruption-safe loops.",
+          "Fix race conditions by introducing synchronization and proper thread joining."
+        ],
+        "focus": "safe concurrent execution basics."
+      },
+      "study": {
+        "order": 21,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 16,
+          "programming": 15,
+          "total": 31
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 9 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Primitive Types",
+      "expectedTags": [
+        "primitives"
+      ],
+      "prerequisites": [
+        "Class Basics"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which numeric literal promotes in this assignment?",
+          "Which comparison triggers implicit conversion surprises?",
+          "Which declaration overflows before runtime checks?"
+        ],
+        "focus": "widening/narrowing, promotion, and overflow behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Write conversion-heavy methods and document explicit overflow boundaries.",
+          "Correct a calculation that relies on unintended numeric coercion."
+        ],
+        "focus": "numerical correctness and bounds reasoning."
+      },
+      "study": {
+        "order": 22,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Numeric Casting Overflow Math",
+      "expectedTags": [
+        "numeric-casting",
+        "math"
+      ],
+      "prerequisites": [
+        "Primitive Types",
+        "Streams"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which cast truncates prior to multiplication?",
+          "Which expression can overflow silently and why?",
+          "Which conversion order preserves precision?"
+        ],
+        "focus": "cast ordering, integer division, and precision loss."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Build safe numeric helpers with explicit checked conversion boundaries.",
+          "Refactor math expressions to avoid hidden truncation."
+        ],
+        "focus": "reliable arithmetic logic."
+      },
+      "implementedLessonIds": [
+        "java-checked-numeric-casts-81"
+      ],
+      "study": {
+        "order": 23,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Strings",
+      "expectedTags": [
+        "strings"
+      ],
+      "prerequisites": [
+        "Class Basics",
+        "Optional"
+      ],
+      "flashcards": {
+        "minimumCount": 10,
+        "questionPatterns": [
+          "Which substring operation throws and when?",
+          "Which interned reference comparison is a trap here?",
+          "What happens when regex flags are passed to this method?"
+        ],
+        "focus": "immutability, indexing, and comparison semantics."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Write string utility functions with null-safe behavior and full unit boundaries.",
+          "Fix code that mixes `==` and `.equals` for string value checks."
+        ],
+        "focus": "text handling confidence."
+      },
+      "implementedLessonIds": [
+        "java-string-pool-equality-82"
+      ],
+      "study": {
+        "order": 24,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "flashcard-heavy",
+        "estimatedMinutes": {
+          "flashcards": 18,
+          "programming": 15,
+          "total": 33
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 10 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Arrays",
+      "expectedTags": [
+        "arrays"
+      ],
+      "prerequisites": [
+        "Primitive Types"
+      ],
+      "flashcards": {
+        "minimumCount": 9,
+        "questionPatterns": [
+          "Which array copy call performs deep vs shallow behavior?",
+          "Which loop bound causes out-of-bounds at runtime?",
+          "How do reference and primitive arrays differ in assignment?"
+        ],
+        "focus": "array creation, copying, and bounds."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Build array transformation utilities with proper bounds checks.",
+          "Refactor loop-based array code to safe utility methods."
+        ],
+        "focus": "memory safety and indexing discipline."
+      },
+      "study": {
+        "order": 25,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 16,
+          "programming": 15,
+          "total": 31
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 9 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Equals HashCode Comparable",
+      "expectedTags": [
+        "object-contracts"
+      ],
+      "prerequisites": [
+        "Records",
+        "Class Basics",
+        "Collections"
+      ],
+      "flashcards": {
+        "minimumCount": 10,
+        "questionPatterns": [
+          "Which implementation violates the hashCode/equals contract?",
+          "Which equals call is reflexive but not transitive in this snippet?",
+          "Which element count change after mutation breaks map keys?"
+        ],
+        "focus": "object contracts and collection key correctness."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Implement equals/hashCode/comparable for a value type and validate in a map/set test.",
+          "Fix a mutable key design that invalidates hashed collections."
+        ],
+        "focus": "contract-first domain modeling."
+      },
+      "implementedLessonIds": [
+        "java-mutable-hash-keys-83"
+      ],
+      "study": {
+        "order": 26,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "flashcard-heavy",
+        "estimatedMinutes": {
+          "flashcards": 18,
+          "programming": 15,
+          "total": 33
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 10 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Date Time",
+      "expectedTags": [
+        "time"
+      ],
+      "prerequisites": [
+        "Primitive Types"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which date-time API keeps timezone offsets intact?",
+          "Which arithmetic on LocalDate is invalid across DST transitions?",
+          "Which factory method throws for malformed zone IDs?"
+        ],
+        "focus": "immutable date-time types and zone-aware reasoning."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Build date-based validation logic with explicit zone handling.",
+          "Refactor legacy calendar-style code to use the Java time API."
+        ],
+        "focus": "temporal correctness and API migration."
+      },
+      "study": {
+        "order": 27,
+        "priority": 2,
+        "phase": "integration",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Time Formatting",
+      "expectedTags": [
+        "time",
+        "formatting"
+      ],
+      "prerequisites": [
+        "Date Time"
+      ],
+      "flashcards": {
+        "minimumCount": 7,
+        "questionPatterns": [
+          "Which formatter fails with unsupported pattern tokens?",
+          "Which parse result is locale-sensitive by default?",
+          "What happens when strict parsing is disabled?"
+        ],
+        "focus": "DateTimeFormatter behavior and locale interactions."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Create parse/format utilities that fail predictably with invalid input.",
+          "Refactor formatting behavior for locale-safe user messages."
+        ],
+        "focus": "input/output precision and user-facing formatting."
+      },
+      "study": {
+        "order": 28,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 13,
+          "programming": 10,
+          "total": 23
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 7 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Modules",
+      "expectedTags": [
+        "modules"
+      ],
+      "prerequisites": [
+        "Class Basics",
+        "Access Modifiers"
+      ],
+      "flashcards": {
+        "minimumCount": 7,
+        "questionPatterns": [
+          "Which module descriptor exports an API surface too broadly?",
+          "Which service usage requires `uses` versus `provides`?",
+          "Which accessibility rule fails at module resolution?"
+        ],
+        "focus": "module boundaries and readability."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Split a monolith package set into module-aware descriptors.",
+          "Resolve a module resolution failure by correcting exports/opens directives."
+        ],
+        "focus": "modular project organization."
+      },
+      "study": {
+        "order": 29,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 13,
+          "programming": 15,
+          "total": 28
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 7 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Scoped Values",
+      "expectedTags": [
+        "scoped-values"
+      ],
+      "prerequisites": [
+        "Threads"
+      ],
+      "flashcards": {
+        "minimumCount": 7,
+        "questionPatterns": [
+          "Which scoped value lifecycle is legal within nested dynamic scopes?",
+          "Which binding is visible in a sibling thread context?",
+          "What happens when a scope is exited before value access?"
+        ],
+        "focus": "lexical scope semantics and thread-local replacements."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Implement context propagation with scoped values and verify leakage safety.",
+          "Refactor thread-local dependent code into scoped-value-based context."
+        ],
+        "focus": "modern context handling."
+      },
+      "study": {
+        "order": 30,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 13,
+          "programming": 10,
+          "total": 23
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 7 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Sealed Types",
+      "expectedTags": [
+        "sealed"
+      ],
+      "prerequisites": [
+        "Inheritance",
+        "Interfaces"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which subtype declaration violates a sealed hierarchy's permits list?",
+          "What compiler rule applies to constructor accessibility?",
+          "How does pattern matching interact with sealed result space?"
+        ],
+        "focus": "sealed hierarchies and exhaustiveness."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Refactor a fragile hierarchy into a sealed interface/class graph.",
+          "Replace unchecked casts with sealed-aware control flow."
+        ],
+        "focus": "bounded polymorphism."
+      },
+      "study": {
+        "order": 31,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Pattern Matching",
+      "expectedTags": [
+        "pattern-matching"
+      ],
+      "prerequisites": [
+        "Sealed Types",
+        "Records"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which pattern guard rejects at compile time?",
+          "What shape does this pattern variable capture produce?",
+          "Which null-handling branch remains uncovered?"
+        ],
+        "focus": "pattern shape, guard semantics, and null behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Build a matcher over mixed payload types with guarded patterns.",
+          "Refactor nested instanceof checks into cleaner pattern workflows."
+        ],
+        "focus": "readable conditional decomposition."
+      },
+      "study": {
+        "order": 32,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 15,
+          "total": 29
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Switch Expressions",
+      "expectedTags": [
+        "switch"
+      ],
+      "prerequisites": [
+        "Conditionals",
+        "Pattern Matching"
+      ],
+      "flashcards": {
+        "minimumCount": 9,
+        "questionPatterns": [
+          "Which switch label is unreachable under a sealed hierarchy?",
+          "What value is returned when no yield arm is specified?",
+          "Which expression form is invalid due to mixed arrow/block arms?"
+        ],
+        "focus": "exhaustive switch behavior and yield semantics."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Refactor a large nested if/else chain to switch expression with guarded arms.",
+          "Build a robust mapper using arrow and block arms."
+        ],
+        "focus": "declarative branching."
+      },
+      "study": {
+        "order": 33,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 16,
+          "programming": 15,
+          "total": 31
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 9 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Sequenced Collections",
+      "expectedTags": [
+        "sequenced-collections"
+      ],
+      "prerequisites": [
+        "Collections"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which operation targets first or last without explicit index arithmetic?",
+          "What is the result of reversing a collection with reversed view?",
+          "Which API returns a view versus a copy?"
+        ],
+        "focus": "new sequence endpoints and view semantics."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Implement queue utilities using first/last accessors and verify consistency.",
+          "Fix a boundary bug in code using reversed and reversed view assumptions."
+        ],
+        "focus": "sequence operations and immutable expectations."
+      },
+      "study": {
+        "order": 34,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 11,
+          "programming": 10,
+          "total": 21
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Deque",
+      "expectedTags": [
+        "deque"
+      ],
+      "prerequisites": [
+        "Collections"
+      ],
+      "flashcards": {
+        "minimumCount": 7,
+        "questionPatterns": [
+          "Which deque method throws on empty vs returns sentinel?",
+          "What order does offer/peek pair preserve under repeated operations?",
+          "Which implementation choice is optimal for frequent head inserts?"
+        ],
+        "focus": "deque API behavior and algorithmic complexity."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Build a bounded deque-based rolling cache and test overflow behavior.",
+          "Replace manual list index logic with deque-first-first-last semantics."
+        ],
+        "focus": "queue-like data structure implementation."
+      },
+      "study": {
+        "order": 35,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 13,
+          "programming": 10,
+          "total": 23
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 7 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "File IO",
+      "expectedTags": [
+        "files"
+      ],
+      "prerequisites": [
+        "Collections"
+      ],
+      "flashcards": {
+        "minimumCount": 9,
+        "questionPatterns": [
+          "Which NIO call creates parent directories safely?",
+          "Which file attribute access is atomic in this snippet?",
+          "Which path expression normalizes unexpectedly?"
+        ],
+        "focus": "path handling, atomic operations, and error mapping."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Implement a path-aware file operation utility with explicit exception mapping.",
+          "Refactor file processing to avoid TOCTOU and improper directory assumptions."
+        ],
+        "focus": "robust file utility code."
+      },
+      "study": {
+        "order": 36,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 16,
+          "programming": 15,
+          "total": 31
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 9 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "IO Streams",
+      "expectedTags": [
+        "io"
+      ],
+      "prerequisites": [
+        "File IO",
+        "Collections"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which stream reads bytes versus characters in this API?",
+          "Which resource needs explicit closure in this construction?",
+          "What exception is wrapped or propagated in this path?"
+        ],
+        "focus": "I/O abstraction boundaries and resource control."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Build buffered text and binary processing paths with explicit charset handling.",
+          "Fix resource-leak and accidental charset bugs in file utilities."
+        ],
+        "focus": "safe and efficient input/output."
+      },
+      "study": {
+        "order": 37,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 15,
+          "total": 29
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Serialization",
+      "expectedTags": [
+        "serialization"
+      ],
+      "prerequisites": [
+        "Class Basics",
+        "IO Streams"
+      ],
+      "flashcards": {
+        "minimumCount": 7,
+        "questionPatterns": [
+          "Which field serializes by default and which does not?",
+          "What breaks compatibility across serialVersionUID changes?",
+          "Which transient field should remain non-persistent?"
+        ],
+        "focus": "java.io mechanics and compatibility obligations."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Implement serializable DTOs with explicit `serialVersionUID` strategy.",
+          "Refactor a serialized type to preserve backward compatibility."
+        ],
+        "focus": "stable persistence contracts."
+      },
+      "study": {
+        "order": 38,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 13,
+          "programming": 10,
+          "total": 23
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 7 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Localization",
+      "expectedTags": [
+        "localization"
+      ],
+      "prerequisites": [
+        "Strings",
+        "Time Formatting"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which locale-sensitive API should be preferred for lowercase conversion?",
+          "How does locale fallback work for missing country variants?",
+          "Which formatter output differs under Turkish locale rules?"
+        ],
+        "focus": "locale-sensitive transformations and surprising Unicode rules."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Internationalize a message utility and validate locale overrides.",
+          "Refactor user-facing strings to locale-aware number and date formatting."
+        ],
+        "focus": "i18n readiness."
+      },
+      "study": {
+        "order": 39,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 11,
+          "programming": 10,
+          "total": 21
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Concurrency Utilities",
+      "expectedTags": [
+        "concurrency"
+      ],
+      "prerequisites": [
+        "Threads"
+      ],
+      "flashcards": {
+        "minimumCount": 9,
+        "questionPatterns": [
+          "Which executor factory is appropriate for short-lived tasks?",
+          "Which future completion path can hide silent failures?",
+          "What happens when an executor is shut down while submitting work?"
+        ],
+        "focus": "thread pool semantics and completion handling."
+      },
+      "programmingExercises": {
+        "minimumCount": 3,
+        "exercisePatterns": [
+          "Implement a bounded work queue with executor and graceful shutdown.",
+          "Refactor blocking synchronization into completion-stage style composition."
+        ],
+        "focus": "practical concurrent API use."
+      },
+      "study": {
+        "order": 40,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 16,
+          "programming": 15,
+          "total": 31
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 9 active-recall checks",
+          "Submit 3 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Executor Services",
+      "expectedTags": [
+        "executors"
+      ],
+      "prerequisites": [
+        "Concurrency Utilities"
+      ],
+      "flashcards": {
+        "minimumCount": 8,
+        "questionPatterns": [
+          "Which executor configuration blocks on task submission?",
+          "Which submit variant returns Future versus void?",
+          "What cancellation behavior should be asserted after timeout?"
+        ],
+        "focus": "ExecutorService APIs and lifecycle management."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Build a task orchestration utility with cancellation and timeout policy.",
+          "Refactor ad-hoc thread creation into reusable executor service wrapper."
+        ],
+        "focus": "scheduled and batched concurrency."
+      },
+      "study": {
+        "order": 41,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 14,
+          "programming": 10,
+          "total": 24
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 8 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Class Basics",
+      "expectedTags": [
+        "classes"
+      ],
+      "prerequisites": [],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which class declaration compiles with the shown members?",
+          "What does this object construction sequence initialize?"
+        ],
+        "focus": "class shape, members, and object creation fundamentals."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Build a small class with fields, constructor, and method behavior.",
+          "Refactor a loose code snippet into a cohesive class."
+        ],
+        "focus": "basic class design and object state."
+      },
+      "study": {
+        "order": 1,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Interfaces",
+      "expectedTags": [
+        "interfaces"
+      ],
+      "prerequisites": [
+        "Methods"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which interface declaration compiles with these methods?",
+          "What implementation obligation remains for this class?"
+        ],
+        "focus": "interface contracts and implementation rules."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Define an interface and implement it with two small classes.",
+          "Extract a common behavior contract from repeated class methods."
+        ],
+        "focus": "contract-first design."
+      },
+      "study": {
+        "order": 4,
+        "priority": 1,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Abstract Classes",
+      "expectedTags": [
+        "abstract"
+      ],
+      "prerequisites": [
+        "Inheritance"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which abstract method implementation is still required?",
+          "What happens when an abstract class is instantiated directly?"
+        ],
+        "focus": "abstract type constraints and inherited behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Create an abstract base class with one template method.",
+          "Refactor duplicated subclass behavior into an abstract superclass."
+        ],
+        "focus": "shared behavior with enforced specialization."
+      },
+      "study": {
+        "order": 42,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Conditionals",
+      "expectedTags": [
+        "conditionals",
+        "if-else"
+      ],
+      "prerequisites": [
+        "Class Basics"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which branch runs for the shown boolean expression?",
+          "What does this nested if/else return?"
+        ],
+        "focus": "boolean expressions and branch selection."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Implement a validator with explicit if/else branches.",
+          "Refactor nested conditionals into clearer guard clauses."
+        ],
+        "focus": "readable branching behavior."
+      },
+      "study": {
+        "order": 15,
+        "priority": 2,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Functional Interfaces",
+      "expectedTags": [
+        "functional-interfaces"
+      ],
+      "prerequisites": [
+        "Interfaces"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which interface remains functional after these methods are added?",
+          "Which lambda target type is selected by this assignment?"
+        ],
+        "focus": "single abstract method rules and lambda target typing."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Create a custom functional interface and use it with a lambda.",
+          "Replace an anonymous class with a functional-interface expression."
+        ],
+        "focus": "lambda-ready API contracts."
+      },
+      "study": {
+        "order": 43,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Lambdas",
+      "expectedTags": [
+        "lambdas"
+      ],
+      "prerequisites": [
+        "Methods"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which lambda body compiles for this target type?",
+          "What value does this lambda capture from the enclosing scope?"
+        ],
+        "focus": "lambda syntax, capture, and target typing."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Use lambdas to filter and transform a small collection.",
+          "Refactor callback-style code into lambda expressions."
+        ],
+        "focus": "concise behavior passing."
+      },
+      "study": {
+        "order": 44,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Local Variables",
+      "expectedTags": [
+        "var"
+      ],
+      "prerequisites": [
+        "Primitive Types"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which var declaration compiles with the shown initializer?",
+          "What type is inferred for this local variable?"
+        ],
+        "focus": "local variable inference and initializer requirements."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Rewrite local declarations with var where inference stays clear.",
+          "Identify declarations where explicit types are required."
+        ],
+        "focus": "safe local type inference."
+      },
+      "study": {
+        "order": 45,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Loops",
+      "expectedTags": [
+        "loops"
+      ],
+      "prerequisites": [
+        "Conditionals"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "What does this loop print after all iterations?",
+          "Which loop boundary causes an off-by-one result?"
+        ],
+        "focus": "iteration counts and loop boundary reasoning."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Implement indexed and enhanced loops over arrays.",
+          "Fix an off-by-one loop bug with explicit boundary tests."
+        ],
+        "focus": "predictable iteration."
+      },
+      "study": {
+        "order": 46,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "References",
+      "expectedTags": [
+        "references"
+      ],
+      "prerequisites": [
+        "Class Basics"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which expression throws after a null reference is dereferenced?",
+          "What does this aliasing assignment change?"
+        ],
+        "focus": "object references, null, and aliasing."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Refactor null-prone code with explicit guards.",
+          "Demonstrate aliasing effects with two object references."
+        ],
+        "focus": "reference safety and identity reasoning."
+      },
+      "study": {
+        "order": 47,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Resource Management",
+      "expectedTags": [
+        "resources"
+      ],
+      "prerequisites": [
+        "Exceptions"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "What happens when a try-with-resources body throws?",
+          "Which resource is closed first in this declaration list?"
+        ],
+        "focus": "automatic closure and suppressed exception behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Wrap a closeable resource in try-with-resources.",
+          "Refactor manual finally cleanup into automatic resource handling."
+        ],
+        "focus": "safe cleanup under failure."
+      },
+      "study": {
+        "order": 48,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Set Collections",
+      "expectedTags": [
+        "sets"
+      ],
+      "prerequisites": [
+        "Collections"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "What does this set contain after duplicate insertions?",
+          "Which equality rule changes HashSet membership?"
+        ],
+        "focus": "set uniqueness and equality contracts."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Use a Set to remove duplicates while preserving expected behavior.",
+          "Fix a set membership bug caused by an equality mistake."
+        ],
+        "focus": "uniqueness and membership correctness."
+      },
+      "study": {
+        "order": 49,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Static Members",
+      "expectedTags": [
+        "static",
+        "methods"
+      ],
+      "prerequisites": [
+        "Methods"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which static member access compiles from this context?",
+          "What does this static counter contain after two instances?"
+        ],
+        "focus": "class-level state and static member access."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Implement a static factory and instance methods side by side.",
+          "Refactor accidental shared static state into instance state."
+        ],
+        "focus": "class state versus object state."
+      },
+      "study": {
+        "order": 50,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Virtual Threads",
+      "expectedTags": [
+        "virtual-threads"
+      ],
+      "prerequisites": [
+        "Threads"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which thread factory creates virtual threads?",
+          "What happens when many blocking tasks use virtual threads?"
+        ],
+        "focus": "virtual-thread creation and blocking behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Run small independent tasks with virtual threads.",
+          "Compare platform-thread and virtual-thread creation paths."
+        ],
+        "focus": "modern thread execution."
+      },
+      "study": {
+        "order": 51,
+        "priority": 3,
+        "phase": "foundation",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    }
+  ],
+  "studyProfile": {
+    "sprintDays": 12,
+    "sessionsPerDay": 3,
+    "sessionMinutesMin": 25,
+    "sessionMinutesMax": 45,
+    "targetTotalMinutes": 900,
+    "highYieldWindow": 10,
+    "sequencing": "roadmap-ordered, high-yield first, then integration, then advanced-modern support",
+    "dailyCadence": {
+      "focus": "learn-review-practice",
+      "minMinutesPerDay": 75,
+      "targetMinutesPerDay": 90,
+      "maxMinutesPerDay": 120,
+      "reviewFrequency": "every 4 sessions"
+    },
+    "phaseAllocation": [
+      {
+        "phase": "foundation",
+        "orderStart": 1,
+        "orderEnd": 14,
+        "targetMinutes": 360
+      },
+      {
+        "phase": "integration",
+        "orderStart": 15,
+        "orderEnd": 27,
+        "targetMinutes": 360
+      },
+      {
+        "phase": "advanced-modern",
+        "orderStart": 28,
+        "orderEnd": 51,
+        "targetMinutes": 540
+      }
+    ],
+    "mockDrills": {
+      "targetQuestions": 50,
+      "frequency": "end of day 8, 10, 12",
+      "checkpointMinutes": 120
+    }
+  }
+}

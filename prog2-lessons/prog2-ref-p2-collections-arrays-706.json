@@ -1,0 +1,28 @@
+{
+    "schemaVersion":  1,
+    "id":  "prog2-ref-p2-collections-arrays-706",
+    "version":  1,
+    "title":  "Collections and Arrays Utilities - Reference Page 2",
+    "description":  "Use this Java reference to review Collections and Arrays Utilities through compact practice examples.",
+    "language":  "java",
+    "difficulty":  3,
+    "estimatedSeconds":  480,
+    "tags":  [
+                 "java",
+                 "prog2",
+                 "b2",
+                 "source-file",
+                 "collections",
+                 "arrays",
+                 "sorting"
+             ],
+    "prerequisites":  [
+
+                      ],
+    "learningGoals":  [
+                          "Use Collections helpers for sorting, searching, wrappers, and list updates.",
+                          "Use Arrays helpers for primitive arrays, copies, fills, and fixed-size list views."
+                      ],
+    "languageVersion":  "Java 8",
+    "targetCode":  "// LESSON: Collections and Arrays Utilities - Reference Page 2.\n// You will learn: Use Collections and Arrays helpers for sorting, search, and fill.\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.List;\n\nclass CollectionsArraysReference {\n  public static void main(String[] args) {\n    example1CollectionsUtilities();\n    example2BinarySearchAndView();\n    example3ArraysUtilities();\n    example4ArraysAsList();\n  }\n\n  static void example1CollectionsUtilities() {\n    List\u003cString\u003e names = new ArrayList\u003c\u003e(Arrays.asList(\"Bo\", \"Ada\", \"Cy\", \"Ada\"));\n    Collections.sort(names);\n    Collections.reverse(names);\n    int adaCount = Collections.frequency(names, \"Ada\");\n    String minName = Collections.min(names);\n    String maxName = Collections.max(names);\n    Collections.swap(names, 0, 1);\n    System.out.println(names + \" \" + adaCount + \" \" + minName + \" \" + maxName);\n  }\n\n  static void example2BinarySearchAndView() {\n    List\u003cInteger\u003e scores = new ArrayList\u003c\u003e(Arrays.asList(30, 10, 20));\n    Collections.sort(scores);\n    int index = Collections.binarySearch(scores, 20);\n    List\u003cInteger\u003e readOnlyView = Collections.unmodifiableList(scores);\n    scores.add(40);\n    System.out.println(index + \" \" + readOnlyView);\n  }\n\n  static void example3ArraysUtilities() {\n    int[] values = {3, 1, 2};\n    Arrays.sort(values);\n    int found = Arrays.binarySearch(values, 2);\n    int[] copy = Arrays.copyOf(values, 5);\n    Arrays.fill(copy, 3, 5, 9);\n    System.out.println(Arrays.toString(copy) + \" index=\" + found);\n  }\n\n  static void example4ArraysAsList() {\n    String[] words = {\"java\", \"map\", \"list\"};\n    List\u003cString\u003e fixed = Arrays.asList(words);\n    fixed.set(1, \"queue\");\n    boolean same = Arrays.equals(words, new String[] {\"java\", \"queue\", \"list\"});\n    System.out.println(fixed + \" \" + same);\n  }\n}"
+}

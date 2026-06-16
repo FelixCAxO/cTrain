@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-scoped-values-54",
+  "version": 1,
+  "title": "Java Scoped Values",
+  "description": "Share immutable context for a dynamic scope with ScopedValue.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "concurrency",
+    "scoped-values"
+  ],
+  "prerequisites": [
+    "java-virtual-threads-40"
+  ],
+  "learningGoals": [
+    "Bind an immutable value for the duration of a call with ScopedValue (JEP 506, final in Java 25).",
+    "Read the bound value downstream with get() instead of threading it through parameters."
+  ],
+  "languageVersion": "Java 25",
+  "completionChecks": [
+    {
+      "prompt": "What does currentUser() print inside the ScopedValue.where(...).run(...) call?",
+      "choices": [
+        "ada",
+        "null",
+        "It throws because USER is never bound"
+      ],
+      "answerIndex": 0,
+      "explanation": "ScopedValue.where(...).run(...) binds the value for the dynamic extent of that call, then the binding ends."
+    },
+    {
+      "prompt": "What kind of sharing are scoped values designed for?",
+      "choices": [
+        "Immutable context passed down a call tree",
+        "Mutable counters shared by every thread",
+        "Replacing all method parameters"
+      ],
+      "answerIndex": 0,
+      "explanation": "Scoped values provide immutable, bounded context that downstream code can read without mutable shared state."
+    },
+    {
+      "prompt": "What happens if currentUser() is called after ScopedValue.where(...).run(...) has returned?",
+      "choices": [
+        "NoSuchElementException is thrown because USER is no longer bound",
+        "It prints ada because the binding is stored globally",
+        "It returns null because the scoped value was cleared",
+        "It fails to compile because get() is only allowed inside lambdas"
+      ],
+      "answerIndex": 0,
+      "explanation": "The binding lasts only for the dynamic extent of run, so the trap is assuming a thread-local-style leftover value."
+    }
+  ],
+  "targetCode": "// Java 25 - Scoped values (JEP 506, final)\n// Learn: share immutable context for a call and read it with get().\nstatic final ScopedValue<String> USER = ScopedValue.newInstance();\n\nString currentUser() {\n    return USER.get();\n}\n\nvoid handle() {\n    ScopedValue.where(USER, \"ada\").run(() -> System.out.println(currentUser())); // USER is set only inside run()\n}"
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-abstract-class-11",
+  "version": 1,
+  "title": "Java Abstract Class",
+  "description": "Practice abstract classes and concrete overrides.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 115,
+  "tags": [
+    "java",
+    "abstract",
+    "inheritance"
+  ],
+  "prerequisites": [
+    "java-inheritance-extends-10"
+  ],
+  "learningGoals": [
+    "Type an abstract class.",
+    "Override an abstract method."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What happens if code writes new Shape()?",
+      "choices": [
+        "It creates a Shape whose area() returns 0",
+        "It creates a Shape but throws at runtime when area() is called",
+        "It creates an anonymous subclass automatically",
+        "Compilation fails because Shape is abstract and cannot be instantiated"
+      ],
+      "answerIndex": 3,
+      "explanation": "An abstract class cannot be instantiated directly, so new Shape() fails to compile; clients must instantiate a concrete subclass such as Circle."
+    },
+    {
+      "prompt": "What happens if Circle removes its area() override?",
+      "choices": [
+        "Circle inherits a default area() that returns 0",
+        "Circle fails to compile unless it is itself declared abstract",
+        "Circle compiles but throws AbstractMethodError when area() is called",
+        "Circle compiles because abstract methods are optional for subclasses"
+      ],
+      "answerIndex": 1,
+      "explanation": "A concrete class must implement every inherited abstract method; without area() Circle is incomplete, so the compiler rejects it unless Circle is also declared abstract."
+    },
+    {
+      "prompt": "What does new Circle(2).area() return approximately?",
+      "choices": [
+        "4.0",
+        "6.28",
+        "12.57",
+        "Compilation fails because area is abstract in Shape"
+      ],
+      "answerIndex": 2,
+      "explanation": "Circle's override runs the formula Math.PI * radius * radius, so a radius of 2 gives about 12.57."
+    }
+  ],
+  "targetCode": "// Learn: Require subclasses to implement an abstract method.\nabstract class Shape {\n  abstract double area();\n}\n\nclass Circle extends Shape {\n  private final double radius;\n\n  Circle(double radius) {\n    this.radius = radius;\n  }\n\n  @Override\n  double area() {\n    // Circle supplies the area formula required by Shape.\n    return Math.PI * radius * radius;\n  }\n}"
+}

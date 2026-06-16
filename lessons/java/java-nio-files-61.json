@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "java-nio-files-61",
+  "version": 1,
+  "title": "Java NIO File IO",
+  "description": "Build a Path and read or write whole files with the java.nio.file API.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "files",
+    "io"
+  ],
+  "prerequisites": [
+    "java-try-with-resources-18"
+  ],
+  "learningGoals": [
+    "Create a Path and write or read an entire file with Files.writeString and Files.readString (Java 11).",
+    "Query the file system with Files.exists."
+  ],
+  "languageVersion": "Java 11",
+  "completionChecks": [
+    {
+      "prompt": "Which API creates notes in this lesson?",
+      "choices": [
+        "new FileReader(\"notes.txt\")",
+        "URI.create(\"notes.txt\")",
+        "Path.of(\"notes.txt\")"
+      ],
+      "answerIndex": 2,
+      "explanation": "The NIO.2 API uses Path to model file-system locations before Files operations read or write them."
+    },
+    {
+      "prompt": "What does Files.exists(notes) check?",
+      "choices": [
+        "Whether the path currently exists in the file system",
+        "Whether the file has exactly two lines",
+        "Whether the path is a classpath resource"
+      ],
+      "answerIndex": 0,
+      "explanation": "Files.exists asks the file system about that Path; it does not inspect the file contents or classpath."
+    },
+    {
+      "prompt": "What does the println statement print if the write and read succeed?",
+      "choices": [
+        "2 lines, exists=true",
+        "3 lines, exists=true",
+        "2 lines, exists=false",
+        "line one lines, exists=true"
+      ],
+      "answerIndex": 0,
+      "explanation": "String.lines counts the two text lines; the trailing line terminator does not create a third content line."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - NIO.2 file IO\n// Learn: read and write whole files with Path and Files.\n// Path names the file; Files performs the IO.\nPath notes = Path.of(\"notes.txt\");\nFiles.writeString(notes, \"line one\\nline two\\n\");\nString body = Files.readString(notes);\nlong lineCount = body.lines().count();\nSystem.out.println(lineCount + \" lines, exists=\" + Files.exists(notes));"
+}

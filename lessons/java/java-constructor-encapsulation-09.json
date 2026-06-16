@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-constructor-encapsulation-09",
+  "version": 1,
+  "title": "Java Class Encapsulation",
+  "description": "Practice the pre-record immutable class idiom with private fields, a constructor, and an explicit getter.",
+  "language": "java",
+  "difficulty": 2,
+  "estimatedSeconds": 45,
+  "tags": [
+    "java",
+    "constructors",
+    "encapsulation"
+  ],
+  "prerequisites": [
+    "java-map-counter-08"
+  ],
+  "learningGoals": [
+    "Type a constructor for an immutable class.",
+    "Differentiate explicit getters from Java record accessors."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What happens if another class runs account.owner = \"Bo\";?",
+      "choices": [
+        "It updates the owner to Bo",
+        "It updates owner only if getOwner was called first",
+        "It throws at runtime",
+        "Compilation fails because owner is private"
+      ],
+      "answerIndex": 3,
+      "explanation": "owner is private, so it is not accessible outside Account; the assignment fails to compile, and final would also forbid reassignment inside the class."
+    },
+    {
+      "prompt": "How can Account.owner be changed after construction?",
+      "choices": [
+        "It cannot be reassigned by this class because the field is final",
+        "Any caller can assign it because getOwner exists",
+        "It changes whenever getOwner is called",
+        "Only a subclass can change it"
+      ],
+      "answerIndex": 0,
+      "explanation": "final means owner is assigned once during construction and cannot be reassigned; private also hides it from callers, so getOwner only reads it."
+    },
+    {
+      "prompt": "What does new Account(\"Ada\").getOwner() return in the same package?",
+      "choices": [
+        "null",
+        "owner",
+        "Ada",
+        "Compilation fails because the constructor is not public"
+      ],
+      "answerIndex": 2,
+      "explanation": "The constructor assigns the parameter into the private final field with this.owner, and the getter returns that stored value."
+    }
+  ],
+  "targetCode": "// Learn: Initialize private state in a constructor.\nclass Account {\n  private final String owner;\n\n  Account(String owner) {\n    // this.owner selects the field, not the parameter.\n    this.owner = owner;\n  }\n\n  String getOwner() {\n    return owner;\n  }\n}"
+}

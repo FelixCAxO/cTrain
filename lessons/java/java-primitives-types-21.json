@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-primitives-types-21",
+  "version": 1,
+  "title": "Java Primitive Types",
+  "description": "Practice primitive declarations and numeric suffixes.",
+  "language": "java",
+  "difficulty": 1,
+  "estimatedSeconds": 35,
+  "tags": [
+    "java",
+    "primitives",
+    "variables"
+  ],
+  "prerequisites": [
+    "java-class-basic-01"
+  ],
+  "learningGoals": [
+    "Type common primitive declarations.",
+    "Practice boolean and numeric literal syntax."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What does the literal 1_500L assign to timeoutMs?",
+      "choices": [
+        "The int value 1500, which then overflows because of the L suffix",
+        "The double value 1500.0",
+        "The long value 1500; the underscore is ignored and L marks it as long",
+        "Compilation fails because underscores are not allowed inside numeric literals"
+      ],
+      "answerIndex": 2,
+      "explanation": "Underscores between digits are readability separators that the compiler ignores, and the L suffix makes the literal a long, so timeoutMs holds 1500."
+    },
+    {
+      "prompt": "What does enabled hold after boolean enabled = retries > 0; when retries is 3?",
+      "choices": [
+        "true",
+        "false",
+        "3",
+        "Compilation fails because a boolean cannot be assigned a comparison result"
+      ],
+      "answerIndex": 0,
+      "explanation": "The relational expression retries > 0 evaluates to the boolean true when retries is 3, and that boolean value is assigned to enabled."
+    },
+    {
+      "prompt": "What does this print if System.out.println(grade + \":\" + ratio); is added after the snippet?",
+      "choices": [
+        "65:0.75",
+        "A:0.75",
+        "A:75",
+        "Compilation fails because char cannot be concatenated with double"
+      ],
+      "answerIndex": 1,
+      "explanation": "The colon makes the expression a String concatenation before ratio is appended, so the char prints as A instead of its numeric code."
+    }
+  ],
+  "targetCode": "// Learn: Declare common primitive value types.\nint retries = 3;\nlong timeoutMs = 1_500L;\ndouble ratio = 0.75;\n// boolean stores a true-or-false condition.\nboolean enabled = retries > 0;\nchar grade = 'A';"
+}
