@@ -1,6 +1,6 @@
 # cTrain
 
-![cTrain logo](extension/docs/cTrain_logo.png)
+![cTrain logo](docs/cTrain_logo.png)
 
 Practice typing real Java code inside VS Code.
 
@@ -44,8 +44,6 @@ If you used `Ctrl+P`, type `>cTrain` instead of `cTrain`.
 - Mock exams draw from certification-focused lesson completion checks, shuffle answer choices, use the Java SE 25 50-question / 120-minute / 68% pass format, sample by objective, and save objective-level missed-question review.
 - Mock summaries show the rolling last-5 average, whether the 3 consecutive 80% readiness gate is met, and any objectives below 70% in the final-week signal.
 
-## Development
+## Packaging
 
-- Run `cd extension && npm ci` to install dependencies.
-- Run `cd extension && npm test` to verify the extension.
-- Run `cd extension && npm run package` to build `releases/ctrain-0.1.0.vsix`.
+- Run `npm run package` to build the installable `ctrain-0.1.0.vsix`.

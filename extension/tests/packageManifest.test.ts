@@ -57,6 +57,16 @@ interface LessonAuthoringSchema {
 describe('package manifest and synced assets', () => {
   const manifest = parseJson<PackageManifest>(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 
+  it('keeps the repository root limited to README, LICENSE, and folders', () => {
+    const repoRoot = path.resolve(root, '..');
+    const rootFiles = fs.readdirSync(repoRoot, { withFileTypes: true })
+      .filter((entry) => entry.isFile())
+      .map((entry) => entry.name)
+      .sort();
+
+    assert.deepEqual(rootFiles, ['LICENSE', 'README.md']);
+  });
+
   it('declares cTrain branding, commands, settings, and no inline provider contribution', () => {
     assert.equal(manifest.name, 'ctrain');
     assert.equal(manifest.displayName, 'cTrain (Code Training)');
@@ -97,6 +107,7 @@ describe('package manifest and synced assets', () => {
     assert.equal(manifest.scripts['test:bundle'], 'node ./scripts/smoke-bundle.cjs');
     assert.match(manifest.scripts.coverage, /^c8 /);
     assert.equal(manifest.scripts['roadmap:coverage'], 'node scripts/roadmap-coverage.cjs');
+    assert.match(manifest.scripts.package, /--out \.\.\/releases\/ctrain-0\.1\.0\.vsix/);
 
     for (const dependency of ['eslint', 'typescript-eslint', 'eslint-plugin-import', 'c8']) {
       assert.ok(manifest.devDependencies[dependency], `${dependency} should be a dev dependency`);
@@ -128,10 +139,10 @@ describe('package manifest and synced assets', () => {
       branches: 80
     });
 
-    const ciPath = path.join(root, '.github', 'workflows', 'ci.yml');
+    const ciPath = path.join(root, '..', '.github', 'workflows', 'ci.yml');
     assert.equal(fs.existsSync(ciPath), true);
     const ci = fs.readFileSync(ciPath, 'utf8');
-    for (const expected of ['windows-latest', 'ubuntu-latest', 'npm ci', 'npm test', 'npm run test:e2e', 'npm run coverage', 'xvfb-run -a']) {
+    for (const expected of ['windows-latest', 'ubuntu-latest', 'working-directory: extension', 'cache-dependency-path: extension/package-lock.json', 'npm ci', 'npm test', 'npm run test:e2e', 'npm run coverage', 'xvfb-run -a', 'path: extension/coverage']) {
       assert.ok(ci.includes(expected), `ci.yml should include ${expected}`);
     }
   });
@@ -284,8 +295,7 @@ describe('package manifest and synced assets', () => {
     for (const expected of ['.vscode/']) {
       assert.ok(gitIgnore.includes(expected), `.gitignore should include ${expected}`);
     }
-    assert.ok(gitIgnore.includes('*.vsix'), '.gitignore should ignore generated VSIX files by default');
-    assert.ok(gitIgnore.includes('!releases/*.vsix'), '.gitignore should allow release VSIX artifacts to be tracked');
+    assert.ok(gitIgnore.includes('*.vsix'), '.gitignore should ignore generated extension-workspace VSIX files by default');
   });
 
   it('presents a minimal first-use guide on the packaged extension page', () => {

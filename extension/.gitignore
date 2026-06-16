@@ -3,8 +3,6 @@ dist/
 out/
 coverage/
 *.vsix
-!releases/
-!releases/*.vsix
 *.log
 .vscode-test/
 .vscode/

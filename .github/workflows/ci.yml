@@ -8,6 +8,9 @@ jobs:
   test:
     name: Test (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: extension
     strategy:
       fail-fast: false
       matrix:
@@ -22,6 +25,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: extension/package-lock.json
 
       - run: npm ci
 
@@ -41,5 +45,5 @@ jobs:
         if: always()
         with:
           name: coverage-${{ matrix.os }}
-          path: coverage
+          path: extension/coverage
           if-no-files-found: ignore

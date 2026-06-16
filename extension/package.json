@@ -35,7 +35,7 @@
     "coverage": "c8 --extension .ts --include src/**/*.ts --reporter=text --reporter=lcov mocha --require ts-node/register \"tests/**/*.test.ts\"",
     "test:e2e": "npm run build && tsc -p . && node ./out/tests/e2e/run.js",
     "test:all": "npm test && npm run test:e2e",
-    "package": "npm run clean && npm run compile && npm run build && vsce package --no-dependencies --allow-missing-repository"
+    "package": "npm run clean && npm run compile && npm run build && vsce package --no-dependencies --allow-missing-repository --out ../releases/ctrain-0.1.0.vsix"
   },
   "contributes": {
     "commands": [
@@ -81,7 +81,7 @@
     "viewsWelcome": [
       {
         "view": "cTrain.lessons",
-        "contents": "Start a focused typing session or practice the active file/selection.\n[Start Lesson](command:cTrain.startLesson)\n[Practice Current File](command:cTrain.practiceCurrentFile)\n[Read the lesson guide](https://github.com/FelixCAxO/cTrain/blob/main/docs/lessons.md)"
+        "contents": "Start a focused typing session or practice the active file/selection.\n[Start Lesson](command:cTrain.startLesson)\n[Practice Current File](command:cTrain.practiceCurrentFile)\n[Read the lesson guide](https://github.com/FelixCAxO/cTrain/blob/main/extension/docs/lessons.md)"
       }
     ],
     "menus": {

@@ -11,7 +11,17 @@ if not defined VSIX_NAME (
   exit /b 1
 )
 
-set "VSIX=%CD%\%VSIX_NAME%"
+set "RELEASE_DIR=%~dp0..\releases"
+set "VSIX=%RELEASE_DIR%\%VSIX_NAME%"
+
+if not exist "%RELEASE_DIR%" (
+  mkdir "%RELEASE_DIR%"
+  if errorlevel 1 (
+    echo Failed to create release directory "%RELEASE_DIR%".
+    popd
+    exit /b 1
+  )
+)
 
 if exist "%VSIX%" (
   echo Removing old "%VSIX%"
