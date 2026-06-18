@@ -30,6 +30,28 @@
       ],
       "answerIndex": 0,
       "explanation": "The builder sets version(HttpClient.Version.HTTP_3), asking the client to use HTTP/3 when available."
+    },
+    {
+      "prompt": "What does response.version() print after the request completes?",
+      "choices": [
+        "Always HTTP_3, even if the server negotiated a fallback",
+        "The protocol version actually used for the response",
+        "The Java language version",
+        "The URI scheme"
+      ],
+      "answerIndex": 1,
+      "explanation": "The request asks for HTTP/3, but response.version() reports the negotiated protocol that the server and client actually used."
+    },
+    {
+      "prompt": "Which statement separates this Java 26 HTTP/3 lesson from preview APIs?",
+      "choices": [
+        "HTTP/3 support is requested through HttpClient.Version.HTTP_3 and is final in Java 26",
+        "It requires --enable-preview because HttpClient is preview-only",
+        "It replaces URI with URL in all requests",
+        "It can only send POST requests"
+      ],
+      "answerIndex": 0,
+      "explanation": "HTTP/3 support is a final Java 26 HttpClient feature. Preview flags are not the mechanism; the code opts in through the client version."
     }
   ],
   "targetCode": "// Java 26 - HTTP/3 HttpClient (JEP 517, final)\n// Learn: opt a request into HTTP/3 with HttpClient.Version.HTTP_3.\nimport java.net.URI;\nimport java.net.http.HttpClient;\nimport java.net.http.HttpRequest;\nimport java.net.http.HttpResponse;\n\nHttpClient client = HttpClient.newBuilder()\n    // version requests HTTP/3 for this client.\n    .version(HttpClient.Version.HTTP_3)\n    .build();\nHttpRequest request = HttpRequest.newBuilder(URI.create(\"https://openjdk.org/\"))\n    .GET()\n    .build();\nHttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());\nSystem.out.println(response.version());"

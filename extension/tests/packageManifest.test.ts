@@ -260,7 +260,7 @@ describe('package manifest and synced assets', () => {
     assert.ok(lessonsDoc.includes('Java 14'));
     assert.ok(lessonsDoc.includes('Java 17'));
     assert.ok(lessonsDoc.includes('Java 21'));
-    assert.ok(lessonsDoc.includes('82 Java lessons'));
+    assert.ok(lessonsDoc.includes('89 Java lessons'));
     assert.ok(lessonsDoc.includes('36 Prog2 reference lessons'));
     assert.equal(fs.existsSync(path.join(root, 'docs', 'prog2-liang-exercise-manifest.json')), false);
     assert.doesNotMatch(lessonsDoc, /lessons\/cpp\//);
@@ -307,7 +307,7 @@ describe('package manifest and synced assets', () => {
     assert.ok(readme.includes('cTrain: Start Lesson'));
     assert.ok(readme.includes('cTrain: Practice Current File'));
     assert.ok(readme.includes('cTrain: Mock Exam'));
-    assert.ok(readme.includes('82 Java typing lessons'));
+    assert.ok(readme.includes('89 Java typing lessons'));
     assert.ok(readme.includes('Typing tips'));
   });
 });

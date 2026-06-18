@@ -404,6 +404,9 @@
         ],
         "focus": "state initialization correctness."
       },
+      "implementedLessonIds": [
+        "java-initializer-blocks-85"
+      ],
       "study": {
         "order": 11,
         "priority": 1,
@@ -691,7 +694,8 @@
         "focus": "functional data processing and collectors."
       },
       "implementedLessonIds": [
-        "java-stream-lazy-pipeline-80"
+        "java-stream-lazy-pipeline-80",
+        "java-primitive-streams-89"
       ],
       "study": {
         "order": 18,
@@ -977,7 +981,8 @@
         "focus": "text handling confidence."
       },
       "implementedLessonIds": [
-        "java-string-pool-equality-82"
+        "java-string-pool-equality-82",
+        "java-stringbuilder-mutation-87"
       ],
       "study": {
         "order": 24,
@@ -1216,6 +1221,9 @@
         ],
         "focus": "modular project organization."
       },
+      "implementedLessonIds": [
+        "java-module-services-86"
+      ],
       "study": {
         "order": 29,
         "priority": 3,
@@ -1588,6 +1596,9 @@
         ],
         "focus": "safe and efficient input/output."
       },
+      "implementedLessonIds": [
+        "java-console-input-91"
+      ],
       "study": {
         "order": 37,
         "priority": 3,
@@ -1728,6 +1739,9 @@
         ],
         "focus": "practical concurrent API use."
       },
+      "implementedLessonIds": [
+        "java-concurrent-hashmap-90"
+      ],
       "study": {
         "order": 40,
         "priority": 3,
@@ -1817,6 +1831,9 @@
         ],
         "focus": "basic class design and object state."
       },
+      "implementedLessonIds": [
+        "java-nested-classes-84"
+      ],
       "study": {
         "order": 1,
         "priority": 1,
@@ -2178,6 +2195,9 @@
         ],
         "focus": "reference safety and identity reasoning."
       },
+      "implementedLessonIds": [
+        "java-gc-eligibility-88"
+      ],
       "study": {
         "order": 47,
         "priority": 3,
@@ -2314,6 +2334,9 @@
         ],
         "focus": "class state versus object state."
       },
+      "implementedLessonIds": [
+        "java-initializer-blocks-85"
+      ],
       "study": {
         "order": 50,
         "priority": 3,
@@ -2379,6 +2402,155 @@
           "Explain the same behavior with a different example"
         ]
       }
+    },
+    {
+      "roadmapNode": "Packaging Artifacts",
+      "expectedTags": [
+        "modules",
+        "jars",
+        "jlink"
+      ],
+      "prerequisites": [
+        "Modules"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which tool creates a JAR versus a runtime image?",
+          "Which command-line option supplies module roots to jlink?"
+        ],
+        "focus": "JAR creation, jlink images, and module-path launch behavior."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Package compiled classes into a modular JAR and launch it from the module path.",
+          "Build a small jlink runtime image for a named application module."
+        ],
+        "focus": "command-line packaging artifacts for Java 25 certification."
+      },
+      "implementedLessonIds": [
+        "java-packaging-artifacts-92"
+      ],
+      "study": {
+        "order": 52,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Unnamed Automatic Modules",
+      "expectedTags": [
+        "modules",
+        "unnamed-modules",
+        "automatic-modules"
+      ],
+      "prerequisites": [
+        "Packaging Artifacts"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which JAR becomes an automatic module on the module path?",
+          "Which class-path code belongs to the unnamed module?"
+        ],
+        "focus": "migration traps around class path, module path, and derived module names."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Move a non-modular JAR between class path and module path and explain the resolution change.",
+          "Add Automatic-Module-Name to a manifest and document the stable module name."
+        ],
+        "focus": "automatic and unnamed module migration behavior."
+      },
+      "implementedLessonIds": [
+        "java-packaging-artifacts-92"
+      ],
+      "study": {
+        "order": 53,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
+    },
+    {
+      "roadmapNode": "Stream Partitioning",
+      "expectedTags": [
+        "streams",
+        "partitioning"
+      ],
+      "prerequisites": [
+        "Streams"
+      ],
+      "flashcards": {
+        "minimumCount": 6,
+        "questionPatterns": [
+          "Which partitioningBy result keys are possible?",
+          "Which downstream collector changes list partitions into counts?"
+        ],
+        "focus": "Collectors.partitioningBy, Boolean keys, and downstream collector traps."
+      },
+      "programmingExercises": {
+        "minimumCount": 2,
+        "exercisePatterns": [
+          "Partition domain objects by a predicate and assert the true and false buckets.",
+          "Add a downstream counting collector and compare the resulting map type."
+        ],
+        "focus": "Boolean stream partitions and collector result types."
+      },
+      "implementedLessonIds": [
+        "java-stream-partitioning-93"
+      ],
+      "study": {
+        "order": 54,
+        "priority": 3,
+        "phase": "advanced-modern",
+        "studyMode": "balanced",
+        "estimatedMinutes": {
+          "flashcards": 10,
+          "programming": 10,
+          "total": 20
+        },
+        "minimumSessions": {
+          "flashcards": 1,
+          "programming": 1
+        },
+        "exitCriteria": [
+          "Reach 6 active-recall checks",
+          "Submit 2 coding drills",
+          "Explain the same behavior with a different example"
+        ]
+      }
     }
   ],
   "studyProfile": {
@@ -2412,7 +2584,7 @@
       {
         "phase": "advanced-modern",
         "orderStart": 28,
-        "orderEnd": 51,
+        "orderEnd": 54,
         "targetMinutes": 540
       }
     ],

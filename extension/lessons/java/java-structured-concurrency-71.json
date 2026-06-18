@@ -32,6 +32,28 @@
       ],
       "answerIndex": 2,
       "explanation": "Structured concurrency treats forked work as a scoped unit; join waits for the subtasks before results are read."
+    },
+    {
+      "prompt": "What does user.get() read after findUser() completes successfully?",
+      "choices": [
+        "The String result produced by the forked subtask",
+        "The thread priority of the current carrier thread",
+        "A serialized JSON document",
+        "The value of a scoped preview flag"
+      ],
+      "answerIndex": 0,
+      "explanation": "The Subtask returned by scope.fork holds the callable result. After join, get() reads the value from findUser()."
+    },
+    {
+      "prompt": "Which command-line treatment does this Java 26 feature still need?",
+      "choices": [
+        "--enable-preview because structured concurrency remains preview",
+        "--add-modules java.applet because applets were restored",
+        "--illegal-final-field-mutation=allow",
+        "--module-source-path for every stream pipeline"
+      ],
+      "answerIndex": 0,
+      "explanation": "The lesson explicitly marks structured concurrency as preview in Java 26, so code must be compiled and run with preview enabled."
     }
   ],
   "targetCode": "// Java 26 - Structured concurrency (PREVIEW, --enable-preview)\n// Learn: fork subtasks and join them as one unit, then read each result.\nimport java.util.concurrent.StructuredTaskScope;\nimport java.util.concurrent.StructuredTaskScope.Subtask;\n\nstatic String findUser() { return \"ada\"; }\nstatic int fetchOrder() { return 7; }\n\ntry (var scope = StructuredTaskScope.open()) {\n    Subtask<String> user = scope.fork(() -> findUser()); // runs concurrently\n    Subtask<Integer> order = scope.fork(() -> fetchOrder());\n    scope.join();\n    System.out.println(user.get() + \" \" + order.get());\n}"

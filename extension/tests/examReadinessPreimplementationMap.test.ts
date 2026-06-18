@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, it } from 'mocha';
+import { builtInLessons } from '../src/lessons/builtInLessons';
 
 interface RoadmapRow {
   roadmapNode: string;
@@ -55,6 +56,7 @@ interface PreImplementationArea {
   prerequisites: string[];
   flashcards: FlashcardPlan;
   programmingExercises: ProgrammingPlan;
+  implementedLessonIds?: string[];
   study: AreaStudyPlan;
 }
 
@@ -208,6 +210,27 @@ describe('Java 25 certification pre-implementation exercise map', () => {
       .map((row) => row.roadmapNode);
 
     assert.deepEqual(missing, []);
+  });
+
+  it('keeps implemented lesson tracking synced with built-in lessons and promoted docs', () => {
+    const builtInIds = new Set(builtInLessons.map((lesson) => lesson.id));
+    const implementedIds = new Set(plan.areas.flatMap((area) => area.implementedLessonIds ?? []));
+
+    for (const lessonId of implementedIds) {
+      assert.ok(builtInIds.has(lessonId), `${lessonId} should exist as a built-in lesson`);
+    }
+
+    const lessonsDoc = fs.readFileSync(path.join(root, 'docs', 'lessons.md'), 'utf8');
+    const start = lessonsDoc.indexOf('When a planned item is promoted');
+    const end = lessonsDoc.indexOf('\n\nThe map includes', start);
+    const promotedSection = lessonsDoc.slice(start, end);
+    const documentedPromotions = [...promotedSection.matchAll(/`(java-[a-z0-9-]+-\d{2,})`/g)]
+      .map((match) => match[1]!);
+
+    assert.ok(documentedPromotions.length >= 16, 'docs/lessons.md should list promoted pre-map lessons');
+    for (const lessonId of documentedPromotions) {
+      assert.ok(implementedIds.has(lessonId), `${lessonId} should be recorded in implementedLessonIds`);
+    }
   });
 
   it('requires each plan entry to define at least one learning dependency for sequencing', () => {

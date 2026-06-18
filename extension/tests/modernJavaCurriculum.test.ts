@@ -16,9 +16,8 @@ interface ModernLessonSpec {
 // The Java 25 block (ids 50-69, growing at 80+ now that 50-69 is full) covers the Oracle
 // Java SE 25 (1Z0-831) objectives that the original 30-lesson seed set did not yet reach, plus
 // the four language features finalized in JDK 25 and promoted pre-implementation-map drills.
-// The Java 26 block (ids 70-79) demonstrates the headline JDK 26 features; everything except
-// HTTP/3 is still a preview feature and must be labelled as such so the curriculum stays
-// honest about what is and is not on the certification exam.
+// The Java 26 block (ids 70-79) demonstrates the headline JDK 26 features and labels preview
+// or incubator status without treating them as Java SE 25 certification material.
 const java25Lessons: ModernLessonSpec[] = [
   { id: 'java-instance-main-50', languageVersion: 'Java 25', difficulty: 2, preview: false, requiredTags: ['java', 'methods'], tokens: ['void main(', 'IO.'] },
   { id: 'java-flexible-constructors-51', languageVersion: 'Java 25', difficulty: 3, preview: false, requiredTags: ['java', 'constructors'], tokens: ['super(', 'throw'] },
@@ -51,7 +50,9 @@ const java25Lessons: ModernLessonSpec[] = [
   { id: 'java-gc-eligibility-88', languageVersion: 'Java 8', difficulty: 3, preview: false, requiredTags: ['java', 'references'], tokens: ['first = null', 'System.gc()'] },
   { id: 'java-primitive-streams-89', languageVersion: 'Java 8', difficulty: 3, preview: false, requiredTags: ['java', 'streams'], tokens: ['IntStream', '.mapToInt(', '.boxed()'] },
   { id: 'java-concurrent-hashmap-90', languageVersion: 'Java 8', difficulty: 3, preview: false, requiredTags: ['java', 'collections', 'concurrency'], tokens: ['ConcurrentHashMap', '.merge(', '.computeIfAbsent('] },
-  { id: 'java-console-input-91', languageVersion: 'Java 8', difficulty: 3, preview: false, requiredTags: ['java', 'io'], tokens: ['Scanner', 'System.console()', 'readLine('] }
+  { id: 'java-console-input-91', languageVersion: 'Java 8', difficulty: 3, preview: false, requiredTags: ['java', 'io'], tokens: ['Scanner', 'System.console()', 'readLine('] },
+  { id: 'java-packaging-artifacts-92', languageVersion: 'Java 25', difficulty: 4, preview: false, requiredTags: ['java', 'modules', 'jars', 'jlink', 'unnamed-modules', 'automatic-modules'], tokens: ['jar --create', 'jlink', 'Automatic-Module-Name'] },
+  { id: 'java-stream-partitioning-93', languageVersion: 'Java 8', difficulty: 3, preview: false, requiredTags: ['java', 'streams', 'collectors', 'partitioning'], tokens: ['Collectors.partitioningBy', 'Map<Boolean, List<Task>>', 'Map<Boolean, Long>'] }
 ];
 
 const java26Lessons: ModernLessonSpec[] = [
@@ -61,7 +62,12 @@ const java26Lessons: ModernLessonSpec[] = [
   { id: 'java-structured-concurrency-71', languageVersion: 'Java 26', difficulty: 4, preview: true, requiredTags: ['java', 'concurrency', 'structured-concurrency', 'preview'], tokens: ['StructuredTaskScope', 'static String findUser()', 'Subtask<String>'] },
   { id: 'java-lazy-constants-72', languageVersion: 'Java 26', difficulty: 4, preview: true, requiredTags: ['java', 'concurrency', 'lazy-constants', 'preview'], tokens: ['LazyConstant', '.get()', 'System.getLogger'] },
   { id: 'java-primitive-patterns-73', languageVersion: 'Java 26', difficulty: 4, preview: true, requiredTags: ['java', 'pattern-matching', 'switch', 'preview'], tokens: ['case int '] },
-  { id: 'java-pem-encoding-74', languageVersion: 'Java 26', difficulty: 4, preview: true, requiredTags: ['java', 'security', 'io', 'preview'], tokens: ['PEMEncoder', 'PublicKey publicKey ='] }
+  { id: 'java-pem-encoding-74', languageVersion: 'Java 26', difficulty: 4, preview: true, requiredTags: ['java', 'security', 'io', 'preview'], tokens: ['PEMEncoder', 'PublicKey publicKey ='] },
+  { id: 'java-final-fields-75', languageVersion: 'Java 26', difficulty: 4, preview: false, requiredTags: ['java', 'final-fields'], tokens: ['final int amount', 'getDeclaredField("amount")', 'field.set(invoice, 99)'] },
+  { id: 'java-applet-removal-76', languageVersion: 'Java 26', difficulty: 3, preview: false, requiredTags: ['java', 'applets'], tokens: ['java.applet.Applet', 'ClassNotFoundException', 'System.out.println("removed")'] },
+  { id: 'java-aot-object-caching-77', languageVersion: 'Java 26', difficulty: 4, preview: false, requiredTags: ['java', 'aot', 'gc'], tokens: ['-XX:+AOTStreamableObjects', 'GC-agnostic', 'ZGC'] },
+  { id: 'java-g1-synchronization-78', languageVersion: 'Java 26', difficulty: 4, preview: false, requiredTags: ['java', 'gc', 'g1'], tokens: ['UseG1GC', 'card table', 'write barrier'] },
+  { id: 'java-vector-api-79', languageVersion: 'Java 26', difficulty: 4, preview: false, requiredTags: ['java', 'vector-api'], tokens: ['jdk.incubator.vector', 'FloatVector.SPECIES_PREFERRED', 'loopBound'] }
 ];
 
 const modernLessons = [...java25Lessons, ...java26Lessons];
@@ -119,12 +125,12 @@ describe('modern Java certification curriculum', () => {
     }
   });
 
-  it('ships all 32 Java 25 exam-prep lessons and 5 Java 26 preview lessons', () => {
+  it('ships all 34 Java 25 exam-prep lessons and 10 Java 26 feature demos', () => {
     for (const spec of modernLessons) {
       assert.ok(lessonsById.has(spec.id), `${spec.id} should be a built-in lesson`);
     }
 
-    assert.equal(builtInLessons.filter((lesson) => lesson.languageVersion === 'Java 26').length, 5);
+    assert.equal(builtInLessons.filter((lesson) => lesson.languageVersion === 'Java 26').length, 10);
     assert.ok(
       builtInLessons.filter((lesson) => lesson.languageVersion === 'Java 25').length >= 4,
       'at least the JDK 25 language-feature lessons should target Java 25'

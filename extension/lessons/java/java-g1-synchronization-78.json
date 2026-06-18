@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-g1-synchronization-78",
+  "version": 1,
+  "title": "Java G1 Synchronization",
+  "description": "Review the Java 26 G1 throughput change that reduces synchronization in write barriers.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "gc",
+    "g1"
+  ],
+  "prerequisites": [
+    "java-gc-eligibility-88"
+  ],
+  "learningGoals": [
+    "Recognize JEP 522 as a HotSpot implementation change, not a source-code API.",
+    "Connect G1 write barriers and card-table updates to reduced synchronization overhead."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "What is the main goal of the Java 26 G1 synchronization change?",
+      "choices": [
+        "Reduce synchronization between application and GC threads to improve throughput",
+        "Expose a new java.gc.G1 API",
+        "Make G1 a preview feature",
+        "Remove the card table entirely"
+      ],
+      "answerIndex": 0,
+      "explanation": "JEP 522 improves G1 internals by reducing synchronization in card-table work and write barriers. It is not a new source-level API."
+    },
+    {
+      "prompt": "What does -XX:+UseG1GC do in this lesson?",
+      "choices": [
+        "Selects the G1 collector at JVM startup",
+        "Compiles a module declaration",
+        "Enables primitive type patterns",
+        "Creates an automatic module name"
+      ],
+      "answerIndex": 0,
+      "explanation": "-XX:+UseG1GC is a launcher flag that selects G1. The Java 26 improvement changes G1 internals behind that choice."
+    },
+    {
+      "prompt": "Which phrase best describes the feature's learner-facing impact?",
+      "choices": [
+        "Source code must import java.gc.CardTable",
+        "Existing G1 users may see throughput improvements without changing source code",
+        "Every application must switch away from G1",
+        "The mock exam treats it as Java SE 25 packaging content"
+      ],
+      "answerIndex": 1,
+      "explanation": "The feature is an implementation improvement. It keeps user interaction stable while reducing synchronization in G1's internal write-barrier/card-table path."
+    }
+  ],
+  "targetCode": "// Java 26 - G1 synchronization reduction (JEP 522)\n// Learn: G1 improves throughput by simplifying write barrier coordination.\nString launch = \"java -XX:+UseG1GC App\";\nString rememberedSet = \"card table\"; // G1 tracks dirty regions here.\nString barrier = \"write barrier\";\nString oldCost = \"application threads synchronize with optimizer threads\";\nString java26Change = \"two card tables reduce \" + oldCost;\nSystem.out.println(launch);\nSystem.out.println(rememberedSet + \" via \" + barrier);\nSystem.out.println(java26Change);"
+}

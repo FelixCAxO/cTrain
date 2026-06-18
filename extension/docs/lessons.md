@@ -16,7 +16,7 @@ The TypeScript validator remains authoritative at runtime. `lessons/_schema/less
 
 Use `learningGoals` for learner-facing outcomes shown in the picker and lesson tree tooltip. Use `defects[]` only for fix-the-code lessons; each entry is `{ "line": number, "hint": string }`, where `line` is one-based against the lesson source after any generated `// LESSON:` header is removed. Use `completionChecks[]` for exam-shaped recall prompts shown after completion and pooled by `cTrain: Mock Exam`; each check is `{ "prompt": string, "choices": string[], "answerIndex": number, "explanation": string }`, with a zero-based `answerIndex`. Runtime UI shuffles displayed choices and maps selections back to the authored answer index, so authoring order should stay readable but cannot be used as an answer cue. Every in-scope Java SE 25 roadmap row maps to at least one non-preview lesson with at least two completion checks; `tests/lessonRoadmapContent.test.ts` and `npm run roadmap:coverage -- --check` enforce that objective coverage. Every in-scope roadmap row also has at least three eligible pooled questions, and the built-in mock bank keeps at least 200 eligible questions so two 50-question mocks can be drawn from a meaningfully deeper pool. At least half of the pooled questions must be code-analysis prompts ("what prints", "does it compile", or "what is thrown"), and every certification lesson ships at least one such check, so practice mirrors the code-reading style of the Oracle Java SE 25 (1Z0-831) exam. `tests/lessonValidator.test.ts` keeps the pooled answer positions from clustering at a single index.
 
-The public seed set ships 82 Java lessons. Lessons `01`-`45` are the foundational track; lessons `50`-`69` plus the `80`+ growth ids form the Java 25 Cert Exam category aligned with the Oracle Java SE 25 (1Z0-831) objectives (the original `50`-`69` band is full, so promoted cert exercises and gap-closure lessons continue at `80`+); and lessons `70`-`74` demonstrate headline Java 26 features, with `75`-`79` reserved for future Java 26 demos. The Java 26 preview features (structured concurrency, lazy constants, primitive type patterns, and PEM encoding) carry the `preview` tag and flag their status in their learning goals, because preview features are not part of the certification exam:
+The public seed set ships 89 Java lessons. Lessons `01`-`45` are the foundational track; lessons `50`-`69` plus the `80`+ growth ids form the Java 25 Cert Exam category aligned with the Oracle Java SE 25 (1Z0-831) objectives (the original `50`-`69` band is full, so promoted cert exercises and gap-closure lessons continue at `80`+); and lessons `70`-`79` demonstrate headline Java 26 features. The Java 26 preview features (structured concurrency, lazy constants, primitive type patterns, and PEM encoding) carry the `preview` tag, the Vector API lesson flags its incubator module, and all Java 26 side-track lessons stay out of the certification exam:
 
 - `java-class-basic-01`
 - `java-method-return-02`
@@ -95,11 +95,18 @@ The public seed set ships 82 Java lessons. Lessons `01`-`45` are the foundationa
 - `java-primitive-streams-89`
 - `java-concurrent-hashmap-90`
 - `java-console-input-91`
+- `java-packaging-artifacts-92`
+- `java-stream-partitioning-93`
 - `java-http3-client-70`
 - `java-structured-concurrency-71`
 - `java-lazy-constants-72`
 - `java-primitive-patterns-73`
 - `java-pem-encoding-74`
+- `java-final-fields-75`
+- `java-applet-removal-76`
+- `java-aot-object-caching-77`
+- `java-g1-synchronization-78`
+- `java-vector-api-79`
 
 Every public snippet lesson opens its `targetCode` with a concise teaching comment and includes at least one short line-level concept note. Java 24/25/26 lessons (ids `50` and above) keep their two-line objective header - `// Java 24 ...`, `// Java 25 ...`, or `// Java 26 ...` followed by a `// Learn: ...` line - and preview lessons say `PREVIEW` in that header. cTrain auto-types `//` comments and excludes them from typing metrics, so the learner reads what the lesson teaches without typing the header.
 
@@ -122,14 +129,14 @@ npm run roadmap:coverage
 npm run roadmap:coverage -- --check
 ```
 
-The script reads `docs/roadmap-coverage.tsv` by default and prints JSON objects shaped as `{ "track": "...", "roadmapNode": "...", "coveredBy": ["lesson-id"], "examReadyBy": ["lesson-id"], "minExamReadyLessons": 1, "minCompletionChecksPerLesson": 1 }`. The current roadmap file intentionally contains Java rows only. Rows with non-zero readiness columns require non-preview lessons with enough `completionChecks`, so Java 26 preview features do not count as Oracle Java SE 25 (1Z0-831) exam-ready coverage. `docs/oracle-1z0-831-objective-map.md` reconciles Oracle's published objective areas and sub-objectives against the mock-exam blueprint plus roadmap rows. Mock exams draw 50 certification-focused questions from that completion-check bank, excluding preview, Java 26, and HTTP client side-track lessons by default; they keep a 120-minute timer, sample by objective, persist objective-level results, and show missed-question explanations.
+The script reads `docs/roadmap-coverage.tsv` by default and prints JSON objects shaped as `{ "track": "...", "roadmapNode": "...", "coveredBy": ["lesson-id"], "examReadyBy": ["lesson-id"], "minExamReadyLessons": 1, "minCompletionChecksPerLesson": 1 }`. The current roadmap file intentionally contains Java rows only. Rows with non-zero readiness columns require non-preview lessons with enough `completionChecks`, so Java 26 side-track features do not count as Oracle Java SE 25 (1Z0-831) exam-ready coverage. `docs/oracle-1z0-831-objective-map.md` reconciles Oracle's published objective areas and sub-objectives against the mock-exam blueprint plus roadmap rows. Mock exams draw 50 certification-focused questions from that completion-check bank, excluding preview, Java 26, and HTTP client side-track lessons by default; they keep a 120-minute timer, sample by objective, persist objective-level results, and show missed-question explanations.
 
 ## Java 25 pre-implementation backlog
 
 The pre-implementation map used for future exam content is `docs/java25-cert-preimplementation-map.json`.
 It is isolated from live lesson execution and is tied to `docs/roadmap-coverage.tsv`.
 It specifies flashcard and coding-exercise planning for each exam-ready Java 25 roadmap node.
-When a planned item is promoted into the public curriculum, the roadmap node records it in `implementedLessonIds`; the promoted exercises so far are `java-generics-wildcard-copy-68` (Generics), `java-optional-lazy-fallback-69` (Optional), `java-stream-lazy-pipeline-80` (Streams), `java-checked-numeric-casts-81` (Numeric Casting Overflow Math), `java-string-pool-equality-82` (Strings), and `java-mutable-hash-keys-83` (Equals HashCode Comparable). The gap-closure lessons `java-nested-classes-84`, `java-initializer-blocks-85`, `java-module-services-86`, `java-stringbuilder-mutation-87`, `java-gc-eligibility-88`, `java-primitive-streams-89`, `java-concurrent-hashmap-90`, and `java-console-input-91` turn previously missing or thin Oracle 1Z0-831 sub-objectives into dedicated non-preview lessons with at least two completion checks and at least one code-trace prompt.
+When a planned item is promoted into the public curriculum, the roadmap node records it in `implementedLessonIds`; the promoted exercises so far are `java-generics-wildcard-copy-68` (Generics), `java-optional-lazy-fallback-69` (Optional), `java-stream-lazy-pipeline-80` (Streams), `java-checked-numeric-casts-81` (Numeric Casting Overflow Math), `java-string-pool-equality-82` (Strings), and `java-mutable-hash-keys-83` (Equals HashCode Comparable). The gap-closure lessons `java-nested-classes-84`, `java-initializer-blocks-85`, `java-module-services-86`, `java-stringbuilder-mutation-87`, `java-gc-eligibility-88`, `java-primitive-streams-89`, `java-concurrent-hashmap-90`, `java-console-input-91`, `java-packaging-artifacts-92`, and `java-stream-partitioning-93` turn previously missing or thin Oracle 1Z0-831 sub-objectives into dedicated non-preview lessons with at least two completion checks and at least one code-trace prompt.
 
 The map includes `studyProfile`, so you can run a focused 12-day sprint without changing lesson assets:
 - `sprintDays`: total sprint length (12 days in the current plan)

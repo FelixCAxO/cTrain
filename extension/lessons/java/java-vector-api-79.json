@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-vector-api-79",
+  "version": 1,
+  "title": "Java Vector API",
+  "description": "Practice the Java 26 Vector API incubator shape with FloatVector.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 220,
+  "tags": [
+    "java",
+    "vector-api"
+  ],
+  "prerequisites": [
+    "java-arrays-init-25"
+  ],
+  "learningGoals": [
+    "Use VectorSpecies and FloatVector to express lane-wise numeric operations.",
+    "Recognize that the Java 26 Vector API is an incubator module, enabled with --add-modules jdk.incubator.vector."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "Which module must be added to compile this Vector API incubator lesson?",
+      "choices": [
+        "java.desktop",
+        "jdk.incubator.vector",
+        "java.compiler",
+        "jdk.httpserver"
+      ],
+      "answerIndex": 1,
+      "explanation": "The Vector API lives in the jdk.incubator.vector module, so code using FloatVector needs that incubator module on the module graph."
+    },
+    {
+      "prompt": "What does species.loopBound(left.length) protect?",
+      "choices": [
+        "It computes the vector-width-safe upper bound before the scalar tail loop",
+        "It creates a JAR manifest",
+        "It enables deep reflection over final fields",
+        "It removes the need for arrays"
+      ],
+      "answerIndex": 0,
+      "explanation": "loopBound returns the largest index range that can be processed in complete vector chunks, leaving remaining elements for scalar handling."
+    },
+    {
+      "prompt": "What does va.add(vb).intoArray(result, i) do?",
+      "choices": [
+        "Adds two vectors lane by lane and stores the result chunk",
+        "Links a custom runtime image",
+        "Partitions stream values into Boolean keys",
+        "Forces G1 card-table synchronization"
+      ],
+      "answerIndex": 0,
+      "explanation": "FloatVector operations work lane-wise. add combines corresponding lanes and intoArray writes that vector chunk back to the result array."
+    }
+  ],
+  "targetCode": "// Java 26 - Vector API incubator (JEP 529)\n// Learn: process numeric arrays with jdk.incubator.vector lanes.\nimport jdk.incubator.vector.FloatVector;\nimport jdk.incubator.vector.VectorSpecies;\n\nVectorSpecies<Float> species = FloatVector.SPECIES_PREFERRED;\nfloat[] result = new float[left.length];\nint i = 0;\nfor (; i < species.loopBound(left.length); i += species.length()) {\n    var va = FloatVector.fromArray(species, left, i);\n    var vb = FloatVector.fromArray(species, right, i);\n    va.add(vb).intoArray(result, i); // lane-wise vector addition\n}\nfor (; i < left.length; i++) {\n    result[i] = left[i] + right[i];\n}"
+}

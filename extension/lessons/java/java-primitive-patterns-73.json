@@ -32,6 +32,28 @@
       ],
       "answerIndex": 0,
       "explanation": "Primitive type patterns let the switch match an int directly with the case int i arm."
+    },
+    {
+      "prompt": "What does classify(\"x\") return in the shown switch?",
+      "choices": [
+        "int x",
+        "long x",
+        "double x",
+        "other"
+      ],
+      "answerIndex": 3,
+      "explanation": "A String does not match the primitive int, long, or double pattern labels, so the default arm returns other."
+    },
+    {
+      "prompt": "Which flag is needed because primitive type patterns are preview in Java 26?",
+      "choices": [
+        "--enable-preview",
+        "--enable-final-field-mutation=ALL-UNNAMED",
+        "--add-modules jdk.incubator.vector",
+        "--class-path java.applet.Applet"
+      ],
+      "answerIndex": 0,
+      "explanation": "Primitive type patterns are marked preview in this lesson, so compilation and execution need preview enabled."
     }
   ],
   "targetCode": "// Java 26 - Primitive type patterns (PREVIEW, --enable-preview)\n// Learn: match primitive types directly in a switch.\nString classify(Object value) {\n    return switch (value) {\n        // Primitive patterns bind the matched value.\n        case int i -> \"int \" + i;\n        case long l -> \"long \" + l;\n        case double d -> \"double \" + d;\n        default -> \"other\";\n    };\n}"

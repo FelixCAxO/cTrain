@@ -32,6 +32,28 @@
       ],
       "answerIndex": 2,
       "explanation": "LazyConstant.get() initializes the content if needed, then returns the initialized value."
+    },
+    {
+      "prompt": "When is System.getLogger(\"app\") called in this lesson?",
+      "choices": [
+        "When the containing object is loaded, before any get() call",
+        "Each time getLogger() is called",
+        "Only when logger.get() first needs the value",
+        "Never, because LazyConstant stores null"
+      ],
+      "answerIndex": 2,
+      "explanation": "The supplier passed to LazyConstant.of is lazy. It runs on the first get() that needs the value and then the initialized value is reused."
+    },
+    {
+      "prompt": "Which trap does LazyConstant avoid compared with an eager static field?",
+      "choices": [
+        "It avoids doing expensive initialization before the value is needed",
+        "It makes the value mutable after every call",
+        "It turns System.Logger into a stream collector",
+        "It removes the need for --enable-preview"
+      ],
+      "answerIndex": 0,
+      "explanation": "Lazy constants defer creation until the value is read. The API is still preview here, but the point is delayed one-time initialization."
     }
   ],
   "targetCode": "// Java 26 - Lazy constants (PREVIEW, --enable-preview)\n// Learn: initialize a value lazily, at most once.\nprivate final LazyConstant<System.Logger> logger =\n    LazyConstant.of(() -> System.getLogger(\"app\"));\n\nSystem.Logger getLogger() {\n    return logger.get(); // computed once, then reused\n}"

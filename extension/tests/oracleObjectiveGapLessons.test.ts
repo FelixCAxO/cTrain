@@ -73,6 +73,20 @@ const dedicatedGapLessons: GapLessonSpec[] = [
     requiredTags: ['java', 'io'],
     targetTokens: ['Scanner', 'System.console()', 'readLine('],
     learningGoalPattern: /Scanner|System\.console|readLine/i
+  },
+  {
+    id: 'java-packaging-artifacts-92',
+    titlePattern: /packaging artifacts/i,
+    requiredTags: ['java', 'modules', 'jars', 'jlink', 'unnamed-modules', 'automatic-modules'],
+    targetTokens: ['jar --create', 'jlink', 'Automatic-Module-Name'],
+    learningGoalPattern: /JAR|jlink|automatic module/i
+  },
+  {
+    id: 'java-stream-partitioning-93',
+    titlePattern: /stream partitioning/i,
+    requiredTags: ['java', 'streams', 'collectors', 'partitioning'],
+    targetTokens: ['Collectors.partitioningBy', 'Map<Boolean, List<Task>>', 'Map<Boolean, Long>'],
+    learningGoalPattern: /partitioningBy|Boolean/i
   }
 ];
 

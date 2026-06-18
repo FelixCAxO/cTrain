@@ -19,6 +19,7 @@ java	Lambdas	lambdas	1	2
 java	Generics	generics	1	2
 java	Optional	optional	1	2
 java	Streams	streams	1	2
+java	Stream Partitioning	streams,partitioning	1	2
 java	Resource Management	resources	1	2
 java	Local Variables	var	1	2
 java	Varargs	varargs	1	2
@@ -39,6 +40,8 @@ java	Date Time	time	1	2
 java	Time Formatting	time,formatting	1	2
 java	Http Client	http-client	0	0
 java	Modules	modules	1	2
+java	Packaging Artifacts	modules,jars,jlink	1	2
+java	Unnamed Automatic Modules	modules,unnamed-modules,automatic-modules	1	2
 java	Scoped Values	scoped-values	1	2
 java	Sealed Types	sealed	1	2
 java	Pattern Matching	pattern-matching	1	2
@@ -54,3 +57,8 @@ java	Executor Services	executors	1	2
 java	Structured Concurrency	structured-concurrency	0	0
 java	Lazy Constants	lazy-constants	0	0
 java	Security	security	0	0
+java	Final Fields	final-fields	0	0
+java	Applet Removal	applets	0	0
+java	AOT Object Caching	aot	0	0
+java	G1 Synchronization	gc,g1	0	0
+java	Vector API	vector-api	0	0

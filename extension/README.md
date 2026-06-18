@@ -8,7 +8,7 @@ Practice typing real Java code inside VS Code.
 
 ## Lessons
 
-82 Java typing lessons, grouped so the next choice is easier to scan:
+89 Java typing lessons, grouped so the next choice is easier to scan:
 
 - **Foundations** — classes, methods, collections, generics, streams, exceptions.
 - **Java 25 Cert Exam** — the focused certification block (ids `50`-`69`, growing at `80`+) for Oracle Java SE 25 (1Z0-831).

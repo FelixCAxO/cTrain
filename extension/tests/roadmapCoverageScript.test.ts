@@ -214,6 +214,102 @@ describe('roadmap coverage report script', function () {
     assert.match(result.stderr, /java\/Conditionals/);
   });
 
+  it('does not mark Java 26 or HTTP client side-track lessons as exam-ready', () => {
+    const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ctrain-roadmap-off-syllabus-'));
+    const lessonRoot = path.join(tempRoot, 'lessons');
+    const javaDirectory = path.join(lessonRoot, 'java');
+    fs.mkdirSync(javaDirectory, { recursive: true });
+
+    fs.writeFileSync(path.join(javaDirectory, 'java-final-fields-75.json'), JSON.stringify({
+      schemaVersion: 1,
+      id: 'java-final-fields-75',
+      version: 1,
+      title: 'Java Final Fields',
+      description: 'Java 26 side-track lesson.',
+      language: 'java',
+      difficulty: 4,
+      estimatedSeconds: 36,
+      tags: ['java', 'final-fields'],
+      prerequisites: [],
+      languageVersion: 'Java 26',
+      completionChecks: [
+        {
+          prompt: 'What happens on illegal final-field mutation?',
+          choices: ['warning', 'nothing'],
+          answerIndex: 0,
+          explanation: 'Java 26 reports illegal final-field mutation.'
+        },
+        {
+          prompt: 'Is this Java SE 25 exam-ready?',
+          choices: ['yes', 'no'],
+          answerIndex: 1,
+          explanation: 'Java 26 side-track content is outside the Java SE 25 exam.'
+        }
+      ],
+      targetCode: 'final int amount = 1;\nSystem.out.println(amount);\nSystem.out.println(\"Java 26\");'
+    }));
+    fs.writeFileSync(path.join(javaDirectory, 'java-http-client-44.json'), JSON.stringify({
+      schemaVersion: 1,
+      id: 'java-http-client-44',
+      version: 1,
+      title: 'Java HTTP Client',
+      description: 'HTTP client side-track lesson.',
+      language: 'java',
+      difficulty: 3,
+      estimatedSeconds: 36,
+      tags: ['java', 'http-client'],
+      prerequisites: [],
+      languageVersion: 'Java 11',
+      completionChecks: [
+        {
+          prompt: 'Which API sends HTTP requests?',
+          choices: ['HttpClient', 'Scanner'],
+          answerIndex: 0,
+          explanation: 'HttpClient sends HTTP requests.'
+        },
+        {
+          prompt: 'Is this Java SE 25 exam-ready?',
+          choices: ['yes', 'no'],
+          answerIndex: 1,
+          explanation: 'The HTTP client side track is excluded from the certification question pool.'
+        }
+      ],
+      targetCode: 'HttpClient client = HttpClient.newHttpClient();\nSystem.out.println(client);\nSystem.out.println(\"side track\");'
+    }));
+
+    const tsvPath = path.join(tempRoot, 'roadmap.tsv');
+    fs.writeFileSync(tsvPath, [
+      'track\troadmapNode\texpectedTags\tminExamReadyLessons\tminCompletionChecksPerLesson',
+      'java\tFinal Fields\tfinal-fields\t0\t0',
+      'java\tHttp Client\thttp-client\t0\t0'
+    ].join('\n'));
+
+    const output = execFileSync(process.execPath, [
+      path.join(root, 'scripts', 'roadmap-coverage.cjs'),
+      lessonRoot,
+      tsvPath
+    ], { encoding: 'utf8' });
+
+    assert.deepEqual(JSON.parse(output), [
+      {
+        track: 'java',
+        roadmapNode: 'Final Fields',
+        coveredBy: ['java-final-fields-75'],
+        examReadyBy: [],
+        minExamReadyLessons: 0,
+        minCompletionChecksPerLesson: 0
+      },
+      {
+        track: 'java',
+        roadmapNode: 'Http Client',
+        coveredBy: ['java-http-client-44'],
+        examReadyBy: [],
+        minExamReadyLessons: 0,
+        minCompletionChecksPerLesson: 0
+      }
+    ]);
+  });
+
   it('passes --check for the checked-in roadmap TSV', () => {
     const result = spawnSync(process.execPath, [
       path.join(root, 'scripts', 'roadmap-coverage.cjs'),

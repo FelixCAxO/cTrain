@@ -11,7 +11,7 @@ const root = path.resolve(__dirname, '..');
 describe('training session reset', () => {
   it('resets every authored exercise to its initial document, counters, and ghost text', () => {
     const lessons = [...builtInLessons, ...readProg2Lessons()];
-    assert.equal(lessons.length, 118);
+    assert.equal(lessons.length, 125);
 
     for (const lesson of lessons) {
       const clock = () => 1_000;

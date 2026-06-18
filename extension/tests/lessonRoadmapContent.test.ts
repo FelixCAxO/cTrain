@@ -44,7 +44,10 @@ describe('lesson roadmap coverage content', () => {
       ['java', 'Multi Catch Custom Exceptions', ['multicatch']],
       ['java', 'Varargs', ['varargs']],
       ['java', 'Unnamed Variables', ['unnamed-variables']],
-      ['java', 'Executor Services', ['executors']]
+      ['java', 'Executor Services', ['executors']],
+      ['java', 'Packaging Artifacts', ['modules', 'jars', 'jlink']],
+      ['java', 'Unnamed Automatic Modules', ['modules', 'unnamed-modules', 'automatic-modules']],
+      ['java', 'Stream Partitioning', ['streams', 'partitioning']]
     ] as const) {
       assert.ok(
         rows.some((row) => (
@@ -100,7 +103,12 @@ describe('lesson roadmap coverage content', () => {
       'Http Client',
       'Structured Concurrency',
       'Lazy Constants',
-      'Security'
+      'Security',
+      'Final Fields',
+      'Applet Removal',
+      'AOT Object Caching',
+      'G1 Synchronization',
+      'Vector API'
     ]);
 
     for (const row of rows.filter((candidate) => !offSyllabusRows.has(candidate.roadmapNode))) {
@@ -109,15 +117,15 @@ describe('lesson roadmap coverage content', () => {
     }
   });
 
-  it('does not count preview-only Java 26 topics as 1Z0-831 exam-ready roadmap rows', () => {
+  it('does not count off-syllabus Java 26 topics as 1Z0-831 exam-ready roadmap rows', () => {
     const rows = readRoadmapRows();
     const rowByNode = new Map(rows.map((row) => [row.roadmapNode, row]));
 
-    for (const previewOnlyNode of ['Structured Concurrency', 'Lazy Constants', 'Security']) {
-      const row = rowByNode.get(previewOnlyNode);
-      assert.notEqual(row, undefined, `${previewOnlyNode} should remain an explicit preview roadmap row`);
-      assert.equal(row!.minExamReadyLessons, 0, `${previewOnlyNode} should not be exam-ready`);
-      assert.equal(row!.minCompletionChecksPerLesson, 0, `${previewOnlyNode} should not require exam checks`);
+    for (const java26Node of ['Structured Concurrency', 'Lazy Constants', 'Security', 'Final Fields', 'Applet Removal', 'AOT Object Caching', 'G1 Synchronization', 'Vector API']) {
+      const row = rowByNode.get(java26Node);
+      assert.notEqual(row, undefined, `${java26Node} should remain an explicit Java 26 roadmap row`);
+      assert.equal(row!.minExamReadyLessons, 0, `${java26Node} should not be exam-ready`);
+      assert.equal(row!.minCompletionChecksPerLesson, 0, `${java26Node} should not require exam checks`);
     }
   });
 

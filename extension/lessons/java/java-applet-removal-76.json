@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-applet-removal-76",
+  "version": 1,
+  "title": "Java Applet API Removal",
+  "description": "Recognize the Java 26 removal of the obsolete Applet API.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 160,
+  "tags": [
+    "java",
+    "applets"
+  ],
+  "prerequisites": [
+    "java-class-basic-01"
+  ],
+  "learningGoals": [
+    "Recognize that java.applet.Applet is removed rather than merely deprecated in Java 26.",
+    "Use reflection-style probes in migration checks without importing removed applet types."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "What happens to source code that imports java.applet.Applet on Java 26?",
+      "choices": [
+        "It compiles with a deprecation warning only",
+        "It fails because the Applet API has been removed",
+        "It automatically migrates to Swing",
+        "It runs only with --enable-preview"
+      ],
+      "answerIndex": 1,
+      "explanation": "JEP 504 removes the Applet API. Code that imports or extends java.applet.Applet must be removed or migrated."
+    },
+    {
+      "prompt": "Why does this lesson use Class.forName(\"java.applet.Applet\") instead of an import?",
+      "choices": [
+        "The string is faster than a normal import",
+        "It keeps the probe compilable even when the type has been removed",
+        "It turns Applet into an automatic module",
+        "It enables browser plug-ins again"
+      ],
+      "answerIndex": 1,
+      "explanation": "A direct import would fail to compile on Java 26. A string-based reflection probe can report that the old type is gone."
+    },
+    {
+      "prompt": "What does the catch block print when java.applet.Applet is absent?",
+      "choices": [
+        "supported",
+        "deprecated",
+        "removed",
+        "preview"
+      ],
+      "answerIndex": 2,
+      "explanation": "Class.forName throws ClassNotFoundException when the removed type cannot be found, so the catch block prints removed."
+    }
+  ],
+  "targetCode": "// Java 26 - Applet API removal (JEP 504)\n// Learn: detect and remove dependencies on java.applet.Applet.\nString removedType = \"java.applet.Applet\";\ntry {\n    Class.forName(removedType);\n    System.out.println(\"legacy applet API still present\");\n} catch (ClassNotFoundException missing) {\n    // Removed API check: Applet is absent on Java 26.\n    System.out.println(\"removed\");\n}\nSystem.out.println(\"Migrate browser-era UI code off \" + removedType);"
+}

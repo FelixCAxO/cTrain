@@ -22,7 +22,7 @@ const report = roadmapRows.map((row) => {
     .sort();
   const examReadyBy = lessons
     .filter((lesson) => lesson.language === row.track)
-    .filter((lesson) => !lesson.tags.includes('preview'))
+    .filter(isCertificationLesson)
     .filter((lesson) => row.expectedTags.every((tag) => lesson.tags.includes(tag)))
     .filter((lesson) => countCompletionChecks(lesson) >= row.minCompletionChecksPerLesson)
     .map((lesson) => lesson.id)
@@ -55,6 +55,12 @@ if (checkCoverage) {
 
 function countCompletionChecks(lesson) {
   return Array.isArray(lesson.completionChecks) ? lesson.completionChecks.length : 0;
+}
+
+function isCertificationLesson(lesson) {
+  return !lesson.tags.includes('preview')
+    && lesson.languageVersion !== 'Java 26'
+    && !lesson.tags.includes('http-client');
 }
 
 function readLessons(directory) {

@@ -362,8 +362,8 @@ describe('lesson validation and loading', () => {
   });
 
   it('ships the Java-only public seed set', () => {
-    assert.equal(builtInLessons.length, 82);
-    assert.equal(builtInLessons.filter((item) => item.language === 'java').length, 82);
+    assert.equal(builtInLessons.length, 89);
+    assert.equal(builtInLessons.filter((item) => item.language === 'java').length, 89);
     assert.equal(builtInLessons.some((item) => /^(?:cpp|typescript|python)-/.test(item.id)), false);
     assert.equal(builtInLessons.some((item) => item.id.startsWith('prog2-')), false);
 
@@ -717,11 +717,18 @@ const expectedJavaLessonIds = [
       'java-primitive-streams-89',
       'java-concurrent-hashmap-90',
       'java-console-input-91',
+      'java-packaging-artifacts-92',
+      'java-stream-partitioning-93',
       'java-http3-client-70',
       'java-structured-concurrency-71',
       'java-lazy-constants-72',
       'java-primitive-patterns-73',
-      'java-pem-encoding-74'
+      'java-pem-encoding-74',
+      'java-final-fields-75',
+      'java-applet-removal-76',
+      'java-aot-object-caching-77',
+      'java-g1-synchronization-78',
+      'java-vector-api-79'
 ];
 
 function assertLessonPrerequisites(lessonId: string, prerequisites: string[]): void {

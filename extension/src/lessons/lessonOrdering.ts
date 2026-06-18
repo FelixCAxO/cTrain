@@ -61,7 +61,7 @@ export interface BuiltInLessonCategory {
 // Built-in Java lessons are organized into curriculum bands by their id suffix:
 // foundations 01-49, the Java 25 Cert Exam band 50-69, and the Java 26 band 70-79.
 // The original cert ids 50-69 are full, so cert-exam growth continues at 80+ while
-// 75-79 stays reserved for future Java 26 demos; adding a lesson inside a band keeps
+// Java 26 demos fill 70-79; adding a lesson inside a band keeps
 // grouping correct without renumbering ids that learner progress is keyed on.
 export function getBuiltInLessonCategory(lesson: Lesson): BuiltInLessonCategory {
   if (lesson.id.startsWith('java-')) {

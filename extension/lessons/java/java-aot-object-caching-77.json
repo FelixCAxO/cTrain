@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "java-aot-object-caching-77",
+  "version": 1,
+  "title": "Java AOT Object Caching",
+  "description": "Review Java 26 GC-agnostic ahead-of-time object caching.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 190,
+  "tags": [
+    "java",
+    "aot",
+    "gc"
+  ],
+  "prerequisites": [
+    "java-class-basic-01"
+  ],
+  "learningGoals": [
+    "Recognize that Java 26 can stream cached objects from a GC-agnostic AOT format.",
+    "Use -XX:+AOTStreamableObjects when a training run should force streamable cached objects."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "What problem does Java 26 GC-agnostic AOT object caching address?",
+      "choices": [
+        "It lets cached objects work across garbage collectors instead of one GC-specific layout",
+        "It replaces every class file with Java source",
+        "It turns off all background materialization",
+        "It removes the need for class loading"
+      ],
+      "answerIndex": 0,
+      "explanation": "JEP 516 stores cached object references in a neutral form so the cache can be used with different collectors, including ZGC."
+    },
+    {
+      "prompt": "Which flag explicitly requests streamable GC-agnostic cached objects?",
+      "choices": [
+        "-XX:+UseG1GC",
+        "-XX:+AOTStreamableObjects",
+        "-Xlog:jni=debug",
+        "--enable-preview"
+      ],
+      "answerIndex": 1,
+      "explanation": "-XX:+AOTStreamableObjects asks the JVM to create a streamable, GC-agnostic object cache even when compressed ordinary object pointers are enabled."
+    },
+    {
+      "prompt": "What does the lesson's GC-agnostic note mean for ZGC?",
+      "choices": [
+        "ZGC can be considered for production with an AOT cache instead of being excluded by object-reference layout",
+        "ZGC becomes the only supported collector",
+        "ZGC disables all AOT cache data",
+        "ZGC compiles Java source files at link time"
+      ],
+      "answerIndex": 0,
+      "explanation": "The point is compatibility across collectors. Java 26 avoids tying the cached object layout to a single collector's in-memory references."
+    }
+  ],
+  "targetCode": "// Java 26 - AOT object caching with any GC (JEP 516)\n// Learn: stream cached objects from a GC-agnostic AOT format.\nList<String> trainingFlags = List.of(\n    \"-XX:+AOTStreamableObjects\", // request streamable cached objects\n    \"-XX:+UseZGC\"\n);\nString mode = \"GC-agnostic AOT cache\";\nString productionGc = \"ZGC\";\nSystem.out.println(mode + \" can be used with \" + productionGc);"
+}

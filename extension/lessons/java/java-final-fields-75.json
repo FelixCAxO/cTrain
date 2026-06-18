@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "java-final-fields-75",
+  "version": 1,
+  "title": "Java Final Fields",
+  "description": "Review Java 26 final-field restrictions for deep reflection.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 200,
+  "tags": [
+    "java",
+    "final-fields"
+  ],
+  "prerequisites": [
+    "java-access-modifiers-05"
+  ],
+  "learningGoals": [
+    "Recognize that Java 26 warns when deep reflection mutates final fields without opt-in.",
+    "Prefer constructor initialization and explicit opt-in only for serialization-style migration cases."
+  ],
+  "languageVersion": "Java 26",
+  "completionChecks": [
+    {
+      "prompt": "What does Java 26 do by default when deep reflection mutates a final field illegally?",
+      "choices": [
+        "It silently treats the field as non-final",
+        "It issues a run-time warning as preparation for future stronger restrictions",
+        "It rewrites the field as volatile",
+        "It deletes the declaring class from the module"
+      ],
+      "answerIndex": 1,
+      "explanation": "JEP 500 starts with warnings for illegal final-field mutation so code can migrate before a future release tightens the default behavior."
+    },
+    {
+      "prompt": "Which option enables class-path code to mutate final fields when a migration truly needs it?",
+      "choices": [
+        "--enable-final-field-mutation=ALL-UNNAMED",
+        "--add-modules=ALL-SYSTEM",
+        "--enable-preview",
+        "--permit-final-overwrite"
+      ],
+      "answerIndex": 0,
+      "explanation": "ALL-UNNAMED applies to class-path code in the unnamed module. The feature is not a preview feature and --add-modules does not enable mutation."
+    },
+    {
+      "prompt": "What happens at field.set(invoice, 99) without the required final-field mutation opt-in?",
+      "choices": [
+        "The mutation is treated as normal assignment with no diagnostics",
+        "The JVM logs or throws an ArrayStoreException",
+        "Java 26 reports an illegal final-field mutation according to the configured mode",
+        "The record pattern matcher handles the assignment"
+      ],
+      "answerIndex": 2,
+      "explanation": "The reflective write is the problematic operation: Java 26 detects the final-field mutation and reports it according to the illegal-final-field-mutation mode."
+    }
+  ],
+  "targetCode": "// Java 26 - Final field restrictions (JEP 500)\n// Learn: deep reflection over final fields now needs explicit migration opt-in.\nclass Invoice {\n    final int amount;\n    Invoice(int amount) { this.amount = amount; }\n}\n\nInvoice invoice = new Invoice(42);\nvar field = Invoice.class.getDeclaredField(\"amount\"); // getDeclaredField(\"amount\") finds the final field.\nfield.setAccessible(true);\nfield.set(invoice, 99); // Java 26 warns unless final-field mutation is enabled.\nSystem.out.println(invoice.amount);"
+}

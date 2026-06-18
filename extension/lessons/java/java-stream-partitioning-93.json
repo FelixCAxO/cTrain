@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "java-stream-partitioning-93",
+  "version": 1,
+  "title": "Java Stream Partitioning",
+  "description": "Partition stream elements into true and false buckets with Collectors.partitioningBy.",
+  "language": "java",
+  "difficulty": 3,
+  "estimatedSeconds": 180,
+  "tags": [
+    "java",
+    "streams",
+    "collectors",
+    "partitioning"
+  ],
+  "prerequisites": [
+    "java-stream-groupby-17"
+  ],
+  "learningGoals": [
+    "Use Collectors.partitioningBy(predicate) to split stream elements into Boolean keys.",
+    "Apply a downstream collector such as counting() to summarize each partition.",
+    "Avoid confusing partitioningBy with groupingBy over arbitrary classifier keys."
+  ],
+  "languageVersion": "Java 8",
+  "completionChecks": [
+    {
+      "prompt": "What keys can appear in the map returned by Collectors.partitioningBy(Task::done)?",
+      "choices": [
+        "One key per task owner",
+        "Only Boolean keys true and false",
+        "A key for every distinct Task instance",
+        "No keys until put() is called manually"
+      ],
+      "answerIndex": 1,
+      "explanation": "partitioningBy always partitions by a Predicate, so the result is keyed by Boolean true and false rather than arbitrary grouping keys."
+    },
+    {
+      "prompt": "What does byDone.get(true) contain after partitioning tasks by Task::done?",
+      "choices": [
+        "All tasks for which done() returned true",
+        "The first task only",
+        "A count stored as an Integer",
+        "All tasks, because true is the default key"
+      ],
+      "answerIndex": 0,
+      "explanation": "The single-argument partitioningBy collector stores matching elements in the true list and non-matching elements in the false list."
+    },
+    {
+      "prompt": "What does doneCounts.get(false) return when two unfinished tasks and one finished task are collected?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "false"
+      ],
+      "answerIndex": 2,
+      "explanation": "With partitioningBy(Task::done, counting()), the false key counts elements where done() is false, so two unfinished tasks produce 2L."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Stream partitioning\n// Learn: split stream elements into true and false partitions.\nimport java.util.List;\nimport java.util.Map;\nimport java.util.stream.Collectors;\n\nMap<Boolean, List<Task>> byDone = tasks.stream()\n    // partitioningBy always returns Boolean keys.\n    .collect(Collectors.partitioningBy(Task::done));\n\nMap<Boolean, Long> doneCounts = tasks.stream()\n    .collect(Collectors.partitioningBy(Task::done, Collectors.counting()));\nSystem.out.println(byDone.get(false).size() + \" pending\");\nSystem.out.println(doneCounts.get(true) + \" finished\");"
+}

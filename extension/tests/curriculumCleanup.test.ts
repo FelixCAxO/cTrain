@@ -70,7 +70,7 @@ describe('Java-only curriculum cleanup', () => {
       .sort();
 
     assert.deepEqual(trackDirectories, ['java']);
-    assert.equal(builtInLessons.length, 82);
+    assert.equal(builtInLessons.length, 89);
     assert.deepEqual([...new Set(builtInLessons.map((lesson) => lesson.language))], ['java']);
     assert.deepEqual(
       builtInLessons.map((lesson) => lesson.id).sort(),
@@ -142,7 +142,7 @@ describe('Java-only curriculum cleanup', () => {
 
     assert.equal(fs.existsSync(path.join(root, 'docs', 'prog2-liang-exercise-manifest.json')), false);
     assert.equal(fs.existsSync(path.join(root, 'build-ctrain-prog2.bat')), false);
-    assert.match(lessonsDoc, /82 Java lessons/);
+    assert.match(lessonsDoc, /89 Java lessons/);
     assert.match(lessonsDoc, /36 Prog2 reference lessons/);
     assert.match(architectureDoc, /Java public lessons plus 36 Prog2 reference lessons/);
     assert.match(testingDoc, /reference-only/);

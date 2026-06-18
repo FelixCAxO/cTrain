@@ -32,6 +32,28 @@
       ],
       "answerIndex": 2,
       "explanation": "PEM encoding serializes cryptographic objects into textual PEM form for storage or exchange."
+    },
+    {
+      "prompt": "What type does decoder.decode(pem, PublicKey.class) request?",
+      "choices": [
+        "A PublicKey restored from PEM text",
+        "A BufferedReader over the PEM file",
+        "A Locale for formatting",
+        "A virtual thread factory"
+      ],
+      "answerIndex": 0,
+      "explanation": "The decoder call asks for a PublicKey result, reversing the public-key PEM text produced by the encoder."
+    },
+    {
+      "prompt": "Which status should learners remember for this API in Java 26?",
+      "choices": [
+        "It is a preview PEM API and needs preview treatment",
+        "It is removed with the Applet API",
+        "It is an automatic module feature only",
+        "It is a Java 8 final API"
+      ],
+      "answerIndex": 0,
+      "explanation": "The lesson header and goals mark the PEM encoding API as preview, so it is not Java SE 25 exam-ready content."
     }
   ],
   "targetCode": "// Java 26 - PEM encoding of crypto objects (JEP 524 PREVIEW)\n// Learn: encode and decode keys as PEM text.\nPublicKey publicKey = KeyPairGenerator.getInstance(\"EC\").generateKeyPair().getPublic();\nPEMEncoder encoder = PEMEncoder.of();\n// PEM text is portable key encoding.\nString pem = encoder.encodeToString(publicKey);\nPEMDecoder decoder = PEMDecoder.of();\nPublicKey restored = decoder.decode(pem, PublicKey.class);\nSystem.out.println(restored.getAlgorithm());"

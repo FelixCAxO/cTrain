@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "java-packaging-artifacts-92",
+  "version": 1,
+  "title": "Java Packaging Artifacts",
+  "description": "Practice JAR creation, jlink images, unnamed modules, and automatic modules for Java 25 packaging objectives.",
+  "language": "java",
+  "difficulty": 4,
+  "estimatedSeconds": 220,
+  "tags": [
+    "java",
+    "modules",
+    "jars",
+    "jlink",
+    "unnamed-modules",
+    "automatic-modules"
+  ],
+  "prerequisites": [
+    "java-module-services-86"
+  ],
+  "learningGoals": [
+    "Create modular and non-modular JAR artifacts with the jar tool.",
+    "Use jlink with a module path to build a runtime image for named modules.",
+    "Distinguish unnamed class-path code from automatic modules on the module path."
+  ],
+  "languageVersion": "Java 25",
+  "completionChecks": [
+    {
+      "prompt": "Which command creates app.jar from compiled classes under out?",
+      "choices": [
+        "java --module-path out --module com.example.app",
+        "jar --create --file app.jar -C out .",
+        "jlink --output app.jar --add-modules com.example.app",
+        "javac --release 25 --file app.jar out"
+      ],
+      "answerIndex": 1,
+      "explanation": "The jar tool creates JAR artifacts. jlink builds runtime images, java launches code, and javac compiles source rather than packaging classes."
+    },
+    {
+      "prompt": "What happens when util-1.0.jar has no module-info.class but is placed on the module path?",
+      "choices": [
+        "It is ignored because only explicit modules can be on the module path",
+        "It becomes an automatic module with a derived module name",
+        "It joins the unnamed module exactly as it would on the class path",
+        "It forces every module to export all packages"
+      ],
+      "answerIndex": 1,
+      "explanation": "A non-modular JAR on the module path is treated as an automatic module. A non-modular JAR on the class path belongs to the unnamed module instead."
+    },
+    {
+      "prompt": "Why does jlink need --add-modules with the application module?",
+      "choices": [
+        "jlink links a runtime image starting from named root modules",
+        "jlink compiles .java files before packaging them",
+        "jlink converts every class-path JAR into source code",
+        "jlink runs completion checks from the lesson bank"
+      ],
+      "answerIndex": 0,
+      "explanation": "jlink resolves named modules from the module path and links the requested roots plus their dependencies into a custom runtime image."
+    }
+  ],
+  "targetCode": "// Java 25 exam prep - Packaging artifacts\n// Learn: create JARs, link runtimes, and classify unnamed versus automatic modules.\n// Compile: javac -d out --module-source-path src $(find src -name \"*.java\")\nString jar = \"jar --create --file app.jar -C out .\";\nString manifestJar = \"jar --create --file util.jar --manifest MANIFEST.MF -C util-out .\";\nString modulePath = \"--module-path mods:lib/util.jar\"; // util.jar becomes an automatic module here.\nString launch = \"java \" + modulePath + \" --module com.example.app/com.example.Main\";\nString image = \"jlink \" + modulePath + \" --add-modules com.example.app --output image\";\nString classPath = \"java -cp lib/util.jar com.example.Main\"; // class-path code is in the unnamed module.\nString manifest = \"Automatic-Module-Name: com.example.util\";\nSystem.out.println(jar);\nSystem.out.println(image);\nSystem.out.println(classPath + \" # \" + manifest);"
+}

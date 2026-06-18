@@ -47,14 +47,14 @@ Blueprint: `collections`
 Blueprint: `streams`
 
 - `6.1` object streams, primitive streams, lambda expressions, functional interfaces, filtering, transforming, processing, and sorting: `Streams`, `Lambdas`, `Functional Interfaces`; dedicated primitive-stream lesson `java-primitive-streams-89`
-- `6.2` decomposition, concatenation, reduction, grouping, partitioning, gather operations, sequential streams, and parallel streams: `Streams`, `Sequenced Collections`
+- `6.2` decomposition, concatenation, reduction, grouping, partitioning, gather operations, sequential streams, and parallel streams: `Streams`, `Stream Partitioning`, `Sequenced Collections`; dedicated partitioning lesson `java-stream-partitioning-93`
 
 ## 7. Packaging and Deploying Java Code
 
 Blueprint: `packaging`
 
 - `7.1` / `7a` modules, exported content, reflection, dependencies, services, providers, consumers, and module import declarations: `Modules`; dedicated module-service lesson `java-module-services-86`
-- `7.2` / `7b` compiling and running source code, compact source files, instance main methods, multi-file source-code programs, modular JARs, non-modular JARs, `jlink` runtime images, migration to modules, unnamed modules, and automatic module migration: `Modules`, `Class Basics`, `Methods`. The lesson corpus covers module descriptors, module imports, services, class/source-file structure, and instance-main compact source files; JAR, `jlink`, unnamed-module, and automatic-module command-line details are retained in this mapping as exam concepts tied to the packaging roadmap row.
+- `7.2` / `7b` compiling and running source code, compact source files, instance main methods, multi-file source-code programs, modular JARs, non-modular JARs, `jlink` runtime images, migration to modules, unnamed modules, and automatic module migration: `Modules`, `Class Basics`, `Methods`, `Packaging Artifacts`, `Unnamed Automatic Modules`; dedicated artifact lesson `java-packaging-artifacts-92`
 
 ## 8. Implementing Multithreading for Concurrent Code Execution
 
@@ -82,6 +82,6 @@ Blueprint: `localization`
 
 - Official objective areas: 10/10 represented in `javaSe25ExamBlueprint`
 - Official sub-objectives: 24/24 mapped to blueprint objectives and checked roadmap rows; no missing mappings
-- Missing-objective lessons added: `java-nested-classes-84`, `java-initializer-blocks-85`, `java-module-services-86`
-- Thin-objective lessons added: `java-stringbuilder-mutation-87`, `java-gc-eligibility-88`, `java-primitive-streams-89`, `java-concurrent-hashmap-90`, `java-console-input-91`
+- Missing-objective lessons added: `java-nested-classes-84`, `java-initializer-blocks-85`, `java-module-services-86`, `java-packaging-artifacts-92`
+- Thin-objective lessons added: `java-stringbuilder-mutation-87`, `java-gc-eligibility-88`, `java-primitive-streams-89`, `java-concurrent-hashmap-90`, `java-console-input-91`, `java-stream-partitioning-93`
 - Checked roadmap rows: all in-scope Java SE 25 rows require exam-ready lessons and completion checks through `tests/lessonRoadmapContent.test.ts` and `npm run roadmap:coverage -- --check`
