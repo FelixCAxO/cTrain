@@ -144,6 +144,22 @@ suite('cTrain session interactions e2e', () => {
     ));
   });
 
+  test('cancels the mock exam picker without opening a training editor', async () => {
+    await vscode.commands.executeCommand('workbench.action.closeAllEditors');
+
+    let examDone = false;
+    const exam = Promise.resolve(vscode.commands.executeCommand('cTrain.mockExam')).finally(() => {
+      examDone = true;
+    });
+    await delay(250);
+    assert.equal(examDone, false);
+
+    await vscode.commands.executeCommand('workbench.action.closeQuickOpen');
+    await exam;
+
+    assert.equal(vscode.window.visibleTextEditors.some((editor) => editor.document.uri.scheme === 'code-trainer'), false);
+  });
+
   test('pauses and resumes the active training session without losing progress', async () => {
     const lesson = findBuiltInLesson((item) => item.id === 'java-method-return-02', 'Java method return lesson');
     await vscode.commands.executeCommand('workbench.action.closeAllEditors');
