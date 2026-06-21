@@ -17,6 +17,8 @@ export interface CompletionCheckItemOptions {
   random?: () => number;
 }
 
+export const reviewDueFlashcardsAction = 'Review Due Flashcards';
+
 export function createCompletionSummary(
   record: LessonProgressRecord,
   context: CompletionSummaryContext
@@ -28,6 +30,27 @@ export function createCompletionSummary(
 
 export function findNextLesson(currentLesson: Lesson, lessons: Lesson[]): Lesson | undefined {
   return createLessonCatalogue(lessons).nextAfter(currentLesson.id);
+}
+
+export function createCompletionActionLabels(nextLesson: Lesson | undefined, dueReviewCount: number): string[] {
+  return [
+    ...(nextLesson === undefined ? [] : ['Next Lesson']),
+    'Retry',
+    ...(dueReviewCount > 0 ? [reviewDueFlashcardsAction] : [])
+  ];
+}
+
+export async function runCompletionAction(
+  nextLesson: Lesson | undefined,
+  dueReviewCount: number,
+  chooseAction: (actions: string[]) => PromiseLike<string | undefined>,
+  reviewDueFlashcards: () => PromiseLike<void>
+): Promise<string | undefined> {
+  const choice = await chooseAction(createCompletionActionLabels(nextLesson, dueReviewCount));
+  if (choice === reviewDueFlashcardsAction) {
+    await reviewDueFlashcards();
+  }
+  return choice;
 }
 
 export function createCompletionCheckItems(

@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'mocha';
 import {
+  createCompletionActionLabels,
   createCompletionCheckItems,
   createCompletionSummary,
   findNextLesson,
-  formatCompletionCheckFeedback
+  formatCompletionCheckFeedback,
+  runCompletionAction
 } from '../src/commands/completionActions';
 import type { Lesson } from '../src/lessons/schema';
 import type { LessonProgressRecord } from '../src/progress/progressStore';
@@ -42,6 +44,33 @@ describe('completion actions', () => {
     ];
 
     assert.equal(findNextLesson(lessons[0]!, lessons)?.id, 'java-if-else-22');
+  });
+
+  it('offers due flashcards as an explicit completion action', () => {
+    assert.deepEqual(createCompletionActionLabels(lesson('java-interface-04', []), 2), [
+      'Next Lesson',
+      'Retry',
+      'Review Due Flashcards'
+    ]);
+    assert.deepEqual(createCompletionActionLabels(undefined, 0), ['Retry']);
+  });
+
+  it('runs due flashcards only after the explicit review action is selected', async () => {
+    let reviewed = false;
+    const choice = await runCompletionAction(
+      lesson('java-interface-04', []),
+      1,
+      async (actions) => {
+        assert.deepEqual(actions, ['Next Lesson', 'Retry', 'Review Due Flashcards']);
+        return 'Next Lesson';
+      },
+      async () => {
+        reviewed = true;
+      }
+    );
+
+    assert.equal(choice, 'Next Lesson');
+    assert.equal(reviewed, false);
   });
 
   it('formats completion check choices and answer feedback', () => {

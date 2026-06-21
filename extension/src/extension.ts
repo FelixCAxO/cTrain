@@ -4,7 +4,8 @@ import {
   createCompletionCheckItems,
   createCompletionSummary,
   findNextLesson,
-  formatCompletionCheckFeedback
+  formatCompletionCheckFeedback,
+  runCompletionAction
 } from './commands/completionActions';
 import {
   collectMockExamQuestions,
@@ -390,13 +391,14 @@ async function showCompletionActions(
   context: { previousBestWpm?: number; currentStreak: number }
 ): Promise<void> {
   await showCompletionChecks(lesson, progressStore);
-  await showDueCompletionCheckReviews(progressStore);
 
   const nextLesson = findNextLesson(lesson, builtInLessons);
-  const actions = nextLesson === undefined ? ['Retry'] : ['Next Lesson', 'Retry'];
-  const choice = await vscode.window.showInformationMessage(
-    createCompletionSummary(record, context),
-    ...actions
+  const dueReviewCount = collectDueCompletionCheckReviews(await progressStore.load()).length;
+  const choice = await runCompletionAction(
+    nextLesson,
+    dueReviewCount,
+    (actions) => vscode.window.showInformationMessage(createCompletionSummary(record, context), ...actions),
+    () => showDueCompletionCheckReviews(progressStore)
   );
 
   if (choice === 'Retry') {
