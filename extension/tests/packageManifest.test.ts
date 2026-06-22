@@ -106,6 +106,7 @@ describe('package manifest and synced assets', () => {
     assert.match(manifest.scripts.test, /npm run test:bundle/);
     assert.equal(manifest.scripts['test:bundle'], 'node ./scripts/smoke-bundle.cjs');
     assert.match(manifest.scripts.coverage, /^c8 /);
+    assert.match(manifest.scripts.coverage, /--include "src\/\*\*\/\*\.ts"/);
     assert.equal(manifest.scripts['roadmap:coverage'], 'node scripts/roadmap-coverage.cjs');
     assert.match(manifest.scripts.package, /--out \.\.\/releases\/ctrain-0\.1\.0\.vsix/);
 

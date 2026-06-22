@@ -16,6 +16,8 @@ Run coverage:
 npm run coverage
 ```
 
+The coverage script quotes the `src/**/*.ts` include glob so POSIX CI shells pass it to c8 instead of expanding source files into command arguments.
+
 Run the roadmap lesson coverage report:
 
 ```powershell
