@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "python-list-dict-basics-03",
+  "version": 1,
+  "title": "Python List and Dict Basics",
+  "description": "Practice indexing a list and reading from a dictionary.",
+  "language": "python",
+  "difficulty": 2,
+  "estimatedSeconds": 80,
+  "tags": [
+    "python",
+    "pcep",
+    "python-basics",
+    "collections",
+    "maps"
+  ],
+  "prerequisites": [
+    "python-if-while-for-02"
+  ],
+  "learningGoals": [
+    "Index a list by position.",
+    "Read a dictionary value by key."
+  ],
+  "languageVersion": "Python 3.13",
+  "completionChecks": [
+    {
+      "prompt": "What does names[0] read?",
+      "choices": [
+        "The first list item",
+        "The list length",
+        "The final list item"
+      ],
+      "answerIndex": 0,
+      "explanation": "Python lists are zero-indexed, so index 0 reads the first item."
+    },
+    {
+      "prompt": "What does scores[\"Ada\"] read?",
+      "choices": [
+        "The key name itself",
+        "The value stored for the Ada key",
+        "Every dictionary value"
+      ],
+      "answerIndex": 1,
+      "explanation": "Dictionary lookup by key returns the value stored for that key."
+    }
+  ],
+  "targetCode": "# Learn: Read a sequence by index and a dict by key.\nnames = [\"Ada\", \"Grace\"]\nscores = {\"Ada\": 10, \"Grace\": 9}  # Keys map to values.\nprint(names[0])\nprint(scores[\"Ada\"])"
+}

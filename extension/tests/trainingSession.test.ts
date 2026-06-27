@@ -739,6 +739,30 @@ describe('training session', () => {
     });
   });
 
+  it('automatically writes Python comment lines and trailing comments', () => {
+    const pythonLesson: Lesson = {
+      ...lesson,
+      id: 'python-comment-skip-01',
+      language: 'python',
+      tags: ['python'],
+      targetCode: '# Learn: Read a name.\nname = input("Name: ")  # input returns str.\nprint(name)'
+    };
+    const session = new TrainingSession(pythonLesson);
+    const firstCode = '# Learn: Read a name.\nname = input("Name: ")';
+
+    assert.equal(session.documentText, '# Learn: Read a name.\n');
+
+    const result = session.applyDocumentText(firstCode, [{ text: ')', rangeLength: 0 }], { allowPaste: true });
+
+    assert.equal(result.accepted, true);
+    assert.equal(session.documentText, `${firstCode}  # input returns str.\n`);
+    assert.deepEqual(session.ghostTextSegments[0], {
+      line: 2,
+      character: 0,
+      contentText: 'print(name)'
+    });
+  });
+
   it('shows a commented exercise description before typeable solution code', () => {
     const exerciseLesson: Lesson = {
       ...lesson,

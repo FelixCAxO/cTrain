@@ -63,7 +63,7 @@ export class TrainingSession {
     private readonly options: TrainingSessionOptions = {}
   ) {
     this.targetCode = normalizeLineEndings(lesson.targetCode);
-    this.autoTypedCommentSpans = findAutoTypedCommentSpans(this.targetCode);
+    this.autoTypedCommentSpans = findAutoTypedCommentSpans(this.targetCode, lesson.language);
     this.startedAt = this.now();
     this.status.totalCharacters = this.targetCode.length;
     const initial = appendAutomaticTargetText(this.targetCode, '', 0, this.autoTypedCommentSpans);
@@ -338,13 +338,14 @@ function appendAutomaticTargetText(
   };
 }
 
-function findAutoTypedCommentSpans(targetCode: string): AutoTypedSpan[] {
+function findAutoTypedCommentSpans(targetCode: string, language: string): AutoTypedSpan[] {
   const spans: AutoTypedSpan[] = [];
   const lines = targetCode.split('\n');
   let lineOffset = 0;
+  const commentPrefix = language === 'python' ? '#' : '//';
 
   for (const line of lines) {
-    const commentStart = findLineCommentStart(line);
+    const commentStart = findLineCommentStart(line, commentPrefix);
     if (commentStart !== undefined) {
       spans.push({
         start: lineOffset + findAutoTypedLineCommentStart(line, commentStart),
@@ -357,13 +358,12 @@ function findAutoTypedCommentSpans(targetCode: string): AutoTypedSpan[] {
   return spans;
 }
 
-function findLineCommentStart(line: string): number | undefined {
+function findLineCommentStart(line: string, commentPrefix: string): number | undefined {
   let quote: '"' | "'" | undefined;
   let escaped = false;
 
-  for (let index = 0; index < line.length - 1; index += 1) {
+  for (let index = 0; index <= line.length - commentPrefix.length; index += 1) {
     const char = line[index]!;
-    const next = line[index + 1]!;
 
     if (escaped) {
       escaped = false;
@@ -384,7 +384,7 @@ function findLineCommentStart(line: string): number | undefined {
       continue;
     }
 
-    if (char === '/' && next === '/') {
+    if (line.startsWith(commentPrefix, index)) {
       return index;
     }
   }

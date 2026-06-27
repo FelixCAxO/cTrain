@@ -106,6 +106,38 @@ describe('mock exam command model', () => {
     );
   });
 
+  it('does not mix Python or C completion checks into the Java SE 25 mock exam', () => {
+    const javaLesson = lesson('java-method-return-02', 'Method Return', [
+      {
+        prompt: 'What returns?',
+        choices: ['a + b', 'void'],
+        answerIndex: 0,
+        explanation: 'The return expression is a + b.'
+      }
+    ]);
+    const pythonLesson = lesson('python-print-input-01', 'Python Print and Input', [
+      {
+        prompt: 'What type does input() return?',
+        choices: ['str', 'int'],
+        answerIndex: 0,
+        explanation: 'input() returns str.'
+      }
+    ], { language: 'python', tags: ['python', 'pcep', 'python-basics'], languageVersion: 'Python 3.13' });
+    const cLesson = lesson('c-pointers-addresses-04', 'C Pointers and Addresses', [
+      {
+        prompt: 'What does &count produce?',
+        choices: ['address', 'copy'],
+        answerIndex: 0,
+        explanation: '& takes an address.'
+      }
+    ], { language: 'c', tags: ['c', 'pointers', 'memory'], languageVersion: 'C17' });
+
+    assert.deepEqual(
+      collectMockExamQuestions([javaLesson, pythonLesson, cLesson]).map((question) => question.lessonId),
+      ['java-method-return-02']
+    );
+  });
+
   it('selects a bounded random question set without repeats', () => {
     const questions = Array.from({ length: 5 }, (_, index) => mockQuestion(index, undefined, 'values'));
 

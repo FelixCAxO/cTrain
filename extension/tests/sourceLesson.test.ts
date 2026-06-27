@@ -115,6 +115,12 @@ describe('source file lessons', () => {
     assert.equal(trimmed.length, 20_000);
   });
 
+  it('recognizes C, Java, and Python source files for current-file practice', () => {
+    assert.equal(isKnownTrainingLanguageId('c'), true);
+    assert.equal(isKnownTrainingLanguageId('java'), true);
+    assert.equal(isKnownTrainingLanguageId('python'), true);
+  });
+
   it('detects plaintext and unknown language ids so the command can warn without blocking', () => {
     assert.equal(isKnownTrainingLanguageId('typescript'), true);
     assert.equal(isKnownTrainingLanguageId('plaintext'), false);

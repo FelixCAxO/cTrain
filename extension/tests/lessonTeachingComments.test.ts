@@ -9,7 +9,7 @@ describe('lesson teaching comments', () => {
     for (const lesson of snippetLessons) {
       const firstLine = lesson.targetCode.split('\n')[0]?.trim() ?? '';
 
-      assert.match(firstLine, /^\/\/\s+\S/, `${lesson.id} should open with a learner-facing comment`);
+      assert.match(firstLine, new RegExp(`^${escapeRegExp(lineCommentPrefix(lesson.language))}\\s+\\S`), `${lesson.id} should open with a learner-facing comment`);
       assert.ok(firstLine.length <= 96, `${lesson.id} opening comment should stay concise`);
     }
   });
@@ -19,7 +19,7 @@ describe('lesson teaching comments', () => {
       const comments = lesson.targetCode
         .split('\n')
         .map((line) => {
-          const start = findLineCommentStart(line);
+          const start = findLineCommentStart(line, lineCommentPrefix(lesson.language));
           return start === undefined ? undefined : line.slice(start).trim();
         })
         .filter((line): line is string => line !== undefined);
@@ -35,16 +35,23 @@ describe('lesson teaching comments', () => {
 });
 
 function isHeaderComment(line: string): boolean {
-  return line.startsWith('// Learn:') || /^\/\/ Java \d+/.test(line);
+  return /^(?:\/\/|#) Learn:/.test(line) || /^\/\/ Java \d+/.test(line);
 }
 
-function findLineCommentStart(line: string): number | undefined {
+function lineCommentPrefix(language: string): string {
+  return language === 'python' ? '#' : '//';
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function findLineCommentStart(line: string, commentPrefix: string): number | undefined {
   let quote: '"' | "'" | undefined;
   let escaped = false;
 
-  for (let index = 0; index < line.length - 1; index += 1) {
+  for (let index = 0; index <= line.length - commentPrefix.length; index += 1) {
     const char = line[index]!;
-    const next = line[index + 1]!;
 
     if (escaped) {
       escaped = false;
@@ -65,7 +72,7 @@ function findLineCommentStart(line: string): number | undefined {
       continue;
     }
 
-    if (char === '/' && next === '/') {
+    if (line.startsWith(commentPrefix, index)) {
       return index;
     }
   }

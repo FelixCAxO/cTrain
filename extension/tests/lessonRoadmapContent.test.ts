@@ -60,11 +60,32 @@ describe('lesson roadmap coverage content', () => {
     }
   });
 
-  it('keeps roadmap coverage scoped to Java public lessons', () => {
+  it('tracks public C, Java, and Python lesson languages', () => {
     const rows = readRoadmapRows();
 
-    assert.deepEqual([...new Set(rows.map((row) => row.track))], ['java']);
-    assert.equal(builtInLessons.every((lesson) => lesson.language === 'java'), true);
+    assert.deepEqual([...new Set(rows.map((row) => row.track))].sort(), ['c', 'java', 'python']);
+    assert.deepEqual([...new Set(builtInLessons.map((lesson) => lesson.language))].sort(), ['c', 'java', 'python']);
+  });
+
+  it('tracks Python certification ladder rows and C systems rows explicitly', () => {
+    const rows = readRoadmapRows();
+
+    for (const expected of [
+      ['python', 'PCEP Basics', ['python', 'pcep', 'python-basics']],
+      ['python', 'PCAP OOP', ['python', 'pcap', 'classes']],
+      ['python', 'PCPP1 Decorators Context Managers', ['python', 'pcpp1', 'decorators', 'context-managers']],
+      ['c', 'Pointers', ['c', 'pointers', 'memory']],
+      ['c', 'Structs', ['c', 'structs']]
+    ] as const) {
+      assert.ok(
+        rows.some((row) => (
+          row.track === expected[0]
+          && row.roadmapNode === expected[1]
+          && expected[2].every((tag) => row.expectedTags.includes(tag))
+        )),
+        `${expected[0]}/${expected[1]} should have a roadmap row`
+      );
+    }
   });
 
   it('requires exam-ready roadmap rows to have non-preview lessons with completion checks', () => {
@@ -111,7 +132,7 @@ describe('lesson roadmap coverage content', () => {
       'Vector API'
     ]);
 
-    for (const row of rows.filter((candidate) => !offSyllabusRows.has(candidate.roadmapNode))) {
+    for (const row of rows.filter((candidate) => candidate.track === 'java' && !offSyllabusRows.has(candidate.roadmapNode))) {
       assert.equal(row.minExamReadyLessons, 1, `${row.roadmapNode} should require one non-preview cert lesson`);
       assert.equal(row.minCompletionChecksPerLesson, 2, `${row.roadmapNode} should require two completion checks`);
     }
@@ -135,7 +156,7 @@ describe('lesson roadmap coverage content', () => {
     const lessonById = new Map(builtInLessons.map((lesson) => [lesson.id, lesson]));
 
     const thinRows = rows
-      .filter((row) => row.minExamReadyLessons > 0)
+      .filter((row) => row.track === 'java' && row.minExamReadyLessons > 0)
       .map((row) => {
         const rowQuestions = questions.filter((question) => {
           const lesson = lessonById.get(question.lessonId);

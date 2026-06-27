@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "c-arrays-loops-03",
+  "version": 1,
+  "title": "C Arrays And Loops",
+  "description": "Practice indexing an array with a counted loop.",
+  "language": "c",
+  "difficulty": 1,
+  "estimatedSeconds": 50,
+  "tags": ["c", "arrays", "loops"],
+  "prerequisites": ["c-variables-printf-02"],
+  "learningGoals": ["Trace a simple loop that accumulates array elements."],
+  "languageVersion": "C17",
+  "completionChecks": [
+    {
+      "prompt": "What value is stored in total after the loop?",
+      "choices": ["5", "10", "3"],
+      "answerIndex": 1,
+      "explanation": "The loop adds 2, 3, and 5, giving total 10."
+    },
+    {
+      "prompt": "Which expression reads the current array element?",
+      "choices": ["scores", "i += 1", "scores[i]"],
+      "answerIndex": 2,
+      "explanation": "scores[i] indexes the array at the current loop position."
+    }
+  ],
+  "targetCode": "// Learn: Walk an array with a counted loop.\nint total = 0;\nint scores[] = {2, 3, 5}; // braces initialize the array.\nfor (int i = 0; i < 3; i += 1) {\n  total += scores[i];\n}"
+}

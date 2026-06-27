@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "python-exceptions-files-52",
+  "version": 1,
+  "title": "Python Exceptions and Files",
+  "description": "Practice reading a file with a handled failure path.",
+  "language": "python",
+  "difficulty": 3,
+  "estimatedSeconds": 95,
+  "tags": [
+    "python",
+    "pcap",
+    "exceptions",
+    "files"
+  ],
+  "prerequisites": [
+    "python-oop-class-methods-51"
+  ],
+  "learningGoals": [
+    "Use with to close a file automatically.",
+    "Catch FileNotFoundError explicitly."
+  ],
+  "languageVersion": "Python 3.13",
+  "completionChecks": [
+    {
+      "prompt": "Which exception does this code handle?",
+      "choices": [
+        "ValueError",
+        "TypeError",
+        "FileNotFoundError"
+      ],
+      "answerIndex": 2,
+      "explanation": "The except clause catches FileNotFoundError when notes.txt is absent."
+    },
+    {
+      "prompt": "Why use with open(...) as file?",
+      "choices": [
+        "It closes the file automatically",
+        "It disables exceptions",
+        "It converts the file to a list"
+      ],
+      "answerIndex": 0,
+      "explanation": "The context manager closes the file when the block exits."
+    }
+  ],
+  "targetCode": "# Learn: Handle a missing file without hiding all errors.\ntry:\n    with open(\"notes.txt\", encoding=\"utf-8\") as file:\n        text = file.read()  # The file closes after this block.\nexcept FileNotFoundError:\n    text = \"\"\nprint(len(text))"
+}

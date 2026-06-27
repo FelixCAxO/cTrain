@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "c-pointers-addresses-04",
+  "version": 1,
+  "title": "C Pointers And Addresses",
+  "description": "Practice taking an address and updating through a pointer.",
+  "language": "c",
+  "difficulty": 2,
+  "estimatedSeconds": 55,
+  "tags": ["c", "pointers", "memory", "variables"],
+  "prerequisites": ["c-arrays-loops-03"],
+  "learningGoals": ["Distinguish address-of from dereference in a short C snippet."],
+  "languageVersion": "C17",
+  "completionChecks": [
+    {
+      "prompt": "What does &count produce?",
+      "choices": ["A copy of count", "The address of count", "The value 4"],
+      "answerIndex": 1,
+      "explanation": "The address-of operator produces the memory address of count."
+    },
+    {
+      "prompt": "What prints after *ptr += 1?",
+      "choices": ["4", "ptr", "5"],
+      "answerIndex": 2,
+      "explanation": "ptr points at count, so dereferencing and incrementing changes count."
+    }
+  ],
+  "targetCode": "// Learn: Read an address through a pointer.\nint count = 4;\nint *ptr = &count; // & stores count's address in ptr.\n*ptr += 1;\nprintf(\"%d\\n\", count);"
+}

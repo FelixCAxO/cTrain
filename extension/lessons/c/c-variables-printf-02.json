@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "c-variables-printf-02",
+  "version": 1,
+  "title": "C Variables And Printf",
+  "description": "Practice declaring an integer and printing a formatted value.",
+  "language": "c",
+  "difficulty": 1,
+  "estimatedSeconds": 50,
+  "tags": ["c", "variables", "stdio"],
+  "prerequisites": ["c-hello-main-01"],
+  "learningGoals": ["Use an int variable in a simple printf expression."],
+  "languageVersion": "C17",
+  "completionChecks": [
+    {
+      "prompt": "What does %d tell printf to format?",
+      "choices": ["A string", "A decimal integer", "A pointer address"],
+      "answerIndex": 1,
+      "explanation": "%d formats an int as a signed decimal value."
+    },
+    {
+      "prompt": "What prints from count + 2 when count is 3?",
+      "choices": ["3", "count + 2", "5"],
+      "answerIndex": 2,
+      "explanation": "The expression is evaluated before printf receives the value."
+    }
+  ],
+  "targetCode": "// Learn: Store numbers and print them.\n#include <stdio.h>\nint main(void) {\n  int count = 3; // int stores a whole number here.\n  printf(\"%d\\n\", count + 2);\n  return 0;\n}"
+}

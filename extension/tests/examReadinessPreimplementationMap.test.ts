@@ -263,7 +263,7 @@ function readRoadmapRows(): RoadmapRow[] {
   const [header, ...rows] = lines;
   assert.equal(header, 'track\troadmapNode\texpectedTags\tminExamReadyLessons\tminCompletionChecksPerLesson');
 
-  return rows.map((line) => {
+  return rows.filter((line) => line.split('\t')[0] === 'java').map((line) => {
     const [track, roadmapNode, expectedTags, minExamReadyLessons, minCompletionChecksPerLesson] = line.split('\t');
     assert.equal(track, 'java');
 

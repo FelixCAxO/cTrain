@@ -115,6 +115,10 @@ export function getExamObjectiveForLesson(
   lesson: Lesson,
   options: { includeOffSyllabus?: boolean } = {}
 ): ExamObjective | undefined {
+  if (lesson.language !== 'java') {
+    return undefined;
+  }
+
   if (options.includeOffSyllabus !== true && !isCertificationLesson(lesson)) {
     return undefined;
   }
@@ -134,7 +138,8 @@ export function getExamObjectiveForLesson(
 }
 
 export function isCertificationLesson(lesson: Lesson): boolean {
-  return !lesson.tags.includes('preview')
+  return lesson.language === 'java'
+    && !lesson.tags.includes('preview')
     && lesson.languageVersion !== 'Java 26'
     && !lesson.tags.includes('http-client');
 }

@@ -58,26 +58,55 @@ export interface BuiltInLessonCategory {
   order: number;
 }
 
-// Built-in Java lessons are organized into curriculum bands by their id suffix:
-// foundations 01-49, the Java 25 Cert Exam band 50-69, and the Java 26 band 70-79.
-// The original cert ids 50-69 are full, so cert-exam growth continues at 80+ while
-// Java 26 demos fill 70-79; adding a lesson inside a band keeps
-// grouping correct without renumbering ids that learner progress is keyed on.
 export function getBuiltInLessonCategory(lesson: Lesson): BuiltInLessonCategory {
+  if (lesson.id.startsWith('c-')) {
+    return getCLessonCategory(lesson);
+  }
+
   if (lesson.id.startsWith('java-')) {
-    const sequence = getBuiltInLessonSequence(lesson.id);
-    if (sequence >= 70 && sequence <= 79) {
-      return { key: 'java-26', label: 'Java 26', icon: 'beaker', order: 2 };
-    }
-    if (sequence >= 50) {
-      return { key: 'java-25-cert-exam', label: 'Java 25 Cert Exam', icon: 'mortar-board', order: 1 };
-    }
-    return { key: 'java-foundations', label: 'Foundations', icon: 'book', order: 0 };
+    return getJavaLessonCategory(lesson);
+  }
+
+  if (lesson.id.startsWith('python-')) {
+    return getPythonLessonCategory(lesson);
   }
 
   if (lesson.id.startsWith('prog2-')) {
-    return { key: 'prog2-references', label: 'Prog2 References', icon: 'references', order: 3 };
+    return { key: 'prog2-references', label: 'Prog2 References', icon: 'references', order: 90 };
   }
 
-  return { key: lesson.language, label: lesson.language, icon: 'symbol-namespace', order: 4 };
+  return { key: lesson.language, label: lesson.language, icon: 'symbol-namespace', order: 99 };
+}
+
+function getJavaLessonCategory(lesson: Lesson): BuiltInLessonCategory {
+  const sequence = getBuiltInLessonSequence(lesson.id);
+  if (sequence >= 70 && sequence <= 79) {
+    return { key: 'java-26', label: 'Java 26', icon: 'beaker', order: 2 };
+  }
+  if (sequence >= 50) {
+    return { key: 'java-25-cert-exam', label: 'Java 25 Cert Exam', icon: 'mortar-board', order: 1 };
+  }
+  return { key: 'java-foundations', label: 'Foundations', icon: 'book', order: 0 };
+}
+
+function getCLessonCategory(lesson: Lesson): BuiltInLessonCategory {
+  const sequence = getBuiltInLessonSequence(lesson.id);
+  if (sequence >= 80) {
+    return { key: 'c-advanced', label: 'C Advanced', icon: 'tools', order: 12 };
+  }
+  if (sequence >= 50) {
+    return { key: 'c-systems', label: 'C Systems Practice', icon: 'gear', order: 11 };
+  }
+  return { key: 'c-foundations', label: 'C Foundations', icon: 'chip', order: 10 };
+}
+
+function getPythonLessonCategory(lesson: Lesson): BuiltInLessonCategory {
+  const sequence = getBuiltInLessonSequence(lesson.id);
+  if (sequence >= 80) {
+    return { key: 'python-pcpp1', label: 'Python PCPP1', icon: 'mortar-board', order: 32 };
+  }
+  if (sequence >= 50) {
+    return { key: 'python-pcap', label: 'Python PCAP', icon: 'mortar-board', order: 31 };
+  }
+  return { key: 'python-pcep', label: 'Python PCEP', icon: 'book', order: 30 };
 }

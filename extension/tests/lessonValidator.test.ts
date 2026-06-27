@@ -45,7 +45,7 @@ describe('lesson validation and loading', () => {
     });
 
     assert.equal(result.ok, false);
-    assert.match(result.errors.find((error) => error.path === 'language')!.message, /java/);
+    assert.match(result.errors.find((error) => error.path === 'language')!.message, /c, java, python/);
     assert.deepEqual(result.errors.map((error) => error.path), [
       'id',
       'version',
@@ -179,6 +179,18 @@ describe('lesson validation and loading', () => {
     assert.equal(validateLesson(makeValidLesson({
       languageVersion: 'Java 24'
     })).ok, true);
+    assert.equal(validateLesson(makeValidLesson({
+      id: 'python-valid-01',
+      language: 'python',
+      tags: ['python'],
+      languageVersion: 'Python 3.13'
+    })).ok, true);
+    assert.equal(validateLesson(makeValidLesson({
+      id: 'c-valid-01',
+      language: 'c',
+      tags: ['c'],
+      languageVersion: 'C17'
+    })).ok, true);
 
     const typo = validateLesson(makeValidLesson({
       languageVersion: 'Java 20'
@@ -230,6 +242,28 @@ describe('lesson validation and loading', () => {
     assert.equal(result.ok, false);
     assert.deepEqual(result.errors.map((error) => error.path), ['tags[1]']);
     assert.match(result.errors[0]!.message, /known lesson tag/);
+  });
+
+  it('accepts authored Python lessons with Python versions and Python tags', () => {
+    const result = validateLesson(makeValidLesson({
+      id: 'python-print-input-01',
+      language: 'python',
+      languageVersion: 'Python 3.13',
+      tags: ['python', 'pcep', 'python-basics', 'strings']
+    }));
+
+    assert.equal(result.ok, true);
+  });
+
+  it('accepts authored C lessons with C versions and C tags', () => {
+    const result = validateLesson(makeValidLesson({
+      id: 'c-pointers-addresses-04',
+      language: 'c',
+      languageVersion: 'C17',
+      tags: ['c', 'pointers', 'memory', 'variables']
+    }));
+
+    assert.equal(result.ok, true);
   });
 
   it('rejects removed exam-style practice Prog2 lesson tags', () => {
@@ -296,6 +330,25 @@ describe('lesson validation and loading', () => {
     }));
     assert.equal(longTeachingComments.ok, true);
 
+    const pythonTeachingComments = validateLesson(makeValidLesson({
+      id: 'python-comment-estimate-01',
+      language: 'python',
+      languageVersion: 'Python 3.13',
+      tags: ['python', 'pcep', 'python-basics'],
+      estimatedSeconds: 35,
+      targetCode: [
+        '# Learn: Read concise teaching notes before typing the real code.',
+        '# This explanatory line is auto-typed and should not inflate the typing estimate.',
+        '# Another long note describes a concept that is useful to read but not part of WPM.',
+        '# Auto-typed comments can be long enough to help the learner without adding typing work.',
+        '# The estimate should still follow the actual code characters that the learner types.',
+        'name = "cTrain"',
+        'message = f"Hello, {name}"',
+        'print(message)'
+      ].join('\n')
+    }));
+    assert.equal(pythonTeachingComments.ok, true);
+
     const tooLarge = validateLesson(makeValidLesson({
       estimatedSeconds: 1_801
     }));
@@ -361,10 +414,11 @@ describe('lesson validation and loading', () => {
     assert.deepEqual(result.errors.map((error) => error.path), ['language', 'tags[0]', 'tags[1]']);
   });
 
-  it('ships the Java-only public seed set', () => {
-    assert.equal(builtInLessons.length, 89);
+  it('ships public C, Java, and Python seed tracks', () => {
+    assert.equal(builtInLessons.length, 104);
     assert.equal(builtInLessons.filter((item) => item.language === 'java').length, 89);
-    assert.equal(builtInLessons.some((item) => /^(?:cpp|typescript|python)-/.test(item.id)), false);
+    assert.equal(builtInLessons.filter((item) => item.language === 'python').length, 9);
+    assert.equal(builtInLessons.filter((item) => item.language === 'c').length, 6);
     assert.equal(builtInLessons.some((item) => item.id.startsWith('prog2-')), false);
 
     for (const item of builtInLessons) {
@@ -372,7 +426,9 @@ describe('lesson validation and loading', () => {
     }
 
     assert.deepEqual(builtInLessons.map((item) => item.id), [
-      ...expectedJavaLessonIds
+      ...expectedJavaLessonIds,
+      ...expectedCLessonIds,
+      ...expectedPythonLessonIds
     ]);
 
   });
@@ -449,7 +505,7 @@ describe('lesson validation and loading', () => {
     for (const lesson of builtInLessons) {
       assert.ok(lesson.estimatedSeconds >= 10, `${lesson.id} should be at least 10 seconds`);
       assert.ok(lesson.estimatedSeconds <= 1_800, `${lesson.id} should be at most 1800 seconds`);
-      if (countTypeableTargetCharacters(lesson.targetCode) > 300 && !lesson.tags.includes('source-file')) {
+      if (countTypeableTargetCharacters(lesson.targetCode, lesson.language) > 300 && !lesson.tags.includes('source-file')) {
         assert.ok(lesson.estimatedSeconds >= 180, `${lesson.id} should budget long snippets at 180s or more`);
       }
     }
@@ -731,6 +787,27 @@ const expectedJavaLessonIds = [
       'java-vector-api-79'
 ];
 
+const expectedCLessonIds = [
+  'c-hello-main-01',
+  'c-variables-printf-02',
+  'c-arrays-loops-03',
+  'c-pointers-addresses-04',
+  'c-struct-basic-05',
+  'c-file-scope-header-06'
+];
+
+const expectedPythonLessonIds = [
+  'python-print-input-01',
+  'python-if-while-for-02',
+  'python-list-dict-basics-03',
+  'python-functions-scope-50',
+  'python-oop-class-methods-51',
+  'python-exceptions-files-52',
+  'python-iterators-generators-80',
+  'python-decorators-context-managers-81',
+  'python-packaging-typing-tools-82'
+];
+
 function assertLessonPrerequisites(lessonId: string, prerequisites: string[]): void {
   assert.deepEqual(findBuiltInLesson(lessonId).prerequisites, prerequisites, lessonId);
 }
@@ -779,24 +856,25 @@ function makeValidLesson(overrides: Partial<Lesson> = {}): Lesson {
   };
 }
 
-function countTypeableTargetCharacters(targetCode: string): number {
+function countTypeableTargetCharacters(targetCode: string, language: Lesson['language'] = 'java'): number {
+  const commentPrefix = language === 'python' ? '#' : '//';
+
   return targetCode
     .split('\n')
     .map((line) => {
-      const commentStart = findLineCommentStart(line);
+      const commentStart = findLineCommentStart(line, commentPrefix);
       return commentStart === undefined ? line : line.slice(0, commentStart);
     })
     .join('\n')
     .length;
 }
 
-function findLineCommentStart(line: string): number | undefined {
+function findLineCommentStart(line: string, commentPrefix: string): number | undefined {
   let quote: '"' | "'" | undefined;
   let escaped = false;
 
-  for (let index = 0; index < line.length - 1; index += 1) {
+  for (let index = 0; index < line.length; index += 1) {
     const char = line[index]!;
-    const next = line[index + 1]!;
 
     if (escaped) {
       escaped = false;
@@ -817,7 +895,7 @@ function findLineCommentStart(line: string): number | undefined {
       continue;
     }
 
-    if (char === '/' && next === '/') {
+    if (line.startsWith(commentPrefix, index)) {
       return index;
     }
   }

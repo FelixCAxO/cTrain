@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "python-print-input-01",
+  "version": 1,
+  "title": "Python Print and Input",
+  "description": "Practice a small Python script that reads a name and prints a greeting.",
+  "language": "python",
+  "difficulty": 1,
+  "estimatedSeconds": 60,
+  "tags": [
+    "python",
+    "pcep",
+    "python-basics",
+    "strings"
+  ],
+  "prerequisites": [],
+  "learningGoals": [
+    "Use input() to read a string.",
+    "Use an f-string to format output."
+  ],
+  "languageVersion": "Python 3.13",
+  "completionChecks": [
+    {
+      "prompt": "What type does input() return?",
+      "choices": [
+        "str",
+        "int",
+        "bytes"
+      ],
+      "answerIndex": 0,
+      "explanation": "input() returns a string. Convert it explicitly when a number is needed."
+    },
+    {
+      "prompt": "What does the f prefix do in f\"Hello {name}\"?",
+      "choices": [
+        "Forces uppercase output",
+        "Formats expressions inside braces",
+        "Reads from a file"
+      ],
+      "answerIndex": 1,
+      "explanation": "An f-string evaluates expressions inside braces and inserts their string representation."
+    }
+  ],
+  "targetCode": "# Learn: Read text and print a formatted greeting.\nname = input(\"Name: \")  # input returns str.\nmessage = f\"Hello, {name}!\"\nprint(message)"
+}

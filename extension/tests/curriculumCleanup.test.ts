@@ -62,27 +62,26 @@ const bannedProg2Terms = [
   /Prog2 exam tasks/i
 ] as const;
 
-describe('Java-only curriculum cleanup', () => {
-  it('ships only Java public built-in lesson assets', () => {
+describe('public curriculum cleanup', () => {
+  it('ships public C, Java, and Python lesson assets', () => {
     const trackDirectories = fs.readdirSync(publicLessonRoot, { withFileTypes: true })
       .filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'))
       .map((entry) => entry.name)
       .sort();
 
-    assert.deepEqual(trackDirectories, ['java']);
-    assert.equal(builtInLessons.length, 89);
-    assert.deepEqual([...new Set(builtInLessons.map((lesson) => lesson.language))], ['java']);
-    assert.deepEqual(
-      builtInLessons.map((lesson) => lesson.id).sort(),
-      listLessonFiles(path.join(publicLessonRoot, 'java')).map((file) => path.basename(file, '.json')).sort()
-    );
+    assert.deepEqual(trackDirectories, ['c', 'java', 'python']);
+    assert.equal(builtInLessons.length, 104);
+    assert.deepEqual([...new Set(builtInLessons.map((lesson) => lesson.language))].sort(), ['c', 'java', 'python']);
+    assert.deepEqual(builtInLessons.map((lesson) => lesson.id).sort(), listLessonFiles(publicLessonRoot).map((file) => path.basename(file, '.json')).sort());
   });
 
-  it('keeps authoring validation Java-only while still allowing Prog2 Java ids', () => {
+  it('keeps authoring validation scoped to supported public languages', () => {
     assert.equal(validateLesson(makeLesson({ language: 'java', id: 'java-valid-01', tags: ['java'] })).ok, true);
+    assert.equal(validateLesson(makeLesson({ language: 'c', id: 'c-valid-01', tags: ['c'], languageVersion: 'C17' })).ok, true);
+    assert.equal(validateLesson(makeLesson({ language: 'python', id: 'python-valid-01', tags: ['python'], languageVersion: 'Python 3.13' })).ok, true);
     assert.equal(validateLesson(makeLesson({ language: 'java', id: 'prog2-ref-p2-list-api-702', tags: ['java', 'prog2', 'source-file'] })).ok, true);
 
-    for (const language of ['cpp', 'typescript', 'python']) {
+    for (const language of ['cpp', 'typescript']) {
       const result = validateLesson(makeLesson({
         language,
         id: `${language}-lesson-01`,
@@ -142,9 +141,9 @@ describe('Java-only curriculum cleanup', () => {
 
     assert.equal(fs.existsSync(path.join(root, 'docs', 'prog2-liang-exercise-manifest.json')), false);
     assert.equal(fs.existsSync(path.join(root, 'build-ctrain-prog2.bat')), false);
-    assert.match(lessonsDoc, /89 Java lessons/);
+    assert.match(lessonsDoc, /104 C, Java, and Python lessons/);
     assert.match(lessonsDoc, /36 Prog2 reference lessons/);
-    assert.match(architectureDoc, /Java public lessons plus 36 Prog2 reference lessons/);
+    assert.match(architectureDoc, /C, Java, and Python public lessons plus 36 Prog2 reference lessons/);
     assert.match(testingDoc, /reference-only/);
     assert.match(testingDoc, /36 retained Prog2 reference lessons/);
     assert.doesNotMatch(testingDoc, /30 public Java lessons/);
@@ -153,7 +152,7 @@ describe('Java-only curriculum cleanup', () => {
     assert.match(expansionDoc, /reference-only/i);
 
     for (const doc of [lessonsDoc, architectureDoc, testingDoc, expansionDoc]) {
-      for (const banned of [/lessons\/cpp\//, /TypeScript seed lessons/, /Python seed lessons/, /Liang/i, /Z-Library/i, /04_Exams/i]) {
+      for (const banned of [/lessons\/cpp\//, /TypeScript seed lessons/, /Liang/i, /Z-Library/i, /04_Exams/i]) {
         assert.doesNotMatch(doc, banned);
       }
     }

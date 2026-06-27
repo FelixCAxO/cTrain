@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "c-struct-basic-05",
+  "version": 1,
+  "title": "C Struct Basics",
+  "description": "Practice grouping fields in a simple struct.",
+  "language": "c",
+  "difficulty": 2,
+  "estimatedSeconds": 55,
+  "tags": ["c", "structs"],
+  "prerequisites": ["c-pointers-addresses-04"],
+  "learningGoals": ["Read and access fields from a small struct value."],
+  "languageVersion": "C17",
+  "completionChecks": [
+    {
+      "prompt": "What does point.x access?",
+      "choices": ["The y field", "The x field", "The struct type name"],
+      "answerIndex": 1,
+      "explanation": "The dot operator reads a field from a struct object."
+    },
+    {
+      "prompt": "What value is stored in sum?",
+      "choices": ["2", "3", "5"],
+      "answerIndex": 2,
+      "explanation": "The initializer sets x to 2 and y to 3, so the sum is 5."
+    }
+  ],
+  "targetCode": "// Learn: Group fields in a struct.\nstruct Point { int x; int y; }; // struct names a record shape.\nstruct Point point = {2, 3};\nint sum = point.x + point.y;\nprintf(\"%d\\n\", sum);"
+}

@@ -12,8 +12,8 @@ Each retained lesson is authored as Java, uses a `prog2-*` id, includes `prog2` 
 
 Packaging policy:
 
-- Public package: 89 Java lessons from `lessons/java/`. The published `ctrain-*.vsix` excludes `prog2-lessons/`.
+- Public package: 104 C, Java, and Python lessons from `lessons/`. The published `ctrain-*.vsix` excludes `prog2-lessons/`.
 - Reference corpus: 36 Prog2 reference lessons kept in `prog2-lessons/` as owned Java reference material, not bundled into the published extension.
 - Guard: `scripts/assert-prog2-coverage.cjs` checks the 36-file reference-only corpus.
 
-Do not add source-mapped exercise copies, one-off exam-drill files, removed corpus tags, stale prerequisites, or non-Java authored lesson JSON. New Prog2 material must be owned Java reference content with compact practice examples and learner-facing descriptions.
+Do not add source-mapped exercise copies, one-off exam-drill files, removed corpus tags, stale prerequisites, or non-Java Prog2 reference JSON. New Prog2 material must be owned Java reference content with compact practice examples and learner-facing descriptions.

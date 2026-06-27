@@ -2,19 +2,21 @@
 
 ![cTrain logo](docs/cTrain_logo.png)
 
-Practice typing real Java code inside VS Code.
+Practice typing real code inside VS Code, with focused tracks for Java certification, Python certification, and C systems fundamentals.
 
-> Personal project — my goal is to pass the Oracle Java SE 25 (1Z0-831) certification exam, so the lessons focus on getting there.
+> Personal project - the Java track is focused on Oracle Java SE 25 preparation. The broader cTrain goal is separate, focused practice tracks for Java, Python, and C.
 
 ## Lessons
 
-89 Java typing lessons, grouped so the next choice is easier to scan:
+104 C, Java, and Python typing lessons, grouped so the next choice is easier to scan:
 
-- **Foundations** — classes, methods, collections, generics, streams, exceptions.
-- **Java 25 Cert Exam** — the focused certification block (ids `50`-`69`, growing at `80`+) for Oracle Java SE 25 (1Z0-831).
-- **Java 26** — headline features such as lazy constants, with preview features clearly flagged.
+- **Java** - foundations, Oracle Java SE 25 certification, and selected Java 26 features.
+- **Python** - PCEP, PCAP, and PCPP1 certification-aligned practice.
+- **C** - systems fundamentals: compilation, memory, pointers, arrays, structs, and debugging.
 
 Each public snippet lesson opens with a concise teaching comment and includes a short key-line note where a new concept first appears.
+
+See [language tracks](docs/language-tracks.md) for the C / Java / Python split.
 
 ## How to use
 

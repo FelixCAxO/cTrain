@@ -43,7 +43,9 @@
     "language": {
       "type": "string",
       "enum": [
-        "java"
+        "java",
+        "c",
+        "python"
       ]
     },
     "difficulty": {
@@ -70,14 +72,21 @@
           "b1",
           "b2",
           "b3",
+          "bitwise",
+          "c",
           "classes",
           "collections",
           "collectors",
+          "compilation",
+          "comprehensions",
           "concurrency",
           "conditionals",
           "constructors",
+          "context-managers",
           "dates",
           "deque",
+          "decorators",
+          "dunder-methods",
           "encapsulation",
           "enum-members",
           "enums",
@@ -86,17 +95,24 @@
           "exceptions",
           "executors",
           "file-chooser",
+          "file-io",
           "final-fields",
           "files",
           "filtering",
+          "floating-point",
           "focus",
           "formatting",
+          "free",
           "functional-interfaces",
+          "function-pointers",
           "functions",
           "g1",
           "gc",
+          "generators",
           "generics",
+          "headers",
           "http-client",
+          "ieee754",
           "if-else",
           "imports",
           "inheritance",
@@ -111,6 +127,7 @@
           "lambda",
           "lambdas",
           "lazy-constants",
+          "linkage",
           "list-view",
           "literals",
           "localization",
@@ -119,7 +136,9 @@
           "maps",
           "math",
           "methods",
+          "memory",
           "modules",
+          "malloc",
           "multicatch",
           "networking",
           "numeric-casting",
@@ -132,6 +151,15 @@
           "primitives",
           "prog2",
           "properties",
+          "packages",
+          "pcap",
+          "pcep",
+          "pcpp1",
+          "pointers",
+          "posix",
+          "preprocessor",
+          "python",
+          "python-basics",
           "records",
           "references",
           "resources",
@@ -141,14 +169,22 @@
           "security",
           "sequenced-collections",
           "serialization",
+          "setjmp",
           "sets",
           "sort",
           "sorting",
           "source-file",
+          "sockets",
+          "scope",
           "stable-values",
           "static",
+          "stdlib",
+          "stdarg",
+          "stdio",
+          "storage-duration",
           "streams",
           "strings",
+          "structs",
           "structured-concurrency",
           "switch",
           "table-view",
@@ -156,14 +192,21 @@
           "text-blocks",
           "threads",
           "time",
+          "typing",
           "unnamed-modules",
           "unnamed-variables",
+          "undefined-behavior",
           "validation",
           "var",
           "varargs",
+          "variadic",
           "variables",
+          "venv",
           "vector-api",
           "virtual-threads",
+          "volatile",
+          "vla",
+          "winapi",
           "workspace"
         ]
       }
@@ -254,7 +297,17 @@
         "Java 23",
         "Java 24",
         "Java 25",
-        "Java 26"
+        "Java 26",
+        "C89",
+        "C99",
+        "C11",
+        "C17",
+        "C23",
+        "Python 3.10",
+        "Python 3.11",
+        "Python 3.12",
+        "Python 3.13",
+        "Python 3.14"
       ]
     },
     "targetCode": {
@@ -291,6 +344,56 @@
               "Java 24",
               "Java 25",
               "Java 26"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "language"
+        ],
+        "properties": {
+          "language": {
+            "const": "c"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "languageVersion": {
+            "enum": [
+              "C89",
+              "C99",
+              "C11",
+              "C17",
+              "C23"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "language"
+        ],
+        "properties": {
+          "language": {
+            "const": "python"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "languageVersion": {
+            "enum": [
+              "Python 3.10",
+              "Python 3.11",
+              "Python 3.12",
+              "Python 3.13",
+              "Python 3.14"
             ]
           }
         }

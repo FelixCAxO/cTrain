@@ -115,7 +115,7 @@ function getLessonPickerGroup(item: LessonListItem): LessonPickerGroup {
     const category = getBuiltInLessonCategory(item.lesson);
     return {
       key: category.key,
-      label: category.order === 4 ? formatLanguageLabel(item.lesson.language) : category.label,
+      label: category.order === 99 ? formatLanguageLabel(item.lesson.language) : category.label,
       order: category.order
     };
   }

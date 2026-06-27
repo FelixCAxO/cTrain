@@ -11,10 +11,12 @@ export type ValidationResult =
   | { ok: true; lesson: Lesson; errors: [] }
   | { ok: false; errors: ValidationError[] };
 
-export const lessonLanguages = ['java'] as const;
+export const lessonLanguages = ['java', 'c', 'python'] as const;
 export const lessonIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*-\d{2,}$/;
 export const lessonLanguageVersionsByLanguage: Record<string, readonly string[]> = {
-  java: ['Java 8', 'Java 9', 'Java 11', 'Java 14', 'Java 15', 'Java 16', 'Java 17', 'Java 21', 'Java 22', 'Java 23', 'Java 24', 'Java 25', 'Java 26']
+  java: ['Java 8', 'Java 9', 'Java 11', 'Java 14', 'Java 15', 'Java 16', 'Java 17', 'Java 21', 'Java 22', 'Java 23', 'Java 24', 'Java 25', 'Java 26'],
+  c: ['C89', 'C99', 'C11', 'C17', 'C23'],
+  python: ['Python 3.10', 'Python 3.11', 'Python 3.12', 'Python 3.13', 'Python 3.14']
 };
 export const lessonTags = [
   'abstract',
@@ -25,14 +27,21 @@ export const lessonTags = [
   'b1',
   'b2',
   'b3',
+  'bitwise',
+  'c',
   'classes',
   'collections',
   'collectors',
+  'compilation',
+  'comprehensions',
   'concurrency',
   'conditionals',
   'constructors',
+  'context-managers',
   'dates',
   'deque',
+  'decorators',
+  'dunder-methods',
   'encapsulation',
   'enum-members',
   'enums',
@@ -41,17 +50,24 @@ export const lessonTags = [
   'exceptions',
   'executors',
   'file-chooser',
+  'file-io',
   'final-fields',
   'files',
   'filtering',
+  'floating-point',
   'focus',
   'formatting',
+  'free',
   'functional-interfaces',
+  'function-pointers',
   'functions',
   'g1',
   'gc',
+  'generators',
   'generics',
+  'headers',
   'http-client',
+  'ieee754',
   'if-else',
   'imports',
   'inheritance',
@@ -66,6 +82,7 @@ export const lessonTags = [
   'lambda',
   'lambdas',
   'lazy-constants',
+  'linkage',
   'list-view',
   'literals',
   'localization',
@@ -74,7 +91,9 @@ export const lessonTags = [
   'maps',
   'math',
   'methods',
+  'memory',
   'modules',
+  'malloc',
   'multicatch',
   'networking',
   'numeric-casting',
@@ -87,6 +106,15 @@ export const lessonTags = [
   'primitives',
   'prog2',
   'properties',
+  'packages',
+  'pcap',
+  'pcep',
+  'pcpp1',
+  'pointers',
+  'posix',
+  'preprocessor',
+  'python',
+  'python-basics',
   'records',
   'references',
   'resources',
@@ -96,14 +124,22 @@ export const lessonTags = [
   'security',
   'sequenced-collections',
   'serialization',
+  'setjmp',
   'sets',
   'sort',
   'sorting',
   'source-file',
+  'sockets',
+  'scope',
   'stable-values',
   'static',
+  'stdlib',
+  'stdarg',
+  'stdio',
+  'storage-duration',
   'streams',
   'strings',
+  'structs',
   'structured-concurrency',
   'switch',
   'table-view',
@@ -111,14 +147,21 @@ export const lessonTags = [
   'text-blocks',
   'threads',
   'time',
+  'typing',
   'unnamed-modules',
   'unnamed-variables',
+  'undefined-behavior',
   'validation',
   'var',
   'varargs',
+  'variadic',
   'variables',
+  'venv',
   'vector-api',
   'virtual-threads',
+  'volatile',
+  'vla',
+  'winapi',
   'workspace'
 ] as const;
 
@@ -252,14 +295,14 @@ function expectEstimatedSeconds(record: Record<string, unknown>, errors: Validat
     return;
   }
 
-  if (countTypeableTargetCharacters(record.targetCode) > 300 && (value as number) < 180) {
+  if (countTypeableTargetCharacters(record.targetCode, lineCommentPrefixForLanguage(record.language)) > 300 && (value as number) < 180) {
     addError(errors, 'estimatedSeconds', value, 'at least 180 seconds for snippets over 300 characters');
   }
 }
 
 function expectLanguage(value: unknown, errors: ValidationError[]): void {
   if (typeof value !== 'string' || !languages.has(value as LessonLanguage)) {
-    addError(errors, 'language', value, 'java');
+    addError(errors, 'language', value, [...lessonLanguages].sort().join(', '));
   }
 }
 
@@ -472,24 +515,27 @@ function isSourceFileLesson(record: Record<string, unknown>): boolean {
   return Array.isArray(record.tags) && record.tags.includes('source-file');
 }
 
-function countTypeableTargetCharacters(targetCode: string): number {
+function countTypeableTargetCharacters(targetCode: string, commentPrefix: string): number {
   return targetCode
     .split('\n')
     .map((line) => {
-      const commentStart = findLineCommentStart(line);
+      const commentStart = findLineCommentStart(line, commentPrefix);
       return commentStart === undefined ? line : line.slice(0, commentStart);
     })
     .join('\n')
     .length;
 }
 
-function findLineCommentStart(line: string): number | undefined {
+function lineCommentPrefixForLanguage(language: unknown): string {
+  return language === 'python' ? '#' : '//';
+}
+
+function findLineCommentStart(line: string, commentPrefix: string): number | undefined {
   let quote: '"' | "'" | undefined;
   let escaped = false;
 
-  for (let index = 0; index < line.length - 1; index += 1) {
+  for (let index = 0; index < line.length; index += 1) {
     const char = line[index]!;
-    const next = line[index + 1]!;
 
     if (escaped) {
       escaped = false;
@@ -510,7 +556,7 @@ function findLineCommentStart(line: string): number | undefined {
       continue;
     }
 
-    if (char === '/' && next === '/') {
+    if (line.startsWith(commentPrefix, index)) {
       return index;
     }
   }

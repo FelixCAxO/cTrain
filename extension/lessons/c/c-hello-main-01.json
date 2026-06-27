@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "c-hello-main-01",
+  "version": 1,
+  "title": "C Main And Output",
+  "description": "Practice the smallest C program shape with standard output.",
+  "language": "c",
+  "difficulty": 1,
+  "estimatedSeconds": 45,
+  "tags": ["c", "compilation", "stdio"],
+  "prerequisites": [],
+  "learningGoals": ["Recognize main, printf, and a normal C program return."],
+  "languageVersion": "C17",
+  "completionChecks": [
+    {
+      "prompt": "Which function is the entry point in this C program?",
+      "choices": ["printf", "main", "stdio"],
+      "answerIndex": 1,
+      "explanation": "Execution starts in main; printf is just a library call."
+    },
+    {
+      "prompt": "What prints when this program runs?",
+      "choices": ["main", "return 0", "Hello, cTrain!"],
+      "answerIndex": 2,
+      "explanation": "printf writes the string literal, including the newline escape."
+    }
+  ],
+  "targetCode": "// Learn: Build the smallest C program shape.\n#include <stdio.h> // printf is declared here.\nint main(void) {\n  printf(\"Hello, cTrain!\\n\");\n  return 0;\n}"
+}

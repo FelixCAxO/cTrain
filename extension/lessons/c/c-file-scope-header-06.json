@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "c-file-scope-header-06",
+  "version": 1,
+  "title": "C Header Scope",
+  "description": "Practice a small header-style declaration block.",
+  "language": "c",
+  "difficulty": 2,
+  "estimatedSeconds": 45,
+  "tags": ["c", "headers", "scope", "linkage"],
+  "prerequisites": ["c-struct-basic-05"],
+  "learningGoals": ["Recognize include guards and extern declarations in C headers."],
+  "languageVersion": "C17",
+  "completionChecks": [
+    {
+      "prompt": "Why use the include guard names here?",
+      "choices": ["To allocate memory", "To avoid duplicate declarations", "To call reset_counter"],
+      "answerIndex": 1,
+      "explanation": "The guard prevents the header body from being included more than once in a translation unit."
+    },
+    {
+      "prompt": "What does extern int counter; declare?",
+      "choices": ["A local variable", "A struct field", "A variable defined elsewhere"],
+      "answerIndex": 2,
+      "explanation": "extern declares a name with external linkage without defining storage here."
+    }
+  ],
+  "targetCode": "// Learn: Share declarations through a header-style guard.\n#ifndef COUNTER_H\n#define COUNTER_H // guard prevents duplicate declarations.\nextern int counter;\nvoid reset_counter(void);\n#endif"
+}

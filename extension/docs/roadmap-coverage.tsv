@@ -1,4 +1,8 @@
 track	roadmapNode	expectedTags	minExamReadyLessons	minCompletionChecksPerLesson
+c	C Foundations	c	1	2
+c	Pointers	c,pointers,memory	1	2
+c	Structs	c,structs	1	2
+c	Header Scope	c,headers,scope,linkage	1	2
 java	Class Basics	classes	1	2
 java	Access Modifiers	encapsulation	1	2
 java	Methods	methods	1	2
@@ -62,3 +66,9 @@ java	Applet Removal	applets	0	0
 java	AOT Object Caching	aot	0	0
 java	G1 Synchronization	gc,g1	0	0
 java	Vector API	vector-api	0	0
+python	PCEP Basics	python,pcep,python-basics	1	2
+python	PCEP Flow And Collections	python,pcep	1	2
+python	PCAP OOP	python,pcap,classes	1	2
+python	PCAP Exceptions Files	python,pcap	1	2
+python	PCPP1 Decorators Context Managers	python,pcpp1,decorators,context-managers	1	2
+python	PCPP1 Typing Packaging	python,pcpp1	1	2

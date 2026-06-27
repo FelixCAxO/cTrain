@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "python-oop-class-methods-51",
+  "version": 1,
+  "title": "Python Classes and Methods",
+  "description": "Practice defining a simple class with instance state.",
+  "language": "python",
+  "difficulty": 3,
+  "estimatedSeconds": 95,
+  "tags": [
+    "python",
+    "pcap",
+    "classes",
+    "methods"
+  ],
+  "prerequisites": [
+    "python-functions-scope-50"
+  ],
+  "learningGoals": [
+    "Store instance data on self.",
+    "Call an instance method."
+  ],
+  "languageVersion": "Python 3.13",
+  "completionChecks": [
+    {
+      "prompt": "What does self.name store?",
+      "choices": [
+        "A local variable that disappears after __init__",
+        "An attribute on the current object",
+        "A class shared value"
+      ],
+      "answerIndex": 1,
+      "explanation": "Assigning to self.name stores an attribute on that instance."
+    },
+    {
+      "prompt": "What does user.greet() return for User(\"Ada\")?",
+      "choices": [
+        "Ada",
+        "Hello, Ada",
+        "User"
+      ],
+      "answerIndex": 1,
+      "explanation": "The method reads self.name and formats it into the greeting."
+    }
+  ],
+  "targetCode": "# Learn: Put Python object state on self.\nclass User:\n    def __init__(self, name):\n        self.name = name  # Instance attribute.\n\n    def greet(self):\n        return f\"Hello, {self.name}\"\n\nuser = User(\"Ada\")\nprint(user.greet())"
+}

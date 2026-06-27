@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "python-packaging-typing-tools-82",
+  "version": 1,
+  "title": "Python Packaging Typing Tools",
+  "description": "Practice a typed function shaped like reusable package code.",
+  "language": "python",
+  "difficulty": 3,
+  "estimatedSeconds": 85,
+  "tags": [
+    "python",
+    "pcpp1",
+    "packages",
+    "typing",
+    "modules"
+  ],
+  "prerequisites": [
+    "python-decorators-context-managers-81"
+  ],
+  "learningGoals": [
+    "Annotate function parameters and returns.",
+    "Keep reusable module code small and explicit."
+  ],
+  "languageVersion": "Python 3.13",
+  "completionChecks": [
+    {
+      "prompt": "What does -> list[str] describe?",
+      "choices": [
+        "The return type",
+        "The module name",
+        "The package installer"
+      ],
+      "answerIndex": 0,
+      "explanation": "The arrow annotation describes the value the function returns."
+    },
+    {
+      "prompt": "Do Python type hints enforce values at runtime by themselves?",
+      "choices": [
+        "Yes, every call is checked automatically",
+        "Only inside packages",
+        "No, they are metadata for tools and readers"
+      ],
+      "answerIndex": 2,
+      "explanation": "Type hints help tools and readers; Python does not enforce them automatically at runtime."
+    }
+  ],
+  "targetCode": "# Learn: Write reusable Python with type hints.\ndef normalize(names: list[str]) -> list[str]:\n    return [name.strip().title() for name in names]  # Tooling can inspect the hint.\n\nusers = normalize([\" ada \", \" grace \"])\nprint(users)"
+}

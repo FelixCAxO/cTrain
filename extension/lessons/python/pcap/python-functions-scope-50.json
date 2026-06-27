@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "python-functions-scope-50",
+  "version": 1,
+  "title": "Python Functions and Scope",
+  "description": "Practice a function with a local variable and return value.",
+  "language": "python",
+  "difficulty": 2,
+  "estimatedSeconds": 75,
+  "tags": [
+    "python",
+    "pcap",
+    "functions",
+    "variables"
+  ],
+  "prerequisites": [
+    "python-list-dict-basics-03"
+  ],
+  "learningGoals": [
+    "Define a function with def.",
+    "Return a computed value."
+  ],
+  "languageVersion": "Python 3.13",
+  "completionChecks": [
+    {
+      "prompt": "Where is total created?",
+      "choices": [
+        "Inside the function call",
+        "In the global module scope",
+        "Inside the function's local scope"
+      ],
+      "answerIndex": 2,
+      "explanation": "total is assigned inside add_tax, so it is local to that function call."
+    },
+    {
+      "prompt": "What does add_tax(100) return?",
+      "choices": [
+        "120",
+        "100",
+        "20"
+      ],
+      "answerIndex": 0,
+      "explanation": "The function adds 20 percent tax, so 100 + 20 is 120."
+    }
+  ],
+  "targetCode": "# Learn: Keep temporary values local to a function.\ndef add_tax(price):\n    total = price * 1.20  # total is local to this call.\n    return total\n\nprint(add_tax(100))"
+}

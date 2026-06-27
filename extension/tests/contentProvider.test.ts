@@ -40,6 +40,7 @@ describe('content provider and UI models', () => {
     assert.equal(renderLessonDocument({
       ...lesson,
       id: 'prog2-b2-f04-array-list-02',
+      language: 'java',
       targetCode: '// LESSON: Dynamic arrays.\n// You will learn: resizing.\npublic class ArrayList {'
     }), '// LESSON: Dynamic arrays.\n// You will learn: resizing.\n');
   });

@@ -90,4 +90,4 @@ function estimateSeconds(text: string): number {
   return Math.max(30, Math.ceil(text.length / 3));
 }
 
-const knownTrainingLanguages = new Set(['java', 'cpp', 'typescript', 'python', 'javascript', 'csharp', 'go', 'rust']);
+const knownTrainingLanguages = new Set(['c', 'java', 'cpp', 'typescript', 'python', 'javascript', 'csharp', 'go', 'rust']);

@@ -151,7 +151,7 @@ describe('package manifest and synced assets', () => {
   it('keeps all seed lesson JSON files in sync with built-in lessons', () => {
     const lessonDir = path.join(root, 'lessons');
     const files = listLessonJsonFiles(lessonDir);
-    const fileIds = files.map((file) => path.basename(file, '.json'));
+    const fileIds = files.map((file) => path.basename(file, '.json')).sort();
     const builtInIds = builtInLessons.map((lesson) => lesson.id).sort();
 
     assert.deepEqual(fileIds, builtInIds);
@@ -171,7 +171,7 @@ describe('package manifest and synced assets', () => {
       .map((entry) => entry.name)
       .sort();
 
-    assert.deepEqual(trackDirectories, ['java']);
+    assert.deepEqual(trackDirectories, ['c', 'java', 'python']);
     assert.deepEqual(fs.readdirSync(lessonDir).filter((file) => file.endsWith('.json')), []);
 
     const schemaPath = path.join(lessonDir, '_schema', 'lesson.schema.json');
@@ -189,7 +189,7 @@ describe('package manifest and synced assets', () => {
       'prerequisites',
       'targetCode'
     ]);
-    assert.deepEqual(schema.properties.language.enum, ['java']);
+    assert.deepEqual(schema.properties.language.enum, ['java', 'c', 'python']);
     assert.equal(schema.properties.$schema.type, 'string');
     assert.equal(schema.properties.difficulty.minimum, 1);
     assert.equal(schema.properties.difficulty.maximum, 5);
@@ -223,7 +223,17 @@ describe('package manifest and synced assets', () => {
       'Java 23',
       'Java 24',
       'Java 25',
-      'Java 26'
+      'Java 26',
+      'C89',
+      'C99',
+      'C11',
+      'C17',
+      'C23',
+      'Python 3.10',
+      'Python 3.11',
+      'Python 3.12',
+      'Python 3.13',
+      'Python 3.14'
     ];
 
     assert.deepEqual(runtime.lessonLanguages, schema.properties.language.enum);
@@ -261,14 +271,12 @@ describe('package manifest and synced assets', () => {
     assert.ok(lessonsDoc.includes('Java 14'));
     assert.ok(lessonsDoc.includes('Java 17'));
     assert.ok(lessonsDoc.includes('Java 21'));
-    assert.ok(lessonsDoc.includes('89 Java lessons'));
+    assert.ok(lessonsDoc.includes('104 C, Java, and Python lessons'));
     assert.ok(lessonsDoc.includes('36 Prog2 reference lessons'));
     assert.equal(fs.existsSync(path.join(root, 'docs', 'prog2-liang-exercise-manifest.json')), false);
     assert.doesNotMatch(lessonsDoc, /lessons\/cpp\//);
-    assert.doesNotMatch(lessonsDoc, /lessons\/python\//);
     assert.doesNotMatch(lessonsDoc, /lessons\/typescript\//);
     assert.doesNotMatch(lessonsDoc, /C\+\+17/);
-    assert.doesNotMatch(lessonsDoc, /Python 3\.10/);
     assert.doesNotMatch(lessonsDoc, /TypeScript 5/);
     for (const lesson of builtInLessons) {
       assert.ok(lessonsDoc.includes(lesson.id), `docs/lessons.md should mention ${lesson.id}`);
@@ -308,7 +316,7 @@ describe('package manifest and synced assets', () => {
     assert.ok(readme.includes('cTrain: Start Lesson'));
     assert.ok(readme.includes('cTrain: Practice Current File'));
     assert.ok(readme.includes('cTrain: Mock Exam'));
-    assert.ok(readme.includes('89 Java typing lessons'));
+    assert.ok(readme.includes('104 C, Java, and Python typing lessons'));
     assert.ok(readme.includes('Typing tips'));
   });
 });

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "python-decorators-context-managers-81",
+  "version": 1,
+  "title": "Python Decorators and Context Managers",
+  "description": "Practice wrapping a function with a decorator.",
+  "language": "python",
+  "difficulty": 4,
+  "estimatedSeconds": 180,
+  "tags": [
+    "python",
+    "pcpp1",
+    "decorators",
+    "context-managers"
+  ],
+  "prerequisites": [
+    "python-iterators-generators-80"
+  ],
+  "learningGoals": [
+    "Return a wrapper function from a decorator.",
+    "Use the @decorator syntax."
+  ],
+  "languageVersion": "Python 3.13",
+  "completionChecks": [
+    {
+      "prompt": "What does @logged do to greet?",
+      "choices": [
+        "It calls greet at import time only",
+        "It replaces greet with the wrapper returned by logged",
+        "It makes greet a class"
+      ],
+      "answerIndex": 1,
+      "explanation": "Decorator syntax assigns the function name to the decorator's returned wrapper."
+    },
+    {
+      "prompt": "What prints before the greeting?",
+      "choices": [
+        "calling greet",
+        "Hello Ada",
+        "wrapper"
+      ],
+      "answerIndex": 0,
+      "explanation": "The wrapper prints the function name before delegating to the original function."
+    }
+  ],
+  "targetCode": "# Learn: Wrap a function without changing its call site.\ndef logged(function):\n    def wrapper(*args, **kwargs):\n        print(f\"calling {function.__name__}\")  # Runs before the original.\n        return function(*args, **kwargs)\n    return wrapper\n\n@logged\ndef greet(name):\n    return f\"Hello {name}\"\n\nprint(greet(\"Ada\"))"
+}

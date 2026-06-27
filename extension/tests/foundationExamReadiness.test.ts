@@ -58,8 +58,9 @@ const coreExamFundamentals = [
 
 // A certification lesson is anything the mock exam can draw from: it excludes Java 26 preview
 // material and the HTTP-client side track, mirroring isCertificationLesson in mockExam.ts.
-function isCertificationLesson(lesson: { tags: readonly string[]; languageVersion?: string }): boolean {
-  return !lesson.tags.includes('preview')
+function isCertificationLesson(lesson: { language: string; tags: readonly string[]; languageVersion?: string }): boolean {
+  return lesson.language === 'java'
+    && !lesson.tags.includes('preview')
     && lesson.languageVersion !== 'Java 26'
     && !lesson.tags.includes('http-client');
 }

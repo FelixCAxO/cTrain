@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "python-if-while-for-02",
+  "version": 1,
+  "title": "Python If While For",
+  "description": "Practice basic Python branching and looping.",
+  "language": "python",
+  "difficulty": 1,
+  "estimatedSeconds": 85,
+  "tags": [
+    "python",
+    "pcep",
+    "conditionals",
+    "loops"
+  ],
+  "prerequisites": [
+    "python-print-input-01"
+  ],
+  "learningGoals": [
+    "Use if to branch on a value.",
+    "Use for with range()."
+  ],
+  "languageVersion": "Python 3.13",
+  "completionChecks": [
+    {
+      "prompt": "How many values does range(3) produce?",
+      "choices": [
+        "2",
+        "3",
+        "4"
+      ],
+      "answerIndex": 1,
+      "explanation": "range(3) produces 0, 1, and 2."
+    },
+    {
+      "prompt": "Which branch runs when score is 7?",
+      "choices": [
+        "The else branch",
+        "Both branches",
+        "The if branch"
+      ],
+      "answerIndex": 2,
+      "explanation": "The condition score >= 5 is true for 7, so the if branch runs."
+    }
+  ],
+  "targetCode": "# Learn: Combine a condition with a counted loop.\nscore = 7\nif score >= 5:  # The colon starts the block.\n    print(\"pass\")\nelse:\n    print(\"retry\")\nfor index in range(3):\n    print(index)"
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "python-iterators-generators-80",
+  "version": 1,
+  "title": "Python Iterators and Generators",
+  "description": "Practice yielding values from a generator function.",
+  "language": "python",
+  "difficulty": 3,
+  "estimatedSeconds": 90,
+  "tags": [
+    "python",
+    "pcpp1",
+    "iterators",
+    "generators"
+  ],
+  "prerequisites": [
+    "python-exceptions-files-52"
+  ],
+  "learningGoals": [
+    "Create values lazily with yield.",
+    "Iterate over a generator."
+  ],
+  "languageVersion": "Python 3.13",
+  "completionChecks": [
+    {
+      "prompt": "What does yield do here?",
+      "choices": [
+        "Stops the program forever",
+        "Returns one value and can resume later",
+        "Creates a dictionary"
+      ],
+      "answerIndex": 1,
+      "explanation": "yield produces a value while preserving generator state for the next iteration."
+    },
+    {
+      "prompt": "What values does countdown(3) produce?",
+      "choices": [
+        "3, 2, 1",
+        "0, 1, 2",
+        "3 only"
+      ],
+      "answerIndex": 0,
+      "explanation": "The loop yields n, then decrements until n reaches zero."
+    }
+  ],
+  "targetCode": "# Learn: Yield a lazy sequence of values.\ndef countdown(n):\n    while n > 0:\n        yield n  # Execution resumes here next time.\n        n -= 1\n\nfor value in countdown(3):\n    print(value)"
+}

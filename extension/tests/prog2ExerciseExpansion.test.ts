@@ -48,7 +48,7 @@ describe('Prog2 reference package policy', () => {
 
     assert.match(expansionDoc, /reference-only/i);
     assert.match(expansionDoc, /36 Prog2 reference lessons/);
-    assert.match(lessonsDoc, /89 Java lessons/);
+    assert.match(lessonsDoc, /104 C, Java, and Python lessons/);
     assert.match(testingDoc, /reference-only/);
 
     for (const doc of [lessonsDoc, expansionDoc, testingDoc]) {

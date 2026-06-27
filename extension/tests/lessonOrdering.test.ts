@@ -47,7 +47,37 @@ describe('built-in lesson ordering', () => {
       key: 'prog2-references',
       label: 'Prog2 References',
       icon: 'references',
-      order: 3
+      order: 90
+    });
+    assert.deepEqual(getBuiltInLessonCategory(lesson('c-hello-main-01')), {
+      key: 'c-foundations',
+      label: 'C Foundations',
+      icon: 'chip',
+      order: 10
+    });
+    assert.deepEqual(getBuiltInLessonCategory(lesson('c-pointers-addresses-80')), {
+      key: 'c-advanced',
+      label: 'C Advanced',
+      icon: 'tools',
+      order: 12
+    });
+    assert.deepEqual(getBuiltInLessonCategory(lesson('python-print-input-01')), {
+      key: 'python-pcep',
+      label: 'Python PCEP',
+      icon: 'book',
+      order: 30
+    });
+    assert.deepEqual(getBuiltInLessonCategory(lesson('python-oop-class-methods-51')), {
+      key: 'python-pcap',
+      label: 'Python PCAP',
+      icon: 'mortar-board',
+      order: 31
+    });
+    assert.deepEqual(getBuiltInLessonCategory(lesson('python-decorators-context-managers-81')), {
+      key: 'python-pcpp1',
+      label: 'Python PCPP1',
+      icon: 'mortar-board',
+      order: 32
     });
   });
 
@@ -60,7 +90,9 @@ describe('built-in lesson ordering', () => {
 
   it('orders the catalogue by curriculum category so cert-exam growth ids precede the Java 26 band', () => {
     const sorted = [
+      lesson('python-print-input-01'),
       lesson('java-http3-client-70'),
+      lesson('c-hello-main-01'),
       lesson('java-stream-lazy-pipeline-80'),
       lesson('java-records-45'),
       lesson('java-optional-lazy-fallback-69'),
@@ -72,22 +104,26 @@ describe('built-in lesson ordering', () => {
       'java-optional-lazy-fallback-69',
       'java-stream-lazy-pipeline-80',
       'java-http3-client-70',
+      'c-hello-main-01',
+      'python-print-input-01',
       'prog2-ref-p2-list-api-702'
     ]);
   });
 });
 
 function lesson(id: string, prerequisites: string[] = []): Lesson {
+  const language = id.startsWith('c-') ? 'c' : id.startsWith('python-') ? 'python' : 'java';
+
   return {
     schemaVersion: 1,
     id,
     version: 1,
     title: id,
     description: id,
-    language: 'java',
+    language,
     difficulty: 1,
     estimatedSeconds: 30,
-    tags: ['java'],
+    tags: [language],
     prerequisites,
     targetCode: 'class Demo {\n}\n'
   };

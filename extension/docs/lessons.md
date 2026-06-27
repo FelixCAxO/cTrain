@@ -2,21 +2,23 @@
 
 cTrain (Code Training) lessons use schema version `1`.
 
-Required fields are `schemaVersion`, `id`, `version`, `title`, `description`, `language`, `difficulty`, `estimatedSeconds`, `tags`, `prerequisites`, and `targetCode`. Optional fields are `learningGoals`, `defects`, `completionChecks`, and `languageVersion`. Authored lesson JSON is Java-only: use `language: "java"` and Java language versions `Java 8`, `Java 9`, `Java 11`, `Java 14`, `Java 15`, `Java 16`, `Java 17`, `Java 21`, `Java 22`, `Java 23`, `Java 24`, `Java 25`, or `Java 26`. Current-file practice is separate from authored lesson JSON and still preserves the VS Code language id from the active editor.
+Required fields are `schemaVersion`, `id`, `version`, `title`, `description`, `language`, `difficulty`, `estimatedSeconds`, `tags`, `prerequisites`, and `targetCode`. Optional fields are `learningGoals`, `defects`, `completionChecks`, and `languageVersion`. Authored lesson JSON supports `language: "java"`, `language: "c"`, and `language: "python"`. Supported versions are `C99`, `C11`, `C17`, `C23`; `Java 8`, `Java 9`, `Java 11`, `Java 14`, `Java 15`, `Java 16`, `Java 17`, `Java 21`, `Java 22`, `Java 23`, `Java 24`, `Java 25`, `Java 26`; and `Python 3.10`, `Python 3.11`, `Python 3.12`, `Python 3.13`. Current-file practice is separate from authored lesson JSON and still preserves the VS Code language id from the active editor.
 
-Built-in public lessons live under `lessons/java/`:
+Built-in public lessons live under `lessons/c/`, `lessons/java/`, and `lessons/python/`:
 
 ```text
 lessons/
   _schema/lesson.schema.json
+  c/
   java/
+  python/
 ```
 
-The TypeScript validator remains authoritative at runtime. `lessons/_schema/lesson.schema.json` matches the runtime-required fields and known field shapes for authoring-time JSON validation, including rejection of unknown fields, non-Java lesson languages, and unknown tags. New snippet lesson files should use compact `targetCode` blocks of 3 to 30 lines, keep `estimatedSeconds` between 10 and 1800, and keep prerequisite chains reachable and acyclic. Full source-file lessons tagged `source-file` are exempt from the snippet line-count and long-snippet estimate checks.
+The TypeScript validator remains authoritative at runtime. `lessons/_schema/lesson.schema.json` matches the runtime-required fields and known field shapes for authoring-time JSON validation, including rejection of unknown fields, unsupported lesson languages, and unknown tags. New snippet lesson files should use compact `targetCode` blocks of 3 to 30 lines, keep `estimatedSeconds` between 10 and 1800, and keep prerequisite chains reachable and acyclic. Full source-file lessons tagged `source-file` are exempt from the snippet line-count and long-snippet estimate checks.
 
 Use `learningGoals` for learner-facing outcomes shown in the picker and lesson tree tooltip. Use `defects[]` only for fix-the-code lessons; each entry is `{ "line": number, "hint": string }`, where `line` is one-based against the lesson source after any generated `// LESSON:` header is removed. Use `completionChecks[]` for exam-shaped recall prompts shown after completion and pooled by `cTrain: Mock Exam`; each check is `{ "prompt": string, "choices": string[], "answerIndex": number, "explanation": string }`, with a zero-based `answerIndex`. Runtime UI shuffles displayed choices and maps selections back to the authored answer index, so authoring order should stay readable but cannot be used as an answer cue. Missed checks become spaced reviews later, but due reviews stay behind the explicit `Review Due Flashcards` completion action instead of being mixed into the current lesson's checks. Every in-scope Java SE 25 roadmap row maps to at least one non-preview lesson with at least two completion checks; `tests/lessonRoadmapContent.test.ts` and `npm run roadmap:coverage -- --check` enforce that objective coverage. Every in-scope roadmap row also has at least three eligible pooled questions, and the built-in mock bank keeps at least 200 eligible questions so two 50-question mocks can be drawn from a meaningfully deeper pool. At least half of the pooled questions must be code-analysis prompts ("what prints", "does it compile", or "what is thrown"), and every certification lesson ships at least one such check, so practice mirrors the code-reading style of the Oracle Java SE 25 (1Z0-831) exam. `tests/lessonValidator.test.ts` keeps the pooled answer positions from clustering at a single index.
 
-The public seed set ships 89 Java lessons. Lessons `01`-`45` are the foundational track; lessons `50`-`69` plus the `80`+ growth ids form the Java 25 Cert Exam category aligned with the Oracle Java SE 25 (1Z0-831) objectives (the original `50`-`69` band is full, so promoted cert exercises and gap-closure lessons continue at `80`+); and lessons `70`-`79` demonstrate headline Java 26 features. The Java 26 preview features (structured concurrency, lazy constants, primitive type patterns, and PEM encoding) carry the `preview` tag, the Vector API lesson flags its incubator module, and all Java 26 side-track lessons stay out of the certification exam:
+The public seed set ships 104 C, Java, and Python lessons: 89 Java lessons, 6 C lessons, and 9 Python lessons. Java lessons `01`-`45` are the foundational track; lessons `50`-`69` plus the `80`+ growth ids form the Java 25 Cert Exam category aligned with the Oracle Java SE 25 (1Z0-831) objectives (the original `50`-`69` band is full, so promoted cert exercises and gap-closure lessons continue at `80`+); and lessons `70`-`79` demonstrate headline Java 26 features. The Java 26 preview features (structured concurrency, lazy constants, primitive type patterns, and PEM encoding) carry the `preview` tag, the Vector API lesson flags its incubator module, and all Java 26 side-track lessons stay out of the certification exam:
 
 - `java-class-basic-01`
 - `java-method-return-02`
@@ -108,15 +110,36 @@ The public seed set ships 89 Java lessons. Lessons `01`-`45` are the foundationa
 - `java-g1-synchronization-78`
 - `java-vector-api-79`
 
-Every public snippet lesson opens its `targetCode` with a concise teaching comment and includes at least one short line-level concept note. Java 24/25/26 lessons (ids `50` and above) keep their two-line objective header - `// Java 24 ...`, `// Java 25 ...`, or `// Java 26 ...` followed by a `// Learn: ...` line - and preview lessons say `PREVIEW` in that header. cTrain auto-types `//` comments and excludes them from typing metrics, so the learner reads what the lesson teaches without typing the header.
+C systems-foundations lessons:
 
-The built-in loader walks `lessons/` recursively, ignores authoring-only folders whose names start with `_`, validates every lesson JSON file, keeps valid lessons when one file is malformed, and then sorts by curriculum category (Foundations, Java 25 Cert Exam, Java 26, Prog2 references, then unknown future categories); within each category it sorts direct prerequisites before dependents, then by numeric id suffix and id. The cert-exam growth ids (`80`+) therefore sit between `69` and the Java 26 band in the catalogue. This order is the lesson catalogue order used by the picker, tree, and completion `Next Lesson` action, so learners can start from any catalogue item and continue one lesson at a time. Missing prerequisite ids, cyclic prerequisite chains, and lessons depending on rejected prerequisites are rejected during loading.
+- `c-hello-main-01`
+- `c-variables-printf-02`
+- `c-arrays-loops-03`
+- `c-pointers-addresses-04`
+- `c-struct-basic-05`
+- `c-file-scope-header-06`
 
-Workspace lesson loading reads `.codetrainer/lessons/*.json`: invalid lessons are skipped without crashing, and valid Java workspace lessons can coexist with built-in lessons when ids are unique. Duplicate ids are rejected across both built-in and workspace lessons so progress keys remain unambiguous.
+Python certification-ladder lessons:
+
+- `python-print-input-01`
+- `python-if-while-for-02`
+- `python-list-dict-basics-03`
+- `python-functions-scope-50`
+- `python-oop-class-methods-51`
+- `python-exceptions-files-52`
+- `python-iterators-generators-80`
+- `python-decorators-context-managers-81`
+- `python-packaging-typing-tools-82`
+
+Every public snippet lesson opens its `targetCode` with a concise teaching comment and includes at least one short line-level concept note. Java 24/25/26 lessons (ids `50` and above) keep their two-line objective header - `// Java 24 ...`, `// Java 25 ...`, or `// Java 26 ...` followed by a `// Learn: ...` line - and preview lessons say `PREVIEW` in that header. cTrain auto-types C/Java `//` comments and Python `#` comments, excluding them from typing metrics, so the learner reads what the lesson teaches without typing the header.
+
+The built-in loader walks `lessons/` recursively, ignores authoring-only folders whose names start with `_`, validates every lesson JSON file, keeps valid lessons when one file is malformed, and then sorts by curriculum category: Java Foundations, Java 25 Cert Exam, Java 26, C Foundations, C Systems Practice, C Advanced, Python PCEP, Python PCAP, Python PCPP1, Prog2 references, then unknown future categories. Within each category it sorts direct prerequisites before dependents, then by numeric id suffix and id. The cert-exam growth ids (`80`+) therefore sit between `69` and the Java 26 band in the catalogue. This order is the lesson catalogue order used by the picker, tree, and completion `Next Lesson` action, so learners can start from any catalogue item and continue one lesson at a time. Missing prerequisite ids, cyclic prerequisite chains, and lessons depending on rejected prerequisites are rejected during loading.
+
+Workspace lesson loading reads `.codetrainer/lessons/*.json`: invalid lessons are skipped without crashing, and valid C, Java, or Python workspace lessons can coexist with built-in lessons when ids are unique. Duplicate ids are rejected across both built-in and workspace lessons so progress keys remain unambiguous.
 
 ## Prog2 reference lessons
 
-The Prog2 reference set is reference-only. The retained corpus is exactly 36 Prog2 reference lessons in `prog2-lessons/`, each using `language: "java"`, a `prog2-*` id, and the `source-file` tag. These lessons stay in the repository as owned Java reference material and are excluded from the published `ctrain-*.vsix` via `.vscodeignore`, so the public extension ships the `lessons/java/` set only.
+The Prog2 reference set is reference-only. The retained corpus is exactly 36 Prog2 reference lessons in `prog2-lessons/`, each using `language: "java"`, a `prog2-*` id, and the `source-file` tag. These lessons stay in the repository as owned Java reference material and are excluded from the published `ctrain-*.vsix` via `.vscodeignore`, so the public extension ships the `lessons/c/`, `lessons/java/`, and `lessons/python/` sets only.
 
 Reference lessons are self-contained: every prerequisite points to another retained reference lesson, and the first reference has no removed prerequisite. `scripts/assert-prog2-coverage.cjs` guards the reference corpus, rejecting non-Java lessons, unexpected `prog2-*` files, removed corpus tags, stale prerequisites, duplicate ids, and removed source/provenance terms.
 
@@ -129,7 +152,9 @@ npm run roadmap:coverage
 npm run roadmap:coverage -- --check
 ```
 
-The script reads `docs/roadmap-coverage.tsv` by default and prints JSON objects shaped as `{ "track": "...", "roadmapNode": "...", "coveredBy": ["lesson-id"], "examReadyBy": ["lesson-id"], "minExamReadyLessons": 1, "minCompletionChecksPerLesson": 1 }`. The current roadmap file intentionally contains Java rows only. Rows with non-zero readiness columns require non-preview lessons with enough `completionChecks`, so Java 26 side-track features do not count as Oracle Java SE 25 (1Z0-831) exam-ready coverage. `docs/oracle-1z0-831-objective-map.md` reconciles Oracle's published objective areas and sub-objectives against the mock-exam blueprint plus roadmap rows. Mock exams draw 50 certification-focused questions from that completion-check bank, excluding preview, Java 26, and HTTP client side-track lessons by default; they keep a 120-minute timer, sample by objective, persist objective-level results, and show missed-question explanations.
+The script reads `docs/roadmap-coverage.tsv` by default and prints JSON objects shaped as `{ "track": "...", "roadmapNode": "...", "coveredBy": ["lesson-id"], "examReadyBy": ["lesson-id"], "minExamReadyLessons": 1, "minCompletionChecksPerLesson": 1 }`. Rows with non-zero readiness columns require non-preview lessons with enough `completionChecks`, so Java 26 side-track features do not count as Oracle Java SE 25 (1Z0-831) exam-ready coverage. `docs/oracle-1z0-831-objective-map.md` reconciles Oracle's published objective areas and sub-objectives against the mock-exam blueprint plus roadmap rows. Mock exams draw 50 Java certification-focused questions from that completion-check bank, excluding preview, Java 26, HTTP client side-track lessons, and non-Java lessons by default; they keep a 120-minute timer, sample by objective, persist objective-level results, and show missed-question explanations.
+
+The 91-lesson C certification backlog is intentionally not checked in as JSON yet beyond the small seed track. The repo now has the required C language versions and C-specific tags (`c`, `pointers`, `memory`, `malloc`, `free`, `structs`, `storage-duration`, `scope`, `linkage`, `preprocessor`, `headers`, `stdio`, `file-io`, `undefined-behavior`, `compilation`, `bitwise`, `variadic`, `stdarg`, `posix`, `winapi`, `threads`, `sockets`, `floating-point`, `ieee754`, `volatile`, `setjmp`, `function-pointers`, `vla`), so the full CLE/CLA/CLP lesson JSON set can be authored without changing the schema again.
 
 ## Java 25 pre-implementation backlog
 
