@@ -6,3 +6,11 @@ coverage/
 *.log
 .vscode-test/
 .vscode/
+
+# Local AI assistant traces
+.codex/
+.claude/
+.superpowers/
+.cursor/
+.aider*
+docs/superpowers/

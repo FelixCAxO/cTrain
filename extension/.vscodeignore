@@ -9,6 +9,12 @@ releases/**
 *.vsix
 .c8rc.json
 .vscode/**
+.codex/**
+.claude/**
+.superpowers/**
+.cursor/**
+.aider*
+docs/superpowers/**
 .github/**
 prog2-lessons/**
 *.log

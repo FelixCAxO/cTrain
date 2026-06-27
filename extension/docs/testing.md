@@ -40,6 +40,8 @@ npm run test:all
 
 `tests/packageManifest.test.ts` also keeps the packaged README and repository README synced with these first-use and development-gate commands.
 
+The same manifest test guards local workflow scratch files: repository and extension `.gitignore` rules keep local scratch files out of Git, and `.vscodeignore` keeps them out of packaged VSIX builds.
+
 Run the bundled build:
 
 ```powershell

@@ -1,0 +1,8 @@
+# Local AI assistant traces
+.codex/
+.claude/
+.superpowers/
+.cursor/
+.aider*
+**/docs/superpowers/
+*.log

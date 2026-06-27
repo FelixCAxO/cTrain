@@ -57,14 +57,14 @@ interface LessonAuthoringSchema {
 describe('package manifest and synced assets', () => {
   const manifest = parseJson<PackageManifest>(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 
-  it('keeps the repository root limited to README, LICENSE, and folders', () => {
+  it('keeps the repository root limited to README, LICENSE, gitignore, and folders', () => {
     const repoRoot = path.resolve(root, '..');
     const rootFiles = fs.readdirSync(repoRoot, { withFileTypes: true })
       .filter((entry) => entry.isFile())
       .map((entry) => entry.name)
       .sort();
 
-    assert.deepEqual(rootFiles, ['LICENSE', 'README.md']);
+    assert.deepEqual(rootFiles, ['.gitignore', 'LICENSE', 'README.md']);
   });
 
   it('declares cTrain branding, commands, settings, and no inline provider contribution', () => {
@@ -292,6 +292,9 @@ describe('package manifest and synced assets', () => {
     assert.ok(vscodeIgnore.includes('.github/**'));
     assert.ok(vscodeIgnore.includes('.vscode/**'));
     assert.ok(vscodeIgnore.includes('prog2-lessons/**'));
+    for (const expected of ['.codex/**', '.claude/**', '.superpowers/**', '.cursor/**', '.aider*', 'docs/superpowers/**']) {
+      assert.ok(activeIgnoreLines(vscodeIgnore).has(expected), `.vscodeignore should include ${expected}`);
+    }
     assert.ok(vscodeIgnore.includes('eslint.config.mjs'));
     const vscodeIgnoreLines = new Set(vscodeIgnore.split(/\r?\n/).filter(Boolean));
     assert.equal(vscodeIgnoreLines.has('docs/**'), false);
@@ -305,6 +308,19 @@ describe('package manifest and synced assets', () => {
       assert.ok(gitIgnore.includes(expected), `.gitignore should include ${expected}`);
     }
     assert.ok(gitIgnore.includes('*.vsix'), '.gitignore should ignore generated extension-workspace VSIX files by default');
+  });
+
+  it('keeps local AI assistant traces out of git tracking', () => {
+    const repoGitIgnore = fs.readFileSync(path.join(root, '..', '.gitignore'), 'utf8');
+    const extensionGitIgnore = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
+
+    for (const expected of ['.codex/', '.claude/', '.superpowers/', '.cursor/', '.aider*', '**/docs/superpowers/', '*.log']) {
+      assert.ok(activeIgnoreLines(repoGitIgnore).has(expected), `repository .gitignore should include ${expected}`);
+    }
+
+    for (const expected of ['.codex/', '.claude/', '.superpowers/', '.cursor/', '.aider*', 'docs/superpowers/', '*.log']) {
+      assert.ok(activeIgnoreLines(extensionGitIgnore).has(expected), `extension .gitignore should include ${expected}`);
+    }
   });
 
   it('presents a minimal first-use guide on the packaged extension page', () => {
@@ -371,6 +387,10 @@ describe('package manifest and synced assets', () => {
     ]) {
       assert.ok(`${lessonsDoc}\n${testingDoc}`.includes(expected), `docs should mention ${expected}`);
     }
+
+    for (const forbidden of ['AI assistant', 'Superpowers', 'docs/superpowers']) {
+      assert.equal(testingDoc.includes(forbidden), false, `packaged testing docs should not mention ${forbidden}`);
+    }
   });
 });
 
@@ -397,4 +417,8 @@ function listLessonJsonFiles(directory: string): string[] {
 
 function parseJson<T>(text: string): T {
   return JSON.parse(text) as T;
+}
+
+function activeIgnoreLines(text: string): Set<string> {
+  return new Set(text.split(/\r?\n/).map((line) => line.trim()).filter((line) => line && !line.startsWith('#')));
 }
