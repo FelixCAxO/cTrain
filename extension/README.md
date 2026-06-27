@@ -22,7 +22,7 @@ See [language tracks](docs/language-tracks.md) for the C / Java / Python split.
 
 1. Press `Ctrl+Shift+P` to open the Command Palette.
 2. Run `cTrain: Start Lesson`.
-3. Pick a lesson.
+3. Pick a lesson from the picker, or use the `cTrain Explorer view` in the Explorer sidebar.
 4. Type over the ghost text until the lesson is complete.
 5. Run `cTrain: Mock Exam` when you want a scored, objective-weighted 50-question certification drill.
 
@@ -46,6 +46,12 @@ If you used `Ctrl+P`, type `>cTrain` instead of `cTrain`.
 - Mock exams draw from certification-focused lesson completion checks, shuffle answer choices, use the Java SE 25 50-question / 120-minute / 68% pass format, sample by objective, and save objective-level missed-question review.
 - Mock summaries show the rolling last-5 average, whether the 3 consecutive 80% readiness gate is met, and any objectives below 70% in the final-week signal.
 
-## Packaging
+## Development
 
+- Run `npm test` for compile, lint, unit, build, and bundle smoke checks.
+- Run `npm run coverage` for the c8 coverage gate.
+- Run `npm run test:e2e` for the VS Code extension-host gate.
+- Run `npm run test:all` for unit, bundle, and e2e checks together.
 - Run `npm run package` to build the installable `ctrain-0.1.0.vsix`.
+
+See [testing](docs/testing.md) for the full check list and manual visual pass.

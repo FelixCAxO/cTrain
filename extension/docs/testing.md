@@ -24,7 +24,7 @@ Run the roadmap lesson coverage report:
 npm run roadmap:coverage
 ```
 
-The roadmap report reads `docs/roadmap-coverage.tsv`, walks the recursive `lessons/` tree, and prints `{track, roadmapNode, coveredBy[], examReadyBy[], minExamReadyLessons, minCompletionChecksPerLesson}` JSON entries for lesson-authoring review. `npm run roadmap:coverage -- --check` fails when any in-scope Java SE 25 objective lacks at least one non-preview exam-ready lesson with at least two completion checks. The unit tests add publish-depth gates on top: every in-scope roadmap row needs at least three eligible pooled questions, the built-in mock bank needs at least 200 questions, at least half of that bank must be code-trace questions, and `docs/oracle-1z0-831-objective-map.md` must map every Oracle 1Z0-831 objective area and sub-objective to the blueprint plus roadmap rows. These are curriculum coverage guardrails, separate from the c8 code coverage report.
+The roadmap report reads `docs/roadmap-coverage.tsv`, walks the recursive `lessons/` tree, and prints `{track, roadmapNode, coveredBy[], examReadyBy[], minExamReadyLessons, minCompletionChecksPerLesson}` JSON entries for lesson-authoring review. `npm run roadmap:coverage -- --check` fails when any in-scope C, Java, and Python roadmap rows lack the required number of non-preview exam-ready lessons with enough completion checks. The unit tests add publish-depth gates on top: every in-scope Java SE 25 roadmap row needs at least three eligible pooled questions, the built-in Java mock bank needs at least 200 questions, at least half of that bank must be code-trace questions, and `docs/oracle-1z0-831-objective-map.md` must map every Oracle 1Z0-831 objective area and sub-objective to the blueprint plus roadmap rows. These are curriculum coverage guardrails, separate from the c8 code coverage report.
 
 Run the extension-host e2e gate:
 
@@ -37,6 +37,8 @@ Run both gates:
 ```powershell
 npm run test:all
 ```
+
+`tests/packageManifest.test.ts` also keeps the packaged README and repository README synced with these first-use and development-gate commands.
 
 Run the bundled build:
 

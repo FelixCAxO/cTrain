@@ -18,7 +18,7 @@ interface PackageManifest {
   };
   activationEvents: string[];
   contributes: {
-    commands: { command: string }[];
+    commands: { command: string; title?: string }[];
     configuration: {
       properties: Record<string, { default?: unknown }>;
     };
@@ -312,12 +312,65 @@ describe('package manifest and synced assets', () => {
 
     assert.ok(readme.includes('## How to use'));
     assert.ok(readme.includes('1. Press `Ctrl+Shift+P` to open the Command Palette.'));
+    assert.ok(readme.includes('cTrain Explorer view'));
     assert.ok(readme.includes('If you used `Ctrl+P`, type `>cTrain` instead of `cTrain`.'));
     assert.ok(readme.includes('cTrain: Start Lesson'));
     assert.ok(readme.includes('cTrain: Practice Current File'));
     assert.ok(readme.includes('cTrain: Mock Exam'));
     assert.ok(readme.includes('104 C, Java, and Python typing lessons'));
     assert.ok(readme.includes('Typing tips'));
+  });
+
+  it('keeps READMEs synced with current development gates', () => {
+    const readmes = [
+      fs.readFileSync(path.join(root, '..', 'README.md'), 'utf8'),
+      fs.readFileSync(path.join(root, 'README.md'), 'utf8')
+    ];
+
+    for (const readme of readmes) {
+      for (const expected of [
+        'npm test',
+        'npm run coverage',
+        'npm run test:e2e',
+        'npm run test:all',
+        'npm run package',
+        'unit, bundle, and e2e checks together'
+      ]) {
+        assert.ok(readme.includes(expected), `README should mention ${expected}`);
+      }
+    }
+
+    assert.ok(readmes[0].includes('npm ci'), 'repository README should mention npm ci');
+    assert.ok(readmes[0].includes('extension/docs/testing.md'), 'repository README should link extension/docs/testing.md');
+    assert.ok(readmes[1].includes('docs/testing.md'), 'extension README should link docs/testing.md');
+  });
+
+  it('keeps user-facing docs synced with commands and lesson authoring rules', () => {
+    const architectureDoc = fs.readFileSync(path.join(root, 'docs', 'architecture.md'), 'utf8');
+    const lessonsDoc = fs.readFileSync(path.join(root, 'docs', 'lessons.md'), 'utf8');
+    const testingDoc = fs.readFileSync(path.join(root, 'docs', 'testing.md'), 'utf8');
+    const runtime = validatorModule as typeof validatorModule & {
+      lessonLanguageVersionsByLanguage?: Record<string, readonly string[]>;
+    };
+
+    for (const command of manifest.contributes.commands) {
+      assert.ok(architectureDoc.includes(command.title ?? command.command), `architecture.md should mention ${command.title ?? command.command}`);
+    }
+
+    for (const versions of Object.values(runtime.lessonLanguageVersionsByLanguage ?? {})) {
+      for (const version of versions) {
+        assert.ok(lessonsDoc.includes(version), `docs/lessons.md should mention ${version}`);
+      }
+    }
+
+    for (const expected of [
+      '`$schema`',
+      'difficulty 3+ lessons',
+      '"minCompletionChecksPerLesson": 2',
+      'C, Java, and Python roadmap rows'
+    ]) {
+      assert.ok(`${lessonsDoc}\n${testingDoc}`.includes(expected), `docs should mention ${expected}`);
+    }
   });
 });
 

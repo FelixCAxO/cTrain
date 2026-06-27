@@ -22,7 +22,7 @@ See [language tracks](extension/docs/language-tracks.md) for the C / Java / Pyth
 
 1. Press `Ctrl+Shift+P` to open the Command Palette.
 2. Run `cTrain: Start Lesson`.
-3. Pick a lesson.
+3. Pick a lesson from the picker, or use the `cTrain Explorer view` in the Explorer sidebar.
 4. Type over the ghost text until the lesson is complete.
 5. Run `cTrain: Mock Exam` when you want a scored, objective-weighted 50-question certification drill.
 
@@ -49,5 +49,10 @@ If you used `Ctrl+P`, type `>cTrain` instead of `cTrain`.
 ## Development
 
 - Run `cd extension && npm ci` to install dependencies.
-- Run `cd extension && npm test` to verify the extension.
+- Run `cd extension && npm test` for compile, lint, unit, build, and bundle smoke checks.
+- Run `cd extension && npm run coverage` for the c8 coverage gate.
+- Run `cd extension && npm run test:e2e` for the VS Code extension-host gate.
+- Run `cd extension && npm run test:all` for unit, bundle, and e2e checks together.
 - Run `cd extension && npm run package` to build `releases/ctrain-0.1.0.vsix`.
+
+See [testing](extension/docs/testing.md) for the full check list and manual visual pass.
